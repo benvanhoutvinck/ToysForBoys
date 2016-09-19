@@ -12,10 +12,10 @@
             <StackPanel Width="450">
                 <ListBox Height="400" Margin="25"></ListBox>
             </StackPanel>
-            <StackPanel Width="450">
+            <StackPanel Width="400">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Product ID:"></Label>
-                    <TextBlock Text="{Binding Path=selectedItem}"></TextBlock>
+                    <TextBox Text="procuct id here" IsEnabled="False" VerticalContentAlignment="Center"></TextBox>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
