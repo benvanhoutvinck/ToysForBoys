@@ -27,9 +27,13 @@ namespace WPFToysForBoys.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //Debug, wordt niet gebruikt in MVVM
-            View.ManagementWindow eenView = new ManagementWindow();
-            eenView.Show();
-            Application.Current.MainWindow.Close();
+            if (userNameTextBox.Text.ToString() == "ABC" && passwordBox.Password.ToString() == "123")
+            {
+                View.ManagementWindow eenView = new ManagementWindow();
+                eenView.Show();
+                Application.Current.MainWindow.Close();
+            }
+            
         }
     }
 }
