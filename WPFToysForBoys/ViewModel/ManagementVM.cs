@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 
 namespace WPFToysForBoys.ViewModel
 {
