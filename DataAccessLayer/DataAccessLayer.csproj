@@ -56,10 +56,13 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomerService.cs" />
-    <Compile Include="ICustomerService.cs" />
-    <Compile Include="IOrderService.cs" />
-    <Compile Include="IProductService.cs" />
+    <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Interfaces\ICountryService.cs" />
+    <Compile Include="Interfaces\ICustomerService.cs" />
+    <Compile Include="Interfaces\IOrderService.cs" />
+    <Compile Include="Interfaces\IOrderdetailsService.cs" />
+    <Compile Include="Interfaces\IProductlineService.cs" />
+    <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>

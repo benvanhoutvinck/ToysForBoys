@@ -11,12 +11,20 @@ namespace DataAccessLayer
 
         public void Insert(Customer customer)
         {
-            throw new NotImplementedException();
+            using (var entities = new toysforboysEntities())
+            {
+                entities.customers.Add(customer);
+                entities.SaveChanges();
+            }
         }
 
         public void Delete(Customer customer)
         {
-            throw new NotImplementedException();
+            using (var entities = new toysforboysEntities())
+            {
+                entities.customers.Remove(customer);
+                entities.SaveChanges();
+            }
         }
 
         public void Edit(Customer customer)
