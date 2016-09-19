@@ -82,6 +82,8 @@
     </Compile>
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="ProductServiceMock.cs" />
+    <Compile Include="ViewModel\ManagementVM.cs" />
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -129,7 +131,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{b1a9a410-a306-473b-9d64-8805aa22240f}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -17,10 +17,25 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
                         <ComboBox Width="150" Margin="0 15"></ComboBox>
-                        <ListBox Height="375" Margin="25 10">
+                        <ListBox Height="375" Width="375" Margin="25 10" ItemsSource="{Binding ProductList}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    
+                                    <Grid Width="350">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
+                                        <TextBlock Text="{Binding Path=name}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                                        <TextBlock Text="{Binding Path=productlineId}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                    </Grid>
+                                    <!--<Border BorderBrush="Black" BorderThickness="1" Width="275">
+                                        <TextBlock Text="{Binding Path=name}"></TextBlock>
+                                    </Border>-->
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
