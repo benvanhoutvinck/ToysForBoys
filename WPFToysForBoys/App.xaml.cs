@@ -17,7 +17,6 @@ namespace WPFToysForBoys
         {
             base.OnStartup(e);
             View.LoginWindow view = new View.LoginWindow();
-            //view.DataContext =
             view.Show();
         }
     }
