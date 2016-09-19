@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    interface ICountryService
+    public interface ICountryService
     {
         void Insert(Country country);
         void Delete(Country country);

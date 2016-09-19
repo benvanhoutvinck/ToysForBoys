@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    interface IOrderService
+    public interface IOrderService
     {
         void Insert(Order order);
         void Delete(Order order);

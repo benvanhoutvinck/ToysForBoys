@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    interface IProductService
+    public interface IProductService
     {
         void Insert(Product product);
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    interface IOrderdetailsService
+    public interface IOrderdetailsService
     {
         void Insert(Orderdetail orderdetail);
         void Delete(Orderdetail orderdetail);

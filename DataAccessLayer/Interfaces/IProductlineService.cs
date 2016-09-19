@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    interface IProductlineService
+    public interface IProductlineService
     {
         void Insert(Productline productline);
         void Delete(Productline productline);
