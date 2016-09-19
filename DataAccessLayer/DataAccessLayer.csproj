@@ -56,6 +56,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Interfaces\ICountryService.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
@@ -76,6 +77,10 @@
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\OrderdetailService.cs" />
+    <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\ProductlineService.cs" />
+    <Compile Include="Services\ProductService.cs" />
     <Compile Include="ToysForBoys.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
