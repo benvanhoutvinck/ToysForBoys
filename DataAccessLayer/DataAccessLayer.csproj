@@ -56,7 +56,10 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="KlantService.cs" />
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="ICustomerService.cs" />
+    <Compile Include="IOrderService.cs" />
+    <Compile Include="IProductService.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
