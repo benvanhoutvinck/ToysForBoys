@@ -4,13 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="90ab8151a4dd4c0a88978af6d4493878" Name="Diagram1">
-        <EntityTypeShape EntityType="toysforboysModel.country" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="toysforboysModel.customer" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="toysforboysModel.orderdetail" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="toysforboysModel.order" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="toysforboysModel.productline" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="toysforboysModel.product" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="49f869f6199d4513bf9d9d9c5decd553" Name="Diagram1">
+        <EntityTypeShape EntityType="toysforboysModel.Country" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="toysforboysModel.Customer" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="toysforboysModel.Orderdetail" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="toysforboysModel.Order" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="toysforboysModel.Productline" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="toysforboysModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="toysforboysModel.FK_customers_countries" ManuallyRouted="false" />
+        <AssociationConnector Association="toysforboysModel.FK_orders_customers" ManuallyRouted="false" />
+        <AssociationConnector Association="toysforboysModel.FK_orderdetails_products" ManuallyRouted="false" />
+        <AssociationConnector Association="toysforboysModel.FK_products_productlines" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
