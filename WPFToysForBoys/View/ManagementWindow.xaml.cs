@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace WPFToysForBoys.View
 {
     /// <summary>
-    /// Interaction logic for ProductsWindow.xaml
+    /// Interaction logic for ManagementWindow.xaml
     /// </summary>
-    public partial class ProductsWindow : Window
+    public partial class ManagementWindow : Window
     {
-        public ProductsWindow()
+        public ManagementWindow()
         {
             InitializeComponent();
         }

@@ -15,19 +15,20 @@ using System.Windows.Shapes;
 namespace WPFToysForBoys.View
 {
     /// <summary>
-    /// Interaction logic for ToysForBoysWindows.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class ToysForBoysWindows : Window
+    public partial class LoginWindow : Window
     {
-        public ToysForBoysWindows()
+        public LoginWindow()
         {
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            View.ProductsWindow view = new ProductsWindow();
-            view.Show();
+            //Debug, wordt niet gebruikt in MVVM
+            View.ManagementWindow eenView = new ManagementWindow();
+            eenView.Show();
             Application.Current.MainWindow.Close();
         }
     }

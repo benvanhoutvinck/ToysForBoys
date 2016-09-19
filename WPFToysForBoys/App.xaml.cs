@@ -16,7 +16,7 @@ namespace WPFToysForBoys
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            View.ToysForBoysWindows view = new View.ToysForBoysWindows();
+            View.LoginWindow view = new View.LoginWindow();
             //view.DataContext =
             view.Show();
         }

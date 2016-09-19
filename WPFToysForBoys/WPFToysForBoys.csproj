@@ -81,11 +81,11 @@
     </Compile>
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Product.cs" />
-    <Compile Include="View\ProductsWindow.xaml.cs">
-      <DependentUpon>ProductsWindow.xaml</DependentUpon>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ToysForBoysWindows.xaml.cs">
-      <DependentUpon>ToysForBoysWindows.xaml</DependentUpon>
+    <Compile Include="View\ManagementWindow.xaml.cs">
+      <DependentUpon>ManagementWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -118,11 +118,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\ProductsWindow.xaml">
+    <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ToysForBoysWindows.xaml">
+    <Page Include="View\ManagementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
