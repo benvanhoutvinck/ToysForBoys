@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Services
 {
-    public class ProductlineService : IProductService
+    public class ProductlineService : IProductlineService
     {
         public void Insert(Productline productline)
         {
