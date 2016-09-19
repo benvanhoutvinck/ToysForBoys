@@ -25,11 +25,11 @@ namespace DataAccessLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<country> countries { get; set; }
-        public virtual DbSet<customer> customers { get; set; }
-        public virtual DbSet<orderdetail> orderdetails { get; set; }
-        public virtual DbSet<order> orders { get; set; }
-        public virtual DbSet<productline> productlines { get; set; }
-        public virtual DbSet<product> products { get; set; }
+        public virtual DbSet<Country> countries { get; set; }
+        public virtual DbSet<Customer> customers { get; set; }
+        public virtual DbSet<Orderdetail> orderdetails { get; set; }
+        public virtual DbSet<Order> orders { get; set; }
+        public virtual DbSet<Productline> productlines { get; set; }
+        public virtual DbSet<Product> products { get; set; }
     }
 }

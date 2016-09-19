@@ -50,23 +50,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="country.cs">
+    <Compile Include="Country.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="customer.cs">
+    <Compile Include="Customer.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="KlantService.cs" />
-    <Compile Include="order.cs">
+    <Compile Include="Order.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="orderdetail.cs">
+    <Compile Include="Orderdetail.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="product.cs">
+    <Compile Include="Product.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="productline.cs">
+    <Compile Include="Productline.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
