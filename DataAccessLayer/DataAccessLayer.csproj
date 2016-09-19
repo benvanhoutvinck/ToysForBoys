@@ -50,23 +50,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="country.cs">
+    <Compile Include="Country.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="customer.cs">
+    <Compile Include="Customer.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="KlantService.cs" />
-    <Compile Include="order.cs">
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="ICustomerService.cs" />
+    <Compile Include="IOrderService.cs" />
+    <Compile Include="IProductService.cs" />
+    <Compile Include="Order.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="orderdetail.cs">
+    <Compile Include="Orderdetail.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="product.cs">
+    <Compile Include="Product.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
-    <Compile Include="productline.cs">
+    <Compile Include="Productline.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBScript\ToysForBoysCreateTableFixed.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
