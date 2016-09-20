@@ -121,7 +121,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DBScript\ToysForBoysCreateTableFixed.sql" />
+    <Content Include="DBScript\DBCreateTables.sql" />
+    <Content Include="DBScript\InsertCountries.sql" />
+    <Content Include="DBScript\InsertCustomers.sql" />
+    <Content Include="DBScript\InsertOrderdetails.sql" />
+    <Content Include="DBScript\InsertOrders.sql" />
+    <Content Include="DBScript\InsertProductLines.sql" />
+    <Content Include="DBScript\InsertProducts.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
