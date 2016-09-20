@@ -30,7 +30,7 @@ namespace DataAccessLayer.Services
 
         public void Edit(Customer customer)
         {
-            
+
             using (var entities = new toysforboysEntities())
             {
                 var originalCustomer = entities.customers.Find(customer.id);
@@ -63,9 +63,9 @@ namespace DataAccessLayer.Services
             using (var entities = new toysforboysEntities())
             {
                 var query = (from customer in entities.customers
-                            where customer.id == customerID
-                            orderby customer.id
-                            select customer).First();
+                             where customer.id == customerID
+                             orderby customer.id
+                             select customer).First();
 
                 return query;
             }
@@ -78,10 +78,11 @@ namespace DataAccessLayer.Services
                 var query = (from customer in entities.customers
                              where customer.name == naam &&
                              customer.postalCode == postcode
-                             select customer).First();
+                             select customer).FirstOrDefault();
 
                 return query;
             }
+
         }
     }
 }
