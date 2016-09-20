@@ -9,6 +9,7 @@ using DataAccessLayer.Interfaces;
 using GalaSoft.MvvmLight.Command;
 using System.ComponentModel;
 using System.Windows;
+using DataAccessLayer.Services;
 
 namespace WPFToysForBoys.ViewModel
 {
@@ -20,8 +21,8 @@ namespace WPFToysForBoys.ViewModel
         private IProductlineService plineService;
         public ManagementVM()
         {
-            pService = new ProductServiceMock();
-            plineService = new ProductlineServiceMock();
+            pService = new ProductService();
+            plineService = new ProductlineService();
             ProductList = pService.GetAll().ToList();
             ProductlineList = plineService.GetAll().ToList();
             //SelectedProduct = ProductList.First();
@@ -96,34 +97,52 @@ namespace WPFToysForBoys.ViewModel
         }
         private void PAdd()
         {
-            bool b = false;
-            foreach (Product product in ProductList)
+            //bool b = false;
+            //foreach (Product product in ProductList)
+            //{
+            //    if (ShowProduct.id == product.id)
+            //    {
+            //        MessageBox.Show("Product ID already exists in database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            //        b = true;
+            //        break;
+            //    }
+            //}
+            try
             {
-                if (ShowProduct.id == product.id)
+                if (!IdChecker.IdCheck(ProductList, ShowProduct))
                 {
-                    MessageBox.Show("Product ID already exists in database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    b = true;
-                    break;
+                    pService.Insert(new Product()
+                    {
+                        name = ShowProduct.name,
+                        description = ShowProduct.description,
+                        productlineId = SelectedPProductlineI,
+                        productline = plineService.GetById(SelectedPProductlineI),
+                        scale = ShowProduct.scale,
+                        quantityInStock = ShowProduct.quantityInStock,
+                        quantityInOrder = ShowProduct.quantityInOrder,
+                        buyPrice = ShowProduct.buyPrice
+                    });
+                    ProductList = pService.GetAll().ToList();
+                    //ProductList.Add(ShowProduct);
+                }
+                else
+                {
+                    pService.Edit(new Product()
+                    {
+                        name = ShowProduct.name,
+                        description = ShowProduct.description,
+                        productlineId = SelectedPProductlineI,
+                        productline = plineService.GetById(SelectedPProductlineI),
+                        scale = ShowProduct.scale,
+                        quantityInStock = ShowProduct.quantityInStock,
+                        quantityInOrder = ShowProduct.quantityInOrder,
+                        buyPrice = ShowProduct.buyPrice
+                    });
                 }
             }
-            if (!b)
+            catch (ArgumentException e)
             {
-                pService.Insert(new Product()
-                {
-                    name = ShowProduct.name,
-                    description = ShowProduct.description,
-                    productline = plineService.GetById(SelectedPProductlineI),
-                    scale = ShowProduct.scale,
-                    quantityInStock = ShowProduct.quantityInStock,
-                    quantityInOrder = ShowProduct.quantityInOrder,
-                    buyPrice = ShowProduct.buyPrice
-                });
-                ProductList = pService.GetAll().ToList();
-                //ProductList.Add(ShowProduct);
-            }
-            else
-            {
-                //modify
+                MessageBox.Show("Identical object already exists in the database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 
