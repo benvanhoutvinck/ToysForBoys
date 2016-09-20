@@ -15,6 +15,8 @@ namespace DataAccessLayer.Interfaces
 
         IEnumerable<Customer> GetAll();
 
-        Customer GetById(int customerID); 
+        Customer GetById(int customerID);
+
+        Customer LoginVerification(string naam, string postcode);
     }
 }

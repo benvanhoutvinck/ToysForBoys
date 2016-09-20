@@ -70,5 +70,18 @@ namespace DataAccessLayer.Services
                 return query;
             }
         }
+
+        public Customer LoginVerification(string naam, string postcode)
+        {
+            using (var entities = new toysforboysEntities())
+            {
+                var query = (from customer in entities.customers
+                             where customer.name == naam &&
+                             customer.postalCode == postcode
+                             select customer).First();
+
+                return query;
+            }
+        }
     }
 }
