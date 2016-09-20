@@ -66,5 +66,18 @@ namespace DataAccessLayer.Services
                 return query;
             }
         }
+
+        public IEnumerable<Productline> GetAll(Func<Productline, bool> predicate)
+        {
+            List<Productline> AllProductlines = new List<Productline>();
+            using (var entities = new toysforboysEntities())
+            {
+                foreach (var productLine in entities.productlines.Where(predicate))
+                {
+                    AllProductlines.Add(productLine);
+                }
+            }
+            return AllProductlines;
+        }
     }
 }
