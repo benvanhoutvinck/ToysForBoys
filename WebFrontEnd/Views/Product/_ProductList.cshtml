@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WebFrontEnd.Models.ProductListItem>
+
+<div class="container">
+    <div id="products" class="row list-group">
+           @foreach (var item in Model)
+           {
+                @Html.Partial("_Detail", item)
+           }
+    </div>
+</div>
+
+

@@ -15,6 +15,8 @@ namespace DataAccessLayer.Interfaces
 
         IEnumerable<Productline> GetAll();
 
-        Productline GetById(int productlineID); 
+        Productline GetById(int productlineID);
+
+        IEnumerable<Productline> GetAll(Func<Productline, bool> predicate);
     }
 }
