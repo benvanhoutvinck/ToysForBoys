@@ -9,18 +9,11 @@ namespace WebFrontEnd.Controllers
 {
     public class ProductController : Controller
     {
-        private IProductlineService plService;
-        // GET: Product
-        public ActionResult Index()
-        {
-
-            return View();
-        }
-
-        public ActionResult SelectGenre(int genreId)
+        private IProductService productService;
+        
+        public ActionResult List()
         {
             return View();
-
-        }
+        }                
     }
 }
