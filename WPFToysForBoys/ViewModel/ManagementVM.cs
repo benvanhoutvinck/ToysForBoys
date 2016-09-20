@@ -9,6 +9,7 @@ using DataAccessLayer.Interfaces;
 using GalaSoft.MvvmLight.Command;
 using System.ComponentModel;
 using System.Windows;
+using DataAccessLayer.Services;
 
 namespace WPFToysForBoys.ViewModel
 {
@@ -20,12 +21,10 @@ namespace WPFToysForBoys.ViewModel
         private IProductlineService plineService;
         public ManagementVM()
         {
-            pService = new ProductServiceMock();
-            plineService = new ProductlineServiceMock();
+            pService = new ProductService();
+            plineService = new ProductlineService();
             ProductList = pService.GetAll().ToList();
             ProductlineList = plineService.GetAll().ToList();
-            ButtonApplyStatus = false;
-            ButtonAddStatus = true;
             //SelectedProduct = ProductList.First();
             PNew();
         }
@@ -49,28 +48,6 @@ namespace WPFToysForBoys.ViewModel
         {
             if (MessageBox.Show("Do you want to close the application?", "Closing", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.No)
                 e.Cancel = true;
-        }
-
-
-        private bool buttonAddStatus;
-        public bool ButtonAddStatus
-        {
-            get { return buttonAddStatus; }
-            set
-            {
-                buttonAddStatus = value;
-                RaisePropertyChanged("ButtonAddStatus");
-            }
-        }
-        private bool buttonApplyStatus;
-        public bool ButtonApplyStatus
-        {
-            get { return buttonApplyStatus; }
-            set
-            {
-                buttonApplyStatus = value;
-                RaisePropertyChanged("ButtonApplyStatus");
-            }
         }
 
         private Product selectedProduct;
@@ -106,7 +83,7 @@ namespace WPFToysForBoys.ViewModel
                 }
                 else
                 {
-                    SelectedPProductlineI = value.productline.id;                   
+                    SelectedPProductlineI = value.productline.id;
                 }
                 RaisePropertyChanged("ShowProduct");
             }
@@ -120,41 +97,53 @@ namespace WPFToysForBoys.ViewModel
         }
         private void PAdd()
         {
-            bool b = false;
-            foreach (Product product in ProductList)
+            //bool b = false;
+            //foreach (Product product in ProductList)
+            //{
+            //    if (ShowProduct.id == product.id)
+            //    {
+            //        MessageBox.Show("Product ID already exists in database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            //        b = true;
+            //        break;
+            //    }
+            //}
+            try
             {
-                if (ShowProduct.id == product.id)
+                if (!IdChecker.IdCheck(ProductList, ShowProduct))
                 {
-                    MessageBox.Show("Product ID already exists in database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    b = true;
-                    break;
+                    pService.Insert(new Product()
+                    {
+                        name = ShowProduct.name,
+                        description = ShowProduct.description,
+                        productlineId = SelectedPProductlineI,
+                        productline = plineService.GetById(SelectedPProductlineI),
+                        scale = ShowProduct.scale,
+                        quantityInStock = ShowProduct.quantityInStock,
+                        quantityInOrder = ShowProduct.quantityInOrder,
+                        buyPrice = ShowProduct.buyPrice
+                    });
+                    ProductList = pService.GetAll().ToList();
+                    //ProductList.Add(ShowProduct);
+                }
+                else
+                {
+                    pService.Edit(new Product()
+                    {
+                        name = ShowProduct.name,
+                        description = ShowProduct.description,
+                        productlineId = SelectedPProductlineI,
+                        productline = plineService.GetById(SelectedPProductlineI),
+                        scale = ShowProduct.scale,
+                        quantityInStock = ShowProduct.quantityInStock,
+                        quantityInOrder = ShowProduct.quantityInOrder,
+                        buyPrice = ShowProduct.buyPrice
+                    });
                 }
             }
-            if (!b)
+            catch (ArgumentException e)
             {
-                pService.Insert(new Product()
-                {
-                    name = ShowProduct.name,
-                    description = ShowProduct.description,
-                    productline = plineService.GetById(SelectedPProductlineI),
-                    scale = ShowProduct.scale
-                });
-                ProductList = pService.GetAll().ToList();
-                //ProductList.Add(ShowProduct);
+                MessageBox.Show("Identical object already exists in the database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-
-
-        }
-
-        public RelayCommand PModifyCommand
-        {
-            get { return new RelayCommand(PModify); }
-        }
-        private void PModify()
-        {
-            ButtonAddStatus = false;
-            ButtonApplyStatus = true;
-
         }
 
         public RelayCommand PNewCommand

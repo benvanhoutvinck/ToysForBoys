@@ -26,7 +26,7 @@ namespace WPFToysForBoys
                 id = 2,
                 name = "Line2",
                 description = "This is a test"
-            });
+            }); ;
             int i = 0;
         }
         public void Delete(Productline productline)
@@ -51,7 +51,12 @@ namespace WPFToysForBoys
 
         public Productline GetById(int productlineID)
         {
-            throw new NotImplementedException();
+            return new Productline()
+            {
+                id = 2,
+                name = "Line2",
+                description = "This is a test"
+            };
         }
 
         public void Insert(Productline productline)
