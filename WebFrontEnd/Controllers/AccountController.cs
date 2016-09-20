@@ -36,6 +36,16 @@ namespace WebFrontEnd.Controllers
 
             var countriesSelectList = new List<SelectListItem>();
 
+            countriesSelectList.Add
+                   (
+                       new SelectListItem()
+                       {
+                           Text = "-- Kies land --",
+                           Value = "",
+                           Selected = true
+                       }
+                   );
+
             foreach (var country in countries)
             {
                 countriesSelectList.Add
@@ -44,6 +54,7 @@ namespace WebFrontEnd.Controllers
                         {
                             Text = country.name,
                             Value = country.id.ToString()
+                           
                         }
                     );
             }
@@ -65,6 +76,21 @@ namespace WebFrontEnd.Controllers
 
             return RedirectToAction("Index");
 
+        }
+
+        public ActionResult Login(string returnUrl)
+        {
+            return View();
+        }
+
+        public ActionResult Login(LoginViewModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return View();
         }
     }
 }
