@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToysForBoys.View"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:gala="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         Title="ProductsWindow" Height="550" Width="900" ResizeMode="NoResize">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <gala:EventToCommand Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="24">
             <MenuItem Header="Bestand">
@@ -17,7 +24,7 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
                         <ComboBox Width="150" Margin="0 15"></ComboBox>
-                        <ListBox Height="375" Width="375" Margin="25 10" ItemsSource="{Binding ProductList}">
+                        <ListBox Height="375" Width="375" Margin="25 10" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Width="350">
@@ -43,19 +50,19 @@
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Product ID:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.id}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Productname:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.name}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Description:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.description}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Scale:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.scale}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Categorie:" Width="100"></Label>
@@ -63,15 +70,15 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="InStock:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.quantityInStock}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="InOrder:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.quantityInOrder}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Buy price:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.buyPrice}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Add" Width="50" Margin="0 0 10 0"></Button>
@@ -118,10 +125,10 @@
                             <ComboBox Width="150"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20 71">
-                            <Button Content="Add" Width="50" Margin="0 0 10 0"></Button>
-                            <Button Content="Modify" Width="50" Margin="0 0 10 0"></Button>
-                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="False"></Button>
-                            <Button Content="Clear" Width="50"></Button>
+                            <Button Content="Add" Width="50" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonAddStatus}" Command="{Binding AddCommand}"></Button>
+                            <Button Content="Modify" Width="50" Margin="0 0 10 0" Command="{Binding ModifyCommand}"></Button>
+                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonApplyStatus}" Command="{Binding ApplyCommand}"></Button>
+                            <Button Content="Clear" Width="50" Command="{Binding ClearCommand}"></Button>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
