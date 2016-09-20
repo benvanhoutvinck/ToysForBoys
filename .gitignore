@@ -191,5 +191,7 @@ ModelManifest.xml
 # Ignore Visual Studio Solution files
 *.sln
 
-# Ignore packages.config
+# Ignore packages.config, web.config and app.config
 packages.config
+web.config
+app.config
