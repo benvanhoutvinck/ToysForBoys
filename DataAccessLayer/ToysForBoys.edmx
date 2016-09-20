@@ -9,14 +9,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="customers">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="streetAndNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="city" Type="nvarchar" MaxLength="50" />
@@ -38,7 +38,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="orderDate" Type="datetime" />
           <Property Name="requiredDate" Type="datetime" />
           <Property Name="shippedDate" Type="datetime" />
@@ -50,7 +50,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="description" Type="ntext" />
         </EntityType>
@@ -58,7 +58,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nvarchar" MaxLength="70" />
           <Property Name="scale" Type="nvarchar" MaxLength="10" />
           <Property Name="description" Type="ntext" />
@@ -164,7 +164,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="customers" Relationship="Self.FK_customers_countries" FromRole="countries" ToRole="customers" />
         </EntityType>
@@ -172,7 +172,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="streetAndNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -198,7 +198,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="orderDate" Type="DateTime" Precision="3" />
           <Property Name="requiredDate" Type="DateTime" Precision="3" />
           <Property Name="shippedDate" Type="DateTime" Precision="3" />
@@ -212,7 +212,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="products" Relationship="Self.FK_products_productlines" FromRole="productlines" ToRole="products" />
@@ -221,7 +221,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="scale" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
