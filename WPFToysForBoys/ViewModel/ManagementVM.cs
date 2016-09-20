@@ -16,7 +16,6 @@ namespace WPFToysForBoys.ViewModel
         {
             pService = new ProductServiceMock();
             ProductList = pService.GetAll().ToList();
-            int i = 0;
         }
 
         private List<Product> productList;
