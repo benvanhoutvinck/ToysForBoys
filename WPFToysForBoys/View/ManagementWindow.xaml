@@ -70,14 +70,14 @@
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                            <Label Content="Buy price:" Width="100"></Label>
+                            <Label Content="Buy price:" Width="100"/>
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                            <Button Content="Add" Width="50" Margin="0 0 10 0"></Button>
-                            <Button Content="Modify" Width="50" Margin="0 0 10 0"></Button>
-                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="False"></Button>
-                            <Button Content="Clear" Width="50"></Button>
+                            <Button Content="Add" Width="50" Margin="0 0 10 0"/>
+                            <Button Content="Modify" Width="50" Margin="0 0 10 0"/>
+                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="False"/>
+                            <Button Content="Clear" Width="50"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -85,7 +85,7 @@
             <TabItem Header="Productline management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
-                        <ListBox Height="400" Margin="25"></ListBox>
+                        <ListBox Height="400" Margin="25" ItemsSource="{Binding ProductlineList}"></ListBox>
                     </StackPanel>
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">

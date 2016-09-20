@@ -12,9 +12,11 @@ namespace WPFToysForBoys.ViewModel
     public partial class ManagementVM:ViewModelBase
     {
         private IProductService pService;
+        private IProductlineService plineService;
         public ManagementVM()
         {
             pService = new ProductServiceMock();
+            plineService = new ProductlineServiceMock();
             ProductList = pService.GetAll().ToList();
         }
 
