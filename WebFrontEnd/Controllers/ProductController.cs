@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataAccessLayer.Interfaces;
+using DataAccessLayer.Services;
 
 namespace WebFrontEnd.Controllers
 {
@@ -13,6 +14,8 @@ namespace WebFrontEnd.Controllers
         
         public ActionResult List()
         {
+
+            var products = new ProductService().GetAll();
             return View();
         }                
     }
