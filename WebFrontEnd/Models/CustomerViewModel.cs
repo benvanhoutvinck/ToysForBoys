@@ -10,22 +10,23 @@ namespace WebFrontEnd.Models
     {
 
         public int id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Naam is een verplicht veld")]
         [Display(Name= "Naam")]
         public string name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Straat en nummer is een verplicht veld")]
         [Display(Name = "Straat en nummer")]
         public string streetAndNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Gemeente is een verplicht veld")]
         [Display(Name = "Gemeente")]
         public string city { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Provincie is een verplicht veld")]
         [Display(Name = "Provincie")]
         public string state { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Postcode is een verplicht veld")]
         [Display(Name = "Postcode")]
         public string postalCode { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Land is een verplicht veld")]
+        [Display(Name = "Land")]
         public Nullable<int> countryId { get; set; }
     }
 }

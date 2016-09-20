@@ -15,10 +15,18 @@ namespace WPFToysForBoys
         public ProductlineServiceMock()
         {
             productlines = new List<Productline>();
-            productlines.Add( new Productline() {
+            productlines.Add(new Productline()
+            {
                 id = 1,
-                name = "test",
-                description = "This is a test" });
+                name = "Line1",
+                description = "This is a test"
+            });
+            productlines.Add(new Productline()
+            {
+                id = 2,
+                name = "Line2",
+                description = "This is a test"
+            });
             int i = 0;
         }
         public void Delete(Productline productline)
