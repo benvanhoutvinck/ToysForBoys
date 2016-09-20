@@ -16,7 +16,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="24">
             <MenuItem Header="Bestand">
-                <MenuItem Header="Afsluiten" Command="{Binding CloseCommand}"></MenuItem>
+                <MenuItem Header="Afsluiten" Command="{Binding ClosingCommand}"></MenuItem>
             </MenuItem>
         </Menu>
         <TabControl>
@@ -38,7 +38,7 @@
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
                                         <TextBlock Text="{Binding Path=name}" Grid.Row="0" Grid.Column="1"></TextBlock>
-                                        <TextBlock Text="{Binding Path=productlineId}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                        <TextBlock Text="{Binding Path=productline.name}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                     </Grid>
                                     <!--<Border BorderBrush="Black" BorderThickness="1" Width="275">
                                         <TextBlock Text="{Binding Path=name}"></TextBlock>
@@ -50,19 +50,19 @@
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Product ID:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.id}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.id}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Productname:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.name}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.name}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Description:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.description}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.description}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Scale:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.scale}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.scale}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Categorie:" Width="100"></Label>
@@ -70,21 +70,24 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="InStock:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.quantityInStock}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.quantityInStock}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="InOrder:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.quantityInOrder}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.quantityInOrder}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Buy price:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=SelectedProduct.buyPrice}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.buyPrice}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                            <Button Content="Add" Width="50" Margin="0 0 10 0"/>
-                            <Button Content="Modify" Width="50" Margin="0 0 10 0"/>
-                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="False"/>
-                            <Button Content="Clear" Width="50"/>
+                            <Button Content="Add" Width="50" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonAddStatus}" 
+                                    Command="{Binding PAddCommand}"></Button>
+                            <Button Content="Modify" Width="50" Margin="0 0 10 0" Command="{Binding PModifyCommand}"></Button>
+                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonApplyStatus}" 
+                                    Command="{Binding PApplyCommand}"></Button>
+                            <Button Content="New" Width="50" Command="{Binding PNewCommand}"></Button>
+                            
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -126,7 +129,6 @@
                             <Label Content="Name:" Width="100"></Label>
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
                         </StackPanel>
-                        
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Adress:" Width="100"></Label>
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
@@ -148,10 +150,10 @@
                             <ComboBox Width="150"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20 71">
-                            <Button Content="Add" Width="50" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonAddStatus}" Command="{Binding AddCommand}"></Button>
-                            <Button Content="Modify" Width="50" Margin="0 0 10 0" Command="{Binding ModifyCommand}"></Button>
-                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonApplyStatus}" Command="{Binding ApplyCommand}"></Button>
-                            <Button Content="Clear" Width="50" Command="{Binding ClearCommand}"></Button>
+                            <Button Content="Add" Width="50" Margin="0 0 10 0"></Button>
+                            <Button Content="Modify" Width="50" Margin="0 0 10 0"></Button>
+                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="False"></Button>
+                            <Button Content="Clear" Width="50"></Button>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
