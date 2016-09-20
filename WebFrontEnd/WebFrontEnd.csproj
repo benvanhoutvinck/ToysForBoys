@@ -118,8 +118,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mock\CountryServiceMock.cs" />
-    <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CategorieViewModel.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

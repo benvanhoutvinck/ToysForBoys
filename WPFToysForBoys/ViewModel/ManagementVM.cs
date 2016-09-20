@@ -17,9 +17,11 @@ namespace WPFToysForBoys.ViewModel
 
 
         private IProductService pService;
+        private IProductlineService plineService;
         public ManagementVM()
         {
             pService = new ProductServiceMock();
+            plineService = new ProductlineServiceMock();
             ProductList = pService.GetAll().ToList();
             ButtonApplyStatus = false;
             ButtonAddStatus = true;
