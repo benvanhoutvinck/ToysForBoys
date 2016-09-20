@@ -31,7 +31,7 @@ namespace WebFrontEnd.Controllers
 
         public ActionResult Register()
         {
-                        
+
             var countries = countryService.GetAll();
 
             var countriesSelectList = new List<SelectListItem>();
@@ -54,7 +54,7 @@ namespace WebFrontEnd.Controllers
                         {
                             Text = country.name,
                             Value = country.id.ToString()
-                           
+
                         }
                     );
             }
@@ -82,7 +82,7 @@ namespace WebFrontEnd.Controllers
         {
             return View();
         }
-
+        [HttpPost]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
