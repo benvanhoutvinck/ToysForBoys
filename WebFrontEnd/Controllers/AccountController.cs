@@ -19,7 +19,7 @@ namespace WebFrontEnd.Controllers
 
         public AccountController()
         {
-            countryService = new CountryServiceMock();
+            countryService = new CountryService();
             customerService = new CustomerService();
         }
 
@@ -68,8 +68,8 @@ namespace WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                customerService.Insert(new Customer() { name = model.name, city = model.city, countryId = model.countryId, postalCode = model.postalCode, streetAndNumber = model.streetAndNumber });
+              
+                customerService.Insert(new Customer { id=200, name = model.name, city = model.city, state = model.state, countryId = model.countryId, postalCode = model.postalCode, streetAndNumber = model.streetAndNumber });
 
                 return RedirectToAction("Index", "Home");
             }
@@ -90,7 +90,28 @@ namespace WebFrontEnd.Controllers
                 return View(model);
             }
 
-            return View();
+            Customer customer = customerService.LoginVerification(model.name, model.postalCode);
+
+            if (customer != null)
+            {
+                this.Session["customer"] = customer;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Foutieve login.");
+            }
+
+            return View(model);
+        }
+        //
+        // POST: /Account/LogOff
+        [HttpPost]
+        public ActionResult LogOff()
+        {
+          
+            this.Session["customer"] = null;
+            return RedirectToAction("Index", "Home");
         }
     }
 }

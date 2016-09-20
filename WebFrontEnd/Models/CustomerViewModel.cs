@@ -27,6 +27,6 @@ namespace WebFrontEnd.Models
         public string postalCode { get; set; }
         [Required(ErrorMessage = "Land is een verplicht veld")]
         [Display(Name = "Land")]
-        public Nullable<int> countryId { get; set; }
+        public int countryId { get; set; }
     }
 }
