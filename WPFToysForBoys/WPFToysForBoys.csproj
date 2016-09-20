@@ -82,8 +82,10 @@
     </Compile>
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="ProductlineServiceMock.cs" />
     <Compile Include="ProductServiceMock.cs" />
     <Compile Include="ViewModel\ManagementVM.cs" />
+    <Compile Include="ViewModel\ManagementVMProductline.cs" />
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
