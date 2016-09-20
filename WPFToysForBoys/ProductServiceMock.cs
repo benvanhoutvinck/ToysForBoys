@@ -25,7 +25,12 @@ namespace WPFToysForBoys
                         name = "product1",
                         scale = "1:25",
                         description = "dit is een product",
-                        productline = new Productline() { name = "Line1" },
+                        productline = new Productline()
+                         {
+                            id = 1,
+                            name = "Line1",
+                            description = "This is a test"
+                         },
                         quantityInStock = 10,
                         quantityInOrder = 5,
                         buyPrice = 500,
@@ -40,7 +45,12 @@ namespace WPFToysForBoys
                         name = "product2",
                         scale = "1:35",
                         description = "dit is een tweede product",
-                        productline = new Productline() { name = "Line2" },
+                        productline = new Productline()
+                         {
+                            id = 2,
+                            name = "Line2",
+                            description = "This is a test"
+                         },
                         quantityInStock = 25,
                         quantityInOrder = 3,
                         buyPrice = 250,
@@ -52,8 +62,6 @@ namespace WPFToysForBoys
         {
           
            product.id=Products.Count+1;
-            product.productlineId = 3;
-            product.productline = new Productline() { name = "Line3" };
             Products.Add(product);
         }
 
