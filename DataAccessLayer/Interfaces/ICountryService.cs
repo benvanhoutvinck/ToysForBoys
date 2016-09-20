@@ -8,13 +8,13 @@ namespace DataAccessLayer.Interfaces
 {
     public interface ICountryService
     {
-        public void Insert(Country country);
-        public void Delete(Country country);
+        void Insert(Country country);
+        void Delete(Country country);
 
-        public void Edit(Country country);
+        void Edit(Country country);
 
-        public IEnumerable<Country> GetAll();
+        IEnumerable<Country> GetAll();
 
-        public Country GetById(int countryID); 
+        Country GetById(int countryID); 
     }
 }

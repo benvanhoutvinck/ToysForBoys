@@ -8,14 +8,14 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IProductService
     {
-        public void Insert(Product product);
+        void Insert(Product product);
 
-        public void Delete(Product product);
+        void Delete(Product product);
 
-        public void Edit(Product product);
+        void Edit(Product product);
 
-        public IEnumerable<Product> GetAll();
+        IEnumerable<Product> GetAll();
 
-        public Product GetById(int productID); 
+        Product GetById(int productID); 
     }
 }

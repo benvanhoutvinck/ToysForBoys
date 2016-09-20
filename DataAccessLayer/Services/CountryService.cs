@@ -48,7 +48,6 @@ namespace DataAccessLayer.Services
                     AllCountries.Add(country);
                 }
             }
-
             return AllCountries;
         }
 
