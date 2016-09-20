@@ -12,17 +12,19 @@ using System.Windows;
 
 namespace WPFToysForBoys.ViewModel
 {
-    public partial class ManagementVM:ViewModelBase
+    public partial class ManagementVM : ViewModelBase
     {
-        
+
 
         private IProductService pService;
         public ManagementVM()
         {
             pService = new ProductServiceMock();
             ProductList = pService.GetAll().ToList();
-            ButtonApplyStatus = 0;
-            ButtonAddStatus = 1;
+            ButtonApplyStatus = false;
+            ButtonAddStatus = true;
+            //SelectedProduct = ProductList.First();
+            PNew();
         }
 
         private List<Product> productList;
@@ -47,19 +49,23 @@ namespace WPFToysForBoys.ViewModel
         }
 
 
-        private int buttonAddStatus;
-        public int ButtonAddStatus
+        private bool buttonAddStatus;
+        public bool ButtonAddStatus
         {
             get { return buttonAddStatus; }
-            set { buttonAddStatus = value;
+            set
+            {
+                buttonAddStatus = value;
                 RaisePropertyChanged("ButtonAddStatus");
             }
         }
-        private int buttonApplyStatus;
-        public int ButtonApplyStatus
+        private bool buttonApplyStatus;
+        public bool ButtonApplyStatus
         {
             get { return buttonApplyStatus; }
-            set { buttonApplyStatus = value;
+            set
+            {
+                buttonApplyStatus = value;
                 RaisePropertyChanged("ButtonApplyStatus");
             }
         }
@@ -68,30 +74,80 @@ namespace WPFToysForBoys.ViewModel
         public Product SelectedProduct
         {
             get { return selectedProduct; }
-            set { selectedProduct = value;
-                RaisePropertyChanged("SelectedProduct");
+            set
+            {
+                if (value == null)
+                {
+                    ShowProduct = new Product() { id=-1 };
+                }
+                else
+                {
+                    selectedProduct = value;
+                    ShowProduct = value;
+                    RaisePropertyChanged("SelectedProduct");
+                }
+
             }
         }
 
-        
+        private Product showProduct;
+        public Product ShowProduct
+        {
+            get { return showProduct; }
+            set
+            {
+                showProduct = value;
+                RaisePropertyChanged("ShowProduct");
+            }
+        }
 
-        public RelayCommand AddCommand
+
+
+        public RelayCommand PAddCommand
         {
-            get { return new RelayCommand(Add); }
+            get { return new RelayCommand(PAdd); }
         }
-        private void Add()
+        private void PAdd()
         {
-            
+            bool b = false;
+            foreach (Product product in ProductList)
+            {
+                if (ShowProduct.id == product.id)
+                {
+                    MessageBox.Show("Product ID already exists in database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    b = true;
+                    break;
+                }
+            }
+            if (!b)
+            {
+                pService.Insert(new Product() { name=ShowProduct.name, description = ShowProduct.description,
+                    scale = ShowProduct.scale });
+                ProductList = pService.GetAll().ToList();
+                //ProductList.Add(ShowProduct);
+            }
+                
+
         }
 
-        public RelayCommand ModifyCommand
+        public RelayCommand PModifyCommand
         {
-            get { return new RelayCommand(Modify); }
+            get { return new RelayCommand(PModify); }
         }
-        private void Modify()
+        private void PModify()
         {
-            ButtonAddStatus = 0;
-            ButtonApplyStatus = 1;
+            ButtonAddStatus = false;
+            ButtonApplyStatus = true;
+
+        }
+
+        public RelayCommand PNewCommand
+        {
+            get { return new RelayCommand(PNew); }
+        }
+        private void PNew()
+        {
+            SelectedProduct = null;
         }
 
 
