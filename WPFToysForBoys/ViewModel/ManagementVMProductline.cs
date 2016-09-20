@@ -10,8 +10,8 @@ namespace WPFToysForBoys.ViewModel
 {
     public partial class ManagementVM : ViewModelBase
     {
-        private List<Productline> productlineList;
-        public List<Productline> ProductlineList
+        private List<Product> productlineList;
+        public List<Product> ProductlineList
         {
             get { return productlineList; }
             set
@@ -20,26 +20,5 @@ namespace WPFToysForBoys.ViewModel
                 RaisePropertyChanged("ProductlineList");
             }
         }
-
-        private int selectedPProductlineI;
-        public int SelectedPProductlineI
-        {
-            get { return selectedPProductlineI; }
-            set
-            {
-                selectedPProductlineI = value;
-                RaisePropertyChanged("SelectedPProductlineI");
-            }
-        }
-
-        //private Productline selectedPProductline;       
-        //public Productline SelectedPProductline
-        //{
-        //    get { return selectedPProductline; }
-        //    set { selectedPProductline = value;
-        //        SelectedPProductlineI = ProductlineList.IndexOf(value);
-        //        RaisePropertyChanged("SelectedPProductline");
-        //    }
-        //}
     }
 }

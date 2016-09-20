@@ -66,8 +66,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Categorie:" Width="100"></Label>
-                            <ComboBox Width="150" ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedPProductlineI}" 
-                                      SelectedValuePath="id"></ComboBox>
+                            <ComboBox Width="150"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="InStock:" Width="100"></Label>

@@ -23,7 +23,6 @@ namespace WPFToysForBoys.ViewModel
             pService = new ProductServiceMock();
             plineService = new ProductlineServiceMock();
             ProductList = pService.GetAll().ToList();
-            ProductlineList = plineService.GetAll().ToList();
             ButtonApplyStatus = false;
             ButtonAddStatus = true;
             //SelectedProduct = ProductList.First();
@@ -81,7 +80,7 @@ namespace WPFToysForBoys.ViewModel
             {
                 if (value == null)
                 {
-                    ShowProduct = new Product() { id = -1 };
+                    ShowProduct = new Product() { id=-1 };
                 }
                 else
                 {
@@ -100,14 +99,6 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 showProduct = value;
-                if (value.productline == null)
-                {
-                    SelectedPProductlineI = -1;
-                }
-                else
-                {
-                    SelectedPProductlineI = value.productline.id;                   
-                }
                 RaisePropertyChanged("ShowProduct");
             }
         }
@@ -132,17 +123,12 @@ namespace WPFToysForBoys.ViewModel
             }
             if (!b)
             {
-                pService.Insert(new Product()
-                {
-                    name = ShowProduct.name,
-                    description = ShowProduct.description,
-                    productline = plineService.GetById(SelectedPProductlineI),
-                    scale = ShowProduct.scale
-                });
+                pService.Insert(new Product() { name=ShowProduct.name, description = ShowProduct.description,
+                    scale = ShowProduct.scale });
                 ProductList = pService.GetAll().ToList();
                 //ProductList.Add(ShowProduct);
             }
-
+                
 
         }
 
