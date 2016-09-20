@@ -122,12 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBScript\DBCreateTables.sql" />
-    <Content Include="DBScript\InsertCountries.sql" />
-    <Content Include="DBScript\InsertCustomers.sql" />
-    <Content Include="DBScript\InsertOrderdetails.sql" />
-    <Content Include="DBScript\InsertOrders.sql" />
-    <Content Include="DBScript\InsertProductLines.sql" />
-    <Content Include="DBScript\InsertProducts.sql" />
+    <Content Include="DBScript\DBInsertRecords.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
