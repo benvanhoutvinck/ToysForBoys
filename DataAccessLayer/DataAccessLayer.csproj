@@ -98,7 +98,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <None Include="packages.config" />
     <EntityDeploy Include="ToysForBoys.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -122,6 +121,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DBScript\Insert data.sql" />
     <Content Include="DBScript\ToysForBoysCreateTableFixed.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

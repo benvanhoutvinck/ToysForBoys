@@ -44,6 +44,11 @@ namespace WPFToysForBoys
             return productlines;
         }
 
+        public IEnumerable<Productline> GetAll(Func<Productline, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         public Productline GetById(int productlineID)
         {
             throw new NotImplementedException();
