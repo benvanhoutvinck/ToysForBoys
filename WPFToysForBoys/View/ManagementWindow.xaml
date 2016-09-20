@@ -81,12 +81,9 @@
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.buyPrice}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                            <Button Content="Add" Width="50" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonAddStatus}" 
+                            <Button Content="Add / Modify" Width="100" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonAddStatus}" 
                                     Command="{Binding PAddCommand}"></Button>
-                            <Button Content="Modify" Width="50" Margin="0 0 10 0" Command="{Binding PModifyCommand}"></Button>
-                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonApplyStatus}" 
-                                    Command="{Binding PApplyCommand}"></Button>
-                            <Button Content="New" Width="50" Command="{Binding PNewCommand}"></Button>
+                            <Button Content="New" Width="100" Command="{Binding PNewCommand}"></Button>
                             
                         </StackPanel>
                     </StackPanel>

@@ -24,8 +24,6 @@ namespace WPFToysForBoys.ViewModel
             plineService = new ProductlineServiceMock();
             ProductList = pService.GetAll().ToList();
             ProductlineList = plineService.GetAll().ToList();
-            ButtonApplyStatus = false;
-            ButtonAddStatus = true;
             //SelectedProduct = ProductList.First();
             PNew();
         }
@@ -49,28 +47,6 @@ namespace WPFToysForBoys.ViewModel
         {
             if (MessageBox.Show("Do you want to close the application?", "Closing", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.No)
                 e.Cancel = true;
-        }
-
-
-        private bool buttonAddStatus;
-        public bool ButtonAddStatus
-        {
-            get { return buttonAddStatus; }
-            set
-            {
-                buttonAddStatus = value;
-                RaisePropertyChanged("ButtonAddStatus");
-            }
-        }
-        private bool buttonApplyStatus;
-        public bool ButtonApplyStatus
-        {
-            get { return buttonApplyStatus; }
-            set
-            {
-                buttonApplyStatus = value;
-                RaisePropertyChanged("ButtonApplyStatus");
-            }
         }
 
         private Product selectedProduct;
@@ -137,22 +113,18 @@ namespace WPFToysForBoys.ViewModel
                     name = ShowProduct.name,
                     description = ShowProduct.description,
                     productline = plineService.GetById(SelectedPProductlineI),
-                    scale = ShowProduct.scale
+                    scale = ShowProduct.scale,
+                    quantityInStock = ShowProduct.quantityInStock,
+                    quantityInOrder = ShowProduct.quantityInOrder,
+                    buyPrice = ShowProduct.buyPrice
                 });
                 ProductList = pService.GetAll().ToList();
                 //ProductList.Add(ShowProduct);
             }
-        }
-
-        public RelayCommand PModifyCommand
-        {
-            get { return new RelayCommand(PModify); }
-        }
-        private void PModify()
-        {
-            ButtonAddStatus = false;
-            ButtonApplyStatus = true;
-
+            else
+            {
+                //modify
+            }
         }
 
         public RelayCommand PNewCommand
