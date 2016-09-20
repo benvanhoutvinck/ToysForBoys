@@ -27,6 +27,7 @@
         <EntityType Name="orderdetails">
           <Key>
             <PropertyRef Name="orderId" />
+            <PropertyRef Name="productId" />
           </Key>
           <Property Name="orderId" Type="int" Nullable="false" />
           <Property Name="productId" Type="int" Nullable="false" />
@@ -78,6 +79,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_orderdetails_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_orderdetails_products">
           <End Role="products" Type="Self.products" Multiplicity="1" />
           <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
@@ -125,6 +138,10 @@
             <End Role="countries" EntitySet="countries" />
             <End Role="customers" EntitySet="customers" />
           </AssociationSet>
+          <AssociationSet Name="FK_orderdetails_orders" Association="Self.FK_orderdetails_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_orderdetails_products" Association="Self.FK_orderdetails_products">
             <End Role="products" EntitySet="products" />
             <End Role="orderdetails" EntitySet="orderdetails" />
@@ -168,11 +185,13 @@
         <EntityType Name="Orderdetail">
           <Key>
             <PropertyRef Name="orderId" />
+            <PropertyRef Name="productId" />
           </Key>
           <Property Name="orderId" Type="Int32" Nullable="false" />
           <Property Name="productId" Type="Int32" Nullable="false" />
           <Property Name="quantityOrdered" Type="Int32" />
           <Property Name="priceEach" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="order" Relationship="Self.FK_orderdetails_orders" FromRole="orderdetails" ToRole="orders" />
           <NavigationProperty Name="product" Relationship="Self.FK_orderdetails_products" FromRole="orderdetails" ToRole="products" />
         </EntityType>
         <EntityType Name="Order">
@@ -187,6 +206,7 @@
           <Property Name="customerId" Type="Int32" />
           <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="customer" Relationship="Self.FK_orders_customers" FromRole="orders" ToRole="customers" />
+          <NavigationProperty Name="orderdetails" Relationship="Self.FK_orderdetails_orders" FromRole="orders" ToRole="orderdetails" />
         </EntityType>
         <EntityType Name="Productline">
           <Key>
@@ -236,6 +256,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_orderdetails_orders">
+          <End Role="orders" Type="toysforboysModel.Order" Multiplicity="1" />
+          <End Role="orderdetails" Type="toysforboysModel.Orderdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_orderdetails_products">
           <End Role="products" Type="toysforboysModel.Product" Multiplicity="1" />
           <End Role="orderdetails" Type="toysforboysModel.Orderdetail" Multiplicity="*" />
@@ -274,6 +306,10 @@
           <AssociationSet Name="FK_orders_customers" Association="Self.FK_orders_customers">
             <End Role="customers" EntitySet="customers" />
             <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderdetails_orders" Association="Self.FK_orderdetails_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
           </AssociationSet>
           <AssociationSet Name="FK_orderdetails_products" Association="Self.FK_orderdetails_products">
             <End Role="products" EntitySet="products" />

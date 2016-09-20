@@ -19,6 +19,7 @@ namespace DataAccessLayer
         public Nullable<int> quantityOrdered { get; set; }
         public Nullable<decimal> priceEach { get; set; }
     
+        public virtual Order order { get; set; }
         public virtual Product product { get; set; }
     }
 }
