@@ -8,13 +8,13 @@ namespace DataAccessLayer.Interfaces
 {
     public interface ICustomerService
     {
-        void Insert(Customer customer);
-        void Delete(Customer customer);
+        public void Insert(Customer customer);
+        public void Delete(Customer customer);
 
-        void Edit(Customer customer);
+        public void Edit(Customer customer);
 
-        IEnumerable<Customer> GetAll();
+        public IEnumerable<Customer> GetAll();
 
-        Customer GetById(int customerID); 
+        public Customer GetById(int customerID); 
     }
 }

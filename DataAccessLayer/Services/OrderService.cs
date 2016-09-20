@@ -43,7 +43,7 @@ namespace DataAccessLayer.Services
             }
         }
 
-        public List<Order> GetAll()
+        public IEnumerable<Order> GetAll()
         {
             List<Order> AllOrders = new List<Order>();
             using (var entities = new toysforboysEntities())

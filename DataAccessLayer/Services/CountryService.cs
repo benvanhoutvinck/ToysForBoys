@@ -38,7 +38,7 @@ namespace DataAccessLayer.Services
             }
         }
 
-        public List<Country> GetAll()
+        public IEnumerable<Country> GetAll()
         {
             List<Country> AllCountries = new List<Country>();
             using (var entities = new toysforboysEntities())

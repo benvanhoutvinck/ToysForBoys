@@ -8,13 +8,13 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IOrderService
     {
-        void Insert(Order order);
-        void Delete(Order order);
+        public void Insert(Order order);
+        public void Delete(Order order);
 
-        void Edit(Order order);
+        public void Edit(Order order);
 
-        IEnumerable<Order> GetAll();
+        public IEnumerable<Order> GetAll();
 
-        Order GetById(int orderID); 
+        public Order GetById(int orderID); 
     }
 }

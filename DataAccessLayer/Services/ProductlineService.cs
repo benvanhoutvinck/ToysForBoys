@@ -40,7 +40,7 @@ namespace DataAccessLayer.Services
             }
         }
 
-        public List<Productline> GetAll()
+        public IEnumerable<Productline> GetAll()
         {
             List<Productline> AllProductlines = new List<Productline>();
             using (var entities = new toysforboysEntities())

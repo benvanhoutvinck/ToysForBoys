@@ -40,7 +40,7 @@ namespace DataAccessLayer.Services
             }
         }
 
-        public List<Orderdetail> GetAll()
+        public IEnumerable<Orderdetail> GetAll()
         {
             List<Orderdetail> AllOrderdetails = new List<Orderdetail>();
             using (var entities = new toysforboysEntities())
@@ -54,12 +54,12 @@ namespace DataAccessLayer.Services
             return AllOrderdetails;
         }
 
-        public Orderdetail GetById(int orderdetailID)
+        public Orderdetail GetById(int orderdetailID, int productID)
         {
             using (var entities = new toysforboysEntities())
             {
                 var query = (from orderdetail in entities.orderdetails
-                             where orderdetail.orderId == orderdetailID
+                             where orderdetail.orderId == orderdetailID && orderdetail.productId == productID
                              orderby orderdetail.orderId
                              select orderdetail).First();
 

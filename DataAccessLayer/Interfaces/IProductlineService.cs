@@ -8,13 +8,13 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IProductlineService
     {
-        void Insert(Productline productline);
-        void Delete(Productline productline);
+        public void Insert(Productline productline);
+        public void Delete(Productline productline);
 
-        void Edit(Productline productline);
+        public void Edit(Productline productline);
 
-        IEnumerable<Productline> GetAll();
+        public IEnumerable<Productline> GetAll();
 
-        Productline GetById(int productlineID); 
+        public Productline GetById(int productlineID); 
     }
 }

@@ -44,7 +44,7 @@ namespace DataAccessLayer.Services
             }
         }
 
-        public List<Product> GetAll()
+        public IEnumerable<Product> GetAll()
         {
             List<Product> AllProducts = new List<Product>();
             using (var entities = new toysforboysEntities())
@@ -58,11 +58,11 @@ namespace DataAccessLayer.Services
             return AllProducts;
         }
 
-        public Customer GetById(int productID)
+        public Product GetById(int productID)
         {
             using (var entities = new toysforboysEntities())
             {
-                var query = (from product in entities.customers
+                var query = (from product in entities.products
                              where product.id == productID
                              orderby product.id
                              select product).First();

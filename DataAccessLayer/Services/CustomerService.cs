@@ -44,7 +44,7 @@ namespace DataAccessLayer.Services
             }
         }
 
-        public List<Customer> GetAll()
+        public IEnumerable<Customer> GetAll()
         {
             List<Customer> AllCustomers = new List<Customer>();
             using (var entities = new toysforboysEntities())
