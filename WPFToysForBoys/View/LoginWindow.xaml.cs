@@ -30,7 +30,7 @@ namespace WPFToysForBoys.View
             if (userNameTextBox.Text.ToString() == "ABC" && passwordBox.Password.ToString() == "123")
             {
                 ViewModel.ManagementVM vm = new ViewModel.ManagementVM();
-                View.ManagementWindow eenView = new ManagementWindow();
+                View.ManagementWindow eenView = new ManagementWindow(true);
                 eenView.DataContext = vm;
                 eenView.Show();
                 Application.Current.MainWindow.Close();

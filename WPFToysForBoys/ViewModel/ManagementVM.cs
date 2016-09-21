@@ -19,7 +19,7 @@ namespace WPFToysForBoys.ViewModel
         private List<Product> cproductList;
         private IProductService pService;
         private IProductlineService plineService;
-        public ManagementVM()
+        public ManagementVM(bool adminMaster)
         {
             pService = new ProductService();
             plineService = new ProductlineService();
@@ -28,7 +28,10 @@ namespace WPFToysForBoys.ViewModel
             PProductlineList = plineService.GetAll().ToList();
             //SelectedProduct = ProductList.First();
             SelectedProductlineI = -1;
-            adminMaster = "Hidden";
+            if (adminMaster)
+                AdminMaster = "Visible";
+            else
+                AdminMaster = "Hidden";
             cproductList = pService.GetAll("productline").ToList();
             PNew();
         }
