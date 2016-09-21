@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DataAccessLayer.Services
 {
@@ -57,14 +58,38 @@ namespace DataAccessLayer.Services
             return AllOrders;
         }
 
+        public IEnumerable<Order> GetAll(string includes)
+        {
+            return GetAll(p => true, includes);
+        }
+
+        public IEnumerable<Order> GetAll(Func<Order, bool> predicate, string includes)
+        {
+            List<Order> Allorders = new List<Order>();
+            using (var entities = new toysforboysEntities())
+            {
+                foreach (var order in (String.IsNullOrEmpty(includes) ? entities.orders : entities.orders.Include(includes)).Where(predicate))
+                {
+                    Allorders.Add((Order)order);
+                }
+            }
+
+            return Allorders;
+        }
+
         public Order GetById(int orderID)
+        {
+            return GetById(orderID, string.Empty);
+        }
+
+        public Order GetById(int orderID, string includes)
         {
             using (var entities = new toysforboysEntities())
             {
                 var query = (from order in entities.orders
                              where order.id == orderID
                              orderby order.id
-                             select order).First();
+                             select order).Include(includes).First();
 
                 return query;
             }

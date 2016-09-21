@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.Command;
 using System.ComponentModel;
 using System.Windows;
 using DataAccessLayer.Services;
+using System.Windows.Controls;
 
 namespace WPFToysForBoys.ViewModel
 {
@@ -19,8 +20,9 @@ namespace WPFToysForBoys.ViewModel
         private List<Product> cproductList;
         private IProductService pService;
         private IProductlineService plineService;
-        public ManagementVM()
+        public ManagementVM(bool adminMaster, View.ManagementWindow mw)
         {
+            MW = mw;
             pService = new ProductService();
             plineService = new ProductlineService();
             ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
@@ -28,10 +30,15 @@ namespace WPFToysForBoys.ViewModel
             PProductlineList = plineService.GetAll().ToList();
             //SelectedProduct = ProductList.First();
             SelectedProductlineI = -1;
-            adminMaster = "Hidden";
+            if (adminMaster)
+                AdminMaster = "Visible";
+            else
+                AdminMaster = "Hidden";
             cproductList = pService.GetAll("productline").ToList();
             PNew();
         }
+
+        public View.ManagementWindow MW;
 
         private string adminMaster;
         public string AdminMaster
@@ -55,14 +62,39 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
-        public RelayCommand<CancelEventArgs> ClosingCommand
+        //public RelayCommand<CancelEventArgs> ClosingCommand
+        //{
+        //    get { return new RelayCommand<CancelEventArgs>(Closing); }
+        //}
+        //private void Closing(CancelEventArgs e)
+        //{ 
+        //        if (MessageBox.Show("Do you want to close the application?", "Closing", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.No)
+        //            e.Cancel = true;          
+        //}
+
+        public RelayCommand CloseCommand
         {
-            get { return new RelayCommand<CancelEventArgs>(Closing); }
+            get { return new RelayCommand(CloseWindow); }
         }
-        private void Closing(CancelEventArgs e)
+        private void CloseWindow()
         {
-            if (MessageBox.Show("Do you want to close the application?", "Closing", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.No)
-                e.Cancel = true;
+            if (MessageBox.Show("Do you want to close the application?", "Closing", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+                MW.Close();
+        }
+
+        public RelayCommand SwitchUserCommand
+        {
+            get { return new RelayCommand(SwitchUser); }
+        }
+        private void SwitchUser()
+        {
+            if (MessageBox.Show("Do you want to change user?", "Log out", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+            {
+                View.LoginWindow view = new View.LoginWindow();
+                MW.Close();
+                view.Show();
+
+            }
         }
 
         private Product selectedProduct;
@@ -84,6 +116,7 @@ namespace WPFToysForBoys.ViewModel
 
             }
         }
+
 
         private Product showProduct;
         public Product ShowProduct
@@ -155,7 +188,7 @@ namespace WPFToysForBoys.ViewModel
                     SelectedProductlineI = SelectedProductlineI;
                 }
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 MessageBox.Show("Identical object already exists in the database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
@@ -169,8 +202,5 @@ namespace WPFToysForBoys.ViewModel
         {
             SelectedProduct = null;
         }
-
-
-
     }
 }

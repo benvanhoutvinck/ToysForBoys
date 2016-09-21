@@ -14,7 +14,10 @@ namespace DataAccessLayer.Interfaces
         void Edit(Country country);
 
         IEnumerable<Country> GetAll();
+        IEnumerable<Country> GetAll(string includes);
+        IEnumerable<Country> GetAll(Func<Country, bool> predicate, string includes);
 
-        Country GetById(int countryID); 
+        Country GetById(int countryID);
+        Country GetById(int countryID, string includes); 
     }
 }
