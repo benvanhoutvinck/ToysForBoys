@@ -16,17 +16,20 @@ namespace WPFToysForBoys.ViewModel
     public partial class ManagementVM : ViewModelBase
     {
 
-
+        private List<Product> cproductList;
         private IProductService pService;
         private IProductlineService plineService;
         public ManagementVM()
         {
             pService = new ProductService();
             plineService = new ProductlineService();
-            ProductlineList = plineService.GetAll().ToList();
+            ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
+            productlineList.AddRange(plineService.GetAll());
+            PProductlineList = plineService.GetAll().ToList();
             //SelectedProduct = ProductList.First();
             SelectedProductlineI = -1;
             adminMaster = "Hidden";
+            cproductList = pService.GetAll("productline").ToList();
             PNew();
         }
 
@@ -121,7 +124,7 @@ namespace WPFToysForBoys.ViewModel
             //}
             try
             {
-                if (!IdChecker.IdCheck(ProductList, ShowProduct))
+                if (!IdChecker.IdCheck(cproductList, ShowProduct))
                 {
                     pService.Insert(new Product()
                     {
@@ -133,22 +136,23 @@ namespace WPFToysForBoys.ViewModel
                         quantityInOrder = ShowProduct.quantityInOrder,
                         buyPrice = ShowProduct.buyPrice
                     });
-                    ProductList = pService.GetAll().ToList();
+                    SelectedProductlineI = SelectedProductlineI;
                     //ProductList.Add(ShowProduct);
                 }
                 else
                 {
                     pService.Edit(new Product()
                     {
+                        id = ShowProduct.id,
                         name = ShowProduct.name,
                         description = ShowProduct.description,
                         productlineId = SelectedPProductlineI,
-                        productline = plineService.GetById(SelectedPProductlineI),
                         scale = ShowProduct.scale,
                         quantityInStock = ShowProduct.quantityInStock,
                         quantityInOrder = ShowProduct.quantityInOrder,
                         buyPrice = ShowProduct.buyPrice
                     });
+                    SelectedProductlineI = SelectedProductlineI;
                 }
             }
             catch (ArgumentException e)
