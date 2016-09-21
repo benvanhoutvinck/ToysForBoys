@@ -32,14 +32,25 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
-        //private Productline selectedPProductline;       
-        //public Productline SelectedPProductline
-        //{
-        //    get { return selectedPProductline; }
-        //    set { selectedPProductline = value;
-        //        SelectedPProductlineI = ProductlineList.IndexOf(value);
-        //        RaisePropertyChanged("SelectedPProductline");
-        //    }
-        //}
+        private int selectedProductlineI;
+        public int SelectedProductlineI
+        {
+            get { return selectedProductlineI; }
+            set
+            {
+                selectedProductlineI = value;
+
+                if (productlineList.Exists(m => m.id == value))
+                {
+                    ProductList = plineService.GetById(value).products.ToList();
+                }
+                else
+                {
+                    ProductList = pService.GetAll().ToList();
+                }
+
+                RaisePropertyChanged("SelectedProductlineI");
+            }
+        }
     }
 }

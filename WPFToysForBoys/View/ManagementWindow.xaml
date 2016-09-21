@@ -23,7 +23,7 @@
             <TabItem Header="Product management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
-                        <ComboBox Width="150" Margin="0 15"></ComboBox>
+                        <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
                         <ListBox Height="375" Width="375" Margin="25 10" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>

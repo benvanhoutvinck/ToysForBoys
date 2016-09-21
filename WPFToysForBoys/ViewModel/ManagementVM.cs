@@ -23,7 +23,6 @@ namespace WPFToysForBoys.ViewModel
         {
             pService = new ProductService();
             plineService = new ProductlineService();
-            ProductList = pService.GetAll().ToList();
             ProductlineList = plineService.GetAll().ToList();
             //SelectedProduct = ProductList.First();
             PNew();
