@@ -22,12 +22,14 @@ namespace WPFToysForBoys.View
         public LoginWindow()
         {
             InitializeComponent();
+            userNameTextBox.Text = "User";
+            passwordBox.Password = "user";
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             //Regular admin
-            if (userNameTextBox.Text.ToString() == "ABC" && passwordBox.Password.ToString() == "123")
+            if (userNameTextBox.Text.ToString() == "User" && passwordBox.Password.ToString() == "user")
             {
                 ViewModel.ManagementVM vm = new ViewModel.ManagementVM(false);
                 View.ManagementWindow eenView = new ManagementWindow();

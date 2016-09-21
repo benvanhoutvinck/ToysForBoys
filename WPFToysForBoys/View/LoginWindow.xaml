@@ -22,7 +22,7 @@
             <Label Grid.Row="1" Grid.Column="0" Margin="5" 
             Content="_Password" Target="{Binding ElementName=passwordBox}" ></Label>
             <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="userNameTextBox" VerticalContentAlignment="Center"
-                     Text="{Binding UserName}" HorizontalContentAlignment="Center"></TextBox>
+                    HorizontalContentAlignment="Center"></TextBox>
             <PasswordBox Grid.Row="1" Grid.Column="1" Margin="5" Name="passwordBox" VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"></PasswordBox>
         </Grid>
