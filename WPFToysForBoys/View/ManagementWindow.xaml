@@ -7,16 +7,18 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:gala="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
-        Title="ProductsWindow" Height="550" Width="900" ResizeMode="NoResize">
-    <i:Interaction.Triggers>
+        Title="ProductsWindow" Height="600" Width="900" ResizeMode="NoResize">
+    <!--<i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <gala:EventToCommand Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
         </i:EventTrigger>
-    </i:Interaction.Triggers>
+    </i:Interaction.Triggers>-->
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="24">
-            <MenuItem Header="Bestand">
-                <MenuItem Header="Afsluiten" Command="{Binding ClosingCommand}"></MenuItem>
+            <MenuItem Header="Menu">
+                <MenuItem Header="Switch user" Command="{Binding SwitchUserCommand}"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Close" Command="{Binding CloseCommand}"></MenuItem>
             </MenuItem>
         </Menu>
         <TabControl>
@@ -50,41 +52,41 @@
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Product ID:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.id}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.id}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Productname:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.name}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.name}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Description:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.description}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.description}" TextWrapping="Wrap" Height="50"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Scale:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.scale}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.scale}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Categorie:" Width="100"></Label>
-                            <ComboBox Width="150" ItemsSource="{Binding PProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedPProductlineI}" SelectedValuePath="id"></ComboBox>
+                            <ComboBox Width="220" ItemsSource="{Binding PProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedPProductlineI}" SelectedValuePath="id"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="InStock:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.quantityInStock}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.quantityInStock}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="InOrder:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.quantityInOrder}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.quantityInOrder}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Buy price:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowProduct.buyPrice}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.buyPrice}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonAddStatus}" 
                                     Command="{Binding PAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding PNewCommand}"></Button>
-                            
+
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -92,7 +94,7 @@
             <TabItem Header="Productline management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
-                        <ListBox Height="400" Margin="25" ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name"></ListBox>
+                        <ListBox Height="400" Margin="25" ItemsSource="{Binding PProductlineList}" DisplayMemberPath="name"></ListBox>
                     </StackPanel>
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
@@ -168,7 +170,7 @@
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Status" Width="100"></Label>
                             <ComboBox Width="150"></ComboBox>
-                            
+
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Details" Width="50" Margin="0 0 10 0"></Button>
@@ -180,9 +182,32 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Customer overview"></TabItem>
-            <TabItem Header="User management" Visibility="{Binding AdminMaster}"></TabItem>
+            <TabItem Header="User management" Visibility="{Binding AdminMaster}">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Width="450">
+                        <TextBlock Text="User list:" Margin="5 10 5 5"></TextBlock>
+                        <ListBox Height="400" Margin="15"></ListBox>
+                    </StackPanel>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 30 25 0">
+                            <Label Content="Name:" Width="100" Margin="0 20"></Label>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Access level:" Width="100" Margin="0 20"></Label>
+                            <ComboBox Width="150" DisplayMemberPath="" SelectedValue="" SelectedValuePath="" Margin="0 20"></ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+                            <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
+                                    Command=""></Button>
+                            <Button Content="New" Width="100" Command=""></Button>
+
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
         </TabControl>
-        
-        
+
+
     </DockPanel>
 </Window>
