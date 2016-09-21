@@ -92,7 +92,7 @@
             <TabItem Header="Productline management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
-                        <ListBox Height="400" Margin="25" ItemsSource="{Binding ProductlineList}"></ListBox>
+                        <ListBox Height="400" Margin="25" ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name"></ListBox>
                     </StackPanel>
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
