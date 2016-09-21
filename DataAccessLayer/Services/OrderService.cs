@@ -69,5 +69,42 @@ namespace DataAccessLayer.Services
                 return query;
             }
         }
+
+        public IEnumerable<Orderdetail> GetOrderDetails(Order order)
+        {
+            var orderdetails = new List<Orderdetail>();
+
+            using (var entities = new toysforboysEntities())
+            {
+                foreach (var od in entities.orderdetails)
+                {
+                    if (order.id==od.orderId)
+                    {
+                        orderdetails.Add(od);
+                    }
+                }
+            }
+
+            return orderdetails;
+        }
+
+        public decimal GetTotalPrice(Order order)
+        {
+           var orderdetails = GetOrderDetails(order);
+            decimal totalPrice = 0;
+
+            foreach (var od in orderdetails)
+            {
+                totalPrice +=(decimal)(od.quantityOrdered * od.priceEach);
+            }
+
+            return totalPrice;
+        }
+
+        
+
+      
+
+
     }
 }

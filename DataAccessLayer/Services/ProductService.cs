@@ -1,8 +1,9 @@
 ﻿using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -96,6 +97,14 @@ namespace DataAccessLayer.Services
             return AllProducts;
         }
 
-        
+        public OrderedProduct CreateOrderedProduct(Product product, int quantityOrdered, decimal priceEach)
+        {
+            OrderedProduct op = (OrderedProduct)product;
+            op.quantityOrdered = quantityOrdered;
+            op.priceEach = priceEach;
+            return op;
+        }
+
+
     }
 }
