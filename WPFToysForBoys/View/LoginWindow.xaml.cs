@@ -31,8 +31,9 @@ namespace WPFToysForBoys.View
             //Regular admin
             if (userNameTextBox.Text.ToString() == "User" && passwordBox.Password.ToString() == "user")
             {
-                ViewModel.ManagementVM vm = new ViewModel.ManagementVM(false);
                 View.ManagementWindow eenView = new ManagementWindow();
+                ViewModel.ManagementVM vm = new ViewModel.ManagementVM(false, eenView);
+                
                 eenView.DataContext = vm;
                 eenView.Show();
                 Application.Current.MainWindow.Close();
@@ -40,8 +41,9 @@ namespace WPFToysForBoys.View
             //Super admin
             else if (userNameTextBox.Text.ToString() == "Admin" && passwordBox.Password.ToString() == "admin")
             {
-                ViewModel.ManagementVM vm = new ViewModel.ManagementVM(true);
                 View.ManagementWindow eenView = new ManagementWindow();
+                ViewModel.ManagementVM vm = new ViewModel.ManagementVM(true, eenView);
+               
                 eenView.DataContext = vm;
                 eenView.Show();
                 Application.Current.MainWindow.Close();
