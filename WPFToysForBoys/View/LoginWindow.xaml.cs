@@ -26,11 +26,20 @@ namespace WPFToysForBoys.View
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            //Debug, wordt niet gebruikt in MVVM
+            //Regular admin
             if (userNameTextBox.Text.ToString() == "ABC" && passwordBox.Password.ToString() == "123")
             {
-                ViewModel.ManagementVM vm = new ViewModel.ManagementVM();
-                View.ManagementWindow eenView = new ManagementWindow(true);
+                ViewModel.ManagementVM vm = new ViewModel.ManagementVM(false);
+                View.ManagementWindow eenView = new ManagementWindow();
+                eenView.DataContext = vm;
+                eenView.Show();
+                Application.Current.MainWindow.Close();
+            }
+            //Super admin
+            else if (userNameTextBox.Text.ToString() == "Admin" && passwordBox.Password.ToString() == "admin")
+            {
+                ViewModel.ManagementVM vm = new ViewModel.ManagementVM(true);
+                View.ManagementWindow eenView = new ManagementWindow();
                 eenView.DataContext = vm;
                 eenView.Show();
                 Application.Current.MainWindow.Close();
@@ -39,7 +48,7 @@ namespace WPFToysForBoys.View
             {
                 MessageBox.Show("Incorrect Login!", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            
+
         }
     }
 }
