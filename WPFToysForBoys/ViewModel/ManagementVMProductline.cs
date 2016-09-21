@@ -42,11 +42,11 @@ namespace WPFToysForBoys.ViewModel
 
                 if (productlineList.Exists(m => m.id == value))
                 {
-                    ProductList = plineService.GetById(value).products.ToList();
+                    ProductList = plineService.GetById(value, "products").products.ToList();
                 }
                 else
                 {
-                    ProductList = pService.GetAll().ToList();
+                    ProductList = pService.GetAll("productline").ToList();
                 }
 
                 RaisePropertyChanged("SelectedProductlineI");

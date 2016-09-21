@@ -87,8 +87,7 @@ namespace DataAccessLayer.Services
             List<Product> AllProducts = new List<Product>();
             using (var entities = new toysforboysEntities())
             {
-
-                foreach (var Product in ((DbSet)entities.products.Where(predicate)).Include(includes))
+                foreach (var Product in (String.IsNullOrEmpty(includes) ? entities.products : entities.products.Include(includes)).Where(predicate))
                 {
                     AllProducts.Add((Product)Product);
                 }
