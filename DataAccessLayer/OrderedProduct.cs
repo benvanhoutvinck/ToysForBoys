@@ -10,5 +10,6 @@ namespace DataAccessLayer
     {
         public int quantityOrdered { get; set; }
         public decimal priceEach { get; set; }
+        public decimal subTotal {set { value = quantityOrdered * priceEach; } }
     }
 }

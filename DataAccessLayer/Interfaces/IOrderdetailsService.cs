@@ -18,5 +18,7 @@ namespace DataAccessLayer.Interfaces
         Orderdetail GetById(int orderdetailID, int productID);
 
         IEnumerable<Orderdetail> CreateOrderDetails(Order order, List<OrderedProduct> orderedProducts);
+
+
     }
 }

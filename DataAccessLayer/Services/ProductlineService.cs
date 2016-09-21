@@ -34,8 +34,12 @@ namespace DataAccessLayer.Services
             using (var entities = new toysforboysEntities())
             {
                 var originalProductline = entities.productlines.Find(productline.id);
-                originalProductline.name = productline.name;
-                originalProductline.description = productline.description;
+
+                if(productline.name!=string.Empty)
+                    originalProductline.name = productline.name;
+
+                if(productline.description!=string.Empty)
+                    originalProductline.description = productline.description;
 
                 entities.SaveChanges();
             }

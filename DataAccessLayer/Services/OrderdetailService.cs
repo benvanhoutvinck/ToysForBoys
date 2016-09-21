@@ -34,8 +34,12 @@ namespace DataAccessLayer.Services
             {
                 var originalOrderdetail = entities.orderdetails.Find(orderdetail.orderId);
                 originalOrderdetail.productId = orderdetail.productId;
-                originalOrderdetail.quantityOrdered = orderdetail.quantityOrdered;
-                originalOrderdetail.priceEach = orderdetail.priceEach;
+                if(orderdetail.quantityOrdered!=null)
+                    originalOrderdetail.quantityOrdered = orderdetail.quantityOrdered;
+
+                if(orderdetail.priceEach!=null)
+                    originalOrderdetail.priceEach = orderdetail.priceEach;
+
                 entities.SaveChanges();
             }
         }

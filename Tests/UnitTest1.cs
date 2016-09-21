@@ -25,7 +25,25 @@ namespace Tests
             {
             var service = new CustomerService();
             var deleteObject = service.GetById(16);
+            service.Delete(deleteObject);
+
+            Assert.IsNull(service.GetById(16));
             }
+
+        [TestMethod]
+        public void EditCustomer()
+        {
+            var Edit = new Customer {id=1, name = "name", city = "city", countryId = 5};
+            var service = new CustomerService();
+            var originalCustomer = service.GetById(1);
+            service.Edit(Edit);
+            bool succesfullyEdited = false;
+            if (Edit.name==originalCustomer.name && Edit.city == originalCustomer.city && Edit.countryId==originalCustomer.countryId )
+            {
+
+            }
+            Assert.AreEqual(service.GetById(1).name, "name");
+        }
 
         [TestMethod]
         public void ProductInsert()

@@ -35,13 +35,28 @@ namespace DataAccessLayer.Services
             using (var entities = new toysforboysEntities())
             {
                 var originalProduct = entities.products.Find(product.id);
-                originalProduct.name = product.name;
-                originalProduct.scale = product.scale;
-                originalProduct.description = product.description;
-                originalProduct.quantityInStock = product.quantityInStock;
-                originalProduct.quantityInOrder = product.quantityInOrder;
-                originalProduct.buyPrice = product.buyPrice;
-                originalProduct.productlineId = product.productlineId;
+
+                if(product.name!=string.Empty)
+                    originalProduct.name = product.name;
+
+                if(product.scale!=string.Empty)
+                    originalProduct.scale = product.scale;
+
+                if(product.description!=string.Empty)
+                    originalProduct.description = product.description;
+
+                if(product.quantityInStock!=null)
+                    originalProduct.quantityInStock = product.quantityInStock;
+
+                if(product.quantityInOrder!=null)
+                    originalProduct.quantityInOrder = product.quantityInOrder;
+
+                if(product.buyPrice!=null)
+                    originalProduct.buyPrice = product.buyPrice;
+
+                if(product.productlineId!=null)
+                    originalProduct.productlineId = product.productlineId;
+
                 entities.SaveChanges();
             }
         }
