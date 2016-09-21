@@ -29,7 +29,7 @@ namespace Tests
 
             Assert.IsNull(service.GetById(16));
             }
-
+        /*
         [TestMethod]
         public void EditCustomer()
         {
@@ -43,7 +43,7 @@ namespace Tests
 
             }
             Assert.AreEqual(service.GetById(1).name, "name");
-        }
+        }*/
 
         [TestMethod]
         public void ProductInsert()
