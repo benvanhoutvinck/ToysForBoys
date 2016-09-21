@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,29 +47,12 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Customer> GetAll()
         {
-            List<Customer> AllCustomers = new List<Customer>();
-            using (var entities = new toysforboysEntities())
-            {
-                foreach (var customer in entities.customers)
-                {
-                    AllCustomers.Add(customer);
-                }
-            }
-
-            return AllCustomers;
+            return GetAll(string.Empty);
         }
 
         public Customer GetById(int customerID)
         {
-            using (var entities = new toysforboysEntities())
-            {
-                var query = (from customer in entities.customers
-                             where customer.id == customerID
-                             orderby customer.id
-                             select customer).First();
-
-                return query;
-            }
+            return GetById(customerID, string.Empty);
         }
 
         public Customer LoginVerification(string naam, string postcode)
@@ -83,6 +67,41 @@ namespace DataAccessLayer.Services
                 return query;
             }
 
+        }
+
+
+        public IEnumerable<Customer> GetAll(string includes)
+        {
+            return GetAll(c => true, includes);
+        }
+
+        public Customer GetById(int customerID, string includes)
+        {
+            using (var entities = new toysforboysEntities())
+            {
+                var query = (from customer in entities.customers
+                             where customer.id == customerID
+                             orderby customer.id
+                             select customer).Include(includes).First();
+
+                return query;
+            }
+        }
+
+
+        public IEnumerable<Customer> GetAll(Func<Customer, bool> predicate, string includes)
+        {
+            List<Customer> AllCustomers = new List<Customer>();
+            using (var entities = new toysforboysEntities())
+            {
+                
+                foreach (var customer in ((DbSet) entities.customers.Where(predicate)).Include(includes))
+                {
+                    AllCustomers.Add((Customer) customer);
+                }
+            }
+
+            return AllCustomers;
         }
     }
 }

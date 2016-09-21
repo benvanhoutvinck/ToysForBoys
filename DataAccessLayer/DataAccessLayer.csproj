@@ -98,6 +98,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="packages.config" />
     <EntityDeploy Include="ToysForBoys.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

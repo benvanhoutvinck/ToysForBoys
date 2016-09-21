@@ -233,8 +233,8 @@
           <NavigationProperty Name="productline" Relationship="Self.FK_products_productlines" FromRole="products" ToRole="productlines" />
         </EntityType>
         <Association Name="FK_customers_countries">
-          <End Role="countries" Type="toysforboysModel.Country" Multiplicity="0..1" />
-          <End Role="customers" Type="toysforboysModel.Customer" Multiplicity="*" />
+          <End Role="countries" Type="toysforboysModel.Country" Multiplicity="0..1" ></End>
+          <End Role="customers" Type="toysforboysModel.Customer" Multiplicity="*" ></End>
           <ReferentialConstraint>
             <Principal Role="countries">
               <PropertyRef Name="id" />
@@ -245,8 +245,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_orders_customers">
-          <End Role="customers" Type="toysforboysModel.Customer" Multiplicity="0..1" />
-          <End Role="orders" Type="toysforboysModel.Order" Multiplicity="*" />
+          <End Role="customers" Type="toysforboysModel.Customer" Multiplicity="0..1" ></End>
+          <End Role="orders" Type="toysforboysModel.Order" Multiplicity="*" ></End>
           <ReferentialConstraint>
             <Principal Role="customers">
               <PropertyRef Name="id" />
@@ -257,8 +257,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_orderdetails_orders">
-          <End Role="orders" Type="toysforboysModel.Order" Multiplicity="1" />
-          <End Role="orderdetails" Type="toysforboysModel.Orderdetail" Multiplicity="*" />
+          <End Role="orders" Type="toysforboysModel.Order" Multiplicity="1" ></End>
+          <End Role="orderdetails" Type="toysforboysModel.Orderdetail" Multiplicity="*" ></End>
           <ReferentialConstraint>
             <Principal Role="orders">
               <PropertyRef Name="id" />
@@ -269,8 +269,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_orderdetails_products">
-          <End Role="products" Type="toysforboysModel.Product" Multiplicity="1" />
-          <End Role="orderdetails" Type="toysforboysModel.Orderdetail" Multiplicity="*" />
+          <End Role="products" Type="toysforboysModel.Product" Multiplicity="1" ></End>
+          <End Role="orderdetails" Type="toysforboysModel.Orderdetail" Multiplicity="*" ></End>
           <ReferentialConstraint>
             <Principal Role="products">
               <PropertyRef Name="id" />
@@ -281,8 +281,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_products_productlines">
-          <End Role="productlines" Type="toysforboysModel.Productline" Multiplicity="0..1" />
-          <End Role="products" Type="toysforboysModel.Product" Multiplicity="*" />
+          <End Role="productlines" Type="toysforboysModel.Productline" Multiplicity="0..1" ></End>
+          <End Role="products" Type="toysforboysModel.Product" Multiplicity="*" ></End>
           <ReferentialConstraint>
             <Principal Role="productlines">
               <PropertyRef Name="id" />

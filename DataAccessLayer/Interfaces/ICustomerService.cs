@@ -15,7 +15,12 @@ namespace DataAccessLayer.Interfaces
 
         IEnumerable<Customer> GetAll();
 
+        IEnumerable<Customer> GetAll(string includes);
+        IEnumerable<Customer> GetAll(Func<Customer, bool> predicate, string includes);
+
         Customer GetById(int customerID);
+
+        Customer GetById(int customerID, string  includes);
 
         Customer LoginVerification(string naam, string postcode);
     }
