@@ -180,6 +180,7 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Customer overview"></TabItem>
+            <TabItem Header="User management" Visibility="{Binding AdminMaster}"></TabItem>
         </TabControl>
         
         

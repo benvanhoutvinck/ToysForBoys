@@ -25,7 +25,20 @@ namespace WPFToysForBoys.ViewModel
             plineService = new ProductlineService();
             ProductlineList = plineService.GetAll().ToList();
             //SelectedProduct = ProductList.First();
+            SelectedProductlineI = -1;
+            adminMaster = "Hidden";
             PNew();
+        }
+
+        private string adminMaster;
+        public string AdminMaster
+        {
+            get { return adminMaster; }
+            set
+            {
+                adminMaster = value;
+                RaisePropertyChanged("AdminMaster");
+            }
         }
 
         private List<Product> productList;
@@ -115,7 +128,6 @@ namespace WPFToysForBoys.ViewModel
                         name = ShowProduct.name,
                         description = ShowProduct.description,
                         productlineId = SelectedPProductlineI,
-                        productline = plineService.GetById(SelectedPProductlineI),
                         scale = ShowProduct.scale,
                         quantityInStock = ShowProduct.quantityInStock,
                         quantityInOrder = ShowProduct.quantityInOrder,
