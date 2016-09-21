@@ -5,6 +5,23 @@
 }
 
 
+<div id="ProductListFilter">
+    <div id="ProductLineFilters">
+        @using (Html.BeginForm())
+        {
+            foreach (var productLine in Model.AllProductLines)
+            {
+                <p>
+                    @Html.CheckBox(productLine.id.ToString(), true)
+                    @Html.Label(productLine.id.ToString(), productLine.name)
+                </p>
+            }
+            <input type="submit" value="Filter"/>
+        }
+
+    </div>
+</div>
+
 @Html.Partial("_ProductList", Model.Products)
 
 

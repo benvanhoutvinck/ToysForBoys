@@ -20,6 +20,8 @@ namespace WebFrontEnd.Models
         [Display(Name = "Categorie")]
         public string Category { get; set; }
 
+        public int ProductLineID { get; set; }
+
         [Display(Name = "Prijs")]
         public decimal BuyPrice { get; set; }
 

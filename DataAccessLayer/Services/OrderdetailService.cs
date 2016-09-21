@@ -34,8 +34,12 @@ namespace DataAccessLayer.Services
             {
                 var originalOrderdetail = entities.orderdetails.Find(orderdetail.orderId);
                 originalOrderdetail.productId = orderdetail.productId;
-                originalOrderdetail.quantityOrdered = orderdetail.quantityOrdered;
-                originalOrderdetail.priceEach = orderdetail.priceEach;
+                if(orderdetail.quantityOrdered!=null)
+                    originalOrderdetail.quantityOrdered = orderdetail.quantityOrdered;
+
+                if(orderdetail.priceEach!=null)
+                    originalOrderdetail.priceEach = orderdetail.priceEach;
+
                 entities.SaveChanges();
             }
         }
@@ -65,6 +69,24 @@ namespace DataAccessLayer.Services
 
                 return query;
             }
+        }
+
+        public IEnumerable<Orderdetail> CreateOrderDetails(Order order, List<OrderedProduct> orderedProducts)
+        {
+            var orderdetails = new List<Orderdetail>();
+            foreach (var op in orderedProducts)
+            {
+                var orderdetail = new Orderdetail();
+                orderdetail.orderId = order.id;
+                orderdetail.productId = op.id;
+                orderdetail.quantityOrdered = op.quantityOrdered;
+                orderdetail.priceEach = op.priceEach;
+                orderdetails.Add(orderdetail);
+            }
+
+
+
+            return orderdetails;
         }
     }
 }

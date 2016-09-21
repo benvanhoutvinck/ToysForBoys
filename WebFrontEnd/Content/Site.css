@@ -26,6 +26,10 @@ textarea {
 
 /* ProductList */
 
+#products .item {
+    margin-top: 20px;
+}
+
 #products .item .caption {
     height: 300px;
 }
@@ -33,4 +37,9 @@ textarea {
 #products .item .row {
     position: absolute;
     bottom: 10px;
+}
+
+#products .item img {
+    width: 400px;
+    height: 200px;
 }
