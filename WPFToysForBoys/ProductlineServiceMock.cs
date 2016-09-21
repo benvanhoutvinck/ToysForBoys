@@ -63,5 +63,21 @@ namespace WPFToysForBoys
         {
             throw new NotImplementedException();
         }
+
+
+        public IEnumerable<Productline> GetAll(string includes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Productline> GetAll(Func<Productline, bool> predicate, string includes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Productline GetById(int productlineID, string includes)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

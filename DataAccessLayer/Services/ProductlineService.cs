@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,42 +43,48 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Productline> GetAll()
         {
-            List<Productline> AllProductlines = new List<Productline>();
-            using (var entities = new toysforboysEntities())
-            {
-                foreach (var productline in entities.productlines)
-                {
-                    AllProductlines.Add(productline);
-                }
-            }
-
-            return AllProductlines;
+            return GetAll(string.Empty);
         }
 
         public Productline GetById(int productlineID)
+        {
+            return GetById(productlineID, string.Empty);        
+        }
+
+        public Productline GetById(int productlineID, string includes)
         {
             using (var entities = new toysforboysEntities())
             {
                 var query = (from productline in entities.productlines
                              where productline.id == productlineID
                              orderby productline.id
-                             select productline).First();
+                             select productline).Include(includes).First();
 
                 return query;
             }
         }
 
-        public IEnumerable<Productline> GetAll(Func<Productline, bool> predicate)
+
+        public IEnumerable<Productline> GetAll(string includes)
+        {
+            return GetAll(c => true, includes);
+        }
+        
+        public IEnumerable<Productline> GetAll(Func<Productline, bool> predicate, string includes)
         {
             List<Productline> AllProductlines = new List<Productline>();
             using (var entities = new toysforboysEntities())
             {
-                foreach (var productLine in entities.productlines.Where(predicate))
+                
+                foreach (var Productline in ((DbSet) entities.productlines.Where(predicate)).Include(includes))
                 {
-                    AllProductlines.Add(productLine);
+                    AllProductlines.Add((Productline) Productline);
                 }
             }
+
             return AllProductlines;
         }
+
+       
     }
 }

@@ -25,7 +25,7 @@ namespace WebFrontEnd.Controllers
         {
             var products = productService.GetAll();
 
-            var productLines = productLineService.GetAll(pl => products.Select(p => p.id).Distinct().Contains(pl.id));
+            var productLines = productLineService.GetAll(pl => products.Select(p => p.id).Distinct().Contains(pl.id), string.Empty);
 
             var productListViewModel = new ProductListViewModel();
 

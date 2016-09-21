@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,15 +61,42 @@ namespace DataAccessLayer.Services
 
         public Product GetById(int productID)
         {
+            return GetById(productID, string.Empty);
+        }
+
+        public Product GetById(int productID, string includes)
+        {
             using (var entities = new toysforboysEntities())
             {
                 var query = (from product in entities.products
                              where product.id == productID
                              orderby product.id
-                             select product).First();
+                             select product).Include(includes).First();
 
                 return query;
             }
         }
+
+        public IEnumerable<Product> GetAll(string includes)
+        {
+            return GetAll(p => true, includes);
+        }
+
+        public IEnumerable<Product> GetAll(Func<Product, bool> predicate, string includes)
+        {
+            List<Product> AllProducts = new List<Product>();
+            using (var entities = new toysforboysEntities())
+            {
+
+                foreach (var Product in ((DbSet)entities.products.Where(predicate)).Include(includes))
+                {
+                    AllProducts.Add((Product)Product);
+                }
+            }
+
+            return AllProducts;
+        }
+
+        
     }
 }
