@@ -34,7 +34,11 @@ namespace DataAccessLayer.Services
             using (var entities = new toysforboysEntities())
             {
                 var originalCountry = entities.countries.Find(country.id);
-                originalCountry.name = country.name;
+                if (country.name!=string.Empty)
+                {
+                    originalCountry.name = country.name;
+                }
+                
                 entities.SaveChanges();
             }
         }

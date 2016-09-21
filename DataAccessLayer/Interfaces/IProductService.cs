@@ -20,7 +20,10 @@ namespace DataAccessLayer.Interfaces
         IEnumerable<Product> GetAll(Func<Product, bool> predicate, string includes);
 
         Product GetById(int productID);
-        Product GetById(int productID, string includes); 
+        Product GetById(int productID, string includes);
+
+        OrderedProduct CreateOrderedProduct(Product product, int quantityOrdered, decimal priceEach);
+
 
     }
 }

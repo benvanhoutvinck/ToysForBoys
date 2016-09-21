@@ -125,6 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Mock\CountryServiceMock.cs" />
     <Compile Include="Mock\ProductServiceMock.cs" />
     <Compile Include="Models\CategorieViewModel.cs" />
@@ -137,6 +138,13 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\classic-car.jpg" />
+    <Content Include="Content\images\motorcycles.jpg" />
+    <Content Include="Content\images\planes.png" />
+    <Content Include="Content\images\ships.png" />
+    <Content Include="Content\images\trains.jpg" />
+    <Content Include="Content\images\trucks&amp;buses.png" />
+    <Content Include="Content\images\vintage-car.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -169,6 +177,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\Product\_Detail.cshtml" />
+    <Content Include="Views\Product\_ProductList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

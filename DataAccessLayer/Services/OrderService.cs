@@ -34,12 +34,25 @@ namespace DataAccessLayer.Services
             using (var entities = new toysforboysEntities())
             {
                 var originalOrder = entities.orders.Find(order.id);
-                originalOrder.orderDate = order.orderDate;
-                originalOrder.requiredDate = order.requiredDate;
-                originalOrder.shippedDate = order.shippedDate;
-                originalOrder.comments = order.comments;
-                originalOrder.customerId = order.customerId;
-                originalOrder.status = order.status;
+
+                if(order.orderDate!=null)
+                    originalOrder.orderDate = order.orderDate;
+
+                if(order.requiredDate!=null)
+                    originalOrder.requiredDate = order.requiredDate;
+
+                if(order.shippedDate!=null)
+                    originalOrder.shippedDate = order.shippedDate;
+
+                if(order.comments!=string.Empty)
+                    originalOrder.comments = order.comments;
+
+                if(order.customerId!=null)
+                    originalOrder.customerId = order.customerId;
+
+                if(order.status!=string.Empty)
+                    originalOrder.status = order.status;
+
                 entities.SaveChanges();
             }
         }
@@ -94,5 +107,42 @@ namespace DataAccessLayer.Services
                 return query;
             }
         }
+
+        public IEnumerable<Orderdetail> GetOrderDetails(Order order)
+        {
+            var orderdetails = new List<Orderdetail>();
+
+            using (var entities = new toysforboysEntities())
+            {
+                foreach (var od in entities.orderdetails)
+                {
+                    if (order.id==od.orderId)
+                    {
+                        orderdetails.Add(od);
+                    }
+                }
+            }
+
+            return orderdetails;
+        }
+
+        public decimal GetTotalPrice(Order order)
+        {
+           var orderdetails = GetOrderDetails(order);
+            decimal totalPrice = 0;
+
+            foreach (var od in orderdetails)
+            {
+                totalPrice +=(decimal)(od.quantityOrdered * od.priceEach);
+            }
+
+            return totalPrice;
+        }
+
+        
+
+      
+
+
     }
 }

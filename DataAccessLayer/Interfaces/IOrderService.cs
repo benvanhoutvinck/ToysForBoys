@@ -20,5 +20,13 @@ namespace DataAccessLayer.Interfaces
 
         Order GetById(int orderID);
         Order GetById(int orderID, string includes);  
+        
+
+        IEnumerable<Orderdetail> GetOrderDetails(Order order);
+
+        decimal GetTotalPrice(Order order);
+
+        
+        
     }
 }
