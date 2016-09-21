@@ -21,6 +21,17 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
+        private List<Productline> pProductlineList;
+        public List<Productline> PProductlineList
+        {
+            get { return pProductlineList; }
+            set
+            {
+                pProductlineList = value;
+                RaisePropertyChanged("PProductlineList");
+            }
+        }
+
         private int selectedPProductlineI;
         public int SelectedPProductlineI
         {
@@ -40,7 +51,7 @@ namespace WPFToysForBoys.ViewModel
             {
                 selectedProductlineI = value;
 
-                if (productlineList.Exists(m => m.id == value))
+                if (value != -1)
                 {
                     ProductList = plineService.GetById(value, "products").products.ToList();
                 }
