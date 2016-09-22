@@ -14,6 +14,7 @@ namespace DataAccessLayer.Services
         {
             using (var entities = new toysforboysEntities())
             {
+                
                 entities.countries.Add(country);
                 entities.SaveChanges();
             }
@@ -23,6 +24,7 @@ namespace DataAccessLayer.Services
         {
             using (var entities = new toysforboysEntities())
             {
+                entities.countries.Attach(country);
                 entities.countries.Remove(country);
                 entities.SaveChanges();
             }
