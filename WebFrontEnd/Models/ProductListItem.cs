@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -26,5 +27,16 @@ namespace WebFrontEnd.Models
         public decimal BuyPrice { get; set; }
 
         public int ProductID { get; set; }
+
+        public ProductListItem(Product product)
+        {
+            ProductName = product.name;
+            Category = product.productline.name;
+            Description = product.description;
+            Scale = product.scale;
+            ProductID = product.id;
+            ProductLineID = product.productlineId;
+        }
+
     }
 }
