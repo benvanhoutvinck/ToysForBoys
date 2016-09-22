@@ -33,7 +33,7 @@ namespace WPFToysForBoys.ViewModel
             cService = new CustomerService();
             ccountryService = new CountryService();
             ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
-            PProductlineList = plineService.GetAll().ToList();
+            PProductlineList = plineService.GetAll("products").ToList();
             productlineList.AddRange(PProductlineList);
             cproductlineList = plineService.GetAll("products").ToList();
             ccustomerList = cService.GetAll().ToList();
