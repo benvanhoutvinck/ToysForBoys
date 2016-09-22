@@ -226,7 +226,7 @@
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
-                                        <TextBlock Text="{Binding Path=customer.name}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                                        <TextBlock Text="{Binding Path=customerId}" Grid.Row="0" Grid.Column="1"></TextBlock>
                                         <TextBlock Text="{Binding Path=orderdate}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                         <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
@@ -242,18 +242,34 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Order Date:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.orderdate}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.orderDate}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Ship Date:" Width="100"></Label>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.shippedDate}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Req Date:" Width="100"></Label>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.requiredDate}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Customer" Width="100"></Label>
+                            <ComboBox Width="150"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Status" Width="100"></Label>
                             <ComboBox Width="150"></ComboBox>
-
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Comments:" Width="100"></Label>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.comments}" TextWrapping="Wrap" Height="75"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding OAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding ONewCommand}"></Button>
                         </StackPanel>
+                        
                     </StackPanel>
                 </StackPanel>
             </TabItem>
