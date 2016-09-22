@@ -59,7 +59,7 @@ namespace Tests
             }
             Assert.AreEqual(service.GetById(1).name, "name");
         }*/
-
+          
         [TestMethod]
         public void ProductInsert()
         {
@@ -75,7 +75,7 @@ namespace Tests
         //this method has to fail the second time it's runned
         public void AdminInsert()
         {
-            var admin = new Admin { username = "pipo", password = "pw" };
+            var admin = new Admin { username = " ", password = "pw" };
             var service = new AdminService();
 
             service.Insert(admin);
