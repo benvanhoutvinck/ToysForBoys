@@ -68,6 +68,19 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
+        private int selectedCCustomerI;
+        public int SelectedCCustomerI
+        {
+            get { return selectedCCustomerI; }
+            set
+            {
+                selectedCCustomerI = value;
+                RaisePropertyChanged("SelectedCCustomerI");
+            }
+        }
+
+           
+
 
 
         public RelayCommand CAddCommand

@@ -94,6 +94,7 @@
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding PAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding PNewCommand}"></Button>
+                            <Button Content="Delete" Width="100" Margin="10 0 0 0" Command="{Binding PDeleteCommand}"></Button>
 
                         </StackPanel>
                     </StackPanel>
@@ -144,6 +145,10 @@
             <TabItem Header="Customer management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Country filter:" VerticalAlignment="Center" Margin="25 0"></TextBlock>
+                            <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding FCountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCountryI}" SelectedValuePath="id"></ComboBox>
+                        </StackPanel>
                         <ListBox Height="400" Margin="25 10" ItemsSource="{Binding CustomerList}" SelectedItem="{Binding SelectedCustomer}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -207,7 +212,28 @@
             <TabItem Header="Order management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
-                        <ListBox Height="400" Margin="25"></ListBox>
+                        <ListBox Height="400" Margin="25 10" ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="350">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
+                                        <TextBlock Text="{Binding Path=customer}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                                        <TextBlock Text="{Binding Path=orderdate}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                        <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
@@ -220,10 +246,9 @@
 
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                            <Button Content="Details" Width="50" Margin="0 0 10 0"></Button>
-                            <Button Content="Modify" Width="50" Margin="0 0 10 0"></Button>
-                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="False"></Button>
-                            <Button Content="Cancel" Width="50"></Button>
+                            <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
+                                    Command="{Binding OAddCommand}"></Button>
+                            <Button Content="New" Width="100" Command="{Binding ONewCommand}"></Button>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

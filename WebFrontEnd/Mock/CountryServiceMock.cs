@@ -61,5 +61,20 @@ namespace WebFrontEnd.Mock
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Country> GetAll(string includes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Country> GetAll(Func<Country, bool> predicate, string includes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Country GetById(int countryID, string includes)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

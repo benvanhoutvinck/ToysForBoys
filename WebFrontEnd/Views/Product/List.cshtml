@@ -12,8 +12,8 @@
             foreach (var productLine in Model.AllProductLines)
             {
                 <p>
-                    @Html.CheckBox(productLine.id.ToString(), true)
-                    @Html.Label(productLine.id.ToString(), productLine.name)
+                    @Html.CheckBox("productLine" + productLine.id.ToString(), true)
+                    @Html.Label("productLine" + productLine.id.ToString(), productLine.name)
                 </p>
             }
             <input type="submit" value="Filter"/>
