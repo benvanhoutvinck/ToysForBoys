@@ -17,7 +17,7 @@ namespace WPFToysForBoys
                 if (p.id == product.id)
                 {
                     b = true;
-                    if (p == product)
+                    if (p.name == product.name && p.buyPrice == product.buyPrice && p.description == product.description && p.productlineId == product.productlineId && p.quantityInOrder == product.quantityInOrder && p.quantityInStock == product.quantityInStock && p.scale == product.scale)
                         throw new ArgumentException();
                     break;
                 }
@@ -33,7 +33,7 @@ namespace WPFToysForBoys
                 if (p.id == productline.id)
                 {
                     b = true;
-                    if (p.name == productline.name && p.description == productline.description)
+                    if (p == productline)
                         throw new ArgumentException();
                     break;
                 }
@@ -56,6 +56,39 @@ namespace WPFToysForBoys
             }
             return b;
         }
+
+        public static bool IdCheck(List<Order> l, Order o)
+        {
+            bool b = false;
+            foreach (Order order in l)
+            {
+                if (o.id == order.id)
+                {
+                    b = true;
+                    if (o == order)
+                        throw new ArgumentException();
+                    break;
+                }
+            }
+            return b;
+        }
+
+        public static bool IdCheck(List<Orderdetail> l, Orderdetail o)
+        {
+            bool b = false;
+            foreach (Orderdetail orderdetail in l)
+            {
+                if (o.orderId == orderdetail.orderId && o.productId == orderdetail.productId)
+                {
+                    b = true;
+                    if (o == orderdetail)
+                        throw new ArgumentException();
+                    break;
+                }
+            }
+            return b;
+        }
+
 
 
 

@@ -20,11 +20,15 @@ namespace WPFToysForBoys.ViewModel
         private List<Productline> cproductlineList;
         private List<Product> cproductList;
         private List<Customer> ccustomerList;
-        private ICountryService ccountryService;
+        private List<Country> ccountryList;
+        private List<Order> oorderList;
+        private List<Orderdetail> oorderdetailList;
         private IProductService pService;
         private IProductlineService plineService;
         private ICustomerService cService;
-        
+        private ICountryService ccountryService;
+        private IOrderService oService;
+        private IOrderdetailsService oorderdetailService;
         public ManagementVM(bool adminMaster, View.ManagementWindow mw)
         {
             MW = mw;
@@ -32,21 +36,32 @@ namespace WPFToysForBoys.ViewModel
             plineService = new ProductlineService();
             cService = new CustomerService();
             ccountryService = new CountryService();
+            oService = new OrderService();
+            oorderdetailService = new OrderdetailService();
+
+
             ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
-            PProductlineList = plineService.GetAll().ToList();
+            PProductlineList = plineService.GetAll("products").ToList();
             productlineList.AddRange(PProductlineList);
             cproductlineList = plineService.GetAll("products").ToList();
-            ccustomerList = cService.GetAll().ToList();
-            
             //SelectedProduct = ProductList.First();
             SelectedProductlineI = -1;
             SelectedProductline = null;
+            SelectedCountryI = -1;
+            FCountryList = new List<Country>() { new Country() { id = -1, name = "All" } };
+            ccountryList = ccountryService.GetAll("customers").ToList();
+            fcountryList.AddRange(ccountryList);
+            CountryList = ccountryService.GetAll("customers").ToList();
             if (adminMaster)
                 AdminMaster = "Visible";
             else
                 AdminMaster = "Hidden";
             cproductList = pService.GetAll("productline").ToList();
-            PNew();          
+            ccustomerList = cService.GetAll("country").ToList();
+            oorderList = oService.GetAll("customer").ToList();
+            oorderdetailList = oorderdetailService.GetAll().ToList();
+            PNew();
+            CNew();
         }
 
         public View.ManagementWindow MW;
@@ -202,6 +217,32 @@ namespace WPFToysForBoys.ViewModel
             catch (ArgumentException)
             {
                 MessageBox.Show("Identical object already exists in the database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
+
+        public RelayCommand PDeleteCommand
+        {
+            get { return new RelayCommand(PDelete); }
+        }
+        private void PDelete()
+        {
+            try
+            {
+                if (IdChecker.IdCheck(cproductList, ShowProduct))
+                {
+                    if (MessageBox.Show("You are about to delete a modified item. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
+                    {
+                        pService.Delete(pService.GetById(ShowProduct.id));
+                        PNew();
+                    }
+                }
+                else
+                    PNew();
+            }
+            catch (ArgumentException)
+            {
+                pService.Delete(pService.GetById(ShowProduct.id));
+                PNew();
             }
         }
 

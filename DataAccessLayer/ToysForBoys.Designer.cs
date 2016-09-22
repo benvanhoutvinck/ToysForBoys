@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Informaticaopleiding Switch2IT\Oefeningen\02 - .Net Ontwikkelaar\11 - Scrum\DataAccessLayer\ToysForBoys.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\ramon.vangisbergen\Source\Repos\ToysForBoys\DataAccessLayer\ToysForBoys.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
