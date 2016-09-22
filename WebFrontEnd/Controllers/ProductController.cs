@@ -41,7 +41,7 @@ namespace WebFrontEnd.Controllers
                             Description = product.description,
                             Scale = product.scale,
                             ProductID = product.id,
-                            ProductLineID = product.productlineId ?? 0
+                            ProductLineID = product.productlineId 
                         }
                     );
             }

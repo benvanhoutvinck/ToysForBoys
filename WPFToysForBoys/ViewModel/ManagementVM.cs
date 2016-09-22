@@ -58,10 +58,12 @@ namespace WPFToysForBoys.ViewModel
                 AdminMaster = "Hidden";
             cproductList = pService.GetAll("productline").ToList();
             ccustomerList = cService.GetAll("country").ToList();
-            oorderList = oService.GetAll("customer").ToList();
+            oorderList = oService.GetAll().ToList();
+            OrderList = oorderList;
             oorderdetailList = oorderdetailService.GetAll().ToList();
             PNew();
             CNew();
+            ONew();
         }
 
         public View.ManagementWindow MW;

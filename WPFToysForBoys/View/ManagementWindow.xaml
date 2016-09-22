@@ -165,7 +165,7 @@
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
                                         <TextBlock Text="{Binding Path=name}" Grid.Row="0" Grid.Column="1"></TextBlock>
                                         <TextBlock Text="{Binding Path=City}" Grid.Row="0" Grid.Column="2"></TextBlock>
-                                        <TextBlock Text="{Binding Path=postalCode}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                        <TextBlock Text="{Binding Path=postalCode}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
 
                                 </DataTemplate>
@@ -220,15 +220,15 @@
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                            <ColumnDefinition Width="10"></ColumnDefinition>
                                             <ColumnDefinition Width="2*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
-                                        <TextBlock Text="{Binding Path=customer}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                                        <TextBlock Text="{Binding Path=customer.name}" Grid.Row="0" Grid.Column="1"></TextBlock>
                                         <TextBlock Text="{Binding Path=orderdate}" Grid.Row="0" Grid.Column="2"></TextBlock>
-                                        <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                        <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
 
                                 </DataTemplate>
@@ -238,7 +238,11 @@
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Order ID:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.id}"> </TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Order Date:" Width="100"></Label>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.orderdate}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Status" Width="100"></Label>
