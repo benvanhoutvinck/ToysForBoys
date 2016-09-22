@@ -29,14 +29,25 @@ namespace WPFToysForBoys.View
 
         private void RegisterAccount(object sender, RoutedEventArgs e)
         {
-            if (newPasswordBox.Password == verifyPasswordBox.Password)
+           try
             {
-                IAdminService admin = new AdminService();
-                admin.Insert(new Admin() { username = usernameBox.Text, password = newPasswordBox.Password });
+                if (newPasswordBox.Password == verifyPasswordBox.Password)
+                {
+                    IAdminService admin = new AdminService();
+                    admin.Insert(new Admin() { username = usernameBox.Text, password = newPasswordBox.Password });
+                    MessageBox.Show("User added to the database.", "Registration", MessageBoxButton.OK, MessageBoxImage.Information);
+                    View.LoginWindow eenView = new View.LoginWindow();
+                    eenView.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Passwords do not match!", "Password Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Passwords do not match!", "Password Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message);
             }
         }
     }

@@ -14,20 +14,32 @@ namespace DataAccessLayer.Services
         {
             using (var entities = new toysforboysEntities())
             {
-                var query = from a in entities.admins
-                            where a.username == admin.username
-                            select a;
-                if (query.Count()==0)
+                if (admin.username!=null && admin.password!=null)
                 {
-                    entities.admins.Add(admin);
-                    entities.SaveChanges();
+                    var query = from a in entities.admins
+                                where a.username == admin.username
+                                select a;
+
+                    if (query.Count()==0)
+                    {
+                        entities.admins.Add(admin);
+                        entities.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Username already in use");
+                    }
                 }
                 else
                 {
-                    throw new Exception("Username is already in use");
-                }
+                    if(admin.username==null)
+                        throw new Exception("No username given");
 
+                    if (admin.password == null)
+                        throw new Exception("No password given");
+                }
                 
+                                  
             }
         }
 
