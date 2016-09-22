@@ -78,7 +78,7 @@ namespace WPFToysForBoys.ViewModel
         {
             try
             {
-                if (!IdChecker.IdCheckCust(ccustomerList, ShowCustomer))
+                if (!IdChecker.IdCheck(ccustomerList, ShowCustomer))
                 {
                     cService.Insert(new Customer()
                     {
