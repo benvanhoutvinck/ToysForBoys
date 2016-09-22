@@ -254,7 +254,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Customer" Width="100"></Label>
-                            <ComboBox Width="150"></ComboBox>
+                            <ComboBox Width="150" ItemsSource="{Binding CustomerList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCustomerI}" SelectedValuePath="id"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Status" Width="100"></Label>
