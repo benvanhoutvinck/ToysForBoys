@@ -94,6 +94,7 @@
     <Compile Include="ViewModel\ManagementVMCountry.cs" />
     <Compile Include="ViewModel\ManagementVMCustomer.cs" />
     <Compile Include="ViewModel\ManagementVMOrder.cs" />
+    <Compile Include="ViewModel\ManagementVMOrderdetail.cs" />
     <Compile Include="ViewModel\ManagementVMProductline.cs" />
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>

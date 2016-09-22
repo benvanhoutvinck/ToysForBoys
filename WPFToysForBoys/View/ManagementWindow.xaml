@@ -227,7 +227,7 @@
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
                                         <TextBlock Text="{Binding Path=customerId}" Grid.Row="0" Grid.Column="1"></TextBlock>
-                                        <TextBlock Text="{Binding Path=orderdate}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                        <TextBlock Text="{Binding Path=orderdate.tostring()}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                         <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
 
