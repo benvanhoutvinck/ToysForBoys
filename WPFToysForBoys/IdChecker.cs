@@ -40,5 +40,25 @@ namespace WPFToysForBoys
             }
             return b;
         }
+
+        public static bool IdCheck(List<Customer> l, Customer c)
+        {
+            bool b = false;
+            foreach (Customer customer in l)
+            {
+                if (c.id == customer.id)
+                {
+                    b = true;
+                    if (c == customer)
+                        throw new ArgumentException();
+                    break;
+                }
+            }
+            return b;
+        }
+
+
+
+
     }
 }
