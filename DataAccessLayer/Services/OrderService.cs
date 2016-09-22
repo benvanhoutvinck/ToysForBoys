@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DataAccessLayer.Services
 {
@@ -33,12 +34,25 @@ namespace DataAccessLayer.Services
             using (var entities = new toysforboysEntities())
             {
                 var originalOrder = entities.orders.Find(order.id);
-                originalOrder.orderDate = order.orderDate;
-                originalOrder.requiredDate = order.requiredDate;
-                originalOrder.shippedDate = order.shippedDate;
-                originalOrder.comments = order.comments;
-                originalOrder.customerId = order.customerId;
-                originalOrder.status = order.status;
+
+                if(order.orderDate!=null)
+                    originalOrder.orderDate = order.orderDate;
+
+                if(order.requiredDate!=null)
+                    originalOrder.requiredDate = order.requiredDate;
+
+                if(order.shippedDate!=null)
+                    originalOrder.shippedDate = order.shippedDate;
+
+                if(order.comments!=string.Empty)
+                    originalOrder.comments = order.comments;
+
+                if(order.customerId!=null)
+                    originalOrder.customerId = order.customerId;
+
+                if(order.status!=string.Empty)
+                    originalOrder.status = order.status;
+
                 entities.SaveChanges();
             }
         }
@@ -57,17 +71,78 @@ namespace DataAccessLayer.Services
             return AllOrders;
         }
 
+        public IEnumerable<Order> GetAll(string includes)
+        {
+            return GetAll(p => true, includes);
+        }
+
+        public IEnumerable<Order> GetAll(Func<Order, bool> predicate, string includes)
+        {
+            List<Order> Allorders = new List<Order>();
+            using (var entities = new toysforboysEntities())
+            {
+                foreach (var order in (String.IsNullOrEmpty(includes) ? entities.orders : entities.orders.Include(includes)).Where(predicate))
+                {
+                    Allorders.Add((Order)order);
+                }
+            }
+
+            return Allorders;
+        }
+
         public Order GetById(int orderID)
+        {
+            return GetById(orderID, string.Empty);
+        }
+
+        public Order GetById(int orderID, string includes)
         {
             using (var entities = new toysforboysEntities())
             {
                 var query = (from order in entities.orders
                              where order.id == orderID
                              orderby order.id
-                             select order).First();
+                             select order).Include(includes).First();
 
                 return query;
             }
         }
+
+        public IEnumerable<Orderdetail> GetOrderDetails(Order order)
+        {
+            var orderdetails = new List<Orderdetail>();
+
+            using (var entities = new toysforboysEntities())
+            {
+                foreach (var od in entities.orderdetails)
+                {
+                    if (order.id==od.orderId)
+                    {
+                        orderdetails.Add(od);
+                    }
+                }
+            }
+
+            return orderdetails;
+        }
+
+        public decimal GetTotalPrice(Order order)
+        {
+           var orderdetails = GetOrderDetails(order);
+            decimal totalPrice = 0;
+
+            foreach (var od in orderdetails)
+            {
+                totalPrice +=(decimal)(od.quantityOrdered * od.priceEach);
+            }
+
+            return totalPrice;
+        }
+
+        
+
+      
+
+
     }
 }

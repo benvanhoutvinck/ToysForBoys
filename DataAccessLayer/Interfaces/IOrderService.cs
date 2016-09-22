@@ -15,6 +15,18 @@ namespace DataAccessLayer.Interfaces
 
         IEnumerable<Order> GetAll();
 
-        Order GetById(int orderID); 
+        IEnumerable<Order> GetAll(string includes);
+        IEnumerable<Order> GetAll(Func<Order, bool> predicate, string includes);
+
+        Order GetById(int orderID);
+        Order GetById(int orderID, string includes);  
+        
+
+        IEnumerable<Orderdetail> GetOrderDetails(Order order);
+
+        decimal GetTotalPrice(Order order);
+
+        
+        
     }
 }
