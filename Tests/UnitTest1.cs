@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer;
 using DataAccessLayer.Services;
+using System.Collections.Generic;
+
 namespace Tests
 {
     [TestClass]
@@ -26,8 +28,9 @@ namespace Tests
             var service = new CustomerService();
             var deleteObject = service.GetById(16);
             service.Delete(deleteObject);
+            var allObjectsz = (List<Customer>)service.GetAll();
 
-            Assert.IsNull(service.GetById(16));
+            Assert.IsFalse(allObjectsz.Contains(deleteObject));
             }
         /*
         [TestMethod]

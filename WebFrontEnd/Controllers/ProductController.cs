@@ -7,6 +7,7 @@ using DataAccessLayer.Interfaces;
 using DataAccessLayer.Services;
 using WebFrontEnd.Models;
 using DataAccessLayer;
+using WebFrontEnd.Infrastructure;
 
 namespace WebFrontEnd.Controllers
 {
@@ -52,8 +53,9 @@ namespace WebFrontEnd.Controllers
         }
 
         [HttpPost]
-        public ActionResult List(ProductListViewModel model)
+        public ActionResult List([ModelBinder(typeof(ProductLineFilterModelBinder))] ProductListViewModel model)
         {
+            
 
             return View(model);
         }

@@ -24,6 +24,7 @@ namespace DataAccessLayer.Services
         {
             using (var entities = new toysforboysEntities())
             {
+                entities.products.Attach(product);
                 entities.products.Remove(product);
                 entities.SaveChanges();
             }
@@ -111,12 +112,29 @@ namespace DataAccessLayer.Services
             return AllProducts;
         }
 
-        public OrderedProduct CreateOrderedProduct(Product product, int quantityOrdered, decimal priceEach)
+        public OrderedProduct CreateOrderedProduct(string productName, int quantityOrdered, decimal priceEach)
         {
-            OrderedProduct op = (OrderedProduct)product;
-            op.quantityOrdered = quantityOrdered;
-            op.priceEach = priceEach;
-            return op;
+            using (var entities = new toysforboysEntities())
+            {
+                var query = (from product in entities.products
+                            where product.name == productName
+                            select product).FirstOrDefault();
+
+                if (query==null)
+                {
+                    throw new Exception("Product not found");
+                }
+                else
+                {
+                    OrderedProduct op = (OrderedProduct)query;
+                    op.quantityOrdered = quantityOrdered;
+                    op.priceEach = priceEach;
+                    return op;
+                }
+
+                
+            }
+            
         }
 
 

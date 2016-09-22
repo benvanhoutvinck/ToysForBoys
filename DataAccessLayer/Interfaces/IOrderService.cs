@@ -27,6 +27,8 @@ namespace DataAccessLayer.Interfaces
         decimal GetTotalPrice(Order order);
 
         
+
+        
         
     }
 }
