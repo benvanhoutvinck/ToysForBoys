@@ -144,6 +144,10 @@
             <TabItem Header="Customer management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Country filter:" VerticalAlignment="Center" Margin="25 0"></TextBlock>
+                            <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding FCountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCountryI}" SelectedValuePath="id"></ComboBox>
+                        </StackPanel>
                         <ListBox Height="400" Margin="25 10" ItemsSource="{Binding CustomerList}" SelectedItem="{Binding SelectedCustomer}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>

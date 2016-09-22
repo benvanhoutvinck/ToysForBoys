@@ -21,6 +21,17 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
+        private List<Country> fcountryList;
+        public List<Country> FCountryList
+        {
+            get { return fcountryList; }
+            set
+            {
+                fcountryList = value;
+                RaisePropertyChanged("FCountryList");
+            }
+        }
+
         private List<Country> cCountryList;
         public List<Country> CCountryList
         {
@@ -50,10 +61,10 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 selectedCountryI = value;
-
+                
                 if (value != -1)
                 {
-                    CustomerList = ccountryService.GetById(value).customers.ToList();
+                    CustomerList = ccountryService.GetById(value, "customers").customers.ToList();
                 }
                 else
                 {

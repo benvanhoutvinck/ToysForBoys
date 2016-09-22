@@ -66,9 +66,9 @@ namespace DataAccessLayer.Services
             List<Country> AllCountries = new List<Country>();
             using (var entities = new toysforboysEntities())
             {
-                foreach (var Product in (String.IsNullOrEmpty(includes) ? entities.countries : entities.countries.Include(includes)).Where(predicate))
+                foreach (var country in (String.IsNullOrEmpty(includes) ? entities.countries : entities.countries.Include(includes)).Where(predicate))
                 {
-                    AllCountries.Add((Country)Product);
+                    AllCountries.Add((Country)country);
                 }
             }
 
