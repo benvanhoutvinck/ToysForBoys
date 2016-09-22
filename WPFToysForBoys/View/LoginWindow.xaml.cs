@@ -36,18 +36,18 @@ namespace WPFToysForBoys.View
                 
                 eenView.DataContext = vm;
                 eenView.Show();
-                Application.Current.MainWindow.Close();
+                this.Close();
             }
-            //Super admin
-            else if (userNameTextBox.Text.ToString() == "Admin" && passwordBox.Password.ToString() == "admin")
-            {
-                View.ManagementWindow eenView = new ManagementWindow();
-                ViewModel.ManagementVM vm = new ViewModel.ManagementVM(true, eenView);
+            ////Super admin
+            //else if (userNameTextBox.Text.ToString() == "Admin" && passwordBox.Password.ToString() == "admin")
+            //{
+            //    View.ManagementWindow eenView = new ManagementWindow();
+            //    ViewModel.ManagementVM vm = new ViewModel.ManagementVM(true, eenView);
                
-                eenView.DataContext = vm;
-                eenView.Show();
-                Application.Current.MainWindow.Close();
-            }
+            //    eenView.DataContext = vm;
+            //    eenView.Show();
+            //    Application.Current.MainWindow.Close();
+            //}
             else
             {
                 MessageBox.Show("Incorrect Login!", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
