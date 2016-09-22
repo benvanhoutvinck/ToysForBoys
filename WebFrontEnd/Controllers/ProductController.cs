@@ -24,38 +24,70 @@ namespace WebFrontEnd.Controllers
 
         public ActionResult List()
         {
-            var products = productService.GetAll("productline");
-            
-            var productListViewModel = new ProductListViewModel();
+            var products = productService.GetAll();
+
+            var productListViewModel = new Models.ProductListViewModel();
+
+            productListViewModel.AllProductLines = productLineService.GetAll();
 
             var productList = new List<ProductListItem>();
 
+
             foreach (var product in products)
             {
+                product.productline = productListViewModel.AllProductLines
+                    .FirstOrDefault(pl => pl.id == product.productlineId);
+
                  productList.Add
                     (
-                        new ProductListItem()
-                        {
-                            ProductName = product.name,
-                            Category = product.productline.name,
-                            Description = product.description,
-                            Scale = product.scale,
-                            ProductID = product.id,
-                            ProductLineID = product.productlineId 
-                        }
+                        new ProductListItem(product)
                     );
             }
 
             productListViewModel.Products = productList;
-            productListViewModel.AllProductLines = products.Select(p => p.productline).Distinct();
+            productListViewModel.FilterProductLines = productListViewModel.AllProductLines.Select(pl => pl.id).ToList();
 
             return View(productListViewModel);
         }
 
         [HttpPost]
-        public ActionResult List([ModelBinder(typeof(ProductLineFilterModelBinder))] ProductListViewModel model)
+        public ActionResult List([ModelBinder(typeof(Infrastructure.ProductListViewModelBinder))] Models.ProductListViewModel model)
         {
-            
+            var productLines = productLineService.GetAll();
+
+            Func<Product, bool> filter;
+
+            if(string.IsNullOrEmpty(model.FilterProductName))
+            {
+                filter = product => model.FilterProductLines.Contains(product.productlineId);
+            }
+            else
+            {
+                filter = product => model.FilterProductLines.Contains(product.productlineId) && 
+                                    product.name.Contains(model.FilterProductName); 
+            }
+
+
+
+            var products = productService
+                .GetAll
+                (
+                    filter,
+                    "productline"
+                );
+
+            var productList = new List<ProductListItem>();
+
+            foreach (var product in products)
+            {
+                productList.Add
+                    (
+                        new ProductListItem(product)
+                    );
+            }
+
+            model.AllProductLines = productLines;
+            model.Products = productList;
 
             return View(model);
         }

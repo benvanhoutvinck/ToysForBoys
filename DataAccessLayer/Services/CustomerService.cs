@@ -15,19 +15,28 @@ namespace DataAccessLayer.Services
         {
             using (var entities = new toysforboysEntities())
             {
-                var query = from c in entities.customers
-                            where c.email == customer.email
-                            select c;
+                if (customer.email!=null)
+                {
+                    var query = from c in entities.customers
+                                where c.email == customer.email
+                                select c;
 
-                if (query.Count()==0)
+                    if (query.Count() == 0)
+                    {
+                        entities.customers.Add(customer);
+                        entities.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Email already in use");
+                    }
+                }
+                else
                 {
                     entities.customers.Add(customer);
                     entities.SaveChanges();
                 }
-                else
-                {
-                    throw new Exception("Email already in use");
-                }
+                
 
                 
             }
@@ -150,10 +159,17 @@ namespace DataAccessLayer.Services
                 }
                 else
                 {
+                    if (query==null)
+                    {
+                        throw new Exception("Customer's name not found");
+                    }
+
                     if (query2.Count() > 0)
                     {
                         throw new Exception("Email is already in use");
                     }
+
+                   
                 }
             } 
            

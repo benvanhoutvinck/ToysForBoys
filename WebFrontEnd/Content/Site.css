@@ -43,3 +43,36 @@ textarea {
     width: 400px;
     height: 200px;
 }
+
+
+/* ProductList filter */
+
+#ProductListFilter {
+    width: 50%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+#ProductListFilter #ProductNameFilter input[type="text"]{
+    width: 80%;
+}
+
+#ProductListFilter input[type=submit]{
+    display:block;
+    clear:left;
+    float:right;
+}
+
+
+#ProductListFilter #ProductLineFilter {
+    margin-top: 10px;
+}
+
+#ProductListFilter .productline {
+    float: left;
+    margin-right: 10px;
+}
+
