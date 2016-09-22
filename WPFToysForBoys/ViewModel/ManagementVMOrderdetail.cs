@@ -15,16 +15,7 @@ namespace WPFToysForBoys.ViewModel
 {
     public partial class ManagementVM : ViewModelBase
     {
-        private List<Orderdetail> orderdetailList;
-        public List<Orderdetail> OrderdetailList
-        {
-            get { return orderdetailList; }
-            set
-            {
-                orderdetailList = value;
-                RaisePropertyChanged("OrderdetailList");
-            }
-        }
+        
 
 
         private Orderdetail selectedOrderdetail;
@@ -120,7 +111,10 @@ namespace WPFToysForBoys.ViewModel
         }
         private void OrderDetail()
         {
-
+            View.OrderdetailWindow orderview = new View.OrderdetailWindow();
+            //ViewModel.OrderDetailVM ovm = new OrderDetailVM(oorderdetailService.) 
+            //orderview.DataContext = ovm;
+            orderview.Show();
         }
 
     }
