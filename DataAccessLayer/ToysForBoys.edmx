@@ -5,13 +5,11 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="toysforboysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'toysforboys.dbo.admins' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="admins">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="username" Type="nchar" MaxLength="70" />
           <Property Name="password" Type="nchar" MaxLength="15" />
         </EntityType>
@@ -150,19 +148,13 @@ warning 6002: The table/view 'toysforboys.dbo.admins' does not have a primary ke
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="toysforboysModelStoreContainer">
+          <EntitySet Name="admins" EntityType="Self.admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="countries" EntityType="Self.countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customers" EntityType="Self.customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orderdetails" EntityType="Self.orderdetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="productlines" EntityType="Self.productlines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="admins" EntityType="Self.admins" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [admins].[id] AS [id], 
-    [admins].[username] AS [username], 
-    [admins].[password] AS [password]
-    FROM [dbo].[admins] AS [admins]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_customers_countries" Association="Self.FK_customers_countries">
             <End Role="countries" EntitySet="countries" />
             <End Role="customers" EntitySet="customers" />
