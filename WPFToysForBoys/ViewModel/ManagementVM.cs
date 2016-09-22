@@ -30,7 +30,8 @@ namespace WPFToysForBoys.ViewModel
             MW = mw;
             pService = new ProductService();
             plineService = new ProductlineService();
-            cService = new CustomerService(); 
+            cService = new CustomerService();
+            ccountryService = new CountryService();
             ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
             PProductlineList = plineService.GetAll().ToList();
             productlineList.AddRange(PProductlineList);
@@ -45,6 +46,7 @@ namespace WPFToysForBoys.ViewModel
             else
                 AdminMaster = "Hidden";
             cproductList = pService.GetAll("productline").ToList();
+            ccustomerList = cService.GetAll().ToList();
             PNew();
             CNew();
         }
