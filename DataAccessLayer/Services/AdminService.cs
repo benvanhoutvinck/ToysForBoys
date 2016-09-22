@@ -14,13 +14,13 @@ namespace DataAccessLayer.Services
         {
             using (var entities = new toysforboysEntities())
             {
-                if (admin.username!=null)
+                if (admin.username!=null && admin.password!=null)
                 {
                     var query = from a in entities.admins
                                 where a.username == admin.username
                                 select a;
 
-                    if (query != null)
+                    if (query.Count()==0)
                     {
                         entities.admins.Add(admin);
                         entities.SaveChanges();
@@ -32,8 +32,11 @@ namespace DataAccessLayer.Services
                 }
                 else
                 {
-                    entities.admins.Add(admin);
-                    entities.SaveChanges();
+                    if(admin.username==null)
+                        throw new Exception("No username given");
+
+                    if (admin.password == null)
+                        throw new Exception("No password given");
                 }
                 
                                   
