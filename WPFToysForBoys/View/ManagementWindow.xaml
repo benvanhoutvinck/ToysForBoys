@@ -23,13 +23,21 @@
         </Menu>
         <TabControl>
             <TabItem Header="Product management">
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="FocusableChanged">
+                        <gala:EventToCommand Command="{Binding FocusCommand}" PassEventArgsToCommand="True"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
-                        <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
-                        <ListBox Height="375" Width="375" Margin="25 10" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Category filter:" VerticalAlignment="Center" Margin="25 0"></TextBlock>
+                            <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                        </StackPanel>
+                        <ListBox Height="375" Width="395" Margin="25 10" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="350">
+                                    <Grid Width="360">
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
@@ -83,7 +91,7 @@
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.buyPrice}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                            <Button Content="Add / Modify" Width="100" Margin="0 0 10 0" IsEnabled="{Binding Path=ButtonAddStatus}" 
+                            <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding PAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding PNewCommand}"></Button>
 
@@ -94,22 +102,41 @@
             <TabItem Header="Productline management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
-                        <ListBox Height="400" Margin="25" ItemsSource="{Binding PProductlineList}" DisplayMemberPath="name"></ListBox>
+                        <ListBox Height="400" Margin="25" ItemsSource="{Binding PProductlineList}" SelectedItem="{Binding SelectedProductline}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="360">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
+                                        <TextBlock Text="{Binding Path=name}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                            <Label Content="Customer ID:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <Label Content="Productline ID:" Width="100"></Label>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProductline.id}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Name:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProductline.name}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Description:" Width="100"></Label>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProductline.description}" TextWrapping="Wrap" Height="75"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20 20">
-                            <Button Content="Add" Width="50" Margin="0 0 10 0"></Button>
-                            <Button Content="Modify" Width="50" Margin="0 0 10 0"></Button>
-                            <Button Content="Apply" Width="50" Margin="0 0 10 0" IsEnabled="False"></Button>
-                            <Button Content="Clear" Width="50"></Button>
+                            <Button Content="Add / Modify" Width="100" Margin="0 0 10 0" 
+                                    Command="{Binding PLAddCommand}"></Button>
+                            <Button Content="New" Width="100" Command="{Binding NewProductlineCommand}"></Button>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -194,8 +221,17 @@
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="New password:" Width="100" Margin="0 20"></Label>
+                            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></PasswordBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Verify password:" Width="100" Margin="0 20"></Label>
+                            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></PasswordBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Access level:" Width="100" Margin="0 20"></Label>
-                            <ComboBox Width="150" DisplayMemberPath="" SelectedValue="" SelectedValuePath="" Margin="0 20"></ComboBox>
+                            <ComboBox Width="150" DisplayMemberPath="" SelectedValue="" SelectedValuePath="" Margin="0 20" ></ComboBox>
+                            <!--itemssource toevoegen-->
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"

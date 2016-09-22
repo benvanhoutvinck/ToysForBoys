@@ -17,6 +17,7 @@ namespace WPFToysForBoys.ViewModel
     public partial class ManagementVM : ViewModelBase
     {
 
+        private List<Productline> cproductlineList;
         private List<Product> cproductList;
         private IProductService pService;
         private IProductlineService plineService;
@@ -26,16 +27,18 @@ namespace WPFToysForBoys.ViewModel
             pService = new ProductService();
             plineService = new ProductlineService();
             ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
-            productlineList.AddRange(plineService.GetAll());
             PProductlineList = plineService.GetAll().ToList();
+            productlineList.AddRange(PProductlineList);
+            cproductlineList = plineService.GetAll("products").ToList();
             //SelectedProduct = ProductList.First();
             SelectedProductlineI = -1;
+            SelectedProductline = null;
             if (adminMaster)
                 AdminMaster = "Visible";
             else
                 AdminMaster = "Hidden";
             cproductList = pService.GetAll("productline").ToList();
-            PNew();
+            PNew();          
         }
 
         public View.ManagementWindow MW;
@@ -78,7 +81,8 @@ namespace WPFToysForBoys.ViewModel
         }
         private void CloseWindow()
         {
-            if (MessageBox.Show("Do you want to close the application?", "Closing", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Do you want to close the application?", "Closing", MessageBoxButton.YesNo, 
+                MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
                 MW.Close();
         }
 
@@ -88,7 +92,8 @@ namespace WPFToysForBoys.ViewModel
         }
         private void SwitchUser()
         {
-            if (MessageBox.Show("Do you want to change user?", "Log out", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Do you want to change user?", "Log out", MessageBoxButton.YesNo, 
+                MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
             {
                 View.LoginWindow view = new View.LoginWindow();
                 MW.Close();
@@ -169,8 +174,6 @@ namespace WPFToysForBoys.ViewModel
                         quantityInOrder = ShowProduct.quantityInOrder,
                         buyPrice = ShowProduct.buyPrice
                     });
-                    SelectedProductlineI = SelectedProductlineI;
-                    //ProductList.Add(ShowProduct);
                 }
                 else
                 {
@@ -184,9 +187,9 @@ namespace WPFToysForBoys.ViewModel
                         quantityInStock = ShowProduct.quantityInStock,
                         quantityInOrder = ShowProduct.quantityInOrder,
                         buyPrice = ShowProduct.buyPrice
-                    });
-                    SelectedProductlineI = SelectedProductlineI;
+                    });                    
                 }
+                SelectedProductlineI = SelectedProductlineI;
             }
             catch (ArgumentException)
             {
