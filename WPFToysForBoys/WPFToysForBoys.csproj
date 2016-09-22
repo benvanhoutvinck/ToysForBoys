@@ -95,6 +95,8 @@
     <Compile Include="ProductlineServiceMock.cs" />
     <Compile Include="ProductServiceMock.cs" />
     <Compile Include="ViewModel\ManagementVM.cs" />
+    <Compile Include="ViewModel\ManagementVMCountry.cs" />
+    <Compile Include="ViewModel\ManagementVMCustomer.cs" />
     <Compile Include="ViewModel\ManagementVMProductline.cs" />
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
