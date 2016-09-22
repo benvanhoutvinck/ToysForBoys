@@ -64,11 +64,9 @@ namespace WebFrontEnd.Controllers
             else
             {
                 filter = product => model.FilterProductLines.Contains(product.productlineId) && 
-                                    product.name.Contains(model.FilterProductName); 
+                                    product.name.ToLower().Contains(model.FilterProductName.ToLower()); 
             }
-
-
-
+            
             var products = productService
                 .GetAll
                 (

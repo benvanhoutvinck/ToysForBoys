@@ -127,8 +127,6 @@
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Infrastructure\ProductListViewModelBinder.cs" />
-    <Compile Include="Mock\CountryServiceMock.cs" />
-    <Compile Include="Mock\ProductServiceMock.cs" />
     <Compile Include="Models\CategorieViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
