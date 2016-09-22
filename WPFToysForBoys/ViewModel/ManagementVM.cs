@@ -19,17 +19,25 @@ namespace WPFToysForBoys.ViewModel
 
         private List<Productline> cproductlineList;
         private List<Product> cproductList;
+        private List<Customer> ccustomerList;
+        private ICountryService ccountryService;
         private IProductService pService;
         private IProductlineService plineService;
+        private ICustomerService cService;
+        
         public ManagementVM(bool adminMaster, View.ManagementWindow mw)
         {
             MW = mw;
             pService = new ProductService();
             plineService = new ProductlineService();
+            cService = new CustomerService();
+            ccountryService = new CountryService();
             ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
             PProductlineList = plineService.GetAll().ToList();
             productlineList.AddRange(PProductlineList);
             cproductlineList = plineService.GetAll("products").ToList();
+            ccustomerList = cService.GetAll().ToList();
+            
             //SelectedProduct = ProductList.First();
             SelectedProductlineI = -1;
             SelectedProductline = null;
