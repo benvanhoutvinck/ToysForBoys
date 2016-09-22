@@ -239,6 +239,7 @@ namespace WPFToysForBoys.ViewModel
                 pService.Delete(pService.GetById(ShowProduct.id));
                 PNew();
             }
+            SelectedProductlineI = SelectedProductlineI;
         }
 
         public RelayCommand PNewCommand

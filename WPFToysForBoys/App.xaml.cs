@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataAccessLayer.Interfaces;
+using DataAccessLayer.Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -18,6 +20,7 @@ namespace WPFToysForBoys
             base.OnStartup(e);
             View.LoginWindow view = new View.LoginWindow();
             view.Show();
+
         }
     }
 }
