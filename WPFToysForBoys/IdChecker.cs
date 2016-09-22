@@ -57,6 +57,39 @@ namespace WPFToysForBoys
             return b;
         }
 
+        public static bool IdCheck(List<Order> l, Order o)
+        {
+            bool b = false;
+            foreach (Order order in l)
+            {
+                if (o.id == order.id)
+                {
+                    b = true;
+                    if (o == order)
+                        throw new ArgumentException();
+                    break;
+                }
+            }
+            return b;
+        }
+
+        public static bool IdCheck(List<Orderdetail> l, Orderdetail o)
+        {
+            bool b = false;
+            foreach (Orderdetail orderdetail in l)
+            {
+                if (o.orderId == orderdetail.orderId && o.productId == orderdetail.productId)
+                {
+                    b = true;
+                    if (o == orderdetail)
+                        throw new ArgumentException();
+                    break;
+                }
+            }
+            return b;
+        }
+
+
 
 
 

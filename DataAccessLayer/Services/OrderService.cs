@@ -47,8 +47,8 @@ namespace DataAccessLayer.Services
                 if(order.comments!=string.Empty)
                     originalOrder.comments = order.comments;
 
-                if(order.customerId!=null)
-                    originalOrder.customerId = order.customerId;
+                
+                originalOrder.customerId = order.customerId;
 
                 if(order.status!=string.Empty)
                     originalOrder.status = order.status;
@@ -128,7 +128,7 @@ namespace DataAccessLayer.Services
 
         public decimal GetTotalPrice(Order order)
         {
-           var orderdetails = GetOrderDetails(order);
+            var orderdetails = GetOrderDetails(order);
             decimal totalPrice = 0;
 
             foreach (var od in orderdetails)

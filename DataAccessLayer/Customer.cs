@@ -26,7 +26,9 @@ namespace DataAccessLayer
         public string city { get; set; }
         public string state { get; set; }
         public string postalCode { get; set; }
-        public Nullable<int> countryId { get; set; }
+        public int countryId { get; set; }
+        public string password { get; set; }
+        public string email { get; set; }
     
         public virtual Country country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

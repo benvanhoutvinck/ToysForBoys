@@ -9,6 +9,8 @@ namespace DataAccessLayer.Interfaces
     public interface ICustomerService
     {
         void Insert(Customer customer);
+        //throws exception if email is already in use
+
         void Delete(Customer customer);
 
         void Edit(Customer customer);
@@ -22,6 +24,12 @@ namespace DataAccessLayer.Interfaces
 
         Customer GetById(int customerID, string  includes);
 
-        Customer LoginVerification(string naam, string postcode);
+        Customer LoginVerification(string email, string password);
+        //returns null if login fails
+
+        void AddEmailAndPassword(string name, string email, string password);
+
+        void ChangePassword(string email, string oldPassword, string newPassword);
+        //throws exception if email is already in use
     }
 }

@@ -21,10 +21,14 @@ namespace WPFToysForBoys.ViewModel
         private List<Product> cproductList;
         private List<Customer> ccustomerList;
         private List<Country> ccountryList;
+        private List<Order> oorderList;
+        private List<Orderdetail> oorderdetailList;
         private IProductService pService;
         private IProductlineService plineService;
         private ICustomerService cService;
         private ICountryService ccountryService;
+        private IOrderService oService;
+        private IOrderdetailsService oorderdetailService;
         public ManagementVM(bool adminMaster, View.ManagementWindow mw)
         {
             MW = mw;
