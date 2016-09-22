@@ -7,7 +7,7 @@ using WebFrontEnd.Models;
 
 namespace WebFrontEnd.Infrastructure
 {
-    public class ProductLineFilterModelBinder : DefaultModelBinder
+    public class ProductListViewModelBinder : DefaultModelBinder
     {
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
@@ -18,6 +18,8 @@ namespace WebFrontEnd.Infrastructure
                 var allKeys = new List<string>();
 
                 var model = new ProductListViewModel();
+
+                model.FilterProductName = request.Form.GetValues("FilterProductName")[0];
 
                 model.FilterProductLines = new List<int>();
                 

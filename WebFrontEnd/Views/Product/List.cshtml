@@ -5,21 +5,28 @@
 }
 
 
-<div id="ProductListFilter">
-    <div id="ProductLineFilters">
-        @using (Html.BeginForm())
-        {
-            foreach (var productLine in Model.AllProductLines)
+<div class="container" id="ProductListFilter">
+    @using (Html.BeginForm())
+    {
+        <div class="row" id="ProductNameFilter">
+            @Html.TextBoxFor(model => model.FilterProductName, new { placeholder = "Product name..." })
+        </div>
+        <div class="row" id="ProductLineFilter">
+            <div>
+                Select the categories you want to search for:
+            </div>
+            @foreach (var productLine in Model.AllProductLines)
             {
-                <p>
-                    @Html.CheckBox("productLine" + productLine.id.ToString(), true)
-                    @Html.Label("productLine" + productLine.id.ToString(), productLine.name)
-                </p>
+                <div class="productline">
+                    @Html.CheckBox("productLine" + productLine.id.ToString(), Model.FilterProductLines.Contains(productLine.id))
+                    @Html.Label("productLine" + productLine.id.ToString(), productLine.name, new { @class= "checkbox-label" } )
+                </div>
             }
-            <input type="submit" value="Filter"/>
-        }
+        </div>
 
-    </div>
+        <input type="submit" value="Filter"/>
+    }
+
 </div>
 
 @Html.Partial("_ProductList", Model.Products)
