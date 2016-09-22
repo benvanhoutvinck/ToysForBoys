@@ -92,9 +92,9 @@
     <Compile Include="IdChecker.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Product.cs" />
-    <Compile Include="ProductlineServiceMock.cs" />
-    <Compile Include="ProductServiceMock.cs" />
     <Compile Include="ViewModel\ManagementVM.cs" />
+    <Compile Include="ViewModel\ManagementVMCountry.cs" />
+    <Compile Include="ViewModel\ManagementVMCustomer.cs" />
     <Compile Include="ViewModel\ManagementVMProductline.cs" />
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -121,7 +121,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -130,7 +129,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\LoginWindow.xaml">

@@ -1,10 +1,12 @@
 ﻿using DataAccessLayer;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace WPFToysForBoys.ViewModel
 {
@@ -59,9 +61,104 @@ namespace WPFToysForBoys.ViewModel
                 {
                     ProductList = pService.GetAll("productline").ToList();
                 }
-
+                cproductList = pService.GetAll("productline ").ToList();
                 RaisePropertyChanged("SelectedProductlineI");
             }
         }
+
+
+
+        //productline management:
+
+        public RelayCommand NewProductlineCommand
+        {
+            get { return new RelayCommand(NewProductline); }
+        }
+        private void NewProductline()
+        {
+            SelectedProductline = null;
+        }
+
+
+        private Productline selectedProductline;
+        public Productline SelectedProductline
+        {
+            get { return selectedProductline; }
+            set
+            {
+                if (value == null)
+                {
+                    ShowProductline = new Productline() { id = -1 };
+                }
+                else
+                {
+                    selectedProductline = value;
+                    ShowProductline = value;
+                    RaisePropertyChanged("SelectedProductline");
+                }
+
+            }
+        }
+
+        private Productline showProductline;
+        public Productline ShowProductline
+        {
+            get { return showProductline; }
+            set
+            {
+                showProductline = value;               
+                RaisePropertyChanged("ShowProductline");
+            }
+        }
+
+
+        public RelayCommand PLAddCommand
+        {
+            get { return new RelayCommand(PLAdd); }
+        }
+        private void PLAdd()
+        {
+            try
+            {
+                if (!IdChecker.IdCheck(cproductlineList, ShowProductline))
+                {
+                    plineService.Insert(new Productline()
+                    {
+                        name = ShowProductline.name,
+                        description = ShowProductline.description,
+                    });                    
+                }
+                else
+                {
+                    plineService.Edit(new Productline()
+                    {
+                        id = ShowProductline.id,
+                        name = ShowProductline.name,
+                        description = ShowProductline.description,
+                    });                  
+                }
+                cproductlineList = plineService.GetAll("products").ToList();
+                PProductlineList = plineService.GetAll("products").ToList();
+                RefreshTab();
+                ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" }};
+                productlineList.AddRange(cproductlineList);
+                SelectedProductlineI = -1;
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("Identical object already exists in the database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
+
+
+        //public RelayCommand FocusCommand
+        //{
+        //    get { return new RelayCommand(FocusTab); }
+        //}
+        private void RefreshTab()
+        {
+            SelectedProductlineI = SelectedProductlineI;
+        }
+
     }
 }

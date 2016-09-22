@@ -24,5 +24,41 @@ namespace WPFToysForBoys
             }
             return b;
         }
+
+        public static bool IdCheck(List<Productline> l, Productline p)
+        {
+            bool b = false;
+            foreach (Productline productline in l)
+            {
+                if (p.id == productline.id)
+                {
+                    b = true;
+                    if (p.name == productline.name && p.description == productline.description)
+                        throw new ArgumentException();
+                    break;
+                }
+            }
+            return b;
+        }
+
+        public static bool IdCheck(List<Customer> l, Customer c)
+        {
+            bool b = false;
+            foreach (Customer customer in l)
+            {
+                if (c.id == customer.id)
+                {
+                    b = true;
+                    if (c == customer)
+                        throw new ArgumentException();
+                    break;
+                }
+            }
+            return b;
+        }
+
+
+
+
     }
 }

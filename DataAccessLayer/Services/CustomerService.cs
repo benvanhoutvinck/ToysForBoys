@@ -118,8 +118,9 @@ namespace DataAccessLayer.Services
             List<Customer> AllCustomers = new List<Customer>();
             using (var entities = new toysforboysEntities())
             {
-                foreach (var customer in ((DbSet) entities.customers.Where(predicate)).Include(includes))
-                {
+                
+               foreach (var customer in (String.IsNullOrEmpty(includes) ? entities.customers : entities.customers.Include(includes)).Where(predicate))
+                    {
                     AllCustomers.Add((Customer) customer);
                 }
             }
