@@ -211,6 +211,32 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
+        public RelayCommand PDeleteCommand
+        {
+            get { return new RelayCommand(PDelete); }
+        }
+        private void PDelete()
+        {
+            try
+            {
+                if (IdChecker.IdCheck(cproductList, ShowProduct))
+                {
+                    if (MessageBox.Show("You are about to delete a modified item. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
+                    {
+                        pService.Delete(pService.GetById(ShowProduct.id));
+                        PNew();
+                    }
+                }
+                else
+                    PNew();
+            }
+            catch (ArgumentException)
+            {
+                pService.Delete(pService.GetById(ShowProduct.id));
+                PNew();
+            }
+        }
+
         public RelayCommand PNewCommand
         {
             get { return new RelayCommand(PNew); }

@@ -94,6 +94,7 @@
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding PAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding PNewCommand}"></Button>
+                            <Button Content="Delete" Width="100" Margin="10 0 0 0" Command="{Binding PDeleteCommand}"></Button>
 
                         </StackPanel>
                     </StackPanel>
