@@ -34,7 +34,7 @@ namespace WPFToysForBoys.View
                 if (newPasswordBox.Password == verifyPasswordBox.Password)
                 {
                     IAdminService admin = new AdminService();
-                    admin.Insert(new Admin() { username = usernameBox.Text, password = newPasswordBox.Password });
+                    admin.Insert(new Admin() { username = usernameBox.Text.ToString().Trim(), password = newPasswordBox.Password.ToString().Trim() });
                     MessageBox.Show("User added to the database.", "Registration", MessageBoxButton.OK, MessageBoxImage.Information);
                     View.LoginWindow eenView = new View.LoginWindow();
                     eenView.Show();
