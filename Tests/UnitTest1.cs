@@ -58,6 +58,17 @@ namespace Tests
 
             Assert.IsNotNull(New.id);
         }
+
+        [TestMethod]
+        public void AdminInsert()
+        {
+            var admin = new Admin { username = "test", password = "pw" };
+            var service = new AdminService();
+
+            service.Insert(admin);
+
+            Assert.IsNotNull(admin.id);
+        }
         
     }
 }
