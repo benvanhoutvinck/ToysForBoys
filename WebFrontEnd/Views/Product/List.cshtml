@@ -22,6 +22,14 @@
                     @Html.Label("productLine" + productLine.id.ToString(), productLine.name, new { @class= "checkbox-label" } )
                 </div>
             }
+            <div>
+                Input a minimum and a maximum price:
+            </div>
+            <div id="ProductBuyPriceFilter">
+                @Html.TextBoxFor(model => model.FilterBuyPriceMinimum)
+                @Html.TextBoxFor(model => model.FilterBuyPriceMaximum)
+                @Html.ValidationMessageFor(model => model.FilterBuyPriceMinimum)
+            </div>
         </div>
 
         <input type="submit" value="Filter"/>
