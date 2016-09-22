@@ -35,7 +35,7 @@ namespace WPFToysForBoys.ViewModel
             {
                 if (value == null)
                 {
-                    ShowOrderdetail = new Order() { id = -1 };
+                    ShowOrderdetail = new Orderdetail() { productId= -1, orderId = -1 };
                 }
                 else
                 {
@@ -110,6 +110,17 @@ namespace WPFToysForBoys.ViewModel
         private void OdNew()
         {
             SelectedOrderdetail = null;
+        }
+
+
+        //Order details:
+        public RelayCommand OrderDetailCommand
+        {
+            get { return new RelayCommand(OrderDetail); }
+        }
+        private void OrderDetail()
+        {
+
         }
 
     }

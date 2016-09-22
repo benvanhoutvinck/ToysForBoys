@@ -58,9 +58,10 @@ namespace WPFToysForBoys.ViewModel
                 AdminMaster = "Hidden";
             cproductList = pService.GetAll("productline").ToList();
             ccustomerList = cService.GetAll("country").ToList();
-            oorderList = oService.GetAll().ToList();
-            OrderList = oorderList;
+            oorderList = oService.GetAll("customer").ToList();
+            OrderList = oService.GetAll("customer").ToList();
             oorderdetailList = oorderdetailService.GetAll().ToList();
+            OStatusList = new List<string>() { "WAITING", "CANCELLED", "RESOLVED", "SHIPPED", "DISPUTED", "PROCESSING" };
             PNew();
             CNew();
             ONew();
