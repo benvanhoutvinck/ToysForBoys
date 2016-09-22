@@ -72,5 +72,10 @@ namespace WebFrontEnd.Mock
         {
             throw new NotImplementedException();
         }
+
+        public OrderedProduct CreateOrderedProduct(string productName, int quantityOrdered, decimal priceEach)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
