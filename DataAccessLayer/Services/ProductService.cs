@@ -54,8 +54,7 @@ namespace DataAccessLayer.Services
                 if(product.buyPrice!=null)
                     originalProduct.buyPrice = product.buyPrice;
 
-                if(product.productlineId!=null)
-                    originalProduct.productlineId = product.productlineId;
+                originalProduct.productlineId = product.productlineId;
 
                 entities.SaveChanges();
             }

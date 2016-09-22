@@ -15,8 +15,21 @@ namespace DataAccessLayer.Services
         {
             using (var entities = new toysforboysEntities())
             {
-                entities.customers.Add(customer);
-                entities.SaveChanges();
+                var query = from c in entities.customers
+                            where c.email == customer.email
+                            select c;
+
+                if (query.Count()==0)
+                {
+                    entities.customers.Add(customer);
+                    entities.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Email already in use");
+                }
+
+                
             }
         }
 
@@ -49,9 +62,8 @@ namespace DataAccessLayer.Services
 
                 if(customer.postalCode!=string.Empty)
                     originalCustomer.postalCode = customer.postalCode;
-
-                if(customer.countryId!=null)
-                    originalCustomer.countryId = customer.countryId;
+                
+                originalCustomer.countryId = customer.countryId;
 
                 entities.SaveChanges();
             }
@@ -67,13 +79,13 @@ namespace DataAccessLayer.Services
             return GetById(customerID, string.Empty);
         }
 
-        public Customer LoginVerification(string naam, string postcode)
+        public Customer LoginVerification(string email, string password)
         {
             using (var entities = new toysforboysEntities())
             {
                 var query = (from customer in entities.customers
-                             where customer.name == naam &&
-                             customer.postalCode == postcode
+                             where customer.email == email &&
+                             customer.password == password
                              select customer).FirstOrDefault();
 
                 return query;
@@ -106,7 +118,6 @@ namespace DataAccessLayer.Services
             List<Customer> AllCustomers = new List<Customer>();
             using (var entities = new toysforboysEntities())
             {
-                
                 foreach (var customer in ((DbSet) entities.customers.Where(predicate)).Include(includes))
                 {
                     AllCustomers.Add((Customer) customer);
@@ -114,6 +125,53 @@ namespace DataAccessLayer.Services
             }
 
             return AllCustomers;
+        }
+
+        public void AddEmailAndPassword(string name, string email, string password)
+        {
+            using (var entities = new toysforboysEntities())
+            {
+                var query = (from customer in entities.customers
+                             where customer.name == name
+                             select customer).First();
+
+                var query2 = from customer in entities.customers
+                             where customer.email == email
+                             select customer;
+
+                if (query != null && query2.Count() == 0)
+                {
+
+                    query.email = email;
+                    query.password = password;
+                    entities.SaveChanges();
+                }
+                else
+                {
+                    if (query2.Count() > 0)
+                    {
+                        throw new Exception("Email is already in use");
+                    }
+                }
+            } 
+           
+            
+        }
+
+        public void ChangePassword(string email, string oldPassword, string newPassword)
+        {
+            using (var entities = new toysforboysEntities())
+            {
+                var query = (from customer in entities.customers
+                             where customer.email == email
+                             select customer).FirstOrDefault();
+
+                if (query != null && query.password == oldPassword)
+                {
+                    query.password = newPassword;
+                    entities.SaveChanges();
+                }
+            }                       
         }
     }
 }

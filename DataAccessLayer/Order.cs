@@ -25,7 +25,7 @@ namespace DataAccessLayer
         public Nullable<System.DateTime> requiredDate { get; set; }
         public Nullable<System.DateTime> shippedDate { get; set; }
         public string comments { get; set; }
-        public Nullable<int> customerId { get; set; }
+        public int customerId { get; set; }
         public string status { get; set; }
     
         public virtual Customer customer { get; set; }

@@ -73,6 +73,7 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Orderdetail> CreateOrderDetails(Order order, List<OrderedProduct> orderedProducts)
         {
+
             var orderdetails = new List<Orderdetail>();
             foreach (var op in orderedProducts)
             {
@@ -83,8 +84,6 @@ namespace DataAccessLayer.Services
                 orderdetail.priceEach = op.priceEach;
                 orderdetails.Add(orderdetail);
             }
-
-
 
             return orderdetails;
         }
