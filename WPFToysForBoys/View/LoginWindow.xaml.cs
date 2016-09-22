@@ -54,5 +54,12 @@ namespace WPFToysForBoys.View
             }
 
         }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            View.RegisterWindow registerview = new RegisterWindow();
+            this.Close();        
+            registerview.Show();
+        }
     }
 }

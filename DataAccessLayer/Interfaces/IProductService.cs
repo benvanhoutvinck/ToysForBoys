@@ -22,7 +22,7 @@ namespace DataAccessLayer.Interfaces
         Product GetById(int productID);
         Product GetById(int productID, string includes);
 
-        OrderedProduct CreateOrderedProduct(Product product, int quantityOrdered, decimal priceEach);
+        OrderedProduct CreateOrderedProduct(string productName, int quantityOrdered, decimal priceEach);
 
 
     }
