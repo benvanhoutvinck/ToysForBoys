@@ -9,21 +9,21 @@ namespace WebFrontEnd.Models
 {
     public class ProductListItem
     {
-        [Display(Name = "Productnaam")]
+        [Display(Name = "Name")]
         public string ProductName { get; set; }
 
-        [Display(Name = "Schaal")]
+        [Display(Name = "Scale")]
         public string Scale { get; set; }
 
-        [Display(Name = "Beschrijving")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
 
-        [Display(Name = "Categorie")]
+        [Display(Name = "Productline")]
         public string Category { get; set; }
 
         public int ProductLineID { get; set; }
 
-        [Display(Name = "Prijs")]
+        [Display(Name = "Price")]
         public decimal BuyPrice { get; set; }
 
         public int ProductID { get; set; }
