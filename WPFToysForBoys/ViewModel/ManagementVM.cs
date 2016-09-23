@@ -192,7 +192,7 @@ namespace WPFToysForBoys.ViewModel
                 ShowProduct.productlineId = SelectedPProductlineI;
                 if (!IdChecker.IdCheck(cproductList, ShowProduct))
                 {
-                    Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)$");
+                    Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)?$");
                     if (SelectedPProductlineI >= 1)
                         if ((ShowProduct.buyPrice == null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder == null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock == null || ShowProduct.quantityInStock >= 0))
                             if (!string.IsNullOrEmpty(ShowProduct.name) && !string.IsNullOrWhiteSpace(ShowProduct.name))
