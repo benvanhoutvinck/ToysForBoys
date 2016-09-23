@@ -189,15 +189,15 @@ namespace WPFToysForBoys.ViewModel
             //}
             try
             {
-                if (!IdChecker.IdCheck(cproductList, ShowProduct))
-                {
-                    Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)$");
-                    if (SelectedPProductlineI >= 1)
-                        if ((ShowProduct.buyPrice == null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder == null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock == null || ShowProduct.quantityInStock >= 0))
-                            if (ShowProduct.name != null)
+                Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)$");
+                if (SelectedPProductlineI >= 1)
+                    if ((ShowProduct.buyPrice == null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder == null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock == null || ShowProduct.quantityInStock >= 0))
+                        if (ShowProduct.name != null)
+                        {
+                            var m = reg.Match(ShowProduct.scale);
+                            if (ShowProduct.scale != null && m.Success)
                             {
-                                var m = reg.Match(ShowProduct.scale);
-                                if (ShowProduct.scale != null && m.Success)
+                                if (!IdChecker.IdCheck(cproductList, ShowProduct))
                                 {
                                     pService.Insert(new Product()
                                     {
@@ -211,30 +211,30 @@ namespace WPFToysForBoys.ViewModel
                                     });
                                 }
                                 else
-                                    MessageBox.Show("Invalid scale!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                                {
+                                    pService.Edit(new Product()
+                                    {
+                                        id = ShowProduct.id,
+                                        name = ShowProduct.name,
+                                        description = ShowProduct.description,
+                                        productlineId = SelectedPProductlineI,
+                                        scale = ShowProduct.scale,
+                                        quantityInStock = ShowProduct.quantityInStock,
+                                        quantityInOrder = ShowProduct.quantityInOrder,
+                                        buyPrice = ShowProduct.buyPrice
+                                    });
+                                }
+                                SelectedProductlineI = SelectedProductlineI;
                             }
                             else
-                                MessageBox.Show("Invalid product name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                                MessageBox.Show("Invalid scale!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        }
                         else
-                            MessageBox.Show("Invalid Quantities/price!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            MessageBox.Show("Invalid product name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     else
-                        MessageBox.Show("No productline selected for your product!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
+                        MessageBox.Show("Invalid Quantities/price!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 else
-                {
-                    pService.Edit(new Product()
-                    {
-                        id = ShowProduct.id,
-                        name = ShowProduct.name,
-                        description = ShowProduct.description,
-                        productlineId = SelectedPProductlineI,
-                        scale = ShowProduct.scale,
-                        quantityInStock = ShowProduct.quantityInStock,
-                        quantityInOrder = ShowProduct.quantityInOrder,
-                        buyPrice = ShowProduct.buyPrice
-                    });
-                }
-                SelectedProductlineI = SelectedProductlineI;
+                    MessageBox.Show("No productline selected for your product!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             catch (ArgumentException)
             {
