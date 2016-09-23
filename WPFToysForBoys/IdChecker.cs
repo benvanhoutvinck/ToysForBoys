@@ -7,6 +7,20 @@ using System.Threading.Tasks;
 
 namespace WPFToysForBoys
 {
+    public class CustomerCompare : IComparer<Customer>
+    {
+        public CustomerCompare(): base(){ }
+        public int Compare(Customer x, Customer y)
+        {
+            if (x.id == y.id)
+                return 0;
+            else if (x.id < y.id)
+                return -1;
+            else
+                return 1;
+        }
+    }
+
     public class IdChecker
     {
         public static bool IdCheck(List<Product> l, Product p)
@@ -88,10 +102,5 @@ namespace WPFToysForBoys
             }
             return b;
         }
-
-
-
-
-
     }
 }

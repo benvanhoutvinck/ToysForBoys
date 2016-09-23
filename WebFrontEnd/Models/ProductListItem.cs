@@ -24,7 +24,7 @@ namespace WebFrontEnd.Models
         public int ProductLineID { get; set; }
 
         [Display(Name = "Prijs")]
-        public decimal? BuyPrice { get; set; }
+        public decimal BuyPrice { get; set; }
 
         public int ProductID { get; set; }
 
@@ -36,7 +36,7 @@ namespace WebFrontEnd.Models
             Scale = product.scale;
             ProductID = product.id;
             ProductLineID = product.productlineId;
-            BuyPrice = product.buyPrice;
+            BuyPrice = product.buyPrice ?? 0;
         }
 
     }

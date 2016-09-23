@@ -15,9 +15,14 @@ namespace WebFrontEnd.Models
 
         public string FilterProductName { get; set; }
 
+        [Display(Name ="Minimum price")]
         public int FilterBuyPriceMinimum { get; set; }
+
+        [Display(Name ="Maximum price")]
         public int FilterBuyPriceMaximum { get; set; }
-        
+
+        public bool FilterOnPrice { get { return FilterBuyPriceMaximum > 0; } }
+
         public IEnumerable<ProductListItem> Products { get; set; }
     }
 }

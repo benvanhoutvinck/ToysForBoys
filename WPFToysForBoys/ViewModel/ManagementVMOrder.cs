@@ -78,6 +78,7 @@ namespace WPFToysForBoys.ViewModel
         {
             try
             {
+                ShowOrder.status = SelectedOStatus;
                 if (IdChecker.IdCheck(oorderList, ShowOrder))
                 {
                     oService.Edit(new Order()
@@ -87,7 +88,7 @@ namespace WPFToysForBoys.ViewModel
                         orderDate = ShowOrder.orderDate,
                         requiredDate = ShowOrder.requiredDate,
                         shippedDate = ShowOrder.shippedDate,
-                        status = SelectedOStatus,
+                        status = ShowOrder.status,
                         comments = ShowOrder.comments
                     });
                     OrderList = oService.GetAll("customer").ToList();

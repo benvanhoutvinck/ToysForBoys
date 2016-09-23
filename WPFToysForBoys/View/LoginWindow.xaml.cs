@@ -26,7 +26,7 @@ namespace WPFToysForBoys.View
         {
             InitializeComponent();
             userNameTextBox.Text = "User";
-            passwordBox.Password = "user";
+            //passwordBox.Password = "user";
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)

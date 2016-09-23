@@ -23,6 +23,10 @@ textarea {
     max-width: 280px;
 }
 
+.field-validation-error {
+    color: red;
+}
+
 
 /* ProductList */
 
@@ -66,7 +70,6 @@ textarea {
     float:right;
 }
 
-
 #ProductListFilter #ProductLineFilter {
     margin-top: 10px;
 }
@@ -75,6 +78,15 @@ textarea {
     float: left;
     margin-right: 10px;
 }
+#ProductListFilter #ProductBuyPriceFilter input{
+    text-align: center;
+    width: 30px;
+}
+#ProductListFilter #ProductBuyPriceFilter label {
+    font-weight: normal;
+    width: 100px;
+}
+
 
 /* Header */
 .header-login-signup{

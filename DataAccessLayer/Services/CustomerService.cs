@@ -97,7 +97,6 @@ namespace DataAccessLayer.Services
                              where customer.email == email &&
                              customer.password == password
                              select customer).FirstOrDefault();
-
                 return query;
             }
 

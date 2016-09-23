@@ -37,11 +37,19 @@ namespace WebFrontEnd.Infrastructure
                     }
                 }
 
+                int buyPriceMinimum = 0;
+                int.TryParse(request.Form.GetValues("FilterBuyPriceMinimum")[0], out buyPriceMinimum);
+                int buyPriceMaximum = 0;
+                int.TryParse(request.Form.GetValues("FilterBuyPriceMaximum")[0], out buyPriceMaximum);
+
+                model.FilterBuyPriceMinimum = buyPriceMinimum;
+                model.FilterBuyPriceMaximum = buyPriceMaximum;
+
                 if (model.FilterBuyPriceMaximum > 0 && model.FilterBuyPriceMinimum > 0)
                 {
                     if (model.FilterBuyPriceMinimum > model.FilterBuyPriceMaximum)
                     {
-                        bindingContext.ModelState.AddModelError("FilterBuyPriceMinimum", new Exception("Minimum price must be lower than maximum price"));
+                        bindingContext.ModelState.AddModelError("FilterBuyPriceMinimum", "Minimum price must be lower than maximum price");
                     }
                 }
 
