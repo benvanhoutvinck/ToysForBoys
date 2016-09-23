@@ -123,6 +123,15 @@ namespace DataAccessLayer.Services
                     }
                 }
             }
+            //using (var entities = new toysforboysEntities())
+            //{
+            //    var query = (from orderdetail in entities.orderdetails
+            //                 where orderdetail.orderId == order.id
+            //                 orderby orderdetail.productId
+            //                 select orderdetail).Include("product");
+
+            //    return query;
+            //}
 
             return orderdetails;
         }
