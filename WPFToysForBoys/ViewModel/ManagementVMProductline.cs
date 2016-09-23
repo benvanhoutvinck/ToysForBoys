@@ -178,8 +178,11 @@ namespace WPFToysForBoys.ViewModel
             }
             catch (ArgumentException)
             {
-                plineService.Delete(plineService.GetById(ShowProductline.id));
-                PLNew();
+                if (MessageBox.Show("You are about to delete a productline from the database. \nAre you sure you want to continue? (all existing products belonging to this productline will be deleted)", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
+                {
+                    plineService.Delete(plineService.GetById(ShowProductline.id));
+                    PLNew();
+                }
             }
             SelectedProductlineI = -1;
         }

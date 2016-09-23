@@ -257,17 +257,25 @@ namespace WPFToysForBoys.ViewModel
                     {
                         pService.Delete(pService.GetById(ShowProduct.id));
                         PNew();
+                        RefreshTab();
                     }
                 }
                 else
+                {
                     PNew();
+                    RefreshTab();
+                }                      
             }
             catch (ArgumentException)
             {
-                pService.Delete(pService.GetById(ShowProduct.id));
-                PNew();
+                if (MessageBox.Show("You are about to delete a product from the database. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
+                {
+                    pService.Delete(pService.GetById(ShowProduct.id));
+                    PNew();
+                    RefreshTab();
+                }                    
             }
-            SelectedProductlineI = SelectedProductlineI;
+            //SelectedProductlineI = SelectedProductlineI;
         }
 
         public RelayCommand PNewCommand
