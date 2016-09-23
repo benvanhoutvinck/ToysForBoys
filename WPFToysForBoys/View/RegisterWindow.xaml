@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToysForBoys.View"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="400" Width="350">
-    <StackPanel>
+        Title="Register Account" Height="400" Width="350">
+    <StackPanel HorizontalAlignment="Center">
         <StackPanel Orientation="Horizontal" Margin="25 30 25 0">
             <Label Content="Username:" Width="100" Margin="0 20"></Label>
             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20" Name="usernameBox"></TextBox>

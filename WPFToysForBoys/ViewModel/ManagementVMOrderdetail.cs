@@ -15,16 +15,7 @@ namespace WPFToysForBoys.ViewModel
 {
     public partial class ManagementVM : ViewModelBase
     {
-        private List<Orderdetail> orderdetailList;
-        public List<Orderdetail> OrderdetailList
-        {
-            get { return orderdetailList; }
-            set
-            {
-                orderdetailList = value;
-                RaisePropertyChanged("OrderdetailList");
-            }
-        }
+        
 
 
         private Orderdetail selectedOrderdetail;
@@ -120,7 +111,18 @@ namespace WPFToysForBoys.ViewModel
         }
         private void OrderDetail()
         {
-
+            View.OrderdetailWindow orderview = new View.OrderdetailWindow();
+            List<Orderdetail> od = oService.GetOrderDetails(ShowOrder).ToList();
+            List<Product> pl = oService.GetProducts(ShowOrder).ToList();
+            foreach (Orderdetail o in od)
+                foreach (Product p in pl)
+                {
+                    if (o.productId == p.id)
+                        o.product = p;
+                }
+            ViewModel.OrderDetailVM ovm = new OrderDetailVM(od);
+            orderview.DataContext = ovm;
+            orderview.Show();
         }
 
     }

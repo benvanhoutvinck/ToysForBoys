@@ -7,12 +7,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:gala="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
-        Title="ProductsWindow" Height="600" Width="900" ResizeMode="NoResize">
-    <!--<i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
-            <gala:EventToCommand Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>-->
+        Title="ToysForBoys" Height="600" Width="900" ResizeMode="NoResize">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="24">
             <MenuItem Header="Menu">
@@ -200,13 +195,19 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Country:" Width="100"></Label>
-                            <ComboBox Width="150" ItemsSource="{Binding CountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCountryI}" SelectedValuePath="id"></ComboBox>
+                            <ComboBox Width="150" ItemsSource="{Binding CountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCountryI}" 
+                                      SelectedValuePath="id"></ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="E-mail:" Width="100"></Label>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.email}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding CAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding CNewCommand}"></Button>
                         </StackPanel>
+                        
                     </StackPanel>
                 </StackPanel>
             </TabItem>
