@@ -15,7 +15,7 @@ namespace WebFrontEnd.Controllers
     {
         private IProductService productService;
         private IProductlineService productLineService;
-        
+
         public ProductController()
         {
             productService = new ProductService();
@@ -38,10 +38,10 @@ namespace WebFrontEnd.Controllers
                 product.productline = productListViewModel.AllProductLines
                     .FirstOrDefault(pl => pl.id == product.productlineId);
 
-                 productList.Add
-                    (
-                        new ProductListItem(product)
-                    );
+                productList.Add
+                   (
+                       new ProductListItem(product)
+                   );
             }
 
             productListViewModel.Products = productList;
@@ -54,25 +54,56 @@ namespace WebFrontEnd.Controllers
         public ActionResult List([ModelBinder(typeof(Infrastructure.ProductListViewModelBinder))] Models.ProductListViewModel model)
         {
             var productLines = productLineService.GetAll();
+            IEnumerable<Product> products;
 
-            Func<Product, bool> filter;
-
-            if(string.IsNullOrEmpty(model.FilterProductName))
+            if (ModelState.IsValid)
             {
-                filter = product => model.FilterProductLines.Contains(product.productlineId);
+                Func<Product, bool> filter;
+
+                if (string.IsNullOrEmpty(model.FilterProductName))
+                {
+                    if (model.FilterOnPrice)
+                    {
+                        filter = product => model.FilterProductLines.Contains(product.productlineId) &&
+                                            product.buyPrice >= model.FilterBuyPriceMinimum && product.buyPrice <= model.FilterBuyPriceMaximum;
+                    }
+                    else
+                    {
+                        filter = product => model.FilterProductLines.Contains(product.productlineId);
+                    }
+                }
+                else
+                {
+                    if (model.FilterOnPrice)
+                    {
+
+                        filter = product => model.FilterProductLines.Contains(product.productlineId) &&
+                                        product.name.ToLower().Contains(model.FilterProductName.ToLower()) &&
+                                        product.buyPrice >= model.FilterBuyPriceMinimum && product.buyPrice <= model.FilterBuyPriceMaximum;
+                    }
+                    else
+                    {
+                        filter = product => model.FilterProductLines.Contains(product.productlineId) &&
+                                        product.name.ToLower().Contains(model.FilterProductName.ToLower());
+                    }
+                }
+
+
+                products = productService
+                    .GetAll
+                    (
+                        filter,
+                        "productline"
+                    );
+
+
             }
             else
             {
-                filter = product => model.FilterProductLines.Contains(product.productlineId) && 
-                                    product.name.ToLower().Contains(model.FilterProductName.ToLower()); 
+                products = productService.GetAll("productline");
             }
-            
-            var products = productService
-                .GetAll
-                (
-                    filter,
-                    "productline"
-                );
+
+            model.AllProductLines = productLines;
 
             var productList = new List<ProductListItem>();
 
@@ -84,11 +115,10 @@ namespace WebFrontEnd.Controllers
                     );
             }
 
-            model.AllProductLines = productLines;
             model.Products = productList;
 
             return View(model);
         }
-        
+
     }
 }
