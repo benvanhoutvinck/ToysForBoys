@@ -223,13 +223,13 @@
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="30"></ColumnDefinition>
-                                            <ColumnDefinition Width="30"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="160"></ColumnDefinition>
+                                            <ColumnDefinition Width="90"></ColumnDefinition>
+                                            <ColumnDefinition Width="70"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
-                                        <TextBlock Text="{Binding Path=customerId}" Grid.Row="0" Grid.Column="1"></TextBlock>
-                                        <TextBlock Text="{Binding Path=orderDate}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                        <TextBlock Text="{Binding Path=customer.name}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                                        <TextBlock Text="{Binding Path=orderDate, StringFormat={}{0:dd/MM/yyyy}}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                         <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
 
