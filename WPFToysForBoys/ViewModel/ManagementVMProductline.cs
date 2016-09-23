@@ -145,6 +145,7 @@ namespace WPFToysForBoys.ViewModel
                 RefreshTab();
                 ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
                 productlineList.AddRange(cproductlineList);
+                RaisePropertyChanged("ProductlineList");
                 SelectedProductlineI = -1;
             }
             catch (ArgumentException)
