@@ -189,6 +189,7 @@ namespace WPFToysForBoys.ViewModel
             //}
             try
             {
+                ShowProduct.productlineId = SelectedPProductlineI;
                 Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)?$");
                 if (SelectedPProductlineI >= 1)
                     if ((ShowProduct.buyPrice == null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder == null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock == null || ShowProduct.quantityInStock >= 0))
