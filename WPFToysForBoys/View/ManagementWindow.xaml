@@ -8,11 +8,6 @@
         xmlns:gala="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         Title="ProductsWindow" Height="600" Width="900" ResizeMode="NoResize">
-    <!--<i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
-            <gala:EventToCommand Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>-->
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="24">
             <MenuItem Header="Menu">
@@ -138,6 +133,7 @@
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0" 
                                     Command="{Binding PLAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding NewProductlineCommand}"></Button>
+                            <Button Content="Delete" Width="100" Margin="10 0 0 0" Command="{Binding PLDeleteCommand}"></Button>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -201,11 +197,16 @@
                             <Label Content="Country:" Width="100"></Label>
                             <ComboBox Width="150" ItemsSource="{Binding CountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCountryI}" SelectedValuePath="id"></ComboBox>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="E-mail:" Width="100"></Label>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.email}"></TextBox>
+                        </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding CAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding CNewCommand}"></Button>
                         </StackPanel>
+                        
                     </StackPanel>
                 </StackPanel>
             </TabItem>
@@ -220,14 +221,14 @@
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="10"></ColumnDefinition>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
                                         <TextBlock Text="{Binding Path=customerId}" Grid.Row="0" Grid.Column="1"></TextBlock>
-                                        <TextBlock Text="{Binding Path=orderdate.tostring()}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                        <TextBlock Text="{Binding Path=orderDate}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                         <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
 
@@ -246,7 +247,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Ship Date:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.shippedDate}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.shippedDate}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Req Date:" Width="100"></Label>
@@ -254,27 +255,28 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Customer" Width="100"></Label>
-                            <ComboBox Width="150" ItemsSource="{Binding CustomerList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCustomerI}" SelectedValuePath="id"></ComboBox>
+                            <ComboBox Width="150" ItemsSource="{Binding CustomerList}" DisplayMemberPath="name" IsEnabled="False"
+                                      SelectedValue="{Binding SelectedCCustomerI}" SelectedValuePath="id"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Status" Width="100"></Label>
-                            <ComboBox Width="150"></ComboBox>
+                            <ComboBox Width="150" ItemsSource="{Binding Path=OStatusList}" SelectedValue="{Binding SelectedOStatus}"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Comments:" Width="100"></Label>
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.comments}" TextWrapping="Wrap" Height="75"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                            <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
+                            <Button Content="Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding OAddCommand}"></Button>
-                            <Button Content="New" Width="100" Command="{Binding ONewCommand}"></Button>
+                            <Button Content="Order detail" Width="100" Margin="10 0 0 0" Command="{Binding OrderDetailCommand}"></Button>
                         </StackPanel>
                         
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Customer overview"></TabItem>
-            <TabItem Header="User management" Visibility="{Binding AdminMaster}">
+            <TabItem Header="Customer overview" Visibility="Hidden"></TabItem>
+            <!--<TabItem Header="User management" Visibility="{Binding AdminMaster}">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
                         <TextBlock Text="User list:" Margin="5 10 5 5"></TextBlock>
@@ -296,7 +298,7 @@
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Access level:" Width="100" Margin="0 20"></Label>
                             <ComboBox Width="150" DisplayMemberPath="" SelectedValue="" SelectedValuePath="" Margin="0 20" ></ComboBox>
-                            <!--itemssource toevoegen-->
+                            --><!--itemssource toevoegen--><!--
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
@@ -306,7 +308,7 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
 
 

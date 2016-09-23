@@ -33,7 +33,7 @@ namespace WPFToysForBoys
                 if (p.id == productline.id)
                 {
                     b = true;
-                    if (p == productline)
+                    if (p.description == productline.description && p.name == productline.name)
                         throw new ArgumentException();
                     break;
                 }
@@ -49,7 +49,7 @@ namespace WPFToysForBoys
                 if (c.id == customer.id)
                 {
                     b = true;
-                    if (c == customer)
+                    if (c.city == customer.city && c.name == customer.name && c.countryId == customer.countryId && c.email == customer.email && c.password == customer.password && c.postalCode == customer.postalCode && c.state == customer.state && c.streetAndNumber == customer.streetAndNumber)
                         throw new ArgumentException();
                     break;
                 }
@@ -65,7 +65,7 @@ namespace WPFToysForBoys
                 if (o.id == order.id)
                 {
                     b = true;
-                    if (o == order)
+                    if (o.comments == order.comments && o.customerId == order.customerId && o.orderDate == order.orderDate && o.requiredDate == order.requiredDate && o.shippedDate == order.shippedDate && o.status == order.status)
                         throw new ArgumentException();
                     break;
                 }
@@ -81,7 +81,7 @@ namespace WPFToysForBoys
                 if (o.orderId == orderdetail.orderId && o.productId == orderdetail.productId)
                 {
                     b = true;
-                    if (o == orderdetail)
+                    if (o.priceEach == orderdetail.priceEach && o.quantityOrdered == orderdetail.quantityOrdered)
                         throw new ArgumentException();
                     break;
                 }

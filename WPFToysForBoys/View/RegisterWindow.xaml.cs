@@ -50,5 +50,12 @@ namespace WPFToysForBoys.View
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            View.LoginWindow eenView = new View.LoginWindow();
+            eenView.Show();
+            this.Close();
+        }
     }
 }

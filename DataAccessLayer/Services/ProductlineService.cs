@@ -53,7 +53,15 @@ namespace DataAccessLayer.Services
 
         public Productline GetById(int productlineID)
         {
-            return GetById(productlineID, string.Empty);        
+            using (var entities = new toysforboysEntities())
+            {
+                var query = (from productline in entities.productlines
+                             where productline.id == productlineID
+                             orderby productline.id
+                             select productline).First();
+
+                return query;
+            }
         }
 
         public Productline GetById(int productlineID, string includes)
