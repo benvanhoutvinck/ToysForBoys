@@ -194,4 +194,4 @@ ModelManifest.xml
 # Ignore packages.config, web.config and app.config
 packages.config
 web.config
-app.config
+App.config
