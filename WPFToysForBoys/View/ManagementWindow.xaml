@@ -175,34 +175,34 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Name:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.name}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.name}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Adress:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.streetAndNumber}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.streetAndNumber}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="City:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.city}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.city}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="State:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.state}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.state}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Postal Code:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.postalCode}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.postalCode}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Country:" Width="100"></Label>
-                            <ComboBox Width="150" ItemsSource="{Binding CountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCountryI}" 
+                            <ComboBox IsEnabled="False" Width="150" ItemsSource="{Binding CountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCountryI}" 
                                       SelectedValuePath="id"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="E-mail:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.email}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.email}"></TextBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20" Visibility="Hidden">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding CAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding CNewCommand}"></Button>

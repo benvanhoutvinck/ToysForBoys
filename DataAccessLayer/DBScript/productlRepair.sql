@@ -5,10 +5,6 @@
   UPDATE [toysforboys].[dbo].[productlines]
   SET name = 'Planes' WHERE name = 'Tlanes';
   UPDATE [toysforboys].[dbo].[productlines]
-  SET name = 'Ships' WHERE name = 'Thips';
-  UPDATE [toysforboys].[dbo].[productlines]
-  SET name = 'Trains' WHERE name = 'Trains';
-  UPDATE [toysforboys].[dbo].[productlines]
-  SET name = 'Trucks and Buses' WHERE name = 'Trucks and Buses'; 
+  SET name = 'Ships' WHERE name = 'Thips'; 
   UPDATE [toysforboys].[dbo].[productlines]
   SET name = 'Vintage Cars' WHERE name = 'Tintage Cars';
