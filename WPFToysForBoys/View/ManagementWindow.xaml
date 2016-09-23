@@ -7,7 +7,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:gala="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
-        Title="ProductsWindow" Height="600" Width="900" ResizeMode="NoResize">
+        Title="ToysForBoys" Height="600" Width="900" ResizeMode="NoResize">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="24">
             <MenuItem Header="Menu">
@@ -195,7 +195,8 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Country:" Width="100"></Label>
-                            <ComboBox Width="150" ItemsSource="{Binding CountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCountryI}" SelectedValuePath="id"></ComboBox>
+                            <ComboBox Width="150" ItemsSource="{Binding CountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCountryI}" 
+                                      SelectedValuePath="id"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="E-mail:" Width="100"></Label>
