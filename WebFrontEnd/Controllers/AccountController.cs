@@ -22,15 +22,32 @@ namespace WebFrontEnd.Controllers
             customerService = new CustomerService();
         }
 
-        // GET: Account
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public ActionResult Register()
         {
 
+            ViewBag.Countries = getCountriesList();
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(CustomerViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+              
+                customerService.Insert(new Customer { id=200, name = model.name, city = model.city, state = model.state, countryId = model.countryId, postalCode = model.postalCode, streetAndNumber = model.streetAndNumber, email=model.email, password=model.password });
+
+                return RedirectToAction("List", "Product");
+            }
+
+            ViewBag.Countries = getCountriesList();
+            return View(model);
+
+        }
+
+        private SelectList getCountriesList()
+        {
             var countries = countryService.GetAll();
 
             var countriesSelectList = new List<SelectListItem>();
@@ -39,7 +56,7 @@ namespace WebFrontEnd.Controllers
                    (
                        new SelectListItem()
                        {
-                           Text = "-- Kies land --",
+                           Text = "-- Choose country --",
                            Value = "",
                            Selected = true
                        }
@@ -58,23 +75,7 @@ namespace WebFrontEnd.Controllers
                     );
             }
 
-            ViewBag.Countries = new SelectList(countriesSelectList, "Value", "Text", 0);
-
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Register(CustomerViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-              
-                customerService.Insert(new Customer { id=200, name = model.name, city = model.city, state = model.state, countryId = model.countryId, postalCode = model.postalCode, streetAndNumber = model.streetAndNumber, email=model.email, password=model.password });
-
-                return RedirectToAction("List", "Product");
-            }
-
-            return RedirectToAction("Index");
-
+            return new SelectList(countriesSelectList, "Value", "Text", 0);
         }
 
         public ActionResult Login(string returnUrl)

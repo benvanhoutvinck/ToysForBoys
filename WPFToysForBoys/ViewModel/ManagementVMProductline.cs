@@ -106,7 +106,7 @@ namespace WPFToysForBoys.ViewModel
             get { return showProductline; }
             set
             {
-                showProductline = value;               
+                showProductline = value;
                 RaisePropertyChanged("ShowProductline");
             }
         }
@@ -122,11 +122,14 @@ namespace WPFToysForBoys.ViewModel
             {
                 if (!IdChecker.IdCheck(cproductlineList, ShowProductline))
                 {
-                    plineService.Insert(new Productline()
-                    {
-                        name = ShowProductline.name,
-                        description = ShowProductline.description,
-                    });                    
+                    if (!string.IsNullOrEmpty(ShowProductline.name) && !string.IsNullOrWhiteSpace(ShowProductline.name))
+                        plineService.Insert(new Productline()
+                        {
+                            name = ShowProductline.name,
+                            description = ShowProductline.description,
+                        });
+                    else
+                        MessageBox.Show("Invalid productline name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
                 else
                 {
@@ -135,12 +138,12 @@ namespace WPFToysForBoys.ViewModel
                         id = ShowProductline.id,
                         name = ShowProductline.name,
                         description = ShowProductline.description,
-                    });                  
+                    });
                 }
                 cproductlineList = plineService.GetAll("products").ToList();
                 PProductlineList = plineService.GetAll("products").ToList();
                 RefreshTab();
-                ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" }};
+                ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
                 productlineList.AddRange(cproductlineList);
                 SelectedProductlineI = -1;
             }
@@ -155,7 +158,7 @@ namespace WPFToysForBoys.ViewModel
 
         public RelayCommand PLDeleteCommand
         {
-           get { return new RelayCommand(PLDelete); }
+            get { return new RelayCommand(PLDelete); }
         }
         private void PLDelete()
         {

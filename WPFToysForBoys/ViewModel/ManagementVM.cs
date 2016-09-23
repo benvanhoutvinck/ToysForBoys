@@ -189,25 +189,40 @@ namespace WPFToysForBoys.ViewModel
             //}
             try
             {
+                ShowProduct.productlineId = SelectedPProductlineI;
                 if (!IdChecker.IdCheck(cproductList, ShowProduct))
                 {
-                    Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)$");
+                    Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)?$");
                     if (SelectedPProductlineI >= 1)
                         if ((ShowProduct.buyPrice == null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder == null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock == null || ShowProduct.quantityInStock >= 0))
-                            if (ShowProduct.name != null || reg.IsMatch(ShowProduct.name))
-                                if (ShowProduct.scale != null)
+                            if (!string.IsNullOrEmpty(ShowProduct.name) && !string.IsNullOrWhiteSpace(ShowProduct.name))
+                            {
+                                Match m;
+                                try
+                                {
+                                    m = reg.Match(ShowProduct.scale);
+                                }
+                                catch (Exception e)
+                                {
+                                    m = reg.Match("");
+                                }
+                                
+                                if (ShowProduct.scale != null && m.Success)
+                                {
                                     pService.Insert(new Product()
                                     {
                                         name = ShowProduct.name,
                                         description = ShowProduct.description,
-                                        productlineId = SelectedPProductlineI,
+                                        productlineId = ShowProduct.productlineId,
                                         scale = ShowProduct.scale,
                                         quantityInStock = ShowProduct.quantityInStock,
                                         quantityInOrder = ShowProduct.quantityInOrder,
                                         buyPrice = ShowProduct.buyPrice
                                     });
+                                }
                                 else
                                     MessageBox.Show("Invalid scale!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            }
                             else
                                 MessageBox.Show("Invalid product name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         else

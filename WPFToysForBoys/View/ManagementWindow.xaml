@@ -127,7 +127,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Description:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProductline.description}" TextWrapping="Wrap" Height="75"></TextBox>
+                            <TextBox VerticalScrollBarVisibility="Visible" IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProductline.description}" TextWrapping="Wrap" Height="75"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20 20">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0" 
