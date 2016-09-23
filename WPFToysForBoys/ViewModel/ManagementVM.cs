@@ -203,7 +203,7 @@ namespace WPFToysForBoys.ViewModel
                                     {
                                         name = ShowProduct.name,
                                         description = ShowProduct.description,
-                                        productlineId = SelectedPProductlineI,
+                                        productlineId = ShowProduct.productlineId,
                                         scale = ShowProduct.scale,
                                         quantityInStock = ShowProduct.quantityInStock,
                                         quantityInOrder = ShowProduct.quantityInOrder,

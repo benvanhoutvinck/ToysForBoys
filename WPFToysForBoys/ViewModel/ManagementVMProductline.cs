@@ -122,7 +122,7 @@ namespace WPFToysForBoys.ViewModel
             {
                 if (!IdChecker.IdCheck(cproductlineList, ShowProductline))
                 {
-                    if (ShowProductline.name != null)
+                    if (!string.IsNullOrEmpty(ShowProductline.name) && !string.IsNullOrWhiteSpace(ShowProductline.name))
                         plineService.Insert(new Productline()
                         {
                             name = ShowProductline.name,
@@ -145,6 +145,7 @@ namespace WPFToysForBoys.ViewModel
                 RefreshTab();
                 ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
                 productlineList.AddRange(cproductlineList);
+                RaisePropertyChanged("ProductlineList");
                 SelectedProductlineI = -1;
             }
             catch (ArgumentException)
