@@ -100,7 +100,8 @@ namespace WPFToysForBoys.ViewModel
                         countryId = SelectedCCountryI,
                         postalCode = ShowCustomer.postalCode,
                         state = ShowCustomer.state,
-                        streetAndNumber = ShowCustomer.streetAndNumber
+                        streetAndNumber = ShowCustomer.streetAndNumber,
+                        email = ShowCustomer.email
                     });
                     SelectedCCountryI = SelectedCCountryI;
                     //ProductList.Add(ShowProduct);
@@ -116,6 +117,7 @@ namespace WPFToysForBoys.ViewModel
                         postalCode = ShowCustomer.postalCode,
                         state = ShowCustomer.state,
                         streetAndNumber = ShowCustomer.streetAndNumber,
+                        email = ShowCustomer.email
                     });
                     SelectedCCountryI = SelectedCCountryI;
                 }
