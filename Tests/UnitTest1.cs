@@ -22,6 +22,18 @@ namespace Tests
         }
 
         [TestMethod]
+        //this testmethod has to fail the second time it's runned
+        public void CustomerInsertWithEmail()
+        {
+            var New = new Customer { name = "name", city = "city", countryId = 5, postalCode = "dds", streetAndNumber = "Street", email="a@a.com" };
+            var service = new CustomerService();
+
+            service.Insert(New);
+
+            Assert.IsNotNull(New.id);
+        }
+
+        [TestMethod]
 
             public void DeleteCustomer()
             {
@@ -47,7 +59,7 @@ namespace Tests
             }
             Assert.AreEqual(service.GetById(1).name, "name");
         }*/
-
+          
         [TestMethod]
         public void ProductInsert()
         {
@@ -60,9 +72,10 @@ namespace Tests
         }
 
         [TestMethod]
+        //this method has to fail the second time it's runned
         public void AdminInsert()
         {
-            var admin = new Admin { username = "test", password = "pw" };
+            var admin = new Admin { username = " ", password = "pw" };
             var service = new AdminService();
 
             service.Insert(admin);

@@ -151,10 +151,44 @@ namespace WPFToysForBoys.ViewModel
         }
 
 
-        //public RelayCommand FocusCommand
-        //{
-        //    get { return new RelayCommand(FocusTab); }
-        //}
+
+
+        public RelayCommand PLDeleteCommand
+        {
+           get { return new RelayCommand(PLDelete); }
+        }
+        private void PLDelete()
+        {
+            try
+            {
+                if (IdChecker.IdCheck(cproductlineList, ShowProductline))
+                {
+                    if (MessageBox.Show("You are about to delete a modified item. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
+                    {
+                        plineService.Delete(plineService.GetById(ShowProductline.id));
+                        PLNew();
+                    }
+                }
+                else
+                    PLNew();
+            }
+            catch (ArgumentException)
+            {
+                plineService.Delete(plineService.GetById(ShowProductline.id));
+                PLNew();
+            }
+            SelectedProductlineI = -1;
+        }
+
+        private void PLNew()
+        {
+            ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
+            PProductlineList = plineService.GetAll("products").ToList();
+            productlineList.AddRange(PProductlineList);
+            cproductlineList = plineService.GetAll("products").ToList();
+        }
+
+
         private void RefreshTab()
         {
             SelectedProductlineI = SelectedProductlineI;

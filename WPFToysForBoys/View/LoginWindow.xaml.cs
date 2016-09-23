@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DataAccessLayer;
+using DataAccessLayer.Interfaces;
+using DataAccessLayer.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,34 +34,53 @@ namespace WPFToysForBoys.View
             //Regular admin
             if (userNameTextBox.Text.ToString() == "User" && passwordBox.Password.ToString() == "user")
             {
-                View.ManagementWindow eenView = new ManagementWindow();
-                ViewModel.ManagementVM vm = new ViewModel.ManagementVM(false, eenView);
-                
-                eenView.DataContext = vm;
-                eenView.Show();
-                Application.Current.MainWindow.Close();
+                MoveOn();
             }
-            //Super admin
-            else if (userNameTextBox.Text.ToString() == "Admin" && passwordBox.Password.ToString() == "admin")
-            {
-                View.ManagementWindow eenView = new ManagementWindow();
-                ViewModel.ManagementVM vm = new ViewModel.ManagementVM(true, eenView);
-               
-                eenView.DataContext = vm;
-                eenView.Show();
-                Application.Current.MainWindow.Close();
-            }
+            ////Super admin
+            //else if (userNameTextBox.Text.ToString() == "Admin" && passwordBox.Password.ToString() == "admin")
+            //{
+            //    View.ManagementWindow eenView = new ManagementWindow();
+            //    ViewModel.ManagementVM vm = new ViewModel.ManagementVM(true, eenView);
+
+            //    eenView.DataContext = vm;
+            //    eenView.Show();
+            //    Application.Current.MainWindow.Close();
             else
             {
-                MessageBox.Show("Incorrect Login!", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                IAdminService admin = new AdminService();
+                Admin ad = admin.GetAll().ToList().FindLast(a => a.username.Trim() == userNameTextBox.Text.ToString());
+                if (ad != null)
+                    if (userNameTextBox.Text.ToString() == ad.username.Trim() && passwordBox.Password.ToString() == ad.password.Trim())
+                    {
+                        MoveOn();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect Login!", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+                else
+                {
+                    MessageBox.Show("Incorrect Login!", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
             }
 
+
+        }
+
+        private void MoveOn()
+        {
+            View.ManagementWindow eenView = new ManagementWindow();
+            ViewModel.ManagementVM vm = new ViewModel.ManagementVM(false, eenView);
+
+            eenView.DataContext = vm;
+            eenView.Show();
+            this.Close();
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             View.RegisterWindow registerview = new RegisterWindow();
-            this.Close();        
+            this.Close();
             registerview.Show();
         }
     }

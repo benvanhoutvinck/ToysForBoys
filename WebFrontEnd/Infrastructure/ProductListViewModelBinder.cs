@@ -37,6 +37,14 @@ namespace WebFrontEnd.Infrastructure
                     }
                 }
 
+                if (model.FilterBuyPriceMaximum > 0 && model.FilterBuyPriceMinimum > 0)
+                {
+                    if (model.FilterBuyPriceMinimum > model.FilterBuyPriceMaximum)
+                    {
+                        bindingContext.ModelState.AddModelError("FilterBuyPriceMinimum", new Exception("Minimum price must be lower than maximum price"));
+                    }
+                }
+
                 return model;
                 
             } 

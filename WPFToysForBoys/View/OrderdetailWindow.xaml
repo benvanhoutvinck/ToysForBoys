@@ -1,0 +1,31 @@
+﻿<Window x:Class="WPFToysForBoys.View.OrderdetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFToysForBoys.View"
+        mc:Ignorable="d"
+        Title="OrderdetailWindow" Height="400" Width="400">
+    <StackPanel>
+        <ListBox Margin="20" Width="350" Height="325" ItemsSource="{Binding OrderDetailList}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="325">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"></ColumnDefinition>
+                            <ColumnDefinition Width="30"></ColumnDefinition>
+                            <ColumnDefinition Width="30"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=product.name}" Grid.Row="0" Grid.Column="0"></TextBlock>
+                        <TextBlock Text="{Binding Path=priceEach}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                        <TextBlock Text="{Binding Path=quantityOrdered}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                    </Grid>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</Window>

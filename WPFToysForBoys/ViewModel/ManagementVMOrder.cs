@@ -54,14 +54,16 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 showOrder = value;
-                //if (value.country == null)
-                //{
-                //    SelectedCCountryI = -1;
-                //}
-                //else
-                //{
-                //    SelectedCCountryI = value.country.id;
-                //}
+                if (value.customer == null)
+                {
+                    SelectedCCustomerI = -1;
+                    SelectedOStatus = null;
+                }
+                else
+                {
+                    SelectedCCustomerI = value.customer.id;
+                    SelectedOStatus = value.status.Trim();
+                }
                 RaisePropertyChanged("ShowOrder");
             }
         }
@@ -76,34 +78,21 @@ namespace WPFToysForBoys.ViewModel
         {
             try
             {
-                if (!IdChecker.IdCheck(oorderList, ShowOrder))
-                {
-                    oService.Insert(new Order()
-                    {
-                        customerId = SelectedCCustomerI, //ShowOrder.customerId,
-                        orderDate = ShowOrder.orderDate,
-                        requiredDate = ShowOrder.requiredDate,
-                        shippedDate = ShowOrder.shippedDate,
-                        status = ShowOrder.status,
-                        comments = ShowOrder.comments
-                     });
-                    SelectedCCustomerI = SelectedCCustomerI;
-                    
-                }
-                else
+                if (IdChecker.IdCheck(oorderList, ShowOrder))
                 {
                     oService.Edit(new Order()
                     {
-                        id = ShowCustomer.id,
+                        id = ShowOrder.id,
                         customerId = SelectedCCustomerI, //ShowOrder.customerId,
                         orderDate = ShowOrder.orderDate,
                         requiredDate = ShowOrder.requiredDate,
                         shippedDate = ShowOrder.shippedDate,
-                        status = ShowOrder.status,
+                        status = SelectedOStatus,
                         comments = ShowOrder.comments
                     });
-                    SelectedCCustomerI = SelectedCCustomerI;
-                }
+                    OrderList = oService.GetAll("customer").ToList();
+                    oorderList = oService.GetAll("customer").ToList();
+                }              
             }
             catch (ArgumentException e)
             {
@@ -120,6 +109,27 @@ namespace WPFToysForBoys.ViewModel
             SelectedOrder = null;
         }
 
+        private string selectedOStatus;
+
+        public string SelectedOStatus
+        {
+            get { return selectedOStatus; }
+            set
+            {
+                selectedOStatus = value;
+                RaisePropertyChanged("SelectedOStatus");
+            }
+        }
+
+        private List<string> oStatusList;
+
+        public List<string> OStatusList
+        {
+            get { return oStatusList; }
+            set { oStatusList = value;
+                RaisePropertyChanged("OStatusList");
+            }
+        }
 
 
     }
