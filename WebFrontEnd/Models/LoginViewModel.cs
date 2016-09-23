@@ -9,11 +9,11 @@ namespace WebFrontEnd.Models
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Naam is een verplicht veld")]
-        [Display(Name = "Naam")]
-        public string name { get; set; }
+        [Display(Name = "Email")]
+        public string email { get; set; }
 
         [Required(ErrorMessage = "Postcode is een verplicht veld")]
-        [Display(Name = "Postcode")]
-        public string postalCode { get; set; }
+        [Display(Name = "Password")]
+        public string password { get; set; }
     }
 }
