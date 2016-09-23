@@ -58,7 +58,7 @@ namespace WebFrontEnd.Controllers
                     );
             }
 
-            ViewBag.Countries = new SelectList(countriesSelectList, "Value", "Text", 1);
+            ViewBag.Countries = new SelectList(countriesSelectList, "Value", "Text", 0);
 
             return View();
         }
@@ -68,9 +68,9 @@ namespace WebFrontEnd.Controllers
             if (ModelState.IsValid)
             {
               
-                customerService.Insert(new Customer { id=200, name = model.name, city = model.city, state = model.state, countryId = model.countryId, postalCode = model.postalCode, streetAndNumber = model.streetAndNumber });
+                customerService.Insert(new Customer { id=200, name = model.name, city = model.city, state = model.state, countryId = model.countryId, postalCode = model.postalCode, streetAndNumber = model.streetAndNumber, email=model.email, password=model.password });
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("List", "Product");
             }
 
             return RedirectToAction("Index");
@@ -89,12 +89,12 @@ namespace WebFrontEnd.Controllers
                 return View(model);
             }
 
-            Customer customer = customerService.LoginVerification(model.name, model.postalCode);
+            Customer customer = customerService.LoginVerification(model.email, model.password);
 
             if (customer != null)
             {
                 this.Session["customer"] = customer;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("List", "Product");
             }
             else
             {
@@ -110,7 +110,7 @@ namespace WebFrontEnd.Controllers
         {
           
             this.Session["customer"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("List", "Product");
         }
     }
 }

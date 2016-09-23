@@ -69,6 +69,7 @@ namespace WPFToysForBoys.ViewModel
                 else
                 {
                     CustomerList = cService.GetAll("country").ToList();
+                    customerList.Sort(new CustomerCompare());
                 }
 
                 RaisePropertyChanged("SelectedCountryI");
