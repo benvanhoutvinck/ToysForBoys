@@ -36,22 +36,22 @@ namespace DataAccessLayer.Services
             {
                 var originalOrder = entities.orders.Find(order.id);
 
-                if(order.orderDate!=null)
+                if (order.orderDate != null)
                     originalOrder.orderDate = order.orderDate;
 
-                if(order.requiredDate!=null)
+                if (order.requiredDate != null)
                     originalOrder.requiredDate = order.requiredDate;
 
-                if(order.shippedDate!=null)
+                if (order.shippedDate != null)
                     originalOrder.shippedDate = order.shippedDate;
 
-                if(order.comments!=string.Empty)
+                if (order.comments != string.Empty)
                     originalOrder.comments = order.comments;
 
-                
+
                 originalOrder.customerId = order.customerId;
 
-                if(order.status!=string.Empty)
+                if (order.status != string.Empty)
                     originalOrder.status = order.status;
 
                 entities.SaveChanges();
@@ -117,7 +117,7 @@ namespace DataAccessLayer.Services
             {
                 foreach (var od in entities.orderdetails)
                 {
-                    if (order.id==od.orderId)
+                    if (order.id == od.orderId)
                     {
                         orderdetails.Add(od);
                     }
@@ -134,16 +134,25 @@ namespace DataAccessLayer.Services
 
             foreach (var od in orderdetails)
             {
-                totalPrice +=(decimal)(od.quantityOrdered * od.priceEach);
+                totalPrice += (decimal)(od.quantityOrdered * od.priceEach);
             }
 
             return totalPrice;
         }
 
-        
+        public IEnumerable<Product> GetProducts(Order order)
+        {
+            var service = new ProductService();
+            var products = new List<Product>();
+            var orderdetails = GetOrderDetails(order);
 
-      
+            foreach (var orderdetail in orderdetails)
+            {
+                products.Add(service.GetById(orderdetail.productId));
+            }
 
+            return products;
 
+        }
     }
 }
