@@ -197,7 +197,16 @@ namespace WPFToysForBoys.ViewModel
                         if ((ShowProduct.buyPrice == null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder == null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock == null || ShowProduct.quantityInStock >= 0))
                             if (ShowProduct.name != null)
                             {
-                                var m = reg.Match(ShowProduct.scale);
+                                Match m;
+                                try
+                                {
+                                    m = reg.Match(ShowProduct.scale);
+                                }
+                                catch (Exception e)
+                                {
+                                    m = reg.Match("");
+                                }
+                                
                                 if (ShowProduct.scale != null && m.Success)
                                 {
                                     pService.Insert(new Product()
