@@ -122,7 +122,7 @@ namespace WPFToysForBoys.ViewModel
             {
                 if (!IdChecker.IdCheck(cproductlineList, ShowProductline))
                 {
-                    if (ShowProductline.name != null)
+                    if (!string.IsNullOrEmpty(ShowProductline.name) && !string.IsNullOrWhiteSpace(ShowProductline.name))
                         plineService.Insert(new Productline()
                         {
                             name = ShowProductline.name,
