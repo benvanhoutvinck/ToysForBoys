@@ -143,9 +143,9 @@ namespace WPFToysForBoys.ViewModel
                 cproductlineList = plineService.GetAll("products").ToList();
                 PProductlineList = plineService.GetAll("products").ToList();
                 RefreshTab();
-                ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
-                productlineList.AddRange(cproductlineList);
-                RaisePropertyChanged("ProductlineList");
+                var ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
+                ProductlineList.AddRange(cproductlineList);
+                this.ProductlineList = ProductlineList;
                 SelectedProductlineI = -1;
             }
             catch (ArgumentException)
