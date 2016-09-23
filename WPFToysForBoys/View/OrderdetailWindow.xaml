@@ -5,25 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToysForBoys.View"
         mc:Ignorable="d"
-        Title="OrderdetailWindow" Height="400" Width="400">
+        Title="OrderdetailWindow" Height="440" Width="550">
     <StackPanel>
-        <ListBox Margin="20" Width="350" Height="325" ItemsSource="{Binding OrderDetailList}">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="450" Margin="0 20 0 0">
+            <Label Content="Name Product" Width="250" HorizontalContentAlignment="Center"/>
+            <Label Content="Price" Width="80" HorizontalContentAlignment="Center"/>
+            <Label Content="Quantity" Width="80" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+        <ListBox Margin="20 5 20 20" Width="450" Height="325" ItemsSource="{Binding OrderdetailList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="325">
+                    <Grid ShowGridLines="True">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="250"></ColumnDefinition>
-                            <ColumnDefinition Width="30"></ColumnDefinition>
-                            <ColumnDefinition Width="30"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=product.name}" Grid.Row="0" Grid.Column="0"></TextBlock>
-                        <TextBlock Text="{Binding Path=priceEach}" Grid.Row="0" Grid.Column="1"></TextBlock>
-                        <TextBlock Text="{Binding Path=quantityOrdered}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                        <Label Margin="5 0" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Width="240">
+                            <TextBlock Text="{Binding Path=product.name}" HorizontalAlignment="Left"></TextBlock>
+                        </Label>
+                        <Label Margin="5 0" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" Width="70">
+                            <TextBlock Text="{Binding Path=priceEach}" HorizontalAlignment="Right"></TextBlock>
+                        </Label>
+                        <Label Margin="5 0" Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" Width="70">
+                            <TextBlock Text="{Binding Path=quantityOrdered}" HorizontalAlignment="Right"></TextBlock>
+                        </Label>
                     </Grid>
-
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
