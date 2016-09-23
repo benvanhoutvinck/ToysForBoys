@@ -36,6 +36,7 @@ namespace WebFrontEnd.Models
             Scale = product.scale;
             ProductID = product.id;
             ProductLineID = product.productlineId;
+            BuyPrice = product.buyPrice ?? 0;
         }
 
     }
