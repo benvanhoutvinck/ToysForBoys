@@ -28,6 +28,7 @@ namespace DataAccessLayer
         public Nullable<int> quantityInOrder { get; set; }
         public Nullable<decimal> buyPrice { get; set; }
         public int productlineId { get; set; }
+        public Nullable<bool> active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orderdetail> orderdetails { get; set; }
