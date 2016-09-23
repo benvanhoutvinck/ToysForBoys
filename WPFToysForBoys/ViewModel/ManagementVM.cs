@@ -194,8 +194,11 @@ namespace WPFToysForBoys.ViewModel
                     Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)$");
                     if (SelectedPProductlineI >= 1)
                         if ((ShowProduct.buyPrice == null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder == null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock == null || ShowProduct.quantityInStock >= 0))
-                            if (ShowProduct.name != null || reg.IsMatch(ShowProduct.name))
-                                if (ShowProduct.scale != null)
+                            if (ShowProduct.name != null)
+                            {
+                                var m = reg.Match(ShowProduct.scale);
+                                if (ShowProduct.scale != null && m.Success)
+                                {
                                     pService.Insert(new Product()
                                     {
                                         name = ShowProduct.name,
@@ -206,8 +209,10 @@ namespace WPFToysForBoys.ViewModel
                                         quantityInOrder = ShowProduct.quantityInOrder,
                                         buyPrice = ShowProduct.buyPrice
                                     });
+                                }
                                 else
                                     MessageBox.Show("Invalid scale!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            }
                             else
                                 MessageBox.Show("Invalid product name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         else
