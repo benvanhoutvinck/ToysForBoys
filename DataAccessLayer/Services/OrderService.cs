@@ -161,7 +161,6 @@ namespace DataAccessLayer.Services
             }
 
             return products;
-
         }
     }
 }
