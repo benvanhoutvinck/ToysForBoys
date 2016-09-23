@@ -19,7 +19,7 @@
             <Label Content="Verify password:" Width="100" Margin="0 20"></Label>
             <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20" Name="verifyPasswordBox"></PasswordBox>
         </StackPanel>
-        <Button Content="Register account" Margin="25 20 25 10" Click="RegisterAccount"></Button>
+        <Button Content="Register account" Margin="25 20 25 10" Click="RegisterAccount" IsDefault="True"></Button>
         <Button Content="Cancel" Margin="25 0 25 0" Click="Cancel"></Button>
     </StackPanel>
 
