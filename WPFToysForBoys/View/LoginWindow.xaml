@@ -24,9 +24,9 @@
             <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="userNameTextBox" VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"></TextBox>
             <PasswordBox Grid.Row="1" Grid.Column="1" Margin="5" Name="passwordBox" VerticalContentAlignment="Center"
-                         HorizontalContentAlignment="Center"></PasswordBox>
+                         HorizontalContentAlignment="Center" ></PasswordBox>
         </Grid>
-        <Button HorizontalAlignment="Center" Content="Login" Width="150" Height="20" Click="LoginButton_Click"></Button>
+        <Button HorizontalAlignment="Center" Content="Login" Width="150" Height="20" Click="LoginButton_Click" IsDefault="True"></Button>
         <Button HorizontalAlignment="Center" Content="Register" Width="150" Height="20" Margin="0 10" Click="RegisterButton_Click"></Button>
     </StackPanel>
 
