@@ -76,6 +76,7 @@
           <Property Name="quantityInOrder" Type="int" />
           <Property Name="buyPrice" Type="numeric" Precision="10" Scale="2" />
           <Property Name="productlineId" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" />
         </EntityType>
         <Association Name="FK_customers_countries">
           <End Role="countries" Type="Self.countries" Multiplicity="1">
@@ -253,6 +254,7 @@
           <Property Name="productlineId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="orderdetails" Relationship="Self.FK_orderdetails_products" FromRole="products" ToRole="orderdetails" />
           <NavigationProperty Name="productline" Relationship="Self.FK_products_productlines" FromRole="products" ToRole="productlines" />
+          <Property Name="active" Type="Boolean" />
         </EntityType>
         <Association Name="FK_customers_countries">
           <End Role="countries" Type="toysforboysModel.Country" Multiplicity="1" ></End>
@@ -415,6 +417,7 @@
           <EntitySetMapping Name="products">
             <EntityTypeMapping TypeName="toysforboysModel.Product">
               <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="scale" ColumnName="scale" />
