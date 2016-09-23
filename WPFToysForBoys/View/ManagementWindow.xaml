@@ -63,7 +63,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Description:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.description}" TextWrapping="Wrap" Height="50"></TextBox>
+                            <TextBox IsEnabled="True" VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.description}" TextWrapping="Wrap" Height="50"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Scale:" Width="100"></Label>
@@ -265,7 +265,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Comments:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.comments}" TextWrapping="Wrap" Height="75"></TextBox>
+                            <TextBox VerticalScrollBarVisibility="Visible" IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.comments}" TextWrapping="Wrap" Height="75"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Modify" Width="100" Margin="0 0 10 0"

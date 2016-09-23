@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Windows;
 using DataAccessLayer.Services;
 using System.Windows.Controls;
+using System.Text.RegularExpressions;
 
 namespace WPFToysForBoys.ViewModel
 {
@@ -107,7 +108,7 @@ namespace WPFToysForBoys.ViewModel
         }
         private void CloseWindow()
         {
-            if (MessageBox.Show("Do you want to close the application?", "Closing", MessageBoxButton.YesNo, 
+            if (MessageBox.Show("Do you want to close the application?", "Closing", MessageBoxButton.YesNo,
                 MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
                 MW.Close();
         }
@@ -118,7 +119,7 @@ namespace WPFToysForBoys.ViewModel
         }
         private void SwitchUser()
         {
-            if (MessageBox.Show("Do you want to change user?", "Log out", MessageBoxButton.YesNo, 
+            if (MessageBox.Show("Do you want to change user?", "Log out", MessageBoxButton.YesNo,
                 MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
             {
                 View.LoginWindow view = new View.LoginWindow();
@@ -190,16 +191,29 @@ namespace WPFToysForBoys.ViewModel
             {
                 if (!IdChecker.IdCheck(cproductList, ShowProduct))
                 {
-                    pService.Insert(new Product()
-                    {
-                        name = ShowProduct.name,
-                        description = ShowProduct.description,
-                        productlineId = SelectedPProductlineI,
-                        scale = ShowProduct.scale,
-                        quantityInStock = ShowProduct.quantityInStock,
-                        quantityInOrder = ShowProduct.quantityInOrder,
-                        buyPrice = ShowProduct.buyPrice
-                    });
+                    Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)$");
+                    if (SelectedPProductlineI >= 1)
+                        if ((ShowProduct.buyPrice == null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder == null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock == null || ShowProduct.quantityInStock >= 0))
+                            if (ShowProduct.name != null || reg.IsMatch(ShowProduct.name))
+                                if (ShowProduct.scale != null)
+                                    pService.Insert(new Product()
+                                    {
+                                        name = ShowProduct.name,
+                                        description = ShowProduct.description,
+                                        productlineId = SelectedPProductlineI,
+                                        scale = ShowProduct.scale,
+                                        quantityInStock = ShowProduct.quantityInStock,
+                                        quantityInOrder = ShowProduct.quantityInOrder,
+                                        buyPrice = ShowProduct.buyPrice
+                                    });
+                                else
+                                    MessageBox.Show("Invalid scale!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            else
+                                MessageBox.Show("Invalid product name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        else
+                            MessageBox.Show("Invalid Quantities/price!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    else
+                        MessageBox.Show("No productline selected for your product!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
                 else
                 {
@@ -213,7 +227,7 @@ namespace WPFToysForBoys.ViewModel
                         quantityInStock = ShowProduct.quantityInStock,
                         quantityInOrder = ShowProduct.quantityInOrder,
                         buyPrice = ShowProduct.buyPrice
-                    });                    
+                    });
                 }
                 SelectedProductlineI = SelectedProductlineI;
             }
