@@ -189,6 +189,7 @@ namespace WPFToysForBoys.ViewModel
             //}
             try
             {
+                ShowProduct.productlineId = SelectedPProductlineI;
                 if (!IdChecker.IdCheck(cproductList, ShowProduct))
                 {
                     Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)$");
@@ -203,7 +204,7 @@ namespace WPFToysForBoys.ViewModel
                                     {
                                         name = ShowProduct.name,
                                         description = ShowProduct.description,
-                                        productlineId = SelectedPProductlineI,
+                                        productlineId = ShowProduct.productlineId,
                                         scale = ShowProduct.scale,
                                         quantityInStock = ShowProduct.quantityInStock,
                                         quantityInOrder = ShowProduct.quantityInOrder,
