@@ -60,6 +60,7 @@
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\IStatisticsInterface.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
