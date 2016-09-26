@@ -98,6 +98,7 @@
     <Compile Include="ViewModel\ManagementVMOrder.cs" />
     <Compile Include="ViewModel\ManagementVMOrderdetail.cs" />
     <Compile Include="ViewModel\ManagementVMProductline.cs" />
+    <Compile Include="ViewModel\OrderDetailUpdateVM.cs" />
     <Compile Include="ViewModel\OrderDetailVM.cs" />
     <Compile Include="ViewModel\ProductStatVM.cs" />
     <Compile Include="View\CustomerCountryStatWindow.xaml.cs">
@@ -108,6 +109,9 @@
     </Compile>
     <Compile Include="View\ManagementWindow.xaml.cs">
       <DependentUpon>ManagementWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrderdetailupdateWindow.xaml.cs">
+      <DependentUpon>OrderdetailupdateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OrderdetailWindow.xaml.cs">
       <DependentUpon>OrderdetailWindow.xaml</DependentUpon>
@@ -159,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManagementWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrderdetailupdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

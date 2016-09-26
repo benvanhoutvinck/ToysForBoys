@@ -86,7 +86,16 @@ namespace DataAccessLayer.Services
 
         public Customer GetById(int customerID)
         {
-            return GetById(customerID, string.Empty);
+            using (var entities = new toysforboysEntities())
+            {
+                var query = (from customer in entities.customers
+                             where customer.id == customerID
+                             orderby customer.id
+                             select customer).First();
+
+                return query;
+            }
+            
         }
 
         public Customer LoginVerification(string email, string password)

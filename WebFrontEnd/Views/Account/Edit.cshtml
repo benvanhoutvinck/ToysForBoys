@@ -1,17 +1,16 @@
 ﻿@model WebFrontEnd.Models.CustomerViewModel
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Account Management";
 }
 
-<h2>Register</h2>
+<h2>Account Management</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
-    
+
     <div class="form-horizontal">
-        <h4>Customer</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -57,7 +56,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.countryId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.countryId,  (SelectList) ViewBag.Countries , new { @class = "form-control" } )
+                @Html.DropDownListFor(model => model.countryId, (SelectList)ViewBag.Countries, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.countryId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,7 +74,7 @@
                 @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
             </div>
         </div>
-    
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

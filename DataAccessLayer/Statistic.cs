@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DataAccessLayer
 {
-    public enum SortDateEnum
+    public class Statistic
     {
-        orderDate, requiredDate, shippedDate
+        public DateTime OrderDate { get; set; }
+        public DateTime ShippedDate { get; set; }
     }
 }

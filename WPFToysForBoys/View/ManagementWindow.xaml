@@ -230,7 +230,7 @@
                     <StackPanel Width="450">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="Status filter:" VerticalAlignment="Center" Margin="25 0"></TextBlock>
-                            <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding FOStatusList}" DisplayMemberPath="order.status" SelectedValue="{Binding SelectedCCustomerI}" SelectedValuePath="status"></ComboBox>
+                            <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding Path= FOStatusList}" SelectedValue="{Binding SelectedStatusI}"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="400" Margin="0 5 0 0">
                             <Label Content="Id" Width="30" HorizontalContentAlignment="Left" />
@@ -291,10 +291,11 @@
                             <Label Content="Comments:" Width="100"></Label>
                             <TextBox VerticalScrollBarVisibility="Visible" IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.comments}" TextWrapping="Wrap" Height="75"></TextBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20 20">
                             <Button Content="Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding OAddCommand}"></Button>
-                            <Button Content="Order detail" Width="100" Margin="10 0 0 0" Command="{Binding OrderDetailCommand}"></Button>
+                            <Button Content="Order detail view" Width="100" Margin="10 0 0 0" Command="{Binding OrderDetailCommand}"></Button>
+                            <Button Content="Order detail update" Width="100" Margin="10 0 0 0" Command="{Binding OrderDetailCommand2}"></Button>
                         </StackPanel>
 
                     </StackPanel>

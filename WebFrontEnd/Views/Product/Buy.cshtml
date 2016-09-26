@@ -1,0 +1,46 @@
+﻿@model WebFrontEnd.Models.OrderViewModel
+@{
+    ViewBag.Title = "Buy";
+}
+
+<div class="alert alert-info" role="alert">Aantal tickest voor deze voorstelling</div>
+
+<div>
+    @using (Html.BeginForm("AddToCart", "Product", FormMethod.Post))
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Product.name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.buyPrice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Product.buyPrice)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Aantal)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.Aantal, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Aantal)
+            </dd>
+            <dt></dt>
+            <dd><input class="btn btn-default" type="submit" value="Add to cart" /></dd>
+            @Html.HiddenFor(model => model.Product.id)
+        </dl>
+    }
+</div>
+
