@@ -97,6 +97,9 @@
     <Compile Include="ViewModel\ManagementVMOrderdetail.cs" />
     <Compile Include="ViewModel\ManagementVMProductline.cs" />
     <Compile Include="ViewModel\OrderDetailVM.cs" />
+    <Compile Include="View\CustomerCountryStatWindow.xaml.cs">
+      <DependentUpon>CustomerCountryStatWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\CustomerCountryStatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
