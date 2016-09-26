@@ -13,6 +13,12 @@ namespace DataAccessLayer.Services
 {
     public class StatisticService : IStatisticService
     {
+        public List<Order> GetFilteredStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
+        {
+
+            throw new NotImplementedException();
+        }
+
         public List<Order> GetStatistics(OrderQuery orderQuery)
         {
 
@@ -87,6 +93,26 @@ namespace DataAccessLayer.Services
                 var orders = (List<Order>)cmd.ExecuteScalar();
                 return orders;
             }
+        }
+
+        //Switch method
+        private DateTime GetDateTime(SortDateEnum sortDateEnum, List<Order> orders)
+        {
+            DateTime datetime = new DateTime();
+
+            foreach (var order in orders)
+            {
+                switch (sortDateEnum)
+                {
+                    case SortDateEnum.orderDate: datetime = Convert.ToDateTime(order.orderDate);
+                        break;
+                    case SortDateEnum.requiredDate: datetime = Convert.ToDateTime(order.requiredDate);
+                        break;
+                    case SortDateEnum.shippedDate: datetime = Convert.ToDateTime(order.shippedDate);
+                        break;                   
+                }
+            }
+            return datetime;
         }
     }
 }

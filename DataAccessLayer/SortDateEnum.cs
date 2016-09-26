@@ -8,6 +8,6 @@ namespace DataAccessLayer
 {
     public enum SortDateEnum
     {
-        OrderDate, RequiredDate, ShippedDate
+        orderDate, requiredDate, shippedDate
     }
 }

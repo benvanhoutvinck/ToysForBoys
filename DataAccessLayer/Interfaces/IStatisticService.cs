@@ -9,5 +9,7 @@ namespace DataAccessLayer.Interfaces
     interface IStatisticService
     {
         List<Order> GetStatistics(OrderQuery orderQuery);
+
+        List<Order> GetFilteredStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight);
     }
 }
