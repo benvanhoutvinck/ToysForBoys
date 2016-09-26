@@ -38,7 +38,7 @@ namespace Tests
             public void DeleteCustomer()
             {
             var service = new CustomerService();
-            var deleteObject = service.GetById(16);
+            var deleteObject = ((List<Customer>)service.GetAll("country"))[0];
             service.Delete(deleteObject);
             var allObjectsz = (List<Customer>)service.GetAll();
 

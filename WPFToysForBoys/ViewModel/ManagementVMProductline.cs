@@ -143,8 +143,9 @@ namespace WPFToysForBoys.ViewModel
                 cproductlineList = plineService.GetAll("products").ToList();
                 PProductlineList = plineService.GetAll("products").ToList();
                 RefreshTab();
-                ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
-                productlineList.AddRange(cproductlineList);
+                var ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
+                ProductlineList.AddRange(cproductlineList);
+                this.ProductlineList = ProductlineList;
                 SelectedProductlineI = -1;
             }
             catch (ArgumentException)
@@ -177,8 +178,11 @@ namespace WPFToysForBoys.ViewModel
             }
             catch (ArgumentException)
             {
-                plineService.Delete(plineService.GetById(ShowProductline.id));
-                PLNew();
+                if (MessageBox.Show("You are about to delete a productline from the database. \nAre you sure you want to continue? \n(all existing products & orders belonging to this productline will be deleted)", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
+                {
+                    plineService.Delete(plineService.GetById(ShowProductline.id));
+                    PLNew();
+                }
             }
             SelectedProductlineI = -1;
         }
