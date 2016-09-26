@@ -8,15 +8,8 @@
         xmlns:gala="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         Title="Detail Orders" Height="600" Width="900" ResizeMode="NoResize">
- <DockPanel>
-    <Menu DockPanel.Dock="Top" Height="24">
-        <MenuItem Header="Menu">
-            <MenuItem Header="Switch user" Command="{Binding SwitchUserCommand}"></MenuItem>
-            <Separator></Separator>
-            <MenuItem Header="Close" Command="{Binding CloseCommand}"></MenuItem>
-        </MenuItem>
-    </Menu>
-    <TabControl Margin="0,0,0,10">
+    <DockPanel>
+        <TabControl Margin="0,0,0,10">
             <TabItem Header="Order details">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
@@ -54,23 +47,23 @@
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                         <Label Content="Productname:" Width="100"></Label>
-                            <ComboBox Width="220" ItemsSource="{Binding PProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedPProductlineI}" SelectedValuePath="id"></ComboBox>
+                            <ComboBox Width="220" ItemsSource="{Binding PProductList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedPProductI}" SelectedValuePath="id"></ComboBox>
                         </StackPanel>
                    
                     <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Quantity:" Width="100"></Label>
-                        <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.quantityInStock}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrderline.quantityOrdered}"></TextBox>
                     </StackPanel>
                    
                     <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                         <Label Content="Price:" Width="100"></Label>
-                        <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.buyPrice}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrderline.priceEach}"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                         <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
-                                    Command="{Binding PAddCommand}"></Button>
-                        <Button Content="New" Width="100" Command="{Binding PNewCommand}"></Button>
-                        <Button Content="Delete" Width="100" Margin="10 0 0 0" Command="{Binding PDeleteCommand}"></Button>
+                                    Command="{Binding ODAddCommand}"></Button>
+                        <Button Content="New" Width="100" Command="{Binding ODNewCommand}"></Button>
+                        <Button Content="Delete" Width="100" Margin="10 0 0 0" Command="{Binding ODDeleteCommand}"></Button>
 
                     </StackPanel>
                 </StackPanel>
