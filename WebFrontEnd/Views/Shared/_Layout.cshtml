@@ -19,7 +19,7 @@
 
                     <ul>
                         <li>
-                            @Html.ActionLink("Hello " + ((DataAccessLayer.Customer)Session["customer"]).name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            @Html.ActionLink("Hello " + ((DataAccessLayer.Customer)Session["customer"]).name + "!", "Edit", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
                         </li>
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     </ul>
@@ -43,6 +43,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
