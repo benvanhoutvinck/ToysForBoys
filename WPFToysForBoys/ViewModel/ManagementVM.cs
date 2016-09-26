@@ -63,8 +63,8 @@ namespace WPFToysForBoys.ViewModel
             OrderList = oService.GetAll("customer").ToList();
             oorderdetailList = oorderdetailService.GetAll().ToList();
             OStatusList = new List<string>() { "WAITING", "CANCELLED", "RESOLVED", "SHIPPED", "DISPUTED", "PROCESSING" };
-            FOStatusList = new List<string>() { "WAITING", "CANCELLED", "RESOLVED", "SHIPPED", "DISPUTED", "PROCESSING" };
-            SelectedStatusI = -1;
+            FOStatusList = new List<string>() { "ALL", "WAITING", "CANCELLED", "RESOLVED", "SHIPPED", "DISPUTED", "PROCESSING" };
+            SelectedStatusI = "ALL";
             PNew();
             CNew();
             ONew();

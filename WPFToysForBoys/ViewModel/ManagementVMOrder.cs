@@ -156,22 +156,21 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
-        private int selectedStatusI;
-        public int SelectedStatusI
+        private string selectedStatusI;
+        public string SelectedStatusI
         {
             get { return selectedStatusI; }
             set
             {
                 selectedStatusI = value;
 
-                if (value != -1)
+                if (value != "ALL")
                 {
-                    OrderList = oService.GetAll("customer").ToList().FindAll(user => user.status == FOStatusList[selectedStatusI]);
+                    OrderList = oService.GetAll("customer").ToList().FindAll(user => user.status.Equals(value));
                 }
                 else
                 {
                     OrderList = oService.GetAll("customer").ToList();
-                    //customerList.Sort(new CustomerCompare());
                 }
 
                 RaisePropertyChanged("SelectedStatusI");
