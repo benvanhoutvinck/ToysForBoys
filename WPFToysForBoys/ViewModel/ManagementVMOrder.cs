@@ -78,8 +78,8 @@ namespace WPFToysForBoys.ViewModel
         {
             try
             {
-                if (ShowOrder.shippedDate != null)
-                {
+                //if (ShowOrder.shippedDate != null)
+                //{
                     if (SelectedOStatus != null)
                     {
                         ShowOrder.status = SelectedOStatus;
@@ -101,9 +101,9 @@ namespace WPFToysForBoys.ViewModel
                     }
                     else
                         MessageBox.Show("Invalid Status!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-                else
-                    MessageBox.Show("Invalid Shipdate!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+               // }
+                //else
+                  //  MessageBox.Show("Invalid Shipdate!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             catch (ArgumentException e)
             {
