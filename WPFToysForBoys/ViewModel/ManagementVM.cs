@@ -63,9 +63,21 @@ namespace WPFToysForBoys.ViewModel
             OrderList = oService.GetAll("customer").ToList();
             oorderdetailList = oorderdetailService.GetAll().ToList();
             OStatusList = new List<string>() { "WAITING", "CANCELLED", "RESOLVED", "SHIPPED", "DISPUTED", "PROCESSING" };
+            FOStatusList = new List<string>() { "WAITING", "CANCELLED", "RESOLVED", "SHIPPED", "DISPUTED", "PROCESSING" };
+            SelectedStatusI = -1;
             PNew();
             CNew();
             ONew();
+        }
+
+        public RelayCommand NotImplementedCommand
+        {
+            get { return new RelayCommand(NotImplementedC); }
+        }
+
+        private void NotImplementedC()
+        {
+            MessageBox.Show("Functionality is not yet implemented!", "Function to come soon", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
         public View.ManagementWindow MW;

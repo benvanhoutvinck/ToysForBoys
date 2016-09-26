@@ -144,6 +144,43 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
+        private List<string> foStatusList;
+
+        public List<string> FOStatusList
+        {
+            get { return foStatusList; }
+            set
+            {
+                foStatusList = value;
+                RaisePropertyChanged("FOStatusList");
+            }
+        }
+
+        private int selectedStatusI;
+        public int SelectedStatusI
+        {
+            get { return selectedStatusI; }
+            set
+            {
+                selectedStatusI = value;
+
+                if (value != -1)
+                {
+                    //OrderList = oService.GetById(value, "status")ToList();
+                }
+                else
+                {
+                    OrderList = oService.GetAll("customer").ToList();
+                    //customerList.Sort(new CustomerCompare());
+                }
+
+                RaisePropertyChanged("SelectedStatusI");
+            }
+        }
+
+
+
+
 
     }
 }
