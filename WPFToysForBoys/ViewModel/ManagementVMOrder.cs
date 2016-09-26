@@ -166,7 +166,7 @@ namespace WPFToysForBoys.ViewModel
 
                 if (value != -1)
                 {
-                    //OrderList = oService.GetById(value, "status")ToList();
+                    OrderList = oService.GetAll("customer").ToList().FindAll(user => user.status == FOStatusList[selectedStatusI]);
                 }
                 else
                 {
