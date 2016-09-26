@@ -13,8 +13,14 @@ namespace DataAccessLayer.Interfaces
 
         void Edit(Order order);
 
-        IEnumerable<Order> GetAll();
+        /// <summary>
+        /// geef alle jaren terug die in orderDate voorkomen (Uniek)
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<int> GetYear();
 
+        IEnumerable<Order> GetAll();
+        
         IEnumerable<Order> GetAll(string includes);
         IEnumerable<Order> GetAll(Func<Order, bool> predicate, string includes);
 
