@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -38,5 +39,18 @@ namespace WebFrontEnd.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string password { get; set; }
+
+        public CustomerViewModel(Customer cust)
+        {
+            this.id = cust.id;
+            this.name = cust.name;
+            this.streetAndNumber = cust.streetAndNumber;
+            this.city = cust.city;
+            this.state = cust.state;
+            this.postalCode = cust.postalCode;
+            this.countryId = cust.countryId;
+            this.email = cust.email;
+            this.password = cust.password;
+        }
     }
 }
