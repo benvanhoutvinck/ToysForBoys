@@ -125,5 +125,27 @@ namespace WPFToysForBoys.ViewModel
             orderview.Show();
         }
 
+        public RelayCommand OrderDetailCommand2
+        {
+            get { return new RelayCommand(OrderDetail2); }
+        }
+        private void OrderDetail2()
+        {
+            View.OrderdetailUpdateWindow orderview = new View.OrderdetailUpdateWindow();
+            List<Orderdetail> od = oService.GetOrderDetails(ShowOrder).ToList();
+            List<Product> pl = oService.GetProducts(ShowOrder).ToList();
+            foreach (Orderdetail o in od)
+                foreach (Product p in pl)
+                {
+                    if (o.productId == p.id)
+                        o.product = p;
+                }
+            ViewModel.OrderDetailVM ovm = new OrderDetailVM(od);
+            orderview.DataContext = ovm;
+            orderview.Show();
+        }
+
+
+
     }
 }
