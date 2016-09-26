@@ -35,8 +35,8 @@ namespace WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-              
-                customerService.Insert(new Customer { id=200, name = model.name, city = model.city, state = model.state, countryId = model.countryId, postalCode = model.postalCode, streetAndNumber = model.streetAndNumber, email=model.email, password=model.password });
+
+                customerService.Insert(new Customer { id = 200, name = model.name, city = model.city, state = model.state, countryId = model.countryId, postalCode = model.postalCode, streetAndNumber = model.streetAndNumber, email = model.email, password = model.password });
 
                 return RedirectToAction("List", "Product");
             }
@@ -45,37 +45,47 @@ namespace WebFrontEnd.Controllers
             return View(model);
 
         }
-        
+
         public ActionResult Edit()
         {
             Customer cust = (Customer)this.Session["customer"];
             cust = customerService.GetById(cust.id);
             CustomerViewModel customerViewModel = new CustomerViewModel(cust);
+
+            ViewBag.Countries = getCountriesList();
+
             return View(customerViewModel);
         }
         [HttpPost]
         public ActionResult Edit(CustomerViewModel custViewModel)
         {
+            Customer cust = customerService.GetById(custViewModel.id);
             try
             {
-                Customer cust = customerService.GetById(custViewModel.id);
-                cust.name = custViewModel.name;
-                cust.streetAndNumber = custViewModel.streetAndNumber;
-                cust.city = custViewModel.city;
-                cust.state = custViewModel.state;
-                cust.postalCode = custViewModel.postalCode;
-                cust.countryId = custViewModel.countryId;
-                cust.country = countryService.GetById(custViewModel.countryId);
-                cust.password = custViewModel.password;
-                cust.email = custViewModel.email;
+                if (custViewModel.newPassword != null && cust.password.Trim() == custViewModel.password)
+                {
+                    cust.name = custViewModel.name;
+                    cust.streetAndNumber = custViewModel.streetAndNumber;
+                    cust.city = custViewModel.city;
+                    cust.state = custViewModel.state;
+                    cust.postalCode = custViewModel.postalCode;
+                    cust.countryId = custViewModel.countryId;
+                    cust.country = countryService.GetById(custViewModel.countryId);
+                    cust.password = custViewModel.newPassword;
+                    cust.email = custViewModel.email;
 
-                customerService.Edit(cust);
-                return RedirectToAction("ConfirmEdit", "Account", new { gelukt = true });
+                    customerService.Edit(cust);
+                    return RedirectToAction("ConfirmEdit", "Account", new { gelukt = true });
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                return RedirectToAction("ConfirmEdit", "Account", new { gelukt = true });
+                return RedirectToAction("ConfirmEdit", "Account", new { gelukt = false });
             }
         }
         public ActionResult ConfirmEdit(bool gelukt)
@@ -146,7 +156,7 @@ namespace WebFrontEnd.Controllers
         [HttpPost]
         public ActionResult LogOff()
         {
-          
+
             this.Session["customer"] = null;
             return RedirectToAction("List", "Product");
         }

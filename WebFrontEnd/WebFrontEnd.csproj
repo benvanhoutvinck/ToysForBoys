@@ -184,6 +184,8 @@
     </Content>
     <Content Include="Views\Product\Buy.cshtml" />
     <Content Include="Views\Product\AddToCart.cshtml" />
+    <Content Include="Views\Account\ConfirmEdit.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
