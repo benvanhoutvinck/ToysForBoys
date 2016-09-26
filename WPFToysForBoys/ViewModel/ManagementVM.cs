@@ -70,6 +70,32 @@ namespace WPFToysForBoys.ViewModel
             ONew();
         }
 
+        public RelayCommand ProductStatistics
+        {
+            get { return new RelayCommand(ProductS); }
+        }
+
+        private void ProductS()
+        {
+            View.ProductStatWindow productview = new View.ProductStatWindow();
+            ViewModel.ProductStatVM pvm = new ProductStatVM();
+            productview.DataContext = pvm;
+            productview.Show();
+        }
+
+        public RelayCommand CountryCustomer
+        {
+            get { return new RelayCommand(CountryC); }
+        }
+
+        private void CountryC()
+        {
+            View.CustomerCountryStatWindow countryview = new View.CustomerCountryStatWindow();
+            ViewModel.CountryCustomerVM cvm = new CountryCustomerVM();
+            countryview.DataContext = cvm;
+            countryview.Show();
+        }
+
         public RelayCommand NotImplementedCommand
         {
             get { return new RelayCommand(NotImplementedC); }
