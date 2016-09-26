@@ -68,6 +68,16 @@ namespace WPFToysForBoys.ViewModel
             ONew();
         }
 
+        public RelayCommand NotImplementedCommand
+        {
+            get { return new RelayCommand(NotImplementedC); }
+        }
+
+        private void NotImplementedC()
+        {
+            MessageBox.Show("Functionality is not yet implemented!", "Function to come soon", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
         public View.ManagementWindow MW;
 
         private string adminMaster;

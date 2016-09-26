@@ -221,7 +221,7 @@
                                     Command="{Binding CAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding CNewCommand}"></Button>
                         </StackPanel>
-                        
+
                     </StackPanel>
                 </StackPanel>
             </TabItem>
@@ -264,7 +264,7 @@
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Order ID:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.id}"> </TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.id}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Order Date:" Width="100"></Label>
@@ -296,44 +296,18 @@
                                     Command="{Binding OAddCommand}"></Button>
                             <Button Content="Order detail" Width="100" Margin="10 0 0 0" Command="{Binding OrderDetailCommand}"></Button>
                         </StackPanel>
-                        
+
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Customer overview" Visibility="Hidden"></TabItem>
-            <!--<TabItem Header="User management" Visibility="{Binding AdminMaster}">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Width="450">
-                        <TextBlock Text="User list:" Margin="5 10 5 5"></TextBlock>
-                        <ListBox Height="400" Margin="15"></ListBox>
-                    </StackPanel>
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="25 30 25 0">
-                            <Label Content="Name:" Width="100" Margin="0 20"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                            <Label Content="New password:" Width="100" Margin="0 20"></Label>
-                            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></PasswordBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                            <Label Content="Verify password:" Width="100" Margin="0 20"></Label>
-                            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></PasswordBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                            <Label Content="Access level:" Width="100" Margin="0 20"></Label>
-                            <ComboBox Width="150" DisplayMemberPath="" SelectedValue="" SelectedValuePath="" Margin="0 20" ></ComboBox>
-                            --><!--itemssource toevoegen--><!--
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                            <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
-                                    Command=""></Button>
-                            <Button Content="New" Width="100" Command=""></Button>
-
-                        </StackPanel>
-                    </StackPanel>
+            <TabItem Header="Customer overview">
+                <StackPanel Width="400">
+                    <Button Content="Customers by Country" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding CountryCustomer}"/>
+                    <Button Content="Product Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding NotImplementedCommand}"/>
+                    <Button Content="Shipment Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding NotImplementedCommand}"/>
+                    <Button Content="Order Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding NotImplementedCommand}"/>
                 </StackPanel>
-            </TabItem>-->
+            </TabItem>
         </TabControl>
 
 
