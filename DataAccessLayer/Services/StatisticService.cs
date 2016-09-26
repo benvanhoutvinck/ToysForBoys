@@ -19,6 +19,7 @@ namespace DataAccessLayer.Services
             var datesLeft = GetDateTimes(SortDateCompareLeft, orders);
             var datesRight = GetDateTimes(SortDateCompareRight, orders);
 
+            //Checken welke operator er wordt gebruikt (=, > of <)
             for (int i = 0; i < orders.Count; i++)
             {
                 switch (DateCompareMode)
