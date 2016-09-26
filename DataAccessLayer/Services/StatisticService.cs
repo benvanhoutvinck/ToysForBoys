@@ -118,8 +118,34 @@ namespace DataAccessLayer.Services
             using (var entities = new toysforboysEntities())
             {
                 var cmd = new SqlCommand(queryString.ToString());
-                var orders = (List<Order>)cmd.ExecuteScalar();
-                return orders;
+                var orders = new List<Order>();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    
+                    Int32 orderDatePos = reader.GetOrdinal("orderDate");
+                    Int32 requiredDatePos = reader.GetOrdinal("requiredDate");
+                    Int32 shippedDatePos = reader.GetOrdinal("shippedDate");
+                    Int32 commentsPos = reader.GetOrdinal("comments");
+                    Int32 customerIdPos = reader.GetOrdinal("customerId");
+                    Int32 status = reader.GetOrdinal("status");
+                    
+                    while (reader.Read())
+                    {
+                        var order = new Order();
+                        order.orderDate = Convert.ToDateTime(reader.GetString(orderDatePos));
+                        order.requiredDate = Convert.ToDateTime(reader.GetString(requiredDatePos));
+                        order.shippedDate = Convert.ToDateTime(reader.GetString(shippedDatePos));
+                        order.comments = Convert.ToString(reader.GetString(commentsPos));
+                        order.customerId = Convert.ToInt32(reader.GetInt32(customerIdPos));
+                        order.status = Convert.ToString(reader.GetString(status));
+                        orders.Add(order);
+                    }
+
+                    return orders;
+                }
+                
+                
             }
         }
 
