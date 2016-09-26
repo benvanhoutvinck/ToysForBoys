@@ -15,8 +15,36 @@ namespace DataAccessLayer.Services
     {
         public List<Order> GetFilteredStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
         {
+            var filteredOrders = new List<Order>();
+            var datesLeft = GetDateTimes(SortDateCompareLeft, orders);
+            var datesRight = GetDateTimes(SortDateCompareRight, orders);
 
-            throw new NotImplementedException();
+            for (int i = 0; i < orders.Count; i++)
+            {
+                switch (DateCompareMode)
+                {
+                    case '=':
+                        if (datesLeft[i] == datesRight[i])
+                        {
+                            filteredOrders.Add(orders[i]);
+                        }
+                        break;
+                    case '<':
+                        if (datesLeft[i]<datesRight[i])
+                        {
+                            filteredOrders.Add(orders[i]);
+                        }
+                        break;
+                    case '>':
+                        if (datesLeft[i]>datesRight[i])
+                        {
+                            filteredOrders.Add(orders[i]);
+                        }
+                        break;
+                }
+            }
+
+            return filteredOrders;
         }
 
         public List<Order> GetStatistics(OrderQuery orderQuery)
@@ -96,19 +124,19 @@ namespace DataAccessLayer.Services
         }
 
         //Switch method
-        private DateTime GetDateTime(SortDateEnum sortDateEnum, List<Order> orders)
+        private List<DateTime> GetDateTimes(SortDateEnum sortDateEnum, List<Order> orders)
         {
-            DateTime datetime = new DateTime();
+            List<DateTime> datetime = new List<DateTime>();
 
             foreach (var order in orders)
             {
                 switch (sortDateEnum)
                 {
-                    case SortDateEnum.orderDate: datetime = Convert.ToDateTime(order.orderDate);
+                    case SortDateEnum.orderDate: datetime.Add(Convert.ToDateTime(order.orderDate));
                         break;
-                    case SortDateEnum.requiredDate: datetime = Convert.ToDateTime(order.requiredDate);
+                    case SortDateEnum.requiredDate: datetime.Add(Convert.ToDateTime(order.requiredDate));
                         break;
-                    case SortDateEnum.shippedDate: datetime = Convert.ToDateTime(order.shippedDate);
+                    case SortDateEnum.shippedDate: datetime.Add(Convert.ToDateTime(order.shippedDate));
                         break;                   
                 }
             }
