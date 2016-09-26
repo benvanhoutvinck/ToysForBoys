@@ -47,7 +47,7 @@
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
-                                        <TextBlock Text="{Binding Path=name}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                                        <TextBlock Text="{Binding Path=name}" Grid.Row="0" Grid.Column="1" ToolTip="{Binding Path=name}"></TextBlock>
                                         <TextBlock Text="{Binding Path=productline.name}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                     </Grid>
                                     <!--<Border BorderBrush="Black" BorderThickness="1" Width="275">
@@ -150,7 +150,7 @@
             <TabItem Header="Customer management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="Country filter:" VerticalAlignment="Center" Margin="25 0"></TextBlock>
                             <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding FCountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCountryI}" SelectedValuePath="id"></ComboBox>
                         </StackPanel>
@@ -173,7 +173,7 @@
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
-                                        <TextBlock Text="{Binding Path=name}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                                        <TextBlock Text="{Binding Path=name}" Grid.Row="0" Grid.Column="1" ToolTip="{Binding Path=name}"></TextBlock>
                                         <TextBlock Text="{Binding Path=City}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                         <TextBlock Text="{Binding Path=postalCode}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
@@ -185,49 +185,53 @@
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Customer ID:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.id}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowCustomer.id}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Name:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.name}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowCustomer.name}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Adress:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.streetAndNumber}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowCustomer.streetAndNumber}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="City:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.city}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowCustomer.city}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="State:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.state}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowCustomer.state}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Postal Code:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.postalCode}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowCustomer.postalCode}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Country:" Width="100"></Label>
-                            <ComboBox IsEnabled="False" Width="150" ItemsSource="{Binding CountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCountryI}" 
+                            <ComboBox IsEnabled="False" Width="220" ItemsSource="{Binding CountryList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedCCountryI}" 
                                       SelectedValuePath="id"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="E-mail:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowCustomer.email}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowCustomer.email}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20" Visibility="Hidden">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding CAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding CNewCommand}"></Button>
                         </StackPanel>
-                        
+
                     </StackPanel>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Order management">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Status filter:" VerticalAlignment="Center" Margin="25 0"></TextBlock>
+                            <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding Path= FOStatusList}" SelectedValue="{Binding SelectedStatusI}"></ComboBox>
+                        </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="400" Margin="0 5 0 0">
                             <Label Content="Id" Width="30" HorizontalContentAlignment="Left" />
                             <Label Content="Customer name" Width="150" HorizontalContentAlignment="Left" Margin="0 0 15 0"/>
@@ -248,7 +252,7 @@
                                             <ColumnDefinition Width="70"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
-                                        <TextBlock Text="{Binding Path=customer.name}" Grid.Row="0" Grid.Column="1"></TextBlock>
+                                        <TextBlock Text="{Binding Path=customer.name}" Grid.Row="0" Grid.Column="1" ToolTip="{Binding Path=customer.name}"></TextBlock>
                                         <TextBlock Text="{Binding Path=orderDate, StringFormat={}{0:dd/MM/yyyy}}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                         <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
@@ -260,28 +264,28 @@
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Order ID:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.id}"> </TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.id}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Order Date:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.orderDate}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.orderDate}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Ship Date:" Width="100"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.shippedDate}"></TextBox>
+                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.shippedDate}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Req Date:" Width="100"></Label>
-                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="150" Text="{Binding Path=ShowOrder.requiredDate}"></TextBox>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrder.requiredDate}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Customer" Width="100"></Label>
-                            <ComboBox Width="150" ItemsSource="{Binding CustomerList}" DisplayMemberPath="name" IsEnabled="False"
+                            <ComboBox Width="220" ItemsSource="{Binding CustomerList}" DisplayMemberPath="name" IsEnabled="False"
                                       SelectedValue="{Binding SelectedCCustomerI}" SelectedValuePath="id"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Status" Width="100"></Label>
-                            <ComboBox Width="150" ItemsSource="{Binding Path=OStatusList}" SelectedValue="{Binding SelectedOStatus}"></ComboBox>
+                            <ComboBox Width="220" ItemsSource="{Binding Path=OStatusList}" SelectedValue="{Binding SelectedOStatus}"></ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Comments:" Width="100"></Label>
@@ -292,44 +296,18 @@
                                     Command="{Binding OAddCommand}"></Button>
                             <Button Content="Order detail" Width="100" Margin="10 0 0 0" Command="{Binding OrderDetailCommand}"></Button>
                         </StackPanel>
-                        
+
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Customer overview" Visibility="Hidden"></TabItem>
-            <!--<TabItem Header="User management" Visibility="{Binding AdminMaster}">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Width="450">
-                        <TextBlock Text="User list:" Margin="5 10 5 5"></TextBlock>
-                        <ListBox Height="400" Margin="15"></ListBox>
-                    </StackPanel>
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="25 30 25 0">
-                            <Label Content="Name:" Width="100" Margin="0 20"></Label>
-                            <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                            <Label Content="New password:" Width="100" Margin="0 20"></Label>
-                            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></PasswordBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                            <Label Content="Verify password:" Width="100" Margin="0 20"></Label>
-                            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20"></PasswordBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                            <Label Content="Access level:" Width="100" Margin="0 20"></Label>
-                            <ComboBox Width="150" DisplayMemberPath="" SelectedValue="" SelectedValuePath="" Margin="0 20" ></ComboBox>
-                            --><!--itemssource toevoegen--><!--
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                            <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
-                                    Command=""></Button>
-                            <Button Content="New" Width="100" Command=""></Button>
-
-                        </StackPanel>
-                    </StackPanel>
+            <TabItem Header="Customer overview">
+                <StackPanel Width="400">
+                    <Button Content="Customers by Country" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding CountryCustomer}"/>
+                    <Button Content="Product Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding NotImplementedCommand}"/>
+                    <Button Content="Shipment Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding NotImplementedCommand}"/>
+                    <Button Content="Order Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding NotImplementedCommand}"/>
                 </StackPanel>
-            </TabItem>-->
+            </TabItem>
         </TabControl>
 
 
