@@ -34,6 +34,10 @@
                     <li><a href="~/Account/Register">Sign up</a></li>
                 </ul>
             }
+            @if (Session["cart"] != null)
+            {
+                @Html.Partial("_ShoppingcartPartial")
+            }
         </div>
     </header>
     <div class="container body-content">
