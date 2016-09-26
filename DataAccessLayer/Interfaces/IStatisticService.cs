@@ -8,6 +8,6 @@ namespace DataAccessLayer.Interfaces
 {
     interface IStatisticService
     {
-        Statistic GetStatistics(DateTime orderDate, DateTime shippedDate);
+        List<Order> GetStatistics(OrderQuery orderQuery);
     }
 }
