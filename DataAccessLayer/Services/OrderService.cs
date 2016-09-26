@@ -162,5 +162,10 @@ namespace DataAccessLayer.Services
 
             return products;
         }
+
+        public IEnumerable<int> GetYear()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
