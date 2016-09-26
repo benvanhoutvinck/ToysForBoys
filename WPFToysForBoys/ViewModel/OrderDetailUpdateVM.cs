@@ -32,7 +32,7 @@ namespace WPFToysForBoys.ViewModel
 
         public OrderDetailUpdateVM(List<Orderdetail> nOrderdetailList)
         {
-
+            odService = new OrderdetailService();
             OrderdetailList = nOrderdetailList;
         }
 

@@ -9,6 +9,24 @@ namespace WebFrontEnd.Models
     {
         public List<OrderViewModel> orders { get; set; }
 
+        private decimal? _TotalAmount;
+
+        public decimal? TotalAmount
+        {
+            get 
+            {
+                _TotalAmount = 0;
+                foreach (OrderViewModel order in orders) 
+                {
+                    _TotalAmount += order.Total;
+                }
+                return _TotalAmount; 
+            
+            }
+            
+        }
+        
+
         public ShoppingCart()
         {
             this.orders = new List<OrderViewModel>();
