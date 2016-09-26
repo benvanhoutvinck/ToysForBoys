@@ -120,5 +120,54 @@ namespace WebFrontEnd.Controllers
             return View(model);
         }
 
+        public ActionResult Buy(int id)
+        {
+            OrderViewModel order = new OrderViewModel();
+
+            //Kijk of er voor dit product al een bestelling in het mandje ligt
+            if (this.Session["cart"] != null)
+            {
+                foreach (OrderViewModel f in ((ShoppingCart)this.Session["cart"]).orders)
+                {
+                    //voorstelling gevonden
+                    if (f.Product.id == id)
+                    {
+                        order = f;
+                        return View(order);
+                    }
+                }
+            }
+
+            Product product = productService.GetById(id);
+            
+
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            order.Product = product;
+
+            order.Aantal = 1;
+
+            return View(order);
+        }
+
+        public ActionResult AddToCart(OrderViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                if (this.Session["cart"] == null)
+                {
+                    ShoppingCart cart = new ShoppingCart();
+                    Product product = productService.GetById(model.Product.id);
+                    model.Product = product;
+                    cart.orders.Add(model);
+                }
+            }
+
+            return View();
+        }
+
     }
 }

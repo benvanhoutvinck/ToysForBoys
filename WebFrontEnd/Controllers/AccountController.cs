@@ -45,6 +45,43 @@ namespace WebFrontEnd.Controllers
             return View(model);
 
         }
+        
+        public ActionResult Edit()
+        {
+            Customer cust = (Customer)this.Session["customer"];
+            cust = customerService.GetById(cust.id);
+            CustomerViewModel customerViewModel = new CustomerViewModel(cust);
+            return View(customerViewModel);
+        }
+        [HttpPost]
+        public ActionResult Edit(CustomerViewModel custViewModel)
+        {
+            try
+            {
+                Customer cust = customerService.GetById(custViewModel.id);
+                cust.name = custViewModel.name;
+                cust.streetAndNumber = custViewModel.streetAndNumber;
+                cust.city = custViewModel.city;
+                cust.state = custViewModel.state;
+                cust.postalCode = custViewModel.postalCode;
+                cust.countryId = custViewModel.countryId;
+                cust.country = countryService.GetById(custViewModel.countryId);
+                cust.password = custViewModel.password;
+                cust.email = custViewModel.email;
+
+                customerService.Edit(cust);
+                return RedirectToAction("ConfirmEdit", "Account", new { gelukt = true });
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("ConfirmEdit", "Account", new { gelukt = true });
+            }
+        }
+        public ActionResult ConfirmEdit(bool gelukt)
+        {
+            return View(gelukt);
+        }
 
         private SelectList getCountriesList()
         {
