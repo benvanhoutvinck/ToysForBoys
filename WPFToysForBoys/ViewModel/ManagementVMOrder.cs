@@ -78,22 +78,32 @@ namespace WPFToysForBoys.ViewModel
         {
             try
             {
-                ShowOrder.status = SelectedOStatus;
-                if (IdChecker.IdCheck(oorderList, ShowOrder))
+                if (ShowOrder.shippedDate != null)
                 {
-                    oService.Edit(new Order()
+                    if (SelectedOStatus != null)
                     {
-                        id = ShowOrder.id,
-                        customerId = SelectedCCustomerI, //ShowOrder.customerId,
-                        orderDate = ShowOrder.orderDate,
-                        requiredDate = ShowOrder.requiredDate,
-                        shippedDate = ShowOrder.shippedDate,
-                        status = ShowOrder.status,
-                        comments = ShowOrder.comments
-                    });
-                    OrderList = oService.GetAll("customer").ToList();
-                    oorderList = oService.GetAll("customer").ToList();
-                }              
+                        ShowOrder.status = SelectedOStatus;
+                        if (IdChecker.IdCheck(oorderList, ShowOrder))
+                        {
+                            oService.Edit(new Order()
+                            {
+                                id = ShowOrder.id,
+                                customerId = SelectedCCustomerI, //ShowOrder.customerId,
+                                orderDate = ShowOrder.orderDate,
+                                requiredDate = ShowOrder.requiredDate,
+                                shippedDate = ShowOrder.shippedDate,
+                                status = ShowOrder.status,
+                                comments = ShowOrder.comments
+                            });
+                            OrderList = oService.GetAll("customer").ToList();
+                            oorderList = oService.GetAll("customer").ToList();
+                        }
+                    }
+                    else
+                        MessageBox.Show("Invalid Status!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+                else
+                    MessageBox.Show("Invalid Shipdate!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             catch (ArgumentException e)
             {
@@ -127,11 +137,13 @@ namespace WPFToysForBoys.ViewModel
         public List<string> OStatusList
         {
             get { return oStatusList; }
-            set { oStatusList = value;
+            set
+            {
+                oStatusList = value;
                 RaisePropertyChanged("OStatusList");
             }
         }
 
- 
+
     }
 }
