@@ -60,6 +60,7 @@
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\IStatisticService.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
@@ -67,6 +68,7 @@
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderedProduct.cs" />
+    <Compile Include="OrderQuery.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
@@ -87,6 +89,7 @@
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductlineService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="SortDateEnum.cs" />
     <Compile Include="ToysForBoys.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
