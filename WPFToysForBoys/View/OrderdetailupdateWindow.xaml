@@ -14,7 +14,7 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Width="450">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="400" Margin="0 5 0 0">
-                            <Label Content="Name Product" Width="250" HorizontalContentAlignment="Center"/>
+                            <Label Content="Name Product" Width="200" HorizontalContentAlignment="Center"/>
                             <Label Content="Price" Width="80" HorizontalContentAlignment="Center"/>
                             <Label Content="Quantity" Width="80" HorizontalContentAlignment="Center"/>
                         </StackPanel>
@@ -26,11 +26,11 @@
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="250"></ColumnDefinition>
+                                            <ColumnDefinition Width="200"></ColumnDefinition>
                                             <ColumnDefinition Width="80"></ColumnDefinition>
                                             <ColumnDefinition Width="80"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <Label Margin="5 0" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Width="240">
+                                        <Label Margin="5 0" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Width="190">
                                             <TextBlock Text="{Binding Path=product.name}" HorizontalAlignment="Left"></TextBlock>
                                         </Label>
                                         <Label Margin="5 0" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" Width="70">
@@ -46,20 +46,23 @@
                     </StackPanel>
                     <StackPanel Width="400">
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Order ID:" Width="100"></Label>
+                            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrderdetail.orderId}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Productname:" Width="100"></Label>
                             <ComboBox Width="220" ItemsSource="{Binding PProductList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedPProductI}" SelectedValuePath="id"></ComboBox>
                        
                         </StackPanel>
-
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Quantity:" Width="100"></Label>
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrderdetail.quantityOrdered}"></TextBox>
                         </StackPanel>
-
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Price:" Width="100"></Label>
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrderdetail.priceEach}"></TextBox>
                         </StackPanel>
+                       
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding ODAddCommand}"></Button>
