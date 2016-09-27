@@ -75,7 +75,7 @@ namespace WPFToysForBoys.ViewModel
                 {
                     SelectedPProductI = value.product.id;
                 }
-                RaisePropertyChanged("ShowProduct");
+                RaisePropertyChanged("ShowOrderdetail");
             }
         }
 
@@ -108,6 +108,7 @@ namespace WPFToysForBoys.ViewModel
                             {
                                 odService.Insert(new Orderdetail()
                                 {
+                                    orderId = ShowOrderdetail.orderId,
                                     productId= ShowOrderdetail.productId,
                                     quantityOrdered = ShowOrderdetail.quantityOrdered,
                                     priceEach = ShowOrderdetail.priceEach
@@ -117,6 +118,7 @@ namespace WPFToysForBoys.ViewModel
                             {
                                 odService.Edit(new Orderdetail()
                                 {
+                                    orderId = ShowOrderdetail.orderId,
                                     productId = ShowOrderdetail.productId,
                                     quantityOrdered = ShowOrderdetail.quantityOrdered,
                                     priceEach = ShowOrderdetail.priceEach

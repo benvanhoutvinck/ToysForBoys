@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToysForBoys.View"
         mc:Ignorable="d"
+        xmlns:i="clr-namespace=System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:gala="http://www.galasoft.ch/mvvmlight"
         Title="ProductStatWindow" Height="1000" Width="1000">
     <StackPanel Orientation="Horizontal">
         <StackPanel Width="450">
@@ -23,7 +25,7 @@
                 <Label Content="Name" Width="240" HorizontalContentAlignment="Left"/>
                 <Label Content="# Sold" Width="60" HorizontalContentAlignment="Center"/>
             </StackPanel>
-            <ListBox Height="375" Width="395" Margin="25 5 25 10" ItemsSource="{Binding ProductlineList}" SelectedItem="{Binding SelectedProductline}">
+            <ListBox Height="375" Width="395" Margin="25 5 25 10" ItemsSource="{Binding ProductlineList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedProductline}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="360" ShowGridLines="True">
