@@ -13,7 +13,7 @@ namespace DataAccessLayer.Interfaces
         List<Order> GetOrderStatistics(OrderQuery orderQuery);
 
         //Veiligste is om 0, 1 of 2 als waarde mee te geven bij SortDateEnum
-        List<Order> GetFilteredOrderStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight);
+        List<Order> GetFilteredOrderStatistics(List<Order> ordersFromGetOrderStatistics, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight);
 
         List<Order> GetByDistinctYear(SortDateEnum sortDate, int year);
 

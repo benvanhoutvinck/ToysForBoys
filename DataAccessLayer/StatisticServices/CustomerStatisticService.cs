@@ -100,91 +100,9 @@ namespace DataAccessLayer
                 {
                     query = query.Where(c => c.countryId == customerQuery.CountryId);
                 }
+
                 return query.ToList();
-            }
-           
-            
+            }          
         }
-
-        //public List<Customer> GetCustomerStatistics(CustomerQuery customerQuery)
-        //{
-
-        //    var queryString = new StringBuilder();
-        //    queryString.Append("from customer in entities.customers where ");
-
-        //    //checken of state is ingevuld 
-        //    bool stateUsed = false;
-        //    if (customerQuery.State != string.Empty)
-        //    {
-        //        queryString.Append("customer.state == " + customerQuery.State+" ");
-        //        stateUsed = true;
-        //    }
-        //    bool cityUsed = false;
-
-        //    if(customerQuery.City != string.Empty)
-        //    {
-        //        if (stateUsed)
-        //        {
-        //            queryString.Append("&& ");
-        //        }
-        //        queryString.Append("customer.city == " + customerQuery.City + " ");
-        //        cityUsed = true;
-
-        //    }
-
-        //    bool postalCodeUsed = false;
-        //    if(customerQuery.PostalCode != string.Empty)
-        //    {
-        //        if(cityUsed || stateUsed)
-        //        {
-        //            queryString.Append("&& ");
-        //        }
-        //        queryString.Append("customer.postalCode == " + customerQuery.PostalCode + " ");
-        //        postalCodeUsed = true;
-        //    }
-        //    if (customerQuery.CountryId != null)
-        //    {
-        //        if(cityUsed || stateUsed || postalCodeUsed)
-        //        {
-        //            queryString.Append("&& ");
-        //        }
-        //        queryString.Append("customer.countryId == " + customerQuery.CountryId + " ");
-        //    }
-        //    queryString.Append("select customer");
-
-        //    using(var entities = new toysforboysEntities())
-        //    {
-        //        var cmd = new SqlCommand(queryString.ToString());
-        //        var customers = new List<Customer>();
-        //        using (SqlDataReader reader = cmd.ExecuteReader())
-        //        {
-        //            Int32 IdPos = reader.GetOrdinal("id");
-        //            Int32 namePos = reader.GetOrdinal("name");
-        //            Int32 sanPos = reader.GetOrdinal("streetAndNumber");
-        //            Int32 cityPos = reader.GetOrdinal("city");
-        //            Int32 statePos = reader.GetOrdinal("state");
-        //            Int32 pcPos = reader.GetOrdinal("postalCode");
-        //            Int32 countryIdPos = reader.GetOrdinal("countryId");
-        //            Int32 passPos = reader.GetOrdinal("password");
-        //            Int32 emailPos = reader.GetOrdinal("email");
-
-        //            while (reader.Read())
-        //            {
-        //                var customer = new Customer();
-        //                customer.id = reader.GetInt32(IdPos);
-        //                customer.name = reader.GetString(namePos);
-        //                customer.streetAndNumber = reader.GetString(sanPos);
-        //                customer.city = reader.GetString(cityPos);
-        //                customer.state = reader.GetString(statePos);
-        //                customer.postalCode = reader.GetString(pcPos);
-        //                customer.countryId = reader.GetInt32(countryIdPos);
-        //                customer.password = reader.GetString(passPos);
-        //                customer.email = reader.GetString(emailPos);
-        //                customers.Add(customer);
-        //            }
-        //            return customers;
-        //        }
-        //    }
-        //}
     }
 }

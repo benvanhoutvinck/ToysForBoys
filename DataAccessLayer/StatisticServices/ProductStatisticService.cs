@@ -46,107 +46,55 @@ namespace DataAccessLayer.Services
 
         public List<Product> GetProductStatistics(ProductQuery productQuery)
         {
-            var queryString = new StringBuilder();
-            queryString.Append("from product in entities.products where ");
-
-
-            if (productQuery.SortQuantity!=null)
+            using (var entities = new toysforboysEntities())
             {
+                var query = entities.products.Where(p => true);
                 switch ((int)productQuery.SortQuantity)
                 {
                     case 0:
-                        queryString.Append("product.quantityInStock ");
+                        if (productQuery.minimumQuantity!=null)
+                        {
+                            query = query.Where(p => p.quantityInStock >= productQuery.minimumQuantity);
+                        }
+
+                        if (productQuery.maximumQuantity!=null)
+                        {
+                            query = query.Where(p => p.quantityInStock <= productQuery.maximumQuantity);
+                        }
                         break;
                     case 1:
-                        queryString.Append("product.quantityInOrder ");
-                        break;
+                        if (productQuery.minimumQuantity != null)
+                        {
+                            query = query.Where(p => p.quantityInOrder >= productQuery.minimumQuantity);
+                        }
+
+                        if (productQuery.maximumQuantity != null)
+                        {
+                            query = query.Where(p => p.quantityInOrder <= productQuery.maximumQuantity);
+                        }
+                        break;                  
+
                 }
-            }
 
-            bool quantityUsed = false;
-            if (productQuery.minimumQuantity!=null)
-            {
-                queryString.Append("> " + productQuery.minimumQuantity + " ");
-                quantityUsed = true;
-            }
-
-            if (productQuery.maximumQuantity!=null)
-            {
-                queryString.Append("< " + productQuery.maximumQuantity + " ");
-                quantityUsed = true;
-            }
-
-            bool minPriceUsed = false;
-            if (productQuery.minPrice!=null)
-            {
-                if (quantityUsed)
+                if (productQuery.minPrice!=null)
                 {
-                    queryString.Append("&& ");
-                }
-                queryString.Append("product.buyPrice > " + productQuery.minPrice + " ");
-                minPriceUsed = true;
-            }
+                    query = query.Where(p => p.buyPrice >= productQuery.minPrice);
 
-            bool maxPriceUsed = false;
-            if (productQuery.maxPrice!=null)
-            {
-                if (quantityUsed || minPriceUsed)
+                }
+
+                if (productQuery.maxPrice != null)
                 {
-                    queryString.Append("&& ");
+                    query = query.Where(p => p.buyPrice <= productQuery.maxPrice);
+
                 }
 
-                queryString.Append("product.buyPrice < " + productQuery.maxPrice + " ");
-                maxPriceUsed = true;
-            }
-
-            if (productQuery.active!=null)
-            {
-                if (maxPriceUsed || minPriceUsed || quantityUsed)
+                if (productQuery.active!=null)
                 {
-                    queryString.Append("&& ");
+                    query = query.Where(p => p.active == productQuery.active);
                 }
 
-                queryString.Append("product.active == " + productQuery.active + " ");
+                return query.ToList();
             }
-            queryString.Append("select product");
-
-            using (var entities = new toysforboysEntities())
-            {
-                var cmd = new SqlCommand(queryString.ToString());
-                var products = new List<Product>();
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    Int32 idPos = reader.GetOrdinal("id");
-                    Int32 namePos = reader.GetOrdinal("name");
-                    Int32 scalePos = reader.GetOrdinal("scale");
-                    Int32 descPos = reader.GetOrdinal("description");
-                    Int32 qisPos = reader.GetOrdinal("quantityInStock");
-                    Int32 qioPos = reader.GetOrdinal("quantityInOrder");
-                    Int32 buyPricePos = reader.GetOrdinal("buyPrice");
-                    Int32 productlineIdPos = reader.GetOrdinal("productlineId");
-                    Int32 activePos = reader.GetOrdinal("active");
-
-                    while (reader.Read())
-                    {
-                        var product = new Product();
-                        product.id = Convert.ToInt32(reader.GetInt32(idPos));
-                        product.name = reader.GetString(namePos);
-                        product.scale = reader.GetString(scalePos);
-                        product.description = reader.GetString(descPos);
-                        product.quantityInStock = reader.GetInt32(qisPos);
-                        product.quantityInOrder = reader.GetInt32(qioPos);
-                        product.buyPrice = reader.GetDecimal(buyPricePos);
-                        product.productlineId = reader.GetInt32(productlineIdPos);
-                        product.active = reader.GetBoolean(activePos);
-                        products.Add(product);
-                    }
-                }
-                return products;
-            }
-            
-
-
         }
 
         
