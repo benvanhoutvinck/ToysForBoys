@@ -23,9 +23,9 @@ namespace DataAccessLayer.Services
                                 join order in entities.orders on orderDetail.orderId equals order.id
                                 where product.productlineId == productlineID
                                 && order.orderDate.Value.Year == year
-                                select product;
+                                select orderDetail;
 
-                    count = query.Count();
+                    count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
                 }
                 else
                 {
@@ -33,8 +33,9 @@ namespace DataAccessLayer.Services
                                 join orderDetail in entities.orderdetails on product.id equals orderDetail.productId
                                 join order in entities.orders on orderDetail.orderId equals order.id
                                 where product.productlineId == productlineID                                
-                                select product;
-                    count = query.Count();
+                                select orderDetail;
+
+                    count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
                 }
 
                 return count;                
