@@ -79,7 +79,15 @@ namespace DataAccessLayer.Services
 
         public Country GetById(int countryID)
         {
-            return GetById(countryID, string.Empty);
+            using (var entities = new toysforboysEntities())
+            {
+                var query = (from country in entities.countries
+                             where country.id == countryID
+                             orderby country.id
+                             select country).First();
+
+                return query;
+            }
         }
 
         public Country GetById(int countryID, string includes)

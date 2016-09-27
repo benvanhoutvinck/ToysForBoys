@@ -11,9 +11,45 @@ using System.Data.SqlClient;
 
 namespace DataAccessLayer.Services
 {
-    public class StatisticService : IStatisticService
+    public class OrderStatisticService : IOrderStatisticService
     {
-        public List<Order> GetFilteredStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
+        public List<Order> GetDistinctYear(SortDateEnum sortDate, int year)
+        {
+            var service = new OrderService();
+            var orders = (List<Order>)service.GetAll();
+
+            foreach (var ord in orders)
+            {
+                switch ((int)sortDate)
+                {
+                    case 0:
+                        if (ord.orderDate.Value.Year == year)
+                        {
+                            orders.Add(ord);
+                        }
+                        break;
+
+                    case 1:
+                        if (ord.requiredDate.Value.Year == year)
+                        {
+                            orders.Add(ord);
+                        }
+                        break;
+
+                    case 2:
+                        if (ord.shippedDate.Value.Year == year)
+                        {
+                            orders.Add(ord);
+                        }
+                        break;
+                }
+
+            }
+            return orders;
+           
+        }
+
+        public List<Order> GetFilteredOrderStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
         {
             var filteredOrders = new List<Order>();
             var datesLeft = GetDateTimes(SortDateCompareLeft, orders);
@@ -48,7 +84,7 @@ namespace DataAccessLayer.Services
             return filteredOrders;
         }
 
-        public List<Order> GetStatistics(OrderQuery orderQuery)
+        public List<Order> GetOrderStatistics(OrderQuery orderQuery)
         {
 
             var queryString = new StringBuilder();
