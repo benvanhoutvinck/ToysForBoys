@@ -1,0 +1,53 @@
+﻿@model ICollection<DataAccessLayer.Order>
+@{
+    ViewBag.Title = "ShowOrders";
+}
+
+<h2>All Orders</h2>
+@if (Model.Count == 0)
+{
+    <div class="alert alert-info" role="alert">You didn't place any orders yet!</div>
+}
+else
+{
+    foreach (var order in Model)
+    {
+        decimal? total = 0;
+        <div class="sonny-fun">
+            <h3>Order #@order.id</h3>
+            <span class="sonny-boldtekst">Date of order:</span>      @order.orderDate<br />
+            <span class="sonny-boldtekst">Delivered by:</span>       @order.requiredDate<br />
+            <span class="sonny-boldtekst">Date of Shipment:</span>   @order.shippedDate<br />
+            <span class="sonny-boldtekst">Status:</span>             @order.status<br /><br />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ProductName</th>
+                        <th>Quantity</th>
+                        <th>Price each</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var orderDetail in order.orderdetails)
+                    {
+                        var subTotal = orderDetail.quantityOrdered * orderDetail.priceEach;
+                        total += subTotal;
+                        <tr>
+                            <td>@orderDetail.product.name</td>
+                            <td>@orderDetail.quantityOrdered</td>
+                            <td>@orderDetail.priceEach</td>
+                            <td>@subTotal</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>@total</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+}

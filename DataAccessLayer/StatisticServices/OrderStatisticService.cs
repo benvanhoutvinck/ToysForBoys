@@ -97,6 +97,7 @@ namespace DataAccessLayer.Services
             //Checken welke operator er wordt gebruikt (=, > of <)
             for (int i = 0; i < ordersFromGetOrderStatistics.Count; i++)
             {
+                
                 switch (DateCompareMode)
                 {
                     case '=':
@@ -116,6 +117,8 @@ namespace DataAccessLayer.Services
                         {
                             filteredOrders.Add(ordersFromGetOrderStatistics[i]);
                         }
+                        break;
+                    default:
                         break;
                 }
             }
@@ -179,6 +182,8 @@ namespace DataAccessLayer.Services
                             query = query.Where(o => o.shippedDate < orderQuery.DateRangeEnd);
                         }
                         break;
+                    default:
+                        break;
                 }
 
                 if (orderQuery.CustomerId != null)
@@ -186,11 +191,11 @@ namespace DataAccessLayer.Services
                     query = query.Where(o => o.customerId == orderQuery.CustomerId);
                 }
 
-                if (orderQuery.Status != string.Empty)
+                if (string.IsNullOrEmpty(orderQuery.Status))
                 {
                     query = query.Where(o => o.status == orderQuery.Status);
                 }
-
+                var result = query.ToList();
                 return query.ToList();
 
             }
@@ -213,12 +218,7 @@ namespace DataAccessLayer.Services
             return orders;
         }
 
-        List<Order> IOrderStatisticService.GetByDistinctYear(SortDateEnum sortDate, int year)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Switch method
+       //Switch method
         private List<DateTime> GetDateTimes(SortDateEnum sortDateEnum, List<Order> orders)
         {
             List<DateTime> datetime = new List<DateTime>();
@@ -236,34 +236,13 @@ namespace DataAccessLayer.Services
                     case SortDateEnum.shippedDate:
                         datetime.Add(Convert.ToDateTime(order.shippedDate));
                         break;
+                    default:
+                        break;
                 }
             }
             return datetime;
         }
 
-        IEnumerable<int> IOrderStatisticService.GetDistinctYear(SortDateEnum sortDate)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Order> IOrderStatisticService.GetFilteredOrderStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Order> IOrderStatisticService.GetLateShippingDates()
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Order> IOrderStatisticService.GetOrderStatistics(OrderQuery orderQuery)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Order> IOrderStatisticService.GetUrgentShippingDates(int days)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

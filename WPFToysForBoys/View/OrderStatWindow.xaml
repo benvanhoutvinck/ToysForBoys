@@ -4,9 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToysForBoys.View"
+        xmlns:global="clr-namespace:System.Globalization;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="OrderStatWindow" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="OrderStatWindow" Height="1000" Width="1200">
+    <DockPanel Margin="10 5 10 20">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label Content="Name:" Width="100" Margin="5 0" HorizontalContentAlignment="Center" />
+                    <TextBox Text="{ Binding QueryName }" Width="250" Margin="5 0" VerticalContentAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
+                    <Label Content="Date: " VerticalContentAlignment="Center" Width="70"></Label>
+                    <ComboBox Width="100" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <Label Content=" From " VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50" Margin="50 0 0 0"></Label>
+                    <TextBox Text="{ Binding DateRangeStart}"></TextBox>
+                    <Label Content=" to " VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
+                    <Label Content="Customer" VerticalContentAlignment="Center"></Label>
+                    <ComboBox Width="150" Margin="10 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <Label Content="Order Status" VerticalContentAlignment="Center" Margin="10 0"></Label>
+                    <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                </StackPanel>
+                <!--<StackPanel Orientation="Horizontal">
+                    <Label Content="Where date type"></Label>
+                    <Label Content="comparison"></Label>
+                    
+                </StackPanel>-->
+                <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
+                    <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
 </Window>
