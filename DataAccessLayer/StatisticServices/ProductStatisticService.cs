@@ -11,31 +11,59 @@ namespace DataAccessLayer.Services
 {
     public class ProductStatisticService : IProductStatisticService
     {
-        public int GetCountSold(int productlineID, int year)
+        public int GetCountSold(int productlineID, int year = -1, int month = -1)
         {
             using(var entities = new toysforboysEntities())
             {
                 int count;
                 if (year!=-1)
                 {
-                    var query = from product in entities.products
-                                join orderDetail in entities.orderdetails on product.id equals orderDetail.productId
-                                join order in entities.orders on orderDetail.orderId equals order.id
-                                where product.productlineId == productlineID
-                                && order.orderDate.Value.Year == year
-                                select orderDetail;
+                    if (month != -1)
+                    {
+                        var query = from od in entities.orderdetails
+                                    join p in entities.products on od.productId equals p.id
+                                    join o in entities.orders on od.orderId equals o.id
+                                    where p.productlineId == productlineID
+                                    && o.orderDate.Value.Year == year
+                                    && o.orderDate.Value.Month == month
+                                    select od;
 
-                    count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                        count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                    }
+                    else
+                    {
+                        var query = from od in entities.orderdetails
+                                    join p in entities.products on od.productId equals p.id
+                                    join o in entities.orders on od.orderId equals o.id
+                                    where p.productlineId == productlineID
+                                    && o.orderDate.Value.Year == year
+                                    select od;
+
+                        count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                    }
                 }
                 else
                 {
-                    var query = from product in entities.products
-                                join orderDetail in entities.orderdetails on product.id equals orderDetail.productId
-                                join order in entities.orders on orderDetail.orderId equals order.id
-                                where product.productlineId == productlineID                                
-                                select orderDetail;
+                    if (month != -1)
+                    {
+                        var query = from od in entities.orderdetails
+                                    join p in entities.products on od.productId equals p.id
+                                    join o in entities.orders on od.orderId equals o.id
+                                    where p.productlineId == productlineID
+                                    && o.orderDate.Value.Month == month
+                                    select od;
 
-                    count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                        count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                    }
+                    else
+                    {
+                        var query = from od in entities.orderdetails
+                                    join p in entities.products on od.productId equals p.id
+                                    where p.productlineId == productlineID
+                                    select od;
+
+                        count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                    }
                 }
 
                 return count;                

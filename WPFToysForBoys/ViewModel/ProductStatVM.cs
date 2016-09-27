@@ -60,7 +60,7 @@ namespace WPFToysForBoys.ViewModel
             try
             {
                 foreach (ProductStatStruct p in prod)
-                    p.countProductsSold = pService.GetCountSold(p.id, SelectedYear);
+                    p.countProductsSold = pService.GetCountSold(p.id, SelectedYear, SelectedMonth);
             }
             catch (NotImplementedException) { }
 

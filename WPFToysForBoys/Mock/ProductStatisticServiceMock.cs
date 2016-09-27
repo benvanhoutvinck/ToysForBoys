@@ -11,7 +11,7 @@ namespace WPFToysForBoys.Mock
 {
     public class ProductStatisticServiceMock : IProductStatisticService
     {
-        public int GetCountSold(int productlineID, int year)
+        public int GetCountSold(int productlineID, int year, int month)
         {
             using (var entities = new toysforboysEntities())
             {
