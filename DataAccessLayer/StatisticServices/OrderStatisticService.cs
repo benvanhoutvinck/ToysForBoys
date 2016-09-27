@@ -51,33 +51,33 @@ namespace DataAccessLayer.Services
 
         }
 
-        public List<Order> GetFilteredOrderStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
+        public List<Order> GetFilteredOrderStatistics(List<Order> ordersFromGetOrderStatistics, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
         {
             var filteredOrders = new List<Order>();
-            var datesLeft = GetDateTimes(SortDateCompareLeft, orders);
-            var datesRight = GetDateTimes(SortDateCompareRight, orders);
+            var datesLeft = GetDateTimes(SortDateCompareLeft, ordersFromGetOrderStatistics);
+            var datesRight = GetDateTimes(SortDateCompareRight, ordersFromGetOrderStatistics);
 
             //Checken welke operator er wordt gebruikt (=, > of <)
-            for (int i = 0; i < orders.Count; i++)
+            for (int i = 0; i < ordersFromGetOrderStatistics.Count; i++)
             {
                 switch (DateCompareMode)
                 {
                     case '=':
                         if (datesLeft[i] == datesRight[i])
                         {
-                            filteredOrders.Add(orders[i]);
+                            filteredOrders.Add(ordersFromGetOrderStatistics[i]);
                         }
                         break;
                     case '<':
                         if (datesLeft[i] < datesRight[i])
                         {
-                            filteredOrders.Add(orders[i]);
+                            filteredOrders.Add(ordersFromGetOrderStatistics[i]);
                         }
                         break;
                     case '>':
                         if (datesLeft[i] > datesRight[i])
                         {
-                            filteredOrders.Add(orders[i]);
+                            filteredOrders.Add(ordersFromGetOrderStatistics[i]);
                         }
                         break;
                 }
@@ -104,105 +104,60 @@ namespace DataAccessLayer.Services
 
         public List<Order> GetOrderStatistics(OrderQuery orderQuery)
         {
-
-            var queryString = new StringBuilder();
-            queryString.Append("from order in entities.orders where ");
-
-            //toevoegen kiezen van soort datum uit enum als deze megegeven wordt als parameter
-            if (orderQuery.SortDateRange != null)
+            using (var entities = new toysforboysEntities())
             {
+                var query = entities.orders.Where(o => true);
                 switch ((int)orderQuery.SortDateRange)
                 {
                     case 0:
-                        queryString.Append("order.orderDate ");
+                        if (orderQuery.DateRangeStart!=null)
+                        {
+                            query = query.Where(o => o.orderDate > orderQuery.DateRangeStart);
+                        }
+
+                        if (orderQuery.DateRangeEnd!=null)
+                        {
+                            query = query.Where(o => o.orderDate < orderQuery.DateRangeEnd);
+                        }
                         break;
                     case 1:
-                        queryString.Append("order.requiredDate ");
+                        if (orderQuery.DateRangeStart != null)
+                        {
+                            query = query.Where(o => o.requiredDate > orderQuery.DateRangeStart);
+                        }
+
+                        if (orderQuery.DateRangeEnd != null)
+                        {
+                            query = query.Where(o => o.requiredDate < orderQuery.DateRangeEnd);
+                        }
                         break;
                     case 2:
-                        queryString.Append("order.shippedDate ");
+                        if (orderQuery.DateRangeStart != null)
+                        {
+                            query = query.Where(o => o.shippedDate > orderQuery.DateRangeStart);
+                        }
+
+                        if (orderQuery.DateRangeEnd != null)
+                        {
+                            query = query.Where(o => o.shippedDate < orderQuery.DateRangeEnd);
+                        }
                         break;
-
-                    default:
-                        break;
                 }
-            }
 
-            //checken of DateRangeStart is ingevuld
-            bool DateRangeUsed = false;
-            if (orderQuery.DateRangeStart != null)
-            {
-                queryString.Append("> " + orderQuery.DateRangeStart.ToString() + " ");
-                DateRangeUsed = true;
-            }
-
-            if (orderQuery.DateRangeEnd != null)
-            {
-                queryString.Append("< " + orderQuery.DateRangeEnd.ToString() + " ");
-                DateRangeUsed = true;
-            }
-
-            //checken of customer ID is ingevuld
-            bool customerIdUsed = false;
-            if (orderQuery.CustomerId != null)
-            {
-                if (DateRangeUsed == true)
+                if (orderQuery.CustomerId!=null)
                 {
-                    queryString.Append("&& ");
+                    query = query.Where(o => o.customerId == orderQuery.CustomerId);
                 }
 
-                queryString.Append("order.customerId == " + orderQuery.CustomerId + " ");
-                customerIdUsed = true;
-            }
-
-            //Checken of status is ingevuld
-            if (orderQuery.Status != string.Empty)
-            {
-                if (DateRangeUsed == true || customerIdUsed == true)
+                if (orderQuery.Status!=string.Empty)
                 {
-                    queryString.Append("&& ");
+                    query = query.Where(o => o.status == orderQuery.Status);
                 }
 
-                queryString.Append("order.status == " + orderQuery.Status + " ");
-            }
-
-
-            //effectieve query uitvoeren en list van orders teruggeven
-            queryString.Append("select order");
-
-            using (var entities = new toysforboysEntities())
-            {
-                var cmd = new SqlCommand(queryString.ToString());
-                var orders = new List<Order>();
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    Int32 orderIdPos = reader.GetOrdinal("id");
-                    Int32 orderDatePos = reader.GetOrdinal("orderDate");
-                    Int32 requiredDatePos = reader.GetOrdinal("requiredDate");
-                    Int32 shippedDatePos = reader.GetOrdinal("shippedDate");
-                    Int32 commentsPos = reader.GetOrdinal("comments");
-                    Int32 customerIdPos = reader.GetOrdinal("customerId");
-                    Int32 status = reader.GetOrdinal("status");
-
-                    while (reader.Read())
-                    {
-                        var order = new Order();
-                        order.id = Convert.ToInt32(reader.GetInt32(orderIdPos));
-                        order.orderDate = Convert.ToDateTime(reader.GetString(orderDatePos));
-                        order.requiredDate = Convert.ToDateTime(reader.GetString(requiredDatePos));
-                        order.shippedDate = Convert.ToDateTime(reader.GetString(shippedDatePos));
-                        order.comments = Convert.ToString(reader.GetString(commentsPos));
-                        order.customerId = Convert.ToInt32(reader.GetInt32(customerIdPos));
-                        order.status = Convert.ToString(reader.GetString(status));
-                        orders.Add(order);
-                    }
-
-                    return orders;
-                }
-
+                return query.ToList();
 
             }
+           
         }
 
         public List<Order> GetUrgentShippingDates(int days)

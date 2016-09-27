@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer;
 using DataAccessLayer.Services;
 using System.Collections.Generic;
+using DataAccessLayer.Queries;
 
 namespace Tests
 {
@@ -108,6 +109,13 @@ namespace Tests
 
             Assert.IsNotNull(admin.id);
         }
+
+        //[TestMethod]
+        //public void CustomerGetStatistics()
+        //{
+        //    var service = new CustomerStatisticService();
+        //    CustomerQuery cq = new CustomerQuery {State= }
+        //}
         
     }
 }
