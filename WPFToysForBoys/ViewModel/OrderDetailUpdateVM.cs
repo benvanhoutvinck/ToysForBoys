@@ -127,7 +127,7 @@ namespace WPFToysForBoys.ViewModel
                             {
                                 odService.Insert(new Orderdetail()
                                 {
-                                    orderId = ShowOrderdetail.orderId,
+                                    orderId = OrderdetailList[0].orderId, //ShowOrderdetail.orderId,
                                     productId = SelectedPProductI, // ShowOrderdetail.productId,
                                     quantityOrdered = ShowOrderdetail.quantityOrdered,
                                     priceEach = ShowOrderdetail.priceEach
@@ -145,7 +145,8 @@ namespace WPFToysForBoys.ViewModel
                             }
                             odList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
                             SelectedPProductI = SelectedPProductI;
-
+                           // OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
+                           // RefreshTab();
                         }
                         else
                             MessageBox.Show("Invalid product name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -188,6 +189,7 @@ namespace WPFToysForBoys.ViewModel
                 if (MessageBox.Show("You are about to delete a orderline from the database. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
                 {
                     odService.Delete(odService.GetById(ShowOrderdetail.orderId, ShowOrderdetail.productId));
+                    OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
                     ODNew();
                     RefreshTab();
                 }
