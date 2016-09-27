@@ -206,5 +206,16 @@ namespace DataAccessLayer.Services
                 }
             }                       
         }
+
+        public IEnumerable<Order> GetOrders(int customerId)
+        {
+            using (var entities = new toysforboysEntities())
+            {
+                var query = from order in entities.orders
+                            where order.customerId == customerId
+                            select order;
+                return query;
+            }
+        }
     }
 }

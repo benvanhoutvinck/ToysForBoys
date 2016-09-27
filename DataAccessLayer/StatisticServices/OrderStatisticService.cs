@@ -13,8 +13,45 @@ namespace DataAccessLayer.Services
 {
     public class OrderStatisticService : IOrderStatisticService
     {
+        public IEnumerable<int> GetDistinctYear(SortDateEnum sortDate)
+        {
+            List<int> list = new List<int>();
+            switch ((int)sortDate)
+            {
+                case 0:
+                    using (var entities = new toysforboysEntities())
+                    {
+                        var query = (from order in entities.orders
+                                     select order.orderDate.Value.Year);
 
-         public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
+                        list.AddRange(query);
+                    }
+                    break;
+                case 1:
+                    using (var entities = new toysforboysEntities())
+                    {
+                        var query = (from order in entities.orders
+                                     select order.requiredDate.Value.Year);
+
+                        list.AddRange(query);
+                    }
+                    break;
+                case 2:
+                    using (var entities = new toysforboysEntities())
+                    {
+                        var query = (from order in entities.orders
+                                     select order.shippedDate.Value.Year);
+
+                        list.AddRange(query);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return list.Distinct();
+        }
+
+        public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
         {
             var service = new OrderService();
             var orders = (List<Order>)service.GetAll();
@@ -60,6 +97,7 @@ namespace DataAccessLayer.Services
             //Checken welke operator er wordt gebruikt (=, > of <)
             for (int i = 0; i < ordersFromGetOrderStatistics.Count; i++)
             {
+                
                 switch (DateCompareMode)
                 {
                     case '=':
@@ -79,6 +117,8 @@ namespace DataAccessLayer.Services
                         {
                             filteredOrders.Add(ordersFromGetOrderStatistics[i]);
                         }
+                        break;
+                    default:
                         break;
                 }
             }
@@ -110,12 +150,12 @@ namespace DataAccessLayer.Services
                 switch ((int)orderQuery.SortDateRange)
                 {
                     case 0:
-                        if (orderQuery.DateRangeStart!=null)
+                        if (orderQuery.DateRangeStart != null)
                         {
                             query = query.Where(o => o.orderDate > orderQuery.DateRangeStart);
                         }
 
-                        if (orderQuery.DateRangeEnd!=null)
+                        if (orderQuery.DateRangeEnd != null)
                         {
                             query = query.Where(o => o.orderDate < orderQuery.DateRangeEnd);
                         }
@@ -142,22 +182,24 @@ namespace DataAccessLayer.Services
                             query = query.Where(o => o.shippedDate < orderQuery.DateRangeEnd);
                         }
                         break;
+                    default:
+                        break;
                 }
 
-                if (orderQuery.CustomerId!=null)
+                if (orderQuery.CustomerId != null)
                 {
                     query = query.Where(o => o.customerId == orderQuery.CustomerId);
                 }
 
-                if (orderQuery.Status!=string.Empty)
+                if (string.IsNullOrEmpty(orderQuery.Status))
                 {
                     query = query.Where(o => o.status == orderQuery.Status);
                 }
-
+                var result = query.ToList();
                 return query.ToList();
 
             }
-           
+
         }
 
         public List<Order> GetUrgentShippingDates(int days)
@@ -176,12 +218,7 @@ namespace DataAccessLayer.Services
             return orders;
         }
 
-        List<Order> IOrderStatisticService.GetByDistinctYear(SortDateEnum sortDate, int year)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Switch method
+       //Switch method
         private List<DateTime> GetDateTimes(SortDateEnum sortDateEnum, List<Order> orders)
         {
             List<DateTime> datetime = new List<DateTime>();
@@ -199,34 +236,13 @@ namespace DataAccessLayer.Services
                     case SortDateEnum.shippedDate:
                         datetime.Add(Convert.ToDateTime(order.shippedDate));
                         break;
+                    default:
+                        break;
                 }
             }
             return datetime;
         }
 
-        IEnumerable<int> IOrderStatisticService.GetDistinctYear(SortDateEnum sortDate)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Order> IOrderStatisticService.GetFilteredOrderStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Order> IOrderStatisticService.GetLateShippingDates()
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Order> IOrderStatisticService.GetOrderStatistics(OrderQuery orderQuery)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Order> IOrderStatisticService.GetUrgentShippingDates(int days)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
