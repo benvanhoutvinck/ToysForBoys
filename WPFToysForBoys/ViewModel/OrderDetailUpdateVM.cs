@@ -75,7 +75,7 @@ namespace WPFToysForBoys.ViewModel
                 {
                     SelectedPProductI = value.product.id;
                 }
-                RaisePropertyChanged("ShowProduct");
+                RaisePropertyChanged("ShowOrderdetail");
             }
         }
 
