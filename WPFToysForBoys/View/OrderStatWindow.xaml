@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:WPFToysForBoys.View"
         xmlns:global="clr-namespace:System.Globalization;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="OrderStatWindow" Height="1000" Width="1200">
-    <DockPanel Margin="10 5 10 20">
+        Title="OrderStatWindow" Height="800" Width="1400">
+    <DockPanel  LastChildFill="True"  Margin="10 5 10 20">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -18,8 +18,9 @@
                     <Label Content="Date: " VerticalContentAlignment="Center" Width="70"></Label>
                     <ComboBox Width="100" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
                     <Label Content=" From " VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50" Margin="50 0 0 0"></Label>
-                    <TextBox Text="{ Binding DateRangeStart}"></TextBox>
+                    <TextBox Text="{ Binding DateRangeStart}" Width="100" Margin="5 10"></TextBox>
                     <Label Content=" to " VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50"></Label>
+                    <TextBox Text="{ Binding DateRangeEnd}" Width="100" Margin="5 10"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
                     <Label Content="Customer" VerticalContentAlignment="Center"></Label>
@@ -27,17 +28,112 @@
                     <Label Content="Order Status" VerticalContentAlignment="Center" Margin="10 0"></Label>
                     <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
                 </StackPanel>
-                <!--<StackPanel Orientation="Horizontal">
-                    <Label Content="Where date type"></Label>
-                    <Label Content="comparison"></Label>
-                    
-                </StackPanel>-->
                 <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
-                    <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
-                    <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
-                    <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <Label Content="Where" VerticalContentAlignment="Center"></Label>
+                    <ComboBox Width="150" Margin="10 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <ComboBox Width="50" Margin="50 15 20 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <Label Content="than" VerticalContentAlignment="Center"></Label>
+                    <ComboBox Width="150" Margin="10 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
                 </StackPanel>
             </StackPanel>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="100 0 0 0">
+                    <Label Content="Quick Statistics" Width="250" Margin="5 0 5 20" HorizontalContentAlignment="Center" FontSize="18"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                            <Label Content="# Orders:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{ Binding OrderCount }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                            <Label Content="# Customers:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{ Binding CustomerCount }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                            <Label Content="% Disputed Orders:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{ Binding DisputedOrdersPercentage }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                            <Label Content="Disputed Orders:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{ Binding DisputedOrders }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                            <Label Content="Total Revenue:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{ Binding TotalRevenue }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                            <Label Content="Average Revenue:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{ Binding AverageRevenue }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                            <Label Content="Overdue Shipments:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{ Binding Shipments }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                            <Label Content="Cancelled Orders:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{ Binding Cancelled }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel>
+            <Grid Width="800" Height="500">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Width="800">
+                    <Grid Width="780" ShowGridLines="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <GridViewColumnHeader Grid.Column="0">Customer</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="1">Date Ordered</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="2">Date Required</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="3">Date Shipped</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="4">Status</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="5">Revenue</GridViewColumnHeader>
+                    </Grid>
+                </Label>
+                <ListBox Grid.Row="1" Grid.Column="0" Width="800" ItemsSource="{Binding OrderStatList}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="780" ShowGridLines="True">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Margin="5 0">Test1</Label>
+                                <Label Grid.Row="0" Grid.Column="1" Margin="5 0">Test2</Label>
+                                <Label Grid.Row="0" Grid.Column="2" Margin="5 0">Test3</Label>
+                                <Label Grid.Row="0" Grid.Column="3" Margin="5 0">Test4</Label>
+                                <Label Grid.Row="0" Grid.Column="4" Margin="5 0">Test5</Label>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </StackPanel>
     </DockPanel>
 </Window>

@@ -84,6 +84,7 @@ namespace DataAccessLayer.Services
                 }
 
             }
+
             return orders;
 
         }
@@ -144,54 +145,61 @@ namespace DataAccessLayer.Services
             using (var entities = new toysforboysEntities())
             {
                 var query = entities.orders.Where(o => true);
-                switch ((int)orderQuery.SortDateRange)
-                {
-                    case 0:
-                        if (orderQuery.DateRangeStart != null)
-                        {
-                            query = query.Where(o => o.orderDate > orderQuery.DateRangeStart);
-                        }
+                if (orderQuery.SortDateRange != null)
+                    switch ((int)orderQuery.SortDateRange)
+                    {
+                        case 0:
+                            if (orderQuery.DateRangeStart != null)
+                            {
+                                query = query.Where(o => o.orderDate > orderQuery.DateRangeStart);
+                            }
 
-                        if (orderQuery.DateRangeEnd != null)
-                        {
-                            query = query.Where(o => o.orderDate < orderQuery.DateRangeEnd);
-                        }
-                        break;
-                    case 1:
-                        if (orderQuery.DateRangeStart != null)
-                        {
-                            query = query.Where(o => o.requiredDate > orderQuery.DateRangeStart);
-                        }
+                            if (orderQuery.DateRangeEnd != null)
+                            {
+                                query = query.Where(o => o.orderDate < orderQuery.DateRangeEnd);
+                            }
+                            break;
+                        case 1:
+                            if (orderQuery.DateRangeStart != null)
+                            {
+                                query = query.Where(o => o.requiredDate > orderQuery.DateRangeStart);
+                            }
 
-                        if (orderQuery.DateRangeEnd != null)
-                        {
-                            query = query.Where(o => o.requiredDate < orderQuery.DateRangeEnd);
-                        }
-                        break;
-                    case 2:
-                        if (orderQuery.DateRangeStart != null)
-                        {
-                            query = query.Where(o => o.shippedDate > orderQuery.DateRangeStart);
-                        }
+                            if (orderQuery.DateRangeEnd != null)
+                            {
+                                query = query.Where(o => o.requiredDate < orderQuery.DateRangeEnd);
+                            }
+                            break;
+                        case 2:
+                            if (orderQuery.DateRangeStart != null)
+                            {
+                                query = query.Where(o => o.shippedDate > orderQuery.DateRangeStart);
+                            }
 
-                        if (orderQuery.DateRangeEnd != null)
-                        {
-                            query = query.Where(o => o.shippedDate < orderQuery.DateRangeEnd);
-                        }
-                        break;
-                }
+                            if (orderQuery.DateRangeEnd != null)
+                            {
+                                query = query.Where(o => o.shippedDate < orderQuery.DateRangeEnd);
+                            }
+                            break;
+                    }
 
                 if (orderQuery.CustomerId != null)
                 {
                     query = query.Where(o => o.customerId == orderQuery.CustomerId);
                 }
 
-                if (orderQuery.Status != string.Empty)
+                if (!string.IsNullOrEmpty(orderQuery.Status))
                 {
                     query = query.Where(o => o.status == orderQuery.Status);
                 }
 
-                return query.ToList();
+                List<Order> list = new List<Order>();
+                list.AddRange(query);
+
+                if (orderQuery.SortDateCompareLeft != null && orderQuery.SortDateCompareRight != null && orderQuery.DateCompareMode != null)
+                    list = GetFilteredOrderStatistics(query.ToList(), (SortDateEnum) orderQuery.SortDateCompareLeft, (char) orderQuery.DateCompareMode, (SortDateEnum)orderQuery.SortDateCompareRight);
+
+                return list;
 
             }
 
@@ -252,11 +260,6 @@ namespace DataAccessLayer.Services
         }
 
         List<Order> IOrderStatisticService.GetLateShippingDates()
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Order> IOrderStatisticService.GetOrderStatistics(OrderQuery orderQuery)
         {
             throw new NotImplementedException();
         }

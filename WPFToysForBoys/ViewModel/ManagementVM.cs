@@ -96,6 +96,19 @@ namespace WPFToysForBoys.ViewModel
             countryview.Show();
         }
 
+        public RelayCommand OrderStatCommand
+        {
+            get { return new RelayCommand(OrderStatC); }
+        }
+
+        private void OrderStatC()
+        {
+            View.OrderStatWindow orderview = new View.OrderStatWindow();
+            ViewModel.OrderStatVM ovm = new OrderStatVM();
+            orderview.DataContext = ovm;
+            orderview.Show();
+        }
+
         public RelayCommand NotImplementedCommand
         {
             get { return new RelayCommand(NotImplementedC); }

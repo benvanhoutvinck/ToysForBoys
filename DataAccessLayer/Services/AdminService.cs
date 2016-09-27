@@ -47,6 +47,7 @@ namespace DataAccessLayer.Services
         {
             using (var entities = new toysforboysEntities())
             {
+                entities.admins.Attach(admin);
                 entities.admins.Remove(admin);
                 entities.SaveChanges();
             }
