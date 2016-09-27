@@ -80,7 +80,7 @@ namespace DataAccessLayer.Services
             {
                 if (quantityUsed)
                 {
-                    queryString.Append("and where ");
+                    queryString.Append("&& ");
                 }
                 queryString.Append("product.buyPrice > " + productQuery.minPrice + " ");
                 minPriceUsed = true;
@@ -91,7 +91,7 @@ namespace DataAccessLayer.Services
             {
                 if (quantityUsed || minPriceUsed)
                 {
-                    queryString.Append("and where ");
+                    queryString.Append("&& ");
                 }
 
                 queryString.Append("product.buyPrice < " + productQuery.maxPrice + " ");
@@ -102,7 +102,7 @@ namespace DataAccessLayer.Services
             {
                 if (maxPriceUsed || minPriceUsed || quantityUsed)
                 {
-                    queryString.Append("and where ");
+                    queryString.Append("&& ");
                 }
 
                 queryString.Append("product.active == " + productQuery.active + " ");
