@@ -78,7 +78,7 @@ namespace DataAccessLayer
 
         public List<Customer> GetCustomerStatistics(CustomerQuery customerQuery)
         {
-            using (var entities = new toysforboysEntities)
+            using (var entities = new toysforboysEntities())
             {
                 var query = entities.customers.Where(c=>true);
                 if (customerQuery.State != string.Empty)
@@ -100,7 +100,7 @@ namespace DataAccessLayer
                 {
                     query = query.Where(c => c.countryId == customerQuery.CountryId);
                 }
-                return query;
+                return query.ToList();
             }
            
             

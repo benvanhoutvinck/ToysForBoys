@@ -15,9 +15,6 @@ namespace DataAccessLayer.Interfaces
         //Veiligste is om 0, 1 of 2 als waarde mee te geven bij SortDateEnum
         List<Order> GetFilteredOrderStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight);
 
-
-
-        IEnumerable<int> GetDistinctYear(SortDateEnum sortDate);
         List<Order> GetByDistinctYear(SortDateEnum sortDate, int year);
 
         List<Order> GetLateShippingDates();
