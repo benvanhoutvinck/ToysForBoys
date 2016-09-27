@@ -72,11 +72,11 @@ namespace DataAccessLayer.Services
                     queryString.Append("and where ");
                 }
 
-                queryString.Append("product.active =")
+                queryString.Append("product.active =");
             }
-            
 
 
+            return null;
         }
 
         

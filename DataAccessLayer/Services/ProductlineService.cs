@@ -97,10 +97,5 @@ namespace DataAccessLayer.Services
 
             return AllProductlines;
         }
-
-        public int GetCountSold(int productlineID)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
