@@ -9,6 +9,15 @@ namespace Tests
     [TestClass]
     public class UnitTest1
     {
+        [TestMethod]
+        public void testGetDistinctYear()
+        {
+            OrderStatisticService service = new OrderStatisticService();
+            List<Order> list = service.GetByDistinctYear(SortDateEnum.orderDate, 2003);
+
+
+            Assert.IsTrue(list.Count != 0);
+        }
         
             [TestMethod]
         public void CustomerInsert()

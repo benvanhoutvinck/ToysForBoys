@@ -13,10 +13,11 @@ namespace DataAccessLayer.Services
 {
     public class OrderStatisticService : IOrderStatisticService
     {
-        public List<Order> GetDistinctYear(SortDateEnum sortDate, int year)
+       public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
         {
             var service = new OrderService();
             var orders = (List<Order>)service.GetAll();
+            var ordersOfYear = new List<Order>();
 
             foreach (var ord in orders)
             {
@@ -25,21 +26,21 @@ namespace DataAccessLayer.Services
                     case 0:
                         if (ord.orderDate.Value.Year == year)
                         {
-                            orders.Add(ord);
+                            ordersOfYear.Add(ord);
                         }
                         break;
 
                     case 1:
                         if (ord.requiredDate.Value.Year == year)
                         {
-                            orders.Add(ord);
+                            ordersOfYear.Add(ord);
                         }
                         break;
 
                     case 2:
                         if (ord.shippedDate.Value.Year == year)
                         {
-                            orders.Add(ord);
+                            ordersOfYear.Add(ord);
                         }
                         break;
                 }
@@ -175,7 +176,7 @@ namespace DataAccessLayer.Services
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    
+                    Int32 orderIdPos = reader.GetOrdinal("id");
                     Int32 orderDatePos = reader.GetOrdinal("orderDate");
                     Int32 requiredDatePos = reader.GetOrdinal("requiredDate");
                     Int32 shippedDatePos = reader.GetOrdinal("shippedDate");
@@ -186,6 +187,7 @@ namespace DataAccessLayer.Services
                     while (reader.Read())
                     {
                         var order = new Order();
+                        order.id = Convert.ToInt32(reader.GetInt32(orderIdPos));
                         order.orderDate = Convert.ToDateTime(reader.GetString(orderDatePos));
                         order.requiredDate = Convert.ToDateTime(reader.GetString(requiredDatePos));
                         order.shippedDate = Convert.ToDateTime(reader.GetString(shippedDatePos));
