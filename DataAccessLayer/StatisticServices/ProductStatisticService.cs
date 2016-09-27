@@ -129,6 +129,53 @@ namespace DataAccessLayer.Services
             }
         }
 
+        public BestSoldProduct GetBestSoldProduct(int productId, int productlineId)
+        {
+        
+            using (var entities = new toysforboysEntities())
+            {
+                var orderdetailsSorted = (List<Orderdetail>)(from od in entities.orderdetails
+                                         orderby od.productId
+                                         select od);
+
+                var totals = new List<int>();
+                var totalsIndex = 0;
+                int lastId = 1;
+                int highestId = 0;
+
+                for (int i = 0; i < orderdetailsSorted.Count(); i++)
+                {
+                    
+                    if (lastId != orderdetailsSorted[i].productId)
+                    {
+                        totalsIndex++;
+                    }
+
+                    totals[totalsIndex] += orderdetailsSorted[i].quantityOrdered.Value;
+
+                    if (highestId<totals[totalsIndex])
+                    {
+                        highestId = orderdetailsSorted[i].productId;
+                    }
+
+                    lastId = orderdetailsSorted[i].productId;
+
+                }
+
+                var service = new ProductService();
+                BestSoldProduct bestSold = (BestSoldProduct)service.GetById(highestId);
+                bestSold.QuantityOrdered = totals[bestSold.id-1];
+
+                return bestSold;
+            }
+            
+
+
+            
+        }
+
+
+
         
     }
 }
