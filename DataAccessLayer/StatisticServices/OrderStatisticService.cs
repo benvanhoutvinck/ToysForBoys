@@ -221,6 +221,11 @@ namespace DataAccessLayer.Services
             return orders;
         }
 
+        List<Order> IOrderStatisticService.GetByDistinctYear(SortDateEnum sortDate, int year)
+        {
+            throw new NotImplementedException();
+        }
+
         //Switch method
         private List<DateTime> GetDateTimes(SortDateEnum sortDateEnum, List<Order> orders)
         {
@@ -242,6 +247,31 @@ namespace DataAccessLayer.Services
                 }
             }
             return datetime;
+        }
+
+        IEnumerable<int> IOrderStatisticService.GetDistinctYear(SortDateEnum sortDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Order> IOrderStatisticService.GetFilteredOrderStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Order> IOrderStatisticService.GetLateShippingDates()
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Order> IOrderStatisticService.GetOrderStatistics(OrderQuery orderQuery)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Order> IOrderStatisticService.GetUrgentShippingDates(int days)
+        {
+            throw new NotImplementedException();
         }
     }
 }
