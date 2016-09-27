@@ -15,16 +15,40 @@ namespace DataAccessLayer.Services
     {
         public IEnumerable<int> GetDistinctYear(SortDateEnum sortDate)
         {
-            using (var entities = new toysforboysEntities())
+            List<int> list = new List<int>();
+            
+            switch ((int)sortDate)
             {
-                IQueryable<int> query = (from order in entities.orders
-                             select order.orderDate.Value.Year);
+                case 0:
+                    using (var entities = new toysforboysEntities())
+                    {
+                        IQueryable<int> query = (from order in entities.orders
+                                                 select order.orderDate.Value.Year);
 
-                List<int> list = new List<int>();
-                list.AddRange(query);
-
-                return list.Distinct();
+                        list.AddRange(query);
+                    }
+                    break;
+                case 1:
+                    using (var entities = new toysforboysEntities())
+                    {
+                        IQueryable<int> query = (from order in entities.orders
+                                                 select order.requiredDate.Value.Year);
+                       
+                        list.AddRange(query);
+                    }
+                    break;
+                case 2:
+                    using (var entities = new toysforboysEntities())
+                    {
+                        IQueryable<int> query = (from order in entities.orders
+                                                 select order.shippedDate.Value.Year);
+                        
+                        list.AddRange(query);
+                    }
+                    break;
             }
+
+            return list.Distinct();
         }
 
         public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
