@@ -61,8 +61,12 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
+    <Compile Include="Enums\SortQuantityEnum.cs" />
     <Compile Include="Interfaces\IAdminService.cs" />
-    <Compile Include="Interfaces\IStatisticService.cs" />
+    <Compile Include="Interfaces\ICustomerStatisticService.cs" />
+    <Compile Include="Interfaces\IOrderdetailsStatisticService.cs" />
+    <Compile Include="Interfaces\IOrderStatisticService.cs" />
+    <Compile Include="Interfaces\IProductStatisticService.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
@@ -70,13 +74,16 @@
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderedProduct.cs" />
-    <Compile Include="OrderQuery.cs" />
+    <Compile Include="Queries\CustomerQuery.cs" />
+    <Compile Include="Queries\OrderdetailsQuery.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="Productline.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
+    <Compile Include="Queries\OrderQuery.cs" />
+    <Compile Include="Queries\ProductQuery.cs" />
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
@@ -91,8 +98,11 @@
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductlineService.cs" />
     <Compile Include="Services\ProductService.cs" />
-    <Compile Include="Services\StatisticService.cs" />
-    <Compile Include="SortDateEnum.cs" />
+    <Compile Include="StatisticServices\CustomerStatisticService.cs" />
+    <Compile Include="StatisticServices\OrderdetailsStatisticService.cs" />
+    <Compile Include="StatisticServices\OrderStatisticService.cs" />
+    <Compile Include="Enums\SortDateEnum.cs" />
+    <Compile Include="StatisticServices\ProductStatisticService.cs" />
     <Compile Include="ToysForBoys.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

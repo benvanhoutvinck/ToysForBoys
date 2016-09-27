@@ -13,7 +13,9 @@ namespace DataAccessLayer
         public DateTime? DateRangeEnd { get; set; }
         public int? CustomerId { get; set; }
         public string Status { get; set; }
+        public SortDateEnum? SortDateCompareLeft { get; set; }
+        public char? DateCompareMode { get; set; }
+        public SortDateEnum? SortDateCompareRight { get; set; }
 
-        
     }
 }

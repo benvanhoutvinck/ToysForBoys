@@ -7,17 +7,18 @@
         mc:Ignorable="d"
         Title="Register Account" Height="400" Width="350">
     <StackPanel HorizontalAlignment="Center">
-        <StackPanel Orientation="Horizontal" Margin="25 30 25 0">
+        <StackPanel Orientation="Horizontal" Margin="25 30 25 20">
             <Label Content="Username:" Width="100" Margin="0 20"></Label>
             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20" Name="usernameBox"></TextBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+        <StackPanel Orientation="Horizontal" Margin="25 0 25 0">
             <Label Content="New password:" Width="100" Margin="0 20"></Label>
-            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20" Name="newPasswordBox"></PasswordBox>
+            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20" MaxLength="24" Name="newPasswordBox"></PasswordBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+        <Label Content="(password must be between 6 and 24 characters)" Margin="20 0"/>
+        <StackPanel Orientation="Horizontal" Margin="25 5 25 0">
             <Label Content="Verify password:" Width="100" Margin="0 20"></Label>
-            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20" Name="verifyPasswordBox"></PasswordBox>
+            <PasswordBox IsEnabled="True" VerticalContentAlignment="Center" Width="150" Margin="0 20" MaxLength="24" Name="verifyPasswordBox"></PasswordBox>
         </StackPanel>
         <Button Content="Register account" Margin="25 20 25 10" Click="RegisterAccount" IsDefault="True"></Button>
         <Button Content="Cancel" Margin="25 0 25 0" Click="Cancel"></Button>

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPFToysForBoys.Mock;
 using WPFToysForBoys.Model;
 
 namespace WPFToysForBoys.ViewModel
@@ -14,28 +15,38 @@ namespace WPFToysForBoys.ViewModel
     public class ProductStatVM : ViewModelBase
     {
         public IProductlineService plService;
-        public IProductService pService;
-        public IOrderdetailsService odService;
-        public IOrderService oService;
+        public IProductStatisticService pService;
+        public IOrderStatisticService oService;
 
         public ProductStatVM()
         {
             plService = new ProductlineService();
-            pService = new ProductService();
-            odService = new OrderdetailService();
-            oService = new OrderService();
+            pService = new ProductStatisticService();
+            oService = new OrderStatMock();
 
             {
                 List<YearStruct> yl = new List<YearStruct>() { new YearStruct() { year = -1, display = "---All---" } };
 
-                //List<int> year = oService.GetYear().ToList();
-                //foreach (int y in year)
-                //    yl.Add(new YearStruct() { year = y, display = "--" + y.ToString() + "--" });
+                List<int> year = oService.GetDistinctYear(SortDateEnum.orderDate).ToList();
+                year.Sort();
+                foreach (int y in year)
+                    yl.Add(new YearStruct() { year = y, display = "--" + y.ToString() + "--" });
 
-                //YearList = yl;
+                YearList = yl;
             }
 
             MonthList = new List<MonthStruct>() { new MonthStruct() { month = -1, display = "All" }, new MonthStruct() { month = 1, display = "January" }, new MonthStruct() { month = 2, display = "February" }, new MonthStruct() { month = 3, display = "March" }, new MonthStruct() { month = 4, display = "April" }, new MonthStruct() { month = 5, display = "May" }, new MonthStruct() { month = 6, display = "June" }, new MonthStruct() { month = 7, display = "July" }, new MonthStruct() { month = 8, display = "August" }, new MonthStruct() { month = 9, display = "September" }, new MonthStruct() { month = 10, display = "October" }, new MonthStruct() { month = 11, display = "November" }, new MonthStruct() { month = 12, display = "December" } };
+
+            {
+                List<ProductStatStruct> pList = new List<ProductStatStruct>();
+
+                foreach (Productline pl in plService.GetAll())
+                {
+                    pList.Add(new ProductStatStruct() { id = pl.id, name = pl.name, countProductsSold = 0 });
+                }
+
+                ProductlineList = pList;
+            }
 
             SelectedMonth = -1;
             SelectedYear = -1;
@@ -44,9 +55,12 @@ namespace WPFToysForBoys.ViewModel
         private void ProductlineListRefresh()
         {
             List<ProductStatStruct> prod = ProductlineList;
-
-            //foreach (ProductStatStruct p in prod)
-            //    p.countProductsSold = plService.GetCountSold(p.id);
+            try
+            {
+                foreach (ProductStatStruct p in prod)
+                    p.countProductsSold = pService.GetCountSold(p.id, SelectedYear);
+            }
+            catch (NotImplementedException) { }
 
             ProductlineList = prod;
         }
@@ -58,8 +72,8 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 selectedYear = value;
-                ProductlineListRefresh();
                 RaisePropertyChanged("SelectedYear");
+                ProductlineListRefresh();
             }
         }
 
@@ -70,8 +84,8 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 selectedMonth = value;
-                ProductlineListRefresh();
                 RaisePropertyChanged("SelectedMonth");
+                ProductlineListRefresh();
             }
         }
 
