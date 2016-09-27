@@ -18,7 +18,7 @@
                             <Label Content="Price" Width="80" HorizontalContentAlignment="Center"/>
                             <Label Content="Quantity" Width="80" HorizontalContentAlignment="Center"/>
                         </StackPanel>
-                    <ListBox Height="375" Width="395" Margin="25 5 25 10" ItemsSource="{Binding OrderDetailList}" SelectedItem="{Binding SelectedOrderDetail}">
+                    <ListBox Height="375" Width="395" Margin="25 5 25 10" ItemsSource="{Binding OrderdetailList}" SelectedItem="{Binding SelectedOrderDetail}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                     <Grid Width="360">
