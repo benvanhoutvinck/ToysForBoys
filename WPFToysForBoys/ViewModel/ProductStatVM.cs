@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPFToysForBoys.Mock;
 using WPFToysForBoys.Model;
 
 namespace WPFToysForBoys.ViewModel
@@ -21,7 +22,7 @@ namespace WPFToysForBoys.ViewModel
         {
             plService = new ProductlineService();
             pService = new ProductStatisticService();
-            oService = new OrderStatisticService();
+            oService = new OrderStatMock();
 
             {
                 List<YearStruct> yl = new List<YearStruct>() { new YearStruct() { year = -1, display = "---All---" } };
@@ -71,8 +72,8 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 selectedYear = value;
-                ProductlineListRefresh();
                 RaisePropertyChanged("SelectedYear");
+                ProductlineListRefresh();
             }
         }
 
@@ -83,8 +84,8 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 selectedMonth = value;
-                ProductlineListRefresh();
                 RaisePropertyChanged("SelectedMonth");
+                ProductlineListRefresh();
             }
         }
 
