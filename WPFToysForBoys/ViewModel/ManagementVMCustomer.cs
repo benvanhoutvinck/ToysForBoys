@@ -79,7 +79,7 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
-           
+
 
 
 
@@ -91,36 +91,47 @@ namespace WPFToysForBoys.ViewModel
         {
             try
             {
-                if (!IdChecker.IdCheck(ccustomerList, ShowCustomer))
-                {
-                    cService.Insert(new Customer()
-                    {
-                        name = ShowCustomer.name,
-                        city = ShowCustomer.city,
-                        countryId = SelectedCCountryI,
-                        postalCode = ShowCustomer.postalCode,
-                        state = ShowCustomer.state,
-                        streetAndNumber = ShowCustomer.streetAndNumber,
-                        email = ShowCustomer.email
-                    });
-                    SelectedCCountryI = SelectedCCountryI;
-                    //ProductList.Add(ShowProduct);
-                }
+
+                if (SelectedCCountryI >= 1)
+                    if ((ShowCustomer.postalCode == null || ShowCustomer.postalCode == string.Empty) && (ShowCustomer.streetAndNumber == null || ShowCustomer.streetAndNumber == string.Empty) && (ShowCustomer.city == null || ShowCustomer.city == string.Empty))
+                        if (ShowCustomer.name != null)
+                            if (!IdChecker.IdCheck(ccustomerList, ShowCustomer))
+                            {
+                                cService.Insert(new Customer()
+                                {
+                                    name = ShowCustomer.name,
+                                    city = ShowCustomer.city,
+                                    countryId = SelectedCCountryI,
+                                    postalCode = ShowCustomer.postalCode,
+                                    state = ShowCustomer.state,
+                                    streetAndNumber = ShowCustomer.streetAndNumber,
+                                    email = ShowCustomer.email
+                                });
+                                SelectedCCountryI = SelectedCCountryI;
+                                //ProductList.Add(ShowProduct);
+                            }
+                            else
+                            {
+                                cService.Edit(new Customer()
+                                {
+                                    id = ShowCustomer.id,
+                                    name = ShowCustomer.name,
+                                    city = ShowCustomer.city,
+                                    countryId = SelectedCCountryI,
+                                    postalCode = ShowCustomer.postalCode,
+                                    state = ShowCustomer.state,
+                                    streetAndNumber = ShowCustomer.streetAndNumber,
+                                    email = ShowCustomer.email
+                                });
+                                SelectedCCountryI = SelectedCCountryI;
+                            }
+
+                        else
+                            MessageBox.Show("Invalid customer name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    else
+                        MessageBox.Show("Invalid Adress !", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 else
-                {
-                    cService.Edit(new Customer()
-                    {
-                        id = ShowCustomer.id,
-                        name = ShowCustomer.name,
-                        city = ShowCustomer.city,
-                        countryId = SelectedCCountryI,
-                        postalCode = ShowCustomer.postalCode,
-                        state = ShowCustomer.state,
-                        streetAndNumber = ShowCustomer.streetAndNumber,
-                        email = ShowCustomer.email
-                    });
-                    SelectedCCountryI = SelectedCCountryI;
-                }
+                    MessageBox.Show("No country selected for your customer", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             catch (ArgumentException e)
             {

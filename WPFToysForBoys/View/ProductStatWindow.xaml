@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToysForBoys.View"
         mc:Ignorable="d"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:gala="http://www.galasoft.ch/mvvmlight"
         Title="ProductStatWindow" Height="1000" Width="1000">
     <StackPanel Orientation="Horizontal">
         <StackPanel Width="450">
@@ -15,7 +17,8 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="Year:" VerticalAlignment="Center" Margin="25 0"></TextBlock>
-                    <ComboBox Width="100" Margin="0 15" HorizontalContentAlignment="Center" ItemsSource="{Binding YearList}" DisplayMemberPath="display" SelectedValue="{Binding SelectedYear}" SelectedValuePath="year"></ComboBox>
+                    <ComboBox Width="100" Margin="0 15" HorizontalContentAlignment="Center" ItemsSource="{Binding YearList}" DisplayMemberPath="display" SelectedValue="{Binding SelectedYear}" SelectedValuePath="year">
+                    </ComboBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="400" Margin="0 5 0 0">

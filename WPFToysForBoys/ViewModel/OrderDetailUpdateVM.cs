@@ -18,8 +18,12 @@ namespace WPFToysForBoys.ViewModel
     public class OrderDetailUpdateVM : ViewModelBase
     {
 
+        //private IOrderdetailsService odService;
+        private IProductService pService;
         private IOrderdetailsService odService;
+
         private List<Orderdetail> orderdetailList;
+        private List<Orderdetail> odList;
         public List<Orderdetail> OrderdetailList
         {
             get { return orderdetailList; }
@@ -32,8 +36,15 @@ namespace WPFToysForBoys.ViewModel
 
         public OrderDetailUpdateVM(List<Orderdetail> nOrderdetailList)
         {
-            odService = new OrderdetailService();
+            //odService = new OrderdetailService();
             OrderdetailList = nOrderdetailList;
+            pService = new ProductService();
+            odService = new OrderdetailService();
+            odList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(nOrderdetailList[0].orderId));
+            PProductList = new List<Product>() { new Product() { id = -1, name = "All" } };
+            PProductList = pService.GetAll("productline").ToList();
+            //SelectedProduct = ProductList.First();
+            SelectedPProductI = -1;
         }
 
 
@@ -57,9 +68,6 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
-
-
-
         private Orderdetail showOrderdetail;
         public Orderdetail ShowOrderdetail
         {
@@ -75,7 +83,7 @@ namespace WPFToysForBoys.ViewModel
                 {
                     SelectedPProductI = value.product.id;
                 }
-                RaisePropertyChanged("ShowProduct");
+                RaisePropertyChanged("ShowOrderdetail");
             }
         }
 
@@ -86,10 +94,21 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 selectedPProductI = value;
-                RaisePropertyChanged("SelectedPProductlineI");
+                RaisePropertyChanged("SelectedPProductI");
             }
         }
 
+
+        private List<Product> pProductList;
+        public List<Product> PProductList
+        {
+            get { return pProductList; }
+            set
+            {
+                pProductList = value;
+                RaisePropertyChanged("PProductList");
+            }
+        }
 
         public RelayCommand ODAddCommand
         {
@@ -104,11 +123,12 @@ namespace WPFToysForBoys.ViewModel
                     if ((ShowOrderdetail.priceEach == null || ShowOrderdetail.priceEach > 0) && (ShowOrderdetail.quantityOrdered == null || ShowOrderdetail.quantityOrdered >= 0))
                         if (ShowOrderdetail.productId != 0)//null)
                         {
-                            if (!IdChecker.IdCheck(orderdetailList, ShowOrderdetail))
+                            if (!IdChecker.IdCheck(odList, ShowOrderdetail))
                             {
                                 odService.Insert(new Orderdetail()
                                 {
-                                    productId= ShowOrderdetail.productId,
+                                    orderId = OrderdetailList[0].orderId, //ShowOrderdetail.orderId,
+                                    productId = SelectedPProductI, // ShowOrderdetail.productId,
                                     quantityOrdered = ShowOrderdetail.quantityOrdered,
                                     priceEach = ShowOrderdetail.priceEach
                                 });
@@ -117,13 +137,16 @@ namespace WPFToysForBoys.ViewModel
                             {
                                 odService.Edit(new Orderdetail()
                                 {
-                                    productId = ShowOrderdetail.productId,
+                                    orderId = ShowOrderdetail.orderId,
+                                    productId = SelectedPProductI, // ShowOrderdetail.productId,
                                     quantityOrdered = ShowOrderdetail.quantityOrdered,
                                     priceEach = ShowOrderdetail.priceEach
                                 });
                             }
+                            odList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
                             SelectedPProductI = SelectedPProductI;
-
+                           // OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
+                           // RefreshTab();
                         }
                         else
                             MessageBox.Show("Invalid product name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -148,9 +171,9 @@ namespace WPFToysForBoys.ViewModel
             {
                 if (IdChecker.IdCheck(orderdetailList, ShowOrderdetail))
                 {
-                    if (MessageBox.Show("You are about to delete a modified item. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("You are about to delete a modified orderline. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
                     {
-                        odService.Delete(odService.GetById(ShowOrderdetail.orderId,ShowOrderdetail.productId));
+                        odService.Delete(odService.GetById(ShowOrderdetail.orderId, ShowOrderdetail.productId));
                         ODNew();
                         RefreshTab();
                     }
@@ -163,9 +186,10 @@ namespace WPFToysForBoys.ViewModel
             }
             catch (ArgumentException)
             {
-                if (MessageBox.Show("You are about to delete a product from the database. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
+                if (MessageBox.Show("You are about to delete a orderline from the database. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
                 {
                     odService.Delete(odService.GetById(ShowOrderdetail.orderId, ShowOrderdetail.productId));
+                    OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
                     ODNew();
                     RefreshTab();
                 }

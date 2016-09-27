@@ -90,6 +90,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IdChecker.cs" />
+    <Compile Include="Mock\OrderStatMock.cs" />
+    <Compile Include="Mock\ProductStatisticServiceMock.cs" />
     <Compile Include="Model\ProductStatStruct.cs" />
     <Compile Include="ViewModel\CountryCustomerVM.cs" />
     <Compile Include="ViewModel\ManagementVM.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="ViewModel\ManagementVMProductline.cs" />
     <Compile Include="ViewModel\OrderDetailUpdateVM.cs" />
     <Compile Include="ViewModel\OrderDetailVM.cs" />
+    <Compile Include="ViewModel\OrderStatVM.cs" />
     <Compile Include="ViewModel\ProductStatVM.cs" />
     <Compile Include="View\CustomerCountryStatWindow.xaml.cs">
       <DependentUpon>CustomerCountryStatWindow.xaml</DependentUpon>
