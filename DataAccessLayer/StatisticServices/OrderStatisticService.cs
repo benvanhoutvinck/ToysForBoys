@@ -13,44 +13,6 @@ namespace DataAccessLayer.Services
 {
     public class OrderStatisticService : IOrderStatisticService
     {
-        public IEnumerable<int> GetDistinctYear(SortDateEnum sortDate)
-        {
-            List<int> list = new List<int>();
-            
-            switch ((int)sortDate)
-            {
-                case 0:
-                    using (var entities = new toysforboysEntities())
-                    {
-                        IQueryable<int> query = (from order in entities.orders
-                                                 select order.orderDate.Value.Year);
-
-                        list.AddRange(query);
-                    }
-                    break;
-                case 1:
-                    using (var entities = new toysforboysEntities())
-                    {
-                        IQueryable<int> query = (from order in entities.orders
-                                                 select order.requiredDate.Value.Year);
-                       
-                        list.AddRange(query);
-                    }
-                    break;
-                case 2:
-                    using (var entities = new toysforboysEntities())
-                    {
-                        IQueryable<int> query = (from order in entities.orders
-                                                 select order.shippedDate.Value.Year);
-                        
-                        list.AddRange(query);
-                    }
-                    break;
-            }
-
-            return list.Distinct();
-        }
-
         public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
         {
             var service = new OrderService();
@@ -185,7 +147,7 @@ namespace DataAccessLayer.Services
             {
                 if (DateRangeUsed == true)
                 {
-                    queryString.Append("and where ");
+                    queryString.Append("&& ");
                 }
 
                 queryString.Append("order.customerId == " + orderQuery.CustomerId + " ");
@@ -197,7 +159,7 @@ namespace DataAccessLayer.Services
             {
                 if (DateRangeUsed == true || customerIdUsed == true)
                 {
-                    queryString.Append("and where ");
+                    queryString.Append("&& ");
                 }
 
                 queryString.Append("order.status == " + orderQuery.Status + " ");
