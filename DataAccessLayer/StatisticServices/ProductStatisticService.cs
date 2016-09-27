@@ -120,6 +120,7 @@ namespace DataAccessLayer.Services
                 {
                     query = query.Where(p => p.active == productQuery.active);
                 }
+                
 
                 return query.ToList();
             }

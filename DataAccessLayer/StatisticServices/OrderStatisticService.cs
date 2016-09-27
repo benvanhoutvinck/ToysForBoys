@@ -190,7 +190,7 @@ namespace DataAccessLayer.Services
                 {
                     query = query.Where(o => o.status == orderQuery.Status);
                 }
-
+                var result = query.ToList();
                 return query.ToList();
 
             }

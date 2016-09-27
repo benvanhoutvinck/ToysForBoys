@@ -31,5 +31,7 @@ namespace DataAccessLayer.Interfaces
 
         void ChangePassword(string email, string oldPassword, string newPassword);
         //throws exception if email is already in use
+
+        IEnumerable<Order> GetOrders(int customerId);
     }
 }
