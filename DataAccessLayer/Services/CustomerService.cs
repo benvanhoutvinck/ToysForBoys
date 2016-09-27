@@ -72,6 +72,13 @@ namespace DataAccessLayer.Services
 
                 if(customer.postalCode!=string.Empty)
                     originalCustomer.postalCode = customer.postalCode;
+
+                if (customer.email!=string.Empty)                
+                    originalCustomer.email = customer.email;
+
+                if (customer.password != string.Empty)
+                    originalCustomer.password = customer.password;
+                
                 
                 originalCustomer.countryId = customer.countryId;
 
