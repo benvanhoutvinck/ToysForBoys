@@ -175,7 +175,7 @@ namespace DataAccessLayer.Services
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    
+                    Int32 orderIdPos = reader.GetOrdinal("id");
                     Int32 orderDatePos = reader.GetOrdinal("orderDate");
                     Int32 requiredDatePos = reader.GetOrdinal("requiredDate");
                     Int32 shippedDatePos = reader.GetOrdinal("shippedDate");
@@ -186,6 +186,7 @@ namespace DataAccessLayer.Services
                     while (reader.Read())
                     {
                         var order = new Order();
+                        order.id = Convert.ToInt32(reader.GetInt32(orderIdPos));
                         order.orderDate = Convert.ToDateTime(reader.GetString(orderDatePos));
                         order.requiredDate = Convert.ToDateTime(reader.GetString(requiredDatePos));
                         order.shippedDate = Convert.ToDateTime(reader.GetString(shippedDatePos));
