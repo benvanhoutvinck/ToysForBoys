@@ -100,7 +100,10 @@ namespace DataAccessLayer.Services
                         {
                             query = query.Where(p => p.quantityInOrder <= productQuery.maximumQuantity);
                         }
-                        break;                  
+                        break;
+                    default:
+                        break;
+                                     
 
                 }
 
