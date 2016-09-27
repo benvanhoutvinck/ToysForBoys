@@ -13,6 +13,7 @@ namespace DataAccessLayer.Services
 {
     public class OrderStatisticService : IOrderStatisticService
     {
+
          public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
         {
             var service = new OrderService();
