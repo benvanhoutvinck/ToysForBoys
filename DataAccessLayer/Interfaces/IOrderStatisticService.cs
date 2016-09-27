@@ -16,7 +16,7 @@ namespace DataAccessLayer.Interfaces
         List<Order> GetFilteredOrderStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight);
 
 
-        IEnumerable<int> GetDistinctYear(SortDateEnum sortDate);
+        
         List<Order> GetByDistinctYear(SortDateEnum sortDate, int year);
 
         List<Order> GetLateShippingDates();

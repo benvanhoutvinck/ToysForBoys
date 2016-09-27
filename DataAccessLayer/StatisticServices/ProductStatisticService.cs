@@ -11,9 +11,36 @@ namespace DataAccessLayer.Services
 {
     public class ProductStatisticService : IProductStatisticService
     {
-        public int GetCountSold(int ProductlineID, int Year = -1)
+        public int GetCountSold(int productlineID, int year)
         {
-            throw new NotImplementedException();
+            using(var entities = new toysforboysEntities())
+            {
+                int count;
+                if (year!=-1)
+                {
+                    var query = from product in entities.products
+                                join orderDetail in entities.orderdetails on product.id equals orderDetail.productId
+                                join order in entities.orders on orderDetail.orderId equals order.id
+                                where product.productlineId == productlineID
+                                && order.orderDate.Value.Year == year
+                                select product;
+
+                    count = query.Count();
+                }
+                else
+                {
+                    var query = from product in entities.products
+                                join orderDetail in entities.orderdetails on product.id equals orderDetail.productId
+                                join order in entities.orders on orderDetail.orderId equals order.id
+                                where product.productlineId == productlineID                                
+                                select product;
+                    count = query.Count();
+                }
+
+                return count;                
+
+                
+            }
         }
 
         public List<Product> GetProductStatistics(ProductQuery productQuery)
@@ -53,7 +80,7 @@ namespace DataAccessLayer.Services
             {
                 if (quantityUsed)
                 {
-                    queryString.Append("and where ");
+                    queryString.Append("&& ");
                 }
                 queryString.Append("product.buyPrice > " + productQuery.minPrice + " ");
                 minPriceUsed = true;
@@ -64,7 +91,7 @@ namespace DataAccessLayer.Services
             {
                 if (quantityUsed || minPriceUsed)
                 {
-                    queryString.Append("and where ");
+                    queryString.Append("&& ");
                 }
 
                 queryString.Append("product.buyPrice < " + productQuery.maxPrice + " ");
@@ -75,7 +102,7 @@ namespace DataAccessLayer.Services
             {
                 if (maxPriceUsed || minPriceUsed || quantityUsed)
                 {
-                    queryString.Append("and where ");
+                    queryString.Append("&& ");
                 }
 
                 queryString.Append("product.active == " + productQuery.active + " ");
