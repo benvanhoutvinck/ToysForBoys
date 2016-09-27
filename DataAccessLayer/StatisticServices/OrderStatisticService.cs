@@ -13,7 +13,21 @@ namespace DataAccessLayer.Services
 {
     public class OrderStatisticService : IOrderStatisticService
     {
-       public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
+        public IEnumerable<int> GetDistinctYear(SortDateEnum sortDate)
+        {
+            using (var entities = new toysforboysEntities())
+            {
+                IQueryable<int> query = (from order in entities.orders
+                             select order.orderDate.Value.Year);
+
+                List<int> list = new List<int>();
+                list.AddRange(query);
+
+                return list.Distinct();
+            }
+        }
+
+        public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
         {
             var service = new OrderService();
             var orders = (List<Order>)service.GetAll();
@@ -47,7 +61,7 @@ namespace DataAccessLayer.Services
 
             }
             return orders;
-           
+
         }
 
         public List<Order> GetFilteredOrderStatistics(List<Order> orders, SortDateEnum SortDateCompareLeft, char DateCompareMode, SortDateEnum SortDateCompareRight)
@@ -68,13 +82,13 @@ namespace DataAccessLayer.Services
                         }
                         break;
                     case '<':
-                        if (datesLeft[i]<datesRight[i])
+                        if (datesLeft[i] < datesRight[i])
                         {
                             filteredOrders.Add(orders[i]);
                         }
                         break;
                     case '>':
-                        if (datesLeft[i]>datesRight[i])
+                        if (datesLeft[i] > datesRight[i])
                         {
                             filteredOrders.Add(orders[i]);
                         }
@@ -92,7 +106,7 @@ namespace DataAccessLayer.Services
 
             foreach (var ord in orders)
             {
-                if (ord.shippedDate<ord.requiredDate)
+                if (ord.shippedDate < ord.requiredDate)
                 {
                     orders.Add(ord);
                 }
@@ -150,7 +164,7 @@ namespace DataAccessLayer.Services
                     queryString.Append("and where ");
                 }
 
-                queryString.Append("order.customerId == " + orderQuery.CustomerId +" ");
+                queryString.Append("order.customerId == " + orderQuery.CustomerId + " ");
                 customerIdUsed = true;
             }
 
@@ -183,7 +197,7 @@ namespace DataAccessLayer.Services
                     Int32 commentsPos = reader.GetOrdinal("comments");
                     Int32 customerIdPos = reader.GetOrdinal("customerId");
                     Int32 status = reader.GetOrdinal("status");
-                    
+
                     while (reader.Read())
                     {
                         var order = new Order();
@@ -199,8 +213,8 @@ namespace DataAccessLayer.Services
 
                     return orders;
                 }
-                
-                
+
+
             }
         }
 
@@ -211,7 +225,7 @@ namespace DataAccessLayer.Services
 
             foreach (var ord in orders)
             {
-                if (ord.shippedDate.Value-DateTime.Now <= TimeSpan.FromDays(days))
+                if (ord.shippedDate.Value - DateTime.Now <= TimeSpan.FromDays(days))
                 {
                     orders.Add(ord);
                 }
@@ -229,12 +243,15 @@ namespace DataAccessLayer.Services
             {
                 switch (sortDateEnum)
                 {
-                    case SortDateEnum.orderDate: datetime.Add(Convert.ToDateTime(order.orderDate));
+                    case SortDateEnum.orderDate:
+                        datetime.Add(Convert.ToDateTime(order.orderDate));
                         break;
-                    case SortDateEnum.requiredDate: datetime.Add(Convert.ToDateTime(order.requiredDate));
+                    case SortDateEnum.requiredDate:
+                        datetime.Add(Convert.ToDateTime(order.requiredDate));
                         break;
-                    case SortDateEnum.shippedDate: datetime.Add(Convert.ToDateTime(order.shippedDate));
-                        break;                   
+                    case SortDateEnum.shippedDate:
+                        datetime.Add(Convert.ToDateTime(order.shippedDate));
+                        break;
                 }
             }
             return datetime;
