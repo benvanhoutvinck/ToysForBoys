@@ -145,8 +145,12 @@ namespace WPFToysForBoys.ViewModel
                             }
                             odList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
                             SelectedPProductI = SelectedPProductI;
-                           // OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
-                           // RefreshTab();
+                            OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
+                            for (int i = 0; i < OrderdetailList.Count; i++)
+                            {
+                                OrderdetailList[i].product = pService.GetById(OrderdetailList[i].productId);
+                            }
+                            RefreshTab();
                         }
                         else
                             MessageBox.Show("Invalid product name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -174,8 +178,13 @@ namespace WPFToysForBoys.ViewModel
                     if (MessageBox.Show("You are about to delete a modified orderline. \nAre you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.Yes)
                     {
                         odService.Delete(odService.GetById(ShowOrderdetail.orderId, ShowOrderdetail.productId));
-                        ODNew();
+                        OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
+                        for (int i = 0; i < OrderdetailList.Count; i++)
+                        {
+                            OrderdetailList[i].product = pService.GetById(OrderdetailList[i].productId);
+                        }
                         RefreshTab();
+                        ODNew();
                     }
                 }
                 else
@@ -190,8 +199,12 @@ namespace WPFToysForBoys.ViewModel
                 {
                     odService.Delete(odService.GetById(ShowOrderdetail.orderId, ShowOrderdetail.productId));
                     OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
-                    ODNew();
+                    for (int i = 0; i < OrderdetailList.Count; i++)
+                    {
+                        OrderdetailList[i].product = pService.GetById(OrderdetailList[i].productId);
+                    }
                     RefreshTab();
+                    ODNew();
                 }
             }
             //SelectedProductlineI = SelectedProductlineI;
