@@ -83,12 +83,12 @@ namespace DataAccessLayer
                 var query = entities.customers.Where(c=>true);
                 if (customerQuery.State != string.Empty)
                 {
-                    query = query.Where(c=>c.state==customerQuery.State);
+                    query = query.Where(c => c.state == customerQuery.State);
                 }
 
                 if (customerQuery.City != string.Empty)
                 {
-                    query = query.Where(c=>c.city==customerQuery.City);
+                    query = query.Where(c => c.city == customerQuery.City);
                 }
 
                 if (customerQuery.PostalCode != string.Empty)
@@ -100,6 +100,7 @@ namespace DataAccessLayer
                 {
                     query = query.Where(c => c.countryId == customerQuery.CountryId);
                 }
+                
 
                 return query.ToList();
             }          

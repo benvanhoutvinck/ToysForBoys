@@ -110,12 +110,20 @@ namespace Tests
             Assert.IsNotNull(admin.id);
         }
 
-        //[TestMethod]
-        //public void CustomerGetStatistics()
-        //{
-        //    var service = new CustomerStatisticService();
-        //    CustomerQuery cq = new CustomerQuery {State= }
-        //}
-        
+
+        //method op zich werkt goed, testmethod niet door typedifference (die wij precies nie zien)
+        [TestMethod]
+        public void CustomerGetStatistics()
+        {
+            var service2 = new CustomerService();
+            var service = new CustomerStatisticService();
+            var customer = service2.GetById(85);
+            var customer2 = service2.GetById(121);
+            List<Customer> customers = new List<Customer>() { customer, customer2 };
+            CustomerQuery cq = new CustomerQuery { State = "TA", City = "Toston", CountryId = 27, PostalCode = "T1003" };
+            var result = service.GetCustomerStatistics(cq);
+            Assert.AreEqual(customers, result);
+        }
+
     }
 }
