@@ -9,8 +9,8 @@ namespace Tests
     [TestClass]
     public class UnitTest1
     {
-        
-            [TestMethod]
+
+        [TestMethod]
         public void CustomerInsert()
         {
             var New = new Customer { name = "name", city = "city", countryId = 5, postalCode = "dds", streetAndNumber = "Street" };
@@ -25,7 +25,7 @@ namespace Tests
         //this testmethod has to fail the second time it's runned
         public void CustomerInsertWithEmail()
         {
-            var New = new Customer { name = "name", city = "city", countryId = 5, postalCode = "dds", streetAndNumber = "Street", email="a@a.com" };
+            var New = new Customer { name = "name", city = "city", countryId = 5, postalCode = "dds", streetAndNumber = "Street", email = "a@a.com" };
             var service = new CustomerService();
 
             service.Insert(New);
@@ -35,15 +35,15 @@ namespace Tests
 
         [TestMethod]
 
-            public void DeleteCustomer()
-            {
+        public void DeleteCustomer()
+        {
             var service = new CustomerService();
             var deleteObject = ((List<Customer>)service.GetAll("country"))[0];
             service.Delete(deleteObject);
             var allObjectsz = (List<Customer>)service.GetAll();
 
             Assert.IsFalse(allObjectsz.Contains(deleteObject));
-            }
+        }
         /*
         [TestMethod]
         public void EditCustomer()
@@ -59,11 +59,11 @@ namespace Tests
             }
             Assert.AreEqual(service.GetById(1).name, "name");
         }*/
-          
+
         [TestMethod]
         public void ProductInsert()
         {
-            var New = new Product { name = "name", buyPrice=20, description="desc", productlineId=3, scale="scale", quantityInOrder=1, quantityInStock=2};
+            var New = new Product { name = "name", buyPrice = 20, description = "desc", productlineId = 3, scale = "scale", quantityInOrder = 1, quantityInStock = 2 };
             var service = new ProductService();
 
             service.Insert(New);
@@ -81,7 +81,11 @@ namespace Tests
             service.Insert(admin);
 
             Assert.IsNotNull(admin.id);
+           
         }
-        
+
+      
+
+
     }
 }
