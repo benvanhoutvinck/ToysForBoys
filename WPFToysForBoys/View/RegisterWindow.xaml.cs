@@ -36,12 +36,20 @@ namespace WPFToysForBoys.View
                     {
                         if (!string.IsNullOrEmpty(newPasswordBox.Password) && !string.IsNullOrWhiteSpace(newPasswordBox.Password))
                         {
-                            IAdminService admin = new AdminService();
-                            admin.Insert(new Admin() { username = usernameBox.Text.ToString().Trim(), password = newPasswordBox.Password.ToString().Trim() });
-                            MessageBox.Show("User added to the database.", "Registration", MessageBoxButton.OK, MessageBoxImage.Information);
-                            View.LoginWindow eenView = new View.LoginWindow();
-                            eenView.Show();
-                            this.Close();
+                            if (newPasswordBox.Password.ToString().Trim().Length > 6)
+                            {
+                                IAdminService admin = new AdminService();
+                                admin.Insert(new Admin() { username = usernameBox.Text.ToString().Trim(), password = newPasswordBox.Password.ToString().Trim() });
+                                MessageBox.Show("User added to the database.", "Registration", MessageBoxButton.OK, MessageBoxImage.Information);
+                                View.LoginWindow eenView = new View.LoginWindow();
+                                eenView.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Password must contain at least 6 characters!", "Password Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+
                         }
                         else
                             MessageBox.Show("Password cannot be empty or whitespace!", "Password Error", MessageBoxButton.OK, MessageBoxImage.Error);

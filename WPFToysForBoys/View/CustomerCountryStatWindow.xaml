@@ -5,36 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToysForBoys.View"
         mc:Ignorable="d"
-        Title="CustomerCountryStatWindow" Height="526" Width="500">
+        Title="CustomerCountryStatWindow" Height="500" Width="500">
     <StackPanel Width="450" Margin="21,0,21,0">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock Text="Category filter:" VerticalAlignment="Center" Margin="25 0"></TextBlock>
-            <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
-        </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="400" Margin="0 5 0 0">
-            <Label Content="Id" Width="48" HorizontalContentAlignment="Left" Margin="0 0 10 0"/>
-            <Label Content="Name" Width="200" HorizontalContentAlignment="Left" Margin="0 0 5 0"/>
-            <Label Content="Productline" Width="80" HorizontalContentAlignment="Left"/>
+            <Label Content="    Country" Width="240" HorizontalContentAlignment="Left"/>
+            <Label Content="# Customers" Width="120" HorizontalContentAlignment="Center"/>
         </StackPanel>
-        <ListBox Height="375" Width="395" Margin="25 5 25 10" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
+        <ListBox Height="400" Margin="28,5,28,10" ItemsSource="{Binding CountryList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="360">
+                    <Grid Width="360" ShowGridLines="True">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
-                        <TextBlock Text="{Binding Path=name}" Grid.Row="0" Grid.Column="1" ToolTip="{Binding Path=name}"></TextBlock>
-                        <TextBlock Text="{Binding Path=productline.name}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Margin="5 0" Width="230">
+                            <TextBlock Text="{Binding Path=name}"/>
+                        </Label>
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" Margin="5 0" Width="110">
+                            <TextBlock Text="{Binding Path=customers.Count}"/>
+                        </Label>
                     </Grid>
-                    <!--<Border BorderBrush="Black" BorderThickness="1" Width="275">
-                                        <TextBlock Text="{Binding Path=name}"></TextBlock>
-                                    </Border>-->
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

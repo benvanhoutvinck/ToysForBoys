@@ -131,7 +131,7 @@ namespace WPFToysForBoys.ViewModel
         }
         private void OrderDetail2()
         {
-            View.OrderdetailUpdateWindow orderview = new View.OrderdetailUpdateWindow();
+            View.OrderdetailupdateWindow orderview = new View.OrderdetailupdateWindow();
             List<Orderdetail> od = oService.GetOrderDetails(ShowOrder).ToList();
             List<Product> pl = oService.GetProducts(ShowOrder).ToList();
             foreach (Orderdetail o in od)
@@ -140,7 +140,7 @@ namespace WPFToysForBoys.ViewModel
                     if (o.productId == p.id)
                         o.product = p;
                 }
-            ViewModel.OrderDetailVM ovm = new OrderDetailVM(od);
+            ViewModel.OrderDetailUpdateVM ovm = new OrderDetailUpdateVM(od);
             orderview.DataContext = ovm;
             orderview.Show();
         }

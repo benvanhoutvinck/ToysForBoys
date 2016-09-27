@@ -157,13 +157,21 @@ namespace WebFrontEnd.Controllers
         {
             if (this.ModelState.IsValid)
             {
+                ShoppingCart cart;
                 if (this.Session["cart"] == null)
                 {
-                    ShoppingCart cart = new ShoppingCart();
-                    Product product = productService.GetById(model.Product.id);
-                    model.Product = product;
-                    cart.orders.Add(model);
+                    cart = new ShoppingCart();
+                  
                 }
+                else
+                {
+                    cart = (ShoppingCart)this.Session["cart"];
+                }
+                Product product = productService.GetById(model.Product.id);
+                model.Product = product;
+                cart.orders.Add(model);
+
+                this.Session["cart"] = cart;
             }
 
             return View();

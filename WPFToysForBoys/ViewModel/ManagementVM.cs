@@ -63,11 +63,37 @@ namespace WPFToysForBoys.ViewModel
             OrderList = oService.GetAll("customer").ToList();
             oorderdetailList = oorderdetailService.GetAll().ToList();
             OStatusList = new List<string>() { "WAITING", "CANCELLED", "RESOLVED", "SHIPPED", "DISPUTED", "PROCESSING" };
-            FOStatusList = new List<string>() { "WAITING", "CANCELLED", "RESOLVED", "SHIPPED", "DISPUTED", "PROCESSING" };
-            SelectedStatusI = -1;
+            FOStatusList = new List<string>() { "ALL", "WAITING", "CANCELLED", "RESOLVED", "SHIPPED", "DISPUTED", "PROCESSING" };
+            SelectedStatusI = "ALL";
             PNew();
             CNew();
             ONew();
+        }
+
+        public RelayCommand ProductStatistics
+        {
+            get { return new RelayCommand(ProductS); }
+        }
+
+        private void ProductS()
+        {
+            View.ProductStatWindow productview = new View.ProductStatWindow();
+            ViewModel.ProductStatVM pvm = new ProductStatVM();
+            productview.DataContext = pvm;
+            productview.Show();
+        }
+
+        public RelayCommand CountryCustomer
+        {
+            get { return new RelayCommand(CountryC); }
+        }
+
+        private void CountryC()
+        {
+            View.CustomerCountryStatWindow countryview = new View.CustomerCountryStatWindow();
+            ViewModel.CountryCustomerVM cvm = new CountryCustomerVM();
+            countryview.DataContext = cvm;
+            countryview.Show();
         }
 
         public RelayCommand NotImplementedCommand

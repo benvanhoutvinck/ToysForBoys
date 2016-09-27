@@ -39,7 +39,14 @@ namespace WebFrontEnd.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string password { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "New password")]
+        public string newPassword { get; set; }
 
+        public CustomerViewModel()
+        {
+
+        }
         public CustomerViewModel(Customer cust)
         {
             this.id = cust.id;
