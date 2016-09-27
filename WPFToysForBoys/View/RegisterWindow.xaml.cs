@@ -36,7 +36,7 @@ namespace WPFToysForBoys.View
                     {
                         if (!string.IsNullOrEmpty(newPasswordBox.Password) && !string.IsNullOrWhiteSpace(newPasswordBox.Password))
                         {
-                            if (newPasswordBox.Password.ToString().Trim().Length > 6)
+                            if (newPasswordBox.Password.ToString().Trim().Length > 5)
                             {
                                 IAdminService admin = new AdminService();
                                 admin.Insert(new Admin() { username = usernameBox.Text.ToString().Trim(), password = newPasswordBox.Password.ToString().Trim() });
