@@ -191,6 +191,7 @@
     </Content>
     <Content Include="Views\Account\ConfirmEdit.cshtml" />
     <Content Include="Views\Checkout\EditorTemplates\OrderViewModel.cshtml" />
+    <Content Include="Views\Account\ShowOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
