@@ -23,6 +23,7 @@ namespace WPFToysForBoys.ViewModel
         private IOrderdetailsService odService;
 
         private List<Orderdetail> orderdetailList;
+        private List<Orderdetail> odList;
         public List<Orderdetail> OrderdetailList
         {
             get { return orderdetailList; }
@@ -39,6 +40,7 @@ namespace WPFToysForBoys.ViewModel
             OrderdetailList = nOrderdetailList;
             pService = new ProductService();
             odService = new OrderdetailService();
+            odList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(nOrderdetailList[0].orderId));
             PProductList = new List<Product>() { new Product() { id = -1, name = "All" } };
             PProductList = pService.GetAll("productline").ToList();
             //SelectedProduct = ProductList.First();
@@ -121,12 +123,12 @@ namespace WPFToysForBoys.ViewModel
                     if ((ShowOrderdetail.priceEach == null || ShowOrderdetail.priceEach > 0) && (ShowOrderdetail.quantityOrdered == null || ShowOrderdetail.quantityOrdered >= 0))
                         if (ShowOrderdetail.productId != 0)//null)
                         {
-                            if (!IdChecker.IdCheck(orderdetailList, ShowOrderdetail))
+                            if (!IdChecker.IdCheck(odList, ShowOrderdetail))
                             {
                                 odService.Insert(new Orderdetail()
                                 {
                                     orderId = ShowOrderdetail.orderId,
-                                    productId = ShowOrderdetail.productId,
+                                    productId = SelectedPProductI, // ShowOrderdetail.productId,
                                     quantityOrdered = ShowOrderdetail.quantityOrdered,
                                     priceEach = ShowOrderdetail.priceEach
                                 });
@@ -141,6 +143,7 @@ namespace WPFToysForBoys.ViewModel
                                     priceEach = ShowOrderdetail.priceEach
                                 });
                             }
+                            odList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
                             SelectedPProductI = SelectedPProductI;
 
                         }
