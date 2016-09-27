@@ -9,5 +9,9 @@ namespace DataAccessLayer.Interfaces
     public interface ICustomerStatisticService
     {
         List<Customer> GetCustomerStatistics();
+        List<Customer> GetCustomersPerCountry();
+        List<Customer> GetCustomerPerPostalCode();
+        List<Customer> GetCustomerPerState();
+        List<Customer> GetCustomerPerCity();
     }
 }

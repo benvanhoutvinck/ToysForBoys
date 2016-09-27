@@ -13,23 +13,11 @@ namespace DataAccessLayer.Services
 {
     public class OrderStatisticService : IOrderStatisticService
     {
-        public IEnumerable<int> GetDistinctYear(SortDateEnum sortDate)
-        {
-            using (var entities = new toysforboysEntities())
-            {
-                var query = (from order in entities.orders
-                             select order.orderDate.Value.Year);
-                List<int> list = new List<int>();
-                list.AddRange(query);
-
-                return list.Distinct();
-            }
-        }
-
-        public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
+       public List<Order> GetByDistinctYear(SortDateEnum sortDate, int year)
         {
             var service = new OrderService();
             var orders = (List<Order>)service.GetAll();
+            var ordersOfYear = new List<Order>();
 
             foreach (var ord in orders)
             {
@@ -38,21 +26,21 @@ namespace DataAccessLayer.Services
                     case 0:
                         if (ord.orderDate.Value.Year == year)
                         {
-                            orders.Add(ord);
+                            ordersOfYear.Add(ord);
                         }
                         break;
 
                     case 1:
                         if (ord.requiredDate.Value.Year == year)
                         {
-                            orders.Add(ord);
+                            ordersOfYear.Add(ord);
                         }
                         break;
 
                     case 2:
                         if (ord.shippedDate.Value.Year == year)
                         {
-                            orders.Add(ord);
+                            ordersOfYear.Add(ord);
                         }
                         break;
                 }

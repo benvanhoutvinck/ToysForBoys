@@ -95,9 +95,10 @@
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductlineService.cs" />
     <Compile Include="Services\ProductService.cs" />
-    <Compile Include="Services\OrderStatisticService.cs" />
+    <Compile Include="StatisticServices\CustomerStatisticService.cs" />
+    <Compile Include="StatisticServices\OrderStatisticService.cs" />
     <Compile Include="Enums\SortDateEnum.cs" />
-    <Compile Include="Services\ProductStatisticService.cs" />
+    <Compile Include="StatisticServices\ProductStatisticService.cs" />
     <Compile Include="ToysForBoys.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
