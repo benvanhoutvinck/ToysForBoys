@@ -82,6 +82,7 @@
     <Compile Include="Productline.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
+    <Compile Include="Queries\OrderQuery.cs" />
     <Compile Include="Queries\ProductQuery.cs" />
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\CountryService.cs" />

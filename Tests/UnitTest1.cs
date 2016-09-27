@@ -18,8 +18,21 @@ namespace Tests
 
             Assert.IsTrue(list.Count != 0);
         }
-        
-            [TestMethod]
+
+        [TestMethod]
+        public void testGetOrderStatistics()
+        {
+            OrderStatisticService service = new OrderStatisticService();
+            List<Order> list = service.GetOrderStatistics(new OrderQuery()
+            { SortDateRange = null, DateRangeStart = null, DateRangeEnd = null,
+            CustomerId = null, Status = "CANCELLED",
+            SortDateCompareLeft = null, DateCompareMode = null, SortDateCompareRight = null});
+
+
+            Assert.IsTrue(list.Count != 0);
+        }
+
+        [TestMethod]
         public void CustomerInsert()
         {
             var New = new Customer { name = "name", city = "city", countryId = 5, postalCode = "dds", streetAndNumber = "Street" };
@@ -84,8 +97,12 @@ namespace Tests
         //this method has to fail the second time it's runned
         public void AdminInsert()
         {
-            var admin = new Admin { username = " ", password = "pw" };
+            var admin = new Admin { username = "TestMethod", password = "password" };
             var service = new AdminService();
+
+            foreach (var ad in service.GetAll())
+                if (ad.username.Equals(admin.username))
+                    service.Delete(ad);
 
             service.Insert(admin);
 
