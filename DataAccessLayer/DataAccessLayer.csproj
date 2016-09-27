@@ -55,6 +55,7 @@
     <Compile Include="Admin.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
+    <Compile Include="BestSoldProduct.cs" />
     <Compile Include="Country.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>

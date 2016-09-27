@@ -81,22 +81,22 @@ namespace DataAccessLayer
             using (var entities = new toysforboysEntities())
             {
                 var query = entities.customers.Where(c=>true);
-                if (customerQuery.State != string.Empty)
+                if (!string.IsNullOrEmpty(customerQuery.State))
                 {
                     query = query.Where(c => c.state == customerQuery.State);
                 }
 
-                if (customerQuery.City != string.Empty)
+                if (!string.IsNullOrEmpty(customerQuery.City))
                 {
                     query = query.Where(c => c.city == customerQuery.City);
                 }
 
-                if (customerQuery.PostalCode != string.Empty)
+                if (!string.IsNullOrEmpty(customerQuery.PostalCode))
                 {
                     query = query.Where(c => c.postalCode == customerQuery.PostalCode);
                 }
 
-                if (customerQuery.CountryId != null)
+                if (customerQuery.CountryId!=null)
                 {
                     query = query.Where(c => c.countryId == customerQuery.CountryId);
                 }

@@ -15,11 +15,15 @@ namespace WebFrontEnd.Controllers
 
         private ICountryService countryService;
         private ICustomerService customerService;
+        private IOrderdetailsService orderdetailService;
+        private IOrderService orderService;
 
         public AccountController()
         {
             countryService = new CountryService();
             customerService = new CustomerService();
+            orderdetailService = new OrderdetailService();
+            orderService = new OrderService();
         }
 
 
@@ -62,7 +66,7 @@ namespace WebFrontEnd.Controllers
             Customer cust = customerService.GetById(custViewModel.id);
             try
             {
-                if (custViewModel.newPassword != null && cust.password.Trim() == custViewModel.password)
+                if (cust.password.Trim() == custViewModel.password)
                 {
                     cust.name = custViewModel.name;
                     cust.streetAndNumber = custViewModel.streetAndNumber;
@@ -71,10 +75,15 @@ namespace WebFrontEnd.Controllers
                     cust.postalCode = custViewModel.postalCode;
                     cust.countryId = custViewModel.countryId;
                     cust.country = countryService.GetById(custViewModel.countryId);
-                    cust.password = custViewModel.newPassword;
+                    if (custViewModel.newPassword != null)
+                    {
+                        cust.password = custViewModel.newPassword;
+                    }
                     cust.email = custViewModel.email;
 
                     customerService.Edit(cust);
+                    this.Session["customer"] = cust;
+
                     return RedirectToAction("ConfirmEdit", "Account", new { gelukt = true });
                 }
                 else
@@ -85,12 +94,19 @@ namespace WebFrontEnd.Controllers
             catch (Exception)
             {
 
-                return RedirectToAction("ConfirmEdit", "Account", new { gelukt = false });
+                return RedirectToAction("ConfirmEdit", "Account", new { gelukt = false});
             }
         }
         public ActionResult ConfirmEdit(bool gelukt)
         {
             return View(gelukt);
+        }
+        public ActionResult ShowOrders(Customer cust)
+        {
+            var linkedCust = customerService.GetById(cust.id, "orders.orderdetails.product");
+            var orders = linkedCust.orders;
+
+            return View(orders);
         }
 
         private SelectList getCountriesList()

@@ -138,5 +138,26 @@ namespace Tests
             Assert.AreEqual(customers, result);
         }
 
+        [TestMethod]
+        public void ProductGetStatistics()
+        {
+            
+            var service2 = new ProductStatisticService();
+            var products = new List<Product>();
+            ProductQuery pq = new ProductQuery { active = true, SortQuantity = 0, maximumQuantity = 8700, minimumQuantity = 8500, maxPrice = 30, minPrice = 20 };
+            var result = service2.GetProductStatistics(pq);
+            Assert.AreNotEqual(products, result);
+        }
+
+        [TestMethod]
+        public void OrderGetStatistics()
+        {
+            var service = new OrderStatisticService();
+            var orders = new List<Order>();
+            OrderQuery oq = new OrderQuery { CustomerId = 91, Status = "CANCELLED", SortDateRange = 0, DateRangeStart = new DateTime(2002, 1, 1), DateRangeEnd = new DateTime(2004, 1, 1) };
+            var result = service.GetOrderStatistics(oq);
+            var result2 = service.GetFilteredOrderStatistics(result, SortDateEnum.orderDate, '<', SortDateEnum.requiredDate);
+            Assert.AreNotEqual(orders, result);
+        }
     }
 }
