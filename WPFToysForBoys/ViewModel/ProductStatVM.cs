@@ -2,6 +2,7 @@
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Services;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,8 @@ namespace WPFToysForBoys.ViewModel
 
         private void ProductlineListRefresh()
         {
-            List<ProductStatStruct> prod = ProductlineList;
+            List<ProductStatStruct> prod = new List<ProductStatStruct>();
+            prod.AddRange(ProductlineList);
             try
             {
                 foreach (ProductStatStruct p in prod)
@@ -72,8 +74,8 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 selectedYear = value;
-                RaisePropertyChanged("SelectedYear");
                 ProductlineListRefresh();
+                RaisePropertyChanged("SelectedYear");
             }
         }
 
@@ -84,8 +86,8 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 selectedMonth = value;
-                RaisePropertyChanged("SelectedMonth");
                 ProductlineListRefresh();
+                RaisePropertyChanged("SelectedMonth");
             }
         }
 
@@ -132,5 +134,10 @@ namespace WPFToysForBoys.ViewModel
                 RaisePropertyChanged("SelectedProductline");
             }
         }
+
+        //public RelayCommand<EventArgs> SelectionChangedCommand
+        //{
+        //    get { return new RelayCommand<EventArgs>(ProductlineListRefresh); }
+        //}
     }
 }
