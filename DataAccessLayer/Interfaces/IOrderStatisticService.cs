@@ -17,6 +17,8 @@ namespace DataAccessLayer.Interfaces
 
         List<Order> GetDistinctYear(SortDateEnum sortDate, int year);
 
+        List<Order> GetLateShippingDates();
 
+        List<Order> GetUrgentShippingDates(int days);
     }
 }

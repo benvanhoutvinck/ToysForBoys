@@ -84,6 +84,22 @@ namespace DataAccessLayer.Services
             return filteredOrders;
         }
 
+        public List<Order> GetLateShippingDates()
+        {
+            var service = new OrderService();
+            var orders = (List<Order>)service.GetAll();
+
+            foreach (var ord in orders)
+            {
+                if (ord.shippedDate<ord.requiredDate)
+                {
+                    orders.Add(ord);
+                }
+            }
+
+            return orders;
+        }
+
         public List<Order> GetOrderStatistics(OrderQuery orderQuery)
         {
 
@@ -184,6 +200,22 @@ namespace DataAccessLayer.Services
                 
                 
             }
+        }
+
+        public List<Order> GetUrgentShippingDates(int days)
+        {
+            var service = new OrderService();
+            var orders = (List<Order>)service.GetAll();
+
+            foreach (var ord in orders)
+            {
+                if (ord.shippedDate.Value-DateTime.Now <= TimeSpan.FromDays(days))
+                {
+                    orders.Add(ord);
+                }
+            }
+
+            return orders;
         }
 
         //Switch method
