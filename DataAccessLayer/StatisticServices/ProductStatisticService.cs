@@ -11,6 +11,11 @@ namespace DataAccessLayer.Services
 {
     public class ProductStatisticService : IProductStatisticService
     {
+        public int GetCountSold(int ProductlineID, int Year = -1)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Product> GetProductStatistics(ProductQuery productQuery)
         {
             var queryString = new StringBuilder();
