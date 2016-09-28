@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPFToysForBoys.View"
         xmlns:global="clr-namespace:System.Globalization;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="OrderStatWindow" Height="800" Width="1400">
+        Title="OrderStatWindow" Height="800" Width="1245.5">
     <DockPanel  LastChildFill="True"  Margin="10 5 10 20">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <StackPanel>
@@ -16,24 +16,29 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
                     <Label Content="Date: " VerticalContentAlignment="Center" Width="70"></Label>
-                    <ComboBox Width="100" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <ComboBox Width="100" Margin="0 15"  ItemsSource="{Binding DateRangeSortList}" DisplayMemberPath="display" SelectedValue="{Binding SortDateRange}" SelectedValuePath="value"></ComboBox>
                     <Label Content=" From " VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50" Margin="50 0 0 0"></Label>
-                    <TextBox Text="{ Binding DateRangeStart}" Width="100" Margin="5 10"></TextBox>
+                    <TextBox Text="{ Binding DateRangeStart, StringFormat=MM/dd/yyyy}" ToolTip="Format: Month/Day/Year" Width="100" Margin="5 10"></TextBox>
                     <Label Content=" to " VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50"></Label>
-                    <TextBox Text="{ Binding DateRangeEnd}" Width="100" Margin="5 10"></TextBox>
+                    <TextBox Text="{ Binding DateRangeEnd, StringFormat=MM/dd/yyyy}" ToolTip="Format: Month/Day/Year" Width="100" Margin="5 10"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
                     <Label Content="Customer" VerticalContentAlignment="Center"></Label>
-                    <ComboBox Width="150" Margin="10 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <ComboBox Width="150" Margin="10 15"  ItemsSource="{Binding CustomerList}" DisplayMemberPath="name" SelectedValue="{Binding SCustomer}" SelectedValuePath="id"></ComboBox>
                     <Label Content="Order Status" VerticalContentAlignment="Center" Margin="10 0"></Label>
-                    <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <ComboBox Width="150" Margin="0 15"  ItemsSource="{Binding StatusList}" SelectedValue="{Binding Status}"></ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
                     <Label Content="Where" VerticalContentAlignment="Center"></Label>
-                    <ComboBox Width="150" Margin="10 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
-                    <ComboBox Width="50" Margin="50 15 20 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <ComboBox Width="150" Margin="10 15"  ItemsSource="{Binding DateCompareLeftList}" DisplayMemberPath="display" SelectedValue="{Binding DateCompareLeft}" SelectedValuePath="value"></ComboBox>
+                    <ComboBox Width="50" Margin="50 15 20 15"  ItemsSource="{Binding DateCompareModeList}" SelectedValue="{Binding DateCompareMode}"></ComboBox>
                     <Label Content="than" VerticalContentAlignment="Center"></Label>
-                    <ComboBox Width="150" Margin="10 15"  ItemsSource="{Binding ProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedProductlineI}" SelectedValuePath="id"></ComboBox>
+                    <ComboBox Width="150" Margin="10 15"  ItemsSource="{Binding DateCompareRightList}" DisplayMemberPath="display" SelectedValue="{Binding DateCompareRight}" SelectedValuePath="value"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="50 0 0 0" HorizontalAlignment="Center">
+                    <Button Content="Save Rapport" Width="150" Height="30" FontSize="16" Command="{Binding SaveCommand}"/>
+                    <Button Content="Load Rapport" Width="150" Height="30" FontSize="16" Command="{Binding LoadCommand}" Margin="40 0"/>
+                    <Button Content="Filter" Width="150" Height="30" FontSize="16" Command="{Binding FilterCommand}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel>
@@ -80,7 +85,7 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel>
+        <StackPanel Margin="0 20 0 0">
             <Grid Width="800" Height="500">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"></RowDefinition>
@@ -89,18 +94,18 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Width="800">
-                    <Grid Width="780" ShowGridLines="True">
+                <Label Width="800" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
+                    <Grid Width="765" ShowGridLines="True">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <GridViewColumnHeader Grid.Column="0">Customer</GridViewColumnHeader>
                         <GridViewColumnHeader Grid.Column="1">Date Ordered</GridViewColumnHeader>
@@ -110,25 +115,39 @@
                         <GridViewColumnHeader Grid.Column="5">Revenue</GridViewColumnHeader>
                     </Grid>
                 </Label>
-                <ListBox Grid.Row="1" Grid.Column="0" Width="800" ItemsSource="{Binding OrderStatList}">
+                <ListBox Grid.Row="1" Grid.Column="0" Width="800" ItemsSource="{Binding OrderStatList}" HorizontalAlignment="Left">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="780" ShowGridLines="True">
+                            <Grid Width="765" ShowGridLines="True">
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Margin="5 0">Test1</Label>
-                                <Label Grid.Row="0" Grid.Column="1" Margin="5 0">Test2</Label>
-                                <Label Grid.Row="0" Grid.Column="2" Margin="5 0">Test3</Label>
-                                <Label Grid.Row="0" Grid.Column="3" Margin="5 0">Test4</Label>
-                                <Label Grid.Row="0" Grid.Column="4" Margin="5 0">Test5</Label>
+                                <Label Grid.Row="0" Grid.Column="0" Margin="5 0" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Path=customer.name}" ToolTip="{Binding Path=customer.name}"></TextBlock>
+                                </Label>
+                                <Label Grid.Row="0" Grid.Column="1" Margin="5 0" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Path=orderDate, StringFormat=MM/dd/yyyy}"></TextBlock>
+                                </Label>
+                                <Label Grid.Row="0" Grid.Column="2" Margin="5 0" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Path=requiredDate, StringFormat=MM/dd/yyyy}"></TextBlock>
+                                </Label>
+                                <Label Grid.Row="0" Grid.Column="3" Margin="5 0" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Path=shippedDate, StringFormat=MM/dd/yyyy}"></TextBlock>
+                                </Label>
+                                <Label Grid.Row="0" Grid.Column="4" Margin="5 0" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Path=status}"></TextBlock>
+                                </Label>
+                                <Label Grid.Row="0" Grid.Column="5" Margin="5 0" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding Path=revenue, StringFormat=c}" Foreground="{ Binding Path=brush}"></TextBlock>
+                                </Label>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

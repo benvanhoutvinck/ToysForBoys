@@ -154,12 +154,12 @@ namespace DataAccessLayer.Services
                         case 0:
                             if (orderQuery.DateRangeStart != null)
                             {
-                                query = query.Where(o => o.orderDate > orderQuery.DateRangeStart);
+                                query = query.Where(o => o.orderDate.Value.CompareTo(orderQuery.DateRangeStart.Value) >= 0);
                             }
 
                             if (orderQuery.DateRangeEnd != null)
                             {
-                                query = query.Where(o => o.orderDate < orderQuery.DateRangeEnd);
+                                query = query.Where(o => o.orderDate.Value.CompareTo(orderQuery.DateRangeEnd.Value) <= 0);
                             }
                             break;
                         case 1:
@@ -196,10 +196,12 @@ namespace DataAccessLayer.Services
                     query = query.Where(o => o.status == orderQuery.Status);
                 }
 
+                query = query.Include("customer").Include("orderdetails");
+
                 List<Order> list = new List<Order>();
                 list.AddRange(query);
 
-                if (orderQuery.SortDateCompareLeft != null && orderQuery.SortDateCompareRight != null && orderQuery.DateCompareMode != null)
+                if (orderQuery.SortDateCompareLeft != null && orderQuery.SortDateCompareRight != null && orderQuery.DateCompareMode != null && orderQuery.DateCompareMode != ' ')
                     list = GetFilteredOrderStatistics(query.ToList(), (SortDateEnum) orderQuery.SortDateCompareLeft, (char) orderQuery.DateCompareMode, (SortDateEnum)orderQuery.SortDateCompareRight);
 
                 return list;
