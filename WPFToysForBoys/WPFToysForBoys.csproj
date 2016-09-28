@@ -101,6 +101,7 @@
     <Compile Include="ViewModel\ManagementVMOrder.cs" />
     <Compile Include="ViewModel\ManagementVMOrderdetail.cs" />
     <Compile Include="ViewModel\ManagementVMProductline.cs" />
+    <Compile Include="ViewModel\ManagmentVMShipment.cs" />
     <Compile Include="ViewModel\OrderDetailUpdateVM.cs" />
     <Compile Include="ViewModel\OrderDetailVM.cs" />
     <Compile Include="ViewModel\OrderStatVM.cs" />
@@ -128,6 +129,9 @@
     </Compile>
     <Compile Include="View\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShipmentStatWindow.xaml.cs">
+      <DependentUpon>ShipmentStatWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShipmentStatWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
