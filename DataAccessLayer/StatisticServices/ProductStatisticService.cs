@@ -129,53 +129,45 @@ namespace DataAccessLayer.Services
             }
         }
 
-        public BestSoldProduct GetBestSoldProduct(int productId, int productlineId)
+       
+
+    public List<BestSoldProduct> GetProductsSortedByMostSold()
+    {
+        List<BestSoldProduct> products = new List<BestSoldProduct>();
+
+        using (var entities = new toysforboysEntities())
         {
-        
-            using (var entities = new toysforboysEntities())
+            foreach (var product in entities.products)
             {
-                var orderdetailsSorted = (List<Orderdetail>)(from od in entities.orderdetails
-                                         orderby od.productId
-                                         select od);
-
-                var totals = new List<int>();
-                var totalsIndex = 0;
-                int lastId = 1;
-                int highestId = 0;
-
-                for (int i = 0; i < orderdetailsSorted.Count(); i++)
+                var query = from orderdetail in entities.orderdetails
+                            where orderdetail.productId == product.id
+                            select orderdetail;
+                var totalOrdered = query.AsEnumerable().Sum(od => od.quantityOrdered);
+                products.Add(new BestSoldProduct
                 {
-                    
-                    if (lastId != orderdetailsSorted[i].productId)
-                    {
-                        totalsIndex++;
-                    }
+                    id = product.id,
+                    name = product.name,
+                    active = product.active,
+                    buyPrice = product.buyPrice,
+                    description = product.description,
+                    productlineId = product.productlineId,
+                    quantityInOrder = product.quantityInOrder,
+                    quantityInStock = product.quantityInStock,
+                    scale = product.scale,
+                    QuantityOrdered = (int)totalOrdered
+                });
 
-                    totals[totalsIndex] += orderdetailsSorted[i].quantityOrdered.Value;
-
-                    if (highestId<totals[totalsIndex])
-                    {
-                        highestId = orderdetailsSorted[i].productId;
-                    }
-
-                    lastId = orderdetailsSorted[i].productId;
-
-                }
-
-                var service = new ProductService();
-                BestSoldProduct bestSold = (BestSoldProduct)service.GetById(highestId);
-                bestSold.QuantityOrdered = totals[bestSold.id-1];
-
-                return bestSold;
             }
-            
 
-
-            
+            return products.OrderBy(p => p.QuantityOrdered).Reverse().ToList();
         }
+    }
 
-
-
-        
+        public List<BestSoldProduct> GetProductsSortedByLeastSold()
+        {
+            var list = GetProductsSortedByMostSold().ToList();
+            list.Reverse();
+            return list;
+        }
     }
 }

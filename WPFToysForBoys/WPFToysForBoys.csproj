@@ -92,6 +92,7 @@
     <Compile Include="IdChecker.cs" />
     <Compile Include="Mock\OrderStatMock.cs" />
     <Compile Include="Mock\ProductStatisticServiceMock.cs" />
+    <Compile Include="Model\OrderStat.cs" />
     <Compile Include="Model\ProductStatStruct.cs" />
     <Compile Include="ViewModel\CountryCustomerVM.cs" />
     <Compile Include="ViewModel\ManagementVM.cs" />

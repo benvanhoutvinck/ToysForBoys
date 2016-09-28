@@ -352,3 +352,7 @@ body {
 .thankyou img{
     width: 250px;
 }
+.main-picture-buy {
+    display: flex;
+    align-items: center;
+}

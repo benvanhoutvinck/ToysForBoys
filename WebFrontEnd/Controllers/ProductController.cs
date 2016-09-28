@@ -21,9 +21,17 @@ namespace WebFrontEnd.Controllers
             productService = new ProductService();
             productLineService = new ProductlineService();
         }
-
-        public ActionResult List()
+        public ActionResult List(int? id)
         {
+            if (id == null)
+            {
+                ViewBag.Page = 1;
+            }
+            else
+            {
+                ViewBag.Page = id;
+            }
+
             var products = productService.GetAll();
 
             var productListViewModel = new Models.ProductListViewModel();
@@ -49,7 +57,6 @@ namespace WebFrontEnd.Controllers
 
             return View(productListViewModel);
         }
-
         [HttpPost]
         public ActionResult List([ModelBinder(typeof(Infrastructure.ProductListViewModelBinder))] Models.ProductListViewModel model)
         {
@@ -139,7 +146,7 @@ namespace WebFrontEnd.Controllers
             }
 
             Product product = productService.GetById(id);
-            
+
 
             if (product == null)
             {
@@ -161,7 +168,7 @@ namespace WebFrontEnd.Controllers
                 if (this.Session["cart"] == null)
                 {
                     cart = new ShoppingCart();
-                  
+
                 }
                 else
                 {

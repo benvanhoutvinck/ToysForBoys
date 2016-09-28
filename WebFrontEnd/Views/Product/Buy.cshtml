@@ -10,11 +10,10 @@
         <div class="item-container">
             <div class="container">
                 <div class="col-md-12">
-                    <div class="product col-md-3 service-image-left">
-
-                        <center>
-                            <img id="item-display" src="@Html.GetImageSourceForProductline(Model.Product.productlineId)" alt="" />
-                        </center>
+                    <div class="product col-md-3 service-image-left main-picture-buy">
+                        <div>
+                            <img id="item-display" width="250" src="@Html.GetImageSourceForProductline(Model.Product.productlineId)" alt="" />
+                        </div>
                     </div>
 
                     <div class="container service1-items col-sm-2 col-md-2 pull-left">
@@ -50,16 +49,18 @@
                     </div>
                     @using (Html.BeginForm("AddToCart", "Product", FormMethod.Post))
                     {
-                        <div>Qty: @Html.TextBoxFor(model => model.Aantal, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Aantal)</div>
+                        <div>
+                            Qty: @Html.TextBoxFor(model => model.Aantal, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Aantal)
+                        </div>
 
-                    <hr>
-                    <div class="btn-group cart">
-                        <button type="submit" class="btn btn-success">
-                            Add to cart
-                        </button>
-                    </div>
-                    @Html.HiddenFor(model => model.Product.id)
+                        <hr>
+                        <div class="btn-group cart">
+                            <button type="submit" class="btn btn-success">
+                                Add to cart
+                            </button>
+                        </div>
+                        @Html.HiddenFor(model => model.Product.id)
                     }
                 </div>
             </div>
