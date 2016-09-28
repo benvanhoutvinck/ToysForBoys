@@ -52,15 +52,33 @@ namespace WebFrontEnd.Controllers
                    );
             }
 
-            productListViewModel.Products = productList;
-            productListViewModel.FilterProductLines = productListViewModel.AllProductLines.Select(pl => pl.id).ToList();
+            if (this.Session["filters"] == null)
+            {
+                productListViewModel.Products = productList;
+                productListViewModel.FilterProductLines = productListViewModel.AllProductLines.Select(pl => pl.id).ToList();
+            }
+            else
+            {
+                return List((ProductListViewModel)this.Session["filters"], id);
+
+            }
 
             return View(productListViewModel);
         }
         [HttpPost]
-        public ActionResult List([ModelBinder(typeof(Infrastructure.ProductListViewModelBinder))] Models.ProductListViewModel model)
+        public ActionResult List([ModelBinder(typeof(Infrastructure.ProductListViewModelBinder))] Models.ProductListViewModel model, int? id)
         {
-            ViewBag.Page = 1;
+
+
+            if (id == null || (ProductListViewModel)this.Session["filters"] != model)
+            {
+                ViewBag.Page = 1;
+            }
+            else
+            {
+                ViewBag.Page = id;
+            }
+
             var productLines = productLineService.GetAll();
             IEnumerable<Product> products;
 
@@ -124,6 +142,8 @@ namespace WebFrontEnd.Controllers
             }
 
             model.Products = productList;
+
+            this.Session["filters"] = model;
 
             return View(model);
         }
