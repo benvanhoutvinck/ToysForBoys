@@ -184,5 +184,25 @@ namespace Tests
             var count = service.CountCustomersOfCountry(5);
             Assert.IsNotNull(count);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.Data.Entity.Validation.DbEntityValidationException), "Invalid password: password must be 1 to 20 characters long and is case sensitive")]
+        public void PasswordIsTooLong()
+        {
+            var service = new CustomerService();
+            var customer = service.GetById(1);
+            customer.password = "123456789012345678901";
+            service.Edit(customer);            
+        }
+
+        [TestMethod]
+        public void TestShippingDetails()
+        {
+            var service = new ShippingService();
+            var shippingDetails = new ShippingDetails();
+            var result = service.GetShippingDetails(3);
+            Assert.IsNotNull(result);
+            
+        }
     }
 }
