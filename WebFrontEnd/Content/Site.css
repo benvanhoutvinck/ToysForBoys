@@ -348,3 +348,7 @@ body {
     font-size: 12px;
     font-weight: bold;
 }
+.main-picture-buy {
+    display: flex;
+    align-items: center;
+}
