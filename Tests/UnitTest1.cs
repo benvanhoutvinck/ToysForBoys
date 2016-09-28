@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer;
 using DataAccessLayer.Services;
+
 using System.Collections.Generic;
 using DataAccessLayer.Queries;
 
@@ -98,7 +99,7 @@ namespace Tests
         [TestMethod]
         public void ProductInsert()
         {
-            var New = new Product { name = "name", buyPrice = 20, description = "desc", productlineId = 3, scale = "scale", quantityInOrder = 1, quantityInStock = 2 };
+            var New = new Product { name = "name", buyPrice = 20, description = "desc", productlineId = 3, scale = "scale", quantityInOrder = 1, quantityInStock = 2, active=true };
             var service = new ProductService();
 
             service.Insert(New);
@@ -135,7 +136,7 @@ namespace Tests
             List<Customer> customers = new List<Customer>() { customer, customer2 };
             CustomerQuery cq = new CustomerQuery { State = "TA", City = "Toston", CountryId = 27, PostalCode = "T1003" };
             var result = service.GetCustomerStatistics(cq);
-            Assert.AreEqual(customers, result);
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -174,6 +175,14 @@ namespace Tests
             var service = new ProductStatisticService();
             var products = service.GetProductsSortedByLeastSold();
             Assert.IsNotNull(products);
+        }
+
+        [TestMethod]
+        public void GetCustomersOfCountry()
+        {
+            var service = new CountryStatisticService();
+            var count = service.CountCustomersOfCountry(5);
+            Assert.IsNotNull(count);
         }
     }
 }
