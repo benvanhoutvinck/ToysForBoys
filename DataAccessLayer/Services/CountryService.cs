@@ -65,10 +65,33 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Country> GetAll(Func<Country, bool> predicate, string includes)
         {
-            
+
+            if (includes == "")
+                includes = null;
+
+
             using (var entities = new toysforboysEntities())
             {
-                return entities.countries.Include(includes).Where(predicate);
+
+                if (predicate == null && includes == null)
+                {
+                    return entities.countries.ToList();
+                }
+                else if (predicate != null && includes == null)
+                {
+                    return entities.countries.Where(predicate).ToList();
+                }
+                else if (predicate == null && includes != null)
+                {
+                    return entities.countries.Include(includes).ToList();
+                }
+                else if (predicate != null && includes != null)
+                {
+                    return entities.countries.Include(includes).Where(predicate).ToList();
+                }
+
+                return null;
+
             }
 
            

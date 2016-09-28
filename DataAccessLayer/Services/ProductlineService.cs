@@ -88,7 +88,7 @@ namespace DataAccessLayer.Services
             if (includes == "")
                 includes = null;
 
-            List<Productline> AllProductlines = new List<Productline>();
+         
             using (var entities = new toysforboysEntities())
             {
 
