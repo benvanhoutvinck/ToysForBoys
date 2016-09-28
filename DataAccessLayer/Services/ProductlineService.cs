@@ -85,17 +85,13 @@ namespace DataAccessLayer.Services
         
         public IEnumerable<Productline> GetAll(Func<Productline, bool> predicate, string includes)
         {
-            List<Productline> AllProductlines = new List<Productline>();
+            
             using (var entities = new toysforboysEntities())
             {
-                
-                foreach (var Productline in (String.IsNullOrEmpty(includes) ? entities.productlines : entities.productlines.Include(includes)).Where(predicate))
-                {
-                    AllProductlines.Add((Productline) Productline);
-                }
+                return entities.productlines.Include(includes).Where(predicate);                
             }
 
-            return AllProductlines;
+            
         }
     }
 }

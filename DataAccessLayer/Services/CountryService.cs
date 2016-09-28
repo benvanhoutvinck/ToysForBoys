@@ -65,16 +65,13 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Country> GetAll(Func<Country, bool> predicate, string includes)
         {
-            List<Country> AllCountries = new List<Country>();
+            
             using (var entities = new toysforboysEntities())
             {
-                foreach (var country in (String.IsNullOrEmpty(includes) ? entities.countries : entities.countries.Include(includes)).Where(predicate))
-                {
-                    AllCountries.Add((Country)country);
-                }
+                return entities.countries.Include(includes).Where(predicate);
             }
 
-            return AllCountries;
+           
         }
 
         public Country GetById(int countryID)

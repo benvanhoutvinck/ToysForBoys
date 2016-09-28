@@ -140,17 +140,15 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Customer> GetAll(Func<Customer, bool> predicate, string includes)
         {
-            List<Customer> AllCustomers = new List<Customer>();
+            
             using (var entities = new toysforboysEntities())
             {
+
+                return entities.customers.Include(includes).Where(predicate);
                 
-               foreach (var customer in (String.IsNullOrEmpty(includes) ? entities.customers : entities.customers.Include(includes)).Where(predicate))
-                    {
-                    AllCustomers.Add((Customer) customer);
-                }
             }
 
-            return AllCustomers;
+            
         }
 
         public void AddEmailAndPassword(string name, string email, string password)
