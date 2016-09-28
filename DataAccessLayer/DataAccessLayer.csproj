@@ -65,6 +65,7 @@
     <Compile Include="Enums\SortDateEnum.cs" />
     <Compile Include="Enums\SortQuantityEnum.cs" />
     <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\ICountryStatisticService.cs" />
     <Compile Include="Interfaces\ICustomerStatisticService.cs" />
     <Compile Include="Interfaces\IOrderdetailsStatisticService.cs" />
     <Compile Include="Interfaces\IOrderStatisticService.cs" />
@@ -83,7 +84,6 @@
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
     <Compile Include="Queries\CustomerQuery.cs" />
-    <Compile Include="Queries\OrderdetailsQuery.cs" />
     <Compile Include="Queries\OrderQuery.cs" />
     <Compile Include="Queries\ProductQuery.cs" />
     <Compile Include="Services\AdminService.cs" />
@@ -101,6 +101,7 @@
     <Compile Include="Services\ProductlineService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Statistic.cs" />
+    <Compile Include="StatisticServices\CountryStatisticService.cs" />
     <Compile Include="StatisticServices\CustomerStatisticService.cs" />
     <Compile Include="StatisticServices\OrderdetailsStatisticService.cs" />
     <Compile Include="StatisticServices\OrderStatisticService.cs" />

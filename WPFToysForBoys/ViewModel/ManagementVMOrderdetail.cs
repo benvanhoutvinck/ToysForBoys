@@ -88,7 +88,7 @@ namespace WPFToysForBoys.ViewModel
                     
                 }
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 MessageBox.Show("Identical object already exists in the database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }

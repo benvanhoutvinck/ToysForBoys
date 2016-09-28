@@ -148,7 +148,7 @@ namespace WPFToysForBoys.ViewModel
                 else
                     MessageBox.Show("No country selected for your customer", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 MessageBox.Show("Identical object already exists in the database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }

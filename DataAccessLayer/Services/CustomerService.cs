@@ -35,10 +35,7 @@ namespace DataAccessLayer.Services
                 {
                     entities.customers.Add(customer);
                     entities.SaveChanges();
-                }
-                
-
-                
+                }   
             }
         }
 

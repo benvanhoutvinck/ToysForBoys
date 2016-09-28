@@ -105,7 +105,7 @@ namespace WPFToysForBoys.ViewModel
                 //else
                   //  MessageBox.Show("Invalid Shipdate!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 MessageBox.Show("Identical object already exists in the database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
