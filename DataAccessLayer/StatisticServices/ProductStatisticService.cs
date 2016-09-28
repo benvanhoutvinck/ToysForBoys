@@ -13,10 +13,10 @@ namespace DataAccessLayer.Services
     {
         public int GetCountSold(int productlineID, int year = -1, int month = -1)
         {
-            using(var entities = new toysforboysEntities())
+            using (var entities = new toysforboysEntities())
             {
                 int count;
-                if (year!=-1)
+                if (year != -1)
                 {
                     if (month != -1)
                     {
@@ -66,9 +66,9 @@ namespace DataAccessLayer.Services
                     }
                 }
 
-                return count;                
+                return count;
 
-                
+
             }
         }
 
@@ -80,12 +80,12 @@ namespace DataAccessLayer.Services
                 switch ((int)productQuery.SortQuantity)
                 {
                     case 0:
-                        if (productQuery.minimumQuantity!=null)
+                        if (productQuery.minimumQuantity != null)
                         {
                             query = query.Where(p => p.quantityInStock >= productQuery.minimumQuantity);
                         }
 
-                        if (productQuery.maximumQuantity!=null)
+                        if (productQuery.maximumQuantity != null)
                         {
                             query = query.Where(p => p.quantityInStock <= productQuery.maximumQuantity);
                         }
@@ -103,11 +103,11 @@ namespace DataAccessLayer.Services
                         break;
                     default:
                         break;
-                                     
+
 
                 }
 
-                if (productQuery.minPrice!=null)
+                if (productQuery.minPrice != null)
                 {
                     query = query.Where(p => p.buyPrice >= productQuery.minPrice);
 
@@ -119,53 +119,97 @@ namespace DataAccessLayer.Services
 
                 }
 
-                if (productQuery.active!=null)
+                if (productQuery.active != null)
                 {
                     query = query.Where(p => p.active == productQuery.active);
                 }
-                
+
 
                 return query.ToList();
             }
         }
 
-       
 
-    public List<BestSoldProduct> GetProductsSortedByMostSold()
-    {
-        List<BestSoldProduct> products = new List<BestSoldProduct>();
 
-        using (var entities = new toysforboysEntities())
+        public List<BestSoldProduct> GetProductsSortedByMostSold(int productlineId, int month = -1, int year = -1)
         {
-            foreach (var product in entities.products)
+            List<BestSoldProduct> products = new List<BestSoldProduct>();
+
+            using (var entities = new toysforboysEntities())
             {
-                var query = from orderdetail in entities.orderdetails
-                            where orderdetail.productId == product.id
-                            select orderdetail;
-                var totalOrdered = query.AsEnumerable().Sum(od => od.quantityOrdered);
-                products.Add(new BestSoldProduct
+                foreach (var product in entities.products)
                 {
-                    id = product.id,
-                    name = product.name,
-                    active = product.active,
-                    buyPrice = product.buyPrice,
-                    description = product.description,
-                    productlineId = product.productlineId,
-                    quantityInOrder = product.quantityInOrder,
-                    quantityInStock = product.quantityInStock,
-                    scale = product.scale,
-                    QuantityOrdered = (int)totalOrdered
-                });
+                    int count;
+                    if (year != -1)
+                    {
+                        if (month != -1)
+                        {
+                            var query = from od in entities.orderdetails
+                                        join o in entities.orders on od.orderId equals o.id
+                                        where od.productId == product.id
+                                        && o.orderDate.Value.Year == year
+                                        && o.orderDate.Value.Month == month
+                                        select od;
 
+                            count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                        }
+                        else
+                        {
+                            var query = from od in entities.orderdetails
+                                        join o in entities.orders on od.orderId equals o.id
+                                        where od.productId == product.id
+                                        && o.orderDate.Value.Year == year
+                                        select od;
+
+                            count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                        }
+                    }
+                    else
+                    {
+                        if (month != -1)
+                        {
+                            var query = from od in entities.orderdetails
+                                        join o in entities.orders on od.orderId equals o.id
+                                        where od.productId == product.id
+                                        && o.orderDate.Value.Month == month
+                                        select od;
+
+                            count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                        }
+                        else
+                        {
+                            var query = from od in entities.orderdetails
+                                        where od.productId == product.id
+                                        select od;
+
+                            count = (int)query.AsEnumerable().Sum(od => od.quantityOrdered);
+                        }
+                    }
+
+                    var totalOrdered = count;
+                    products.Add(new BestSoldProduct
+                    {
+                        id = product.id,
+                        name = product.name,
+                        active = product.active,
+                        buyPrice = product.buyPrice,
+                        description = product.description,
+                        productlineId = product.productlineId,
+                        quantityInOrder = product.quantityInOrder,
+                        quantityInStock = product.quantityInStock,
+                        scale = product.scale,
+                        QuantityOrdered = (int)totalOrdered
+                    });
+
+                }
+
+                return products.OrderBy(p => p.QuantityOrdered).Reverse().ToList();
             }
-
-            return products.OrderBy(p => p.QuantityOrdered).Reverse().ToList();
         }
-    }
 
-        public List<BestSoldProduct> GetProductsSortedByLeastSold()
+        public List<BestSoldProduct> GetProductsSortedByLeastSold(int productlineId, int month = -1, int year = -1)
         {
-            var list = GetProductsSortedByMostSold().ToList();
+            var list = GetProductsSortedByMostSold(year:year, month: month, productlineId: productlineId).ToList();
             list.Reverse();
             return list;
         }

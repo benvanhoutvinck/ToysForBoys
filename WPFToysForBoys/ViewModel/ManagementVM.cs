@@ -78,6 +78,7 @@ namespace WPFToysForBoys.ViewModel
         public void ShipmentS()
         {
             View.ShipmentStatWindow shipmentView = new View.ShipmentStatWindow();
+            shipmentView.Show();
             
         }
         public RelayCommand ProductStatistics

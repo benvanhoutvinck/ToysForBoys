@@ -55,46 +55,36 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-        <StackPanel Width="400">
-            <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                <Label Content="Product ID:" Width="100"></Label>
-                <TextBox IsEnabled="False" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.id}"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                <Label Content="Productname:" Width="100"></Label>
-                <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.name}"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                <Label Content="Description:" Width="100"></Label>
-                <TextBox IsEnabled="True" VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.description}" TextWrapping="Wrap" Height="50"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                <Label Content="Scale:" Width="100"></Label>
-                <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.scale}"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                <Label Content="Productline:" Width="100"></Label>
-                <ComboBox Width="220" ItemsSource="{Binding PProductlineList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedPProductlineI}" SelectedValuePath="id"></ComboBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                <Label Content="InStock:" Width="100"></Label>
-                <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.quantityInStock}"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                <Label Content="InOrder:" Width="100"></Label>
-                <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.quantityInOrder}"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                <Label Content="Buy price:" Width="100"></Label>
-                <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.buyPrice}"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
-                                    Command="{Binding PAddCommand}"></Button>
-                <Button Content="New" Width="100" Command="{Binding PNewCommand}"></Button>
-                <Button Content="Delete" Width="100" Margin="10 0 0 0" Command="{Binding PDeleteCommand}"></Button>
-
-            </StackPanel>
+        <StackPanel Width="450">
+            <Button Width="395" Margin="25 75 25 10" Content="{Binding ProductListName}" Command="{Binding SortCommand}"></Button>
+            <ListBox Height="200" Width="395" Margin="25 5 25 10" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="360" ShowGridLines="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="240"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5 0" Width="50">
+                                <TextBlock Text="{Binding Path=id}"/>
+                            </Label>
+                            <Label Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Left" Margin="5 0" Width="230">
+                                <TextBlock Text="{Binding Path=name}"/>
+                            </Label>
+                            <Label Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" Margin="5 0" Width="50">
+                                <TextBlock Text="{Binding Path=countProductsSold}"/>
+                            </Label>
+                        </Grid>
+                        <!--<Border BorderBrush="Black" BorderThickness="1" Width="275">
+                                        <TextBlock Text="{Binding Path=name}"></TextBlock>
+                                    </Border>-->
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
     </StackPanel>
 </Window>
