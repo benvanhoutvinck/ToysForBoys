@@ -173,6 +173,17 @@ namespace WebFrontEnd.Controllers
                 else
                 {
                     cart = (ShoppingCart)this.Session["cart"];
+
+                    //Kijk of dit product reeds in het mandje ligt
+                    foreach (OrderViewModel f in ((ShoppingCart)this.Session["cart"]).orders)
+                    {
+                        //voorstelling gevonden
+                        if (f.Product.id == model.Product.id)
+                        {
+                            f.Aantal += model.Aantal;
+                        }
+
+                    }
                 }
                 Product product = productService.GetById(model.Product.id);
                 model.Product = product;

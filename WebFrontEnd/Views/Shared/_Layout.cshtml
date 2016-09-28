@@ -15,8 +15,6 @@
             {
                 using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                 {
-
-
                     <ul>
                         <li>
                             @Html.ActionLink("Hello " + ((DataAccessLayer.Customer)Session["customer"]).name + "!", "Edit", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
