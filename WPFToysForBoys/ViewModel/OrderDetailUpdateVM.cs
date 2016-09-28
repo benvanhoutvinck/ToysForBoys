@@ -121,39 +121,37 @@ namespace WPFToysForBoys.ViewModel
                 ShowOrderdetail.productId = SelectedPProductI;
                 if (SelectedPProductI >= 1)
                     if ((ShowOrderdetail.priceEach == null || ShowOrderdetail.priceEach > 0) && (ShowOrderdetail.quantityOrdered == null || ShowOrderdetail.quantityOrdered >= 0))
-                        if (ShowOrderdetail.productId != 0)//null)
+                    {
+                        ShowOrderdetail.orderId = OrderdetailList[0].orderId;
+                        if (!IdChecker.IdCheck(odList, ShowOrderdetail))
                         {
-                            if (!IdChecker.IdCheck(odList, ShowOrderdetail))
+                            odService.Insert(new Orderdetail()
                             {
-                                odService.Insert(new Orderdetail()
-                                {
-                                    orderId = OrderdetailList[0].orderId, //ShowOrderdetail.orderId,
-                                    productId = SelectedPProductI, // ShowOrderdetail.productId,
-                                    quantityOrdered = ShowOrderdetail.quantityOrdered,
-                                    priceEach = ShowOrderdetail.priceEach
-                                });
-                            }
-                            else
-                            {
-                                odService.Edit(new Orderdetail()
-                                {
-                                    orderId = ShowOrderdetail.orderId,
-                                    productId = SelectedPProductI, // ShowOrderdetail.productId,
-                                    quantityOrdered = ShowOrderdetail.quantityOrdered,
-                                    priceEach = ShowOrderdetail.priceEach
-                                });
-                            }
-                            odList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
-                            SelectedPProductI = SelectedPProductI;
-                            OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
-                            for (int i = 0; i < OrderdetailList.Count; i++)
-                            {
-                                OrderdetailList[i].product = pService.GetById(OrderdetailList[i].productId);
-                            }
-                            RefreshTab();
+                                orderId = OrderdetailList[0].orderId, //ShowOrderdetail.orderId,
+                                productId = SelectedPProductI, // ShowOrderdetail.productId,
+                                quantityOrdered = ShowOrderdetail.quantityOrdered,
+                                priceEach = ShowOrderdetail.priceEach
+                            });
                         }
                         else
-                            MessageBox.Show("Invalid product name!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        {
+                            odService.Edit(new Orderdetail()
+                            {
+                                orderId = ShowOrderdetail.orderId,
+                                productId = SelectedPProductI, // ShowOrderdetail.productId,
+                                quantityOrdered = ShowOrderdetail.quantityOrdered,
+                                priceEach = ShowOrderdetail.priceEach
+                            });
+                        }
+                        odList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
+                        SelectedPProductI = SelectedPProductI;
+                        OrderdetailList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(ShowOrderdetail.orderId));
+                        for (int i = 0; i < OrderdetailList.Count; i++)
+                        {
+                            OrderdetailList[i].product = pService.GetById(OrderdetailList[i].productId);
+                        }
+                        RefreshTab();
+                    }
                     else
                         MessageBox.Show("Invalid Quantities/price!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 else
