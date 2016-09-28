@@ -111,16 +111,13 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Product> GetAll(Func<Product, bool> predicate, string includes)
         {
-            List<Product> AllProducts = new List<Product>();
+           
             using (var entities = new toysforboysEntities())
             {
-                foreach (var Product in (String.IsNullOrEmpty(includes) ? entities.products : entities.products.Include(includes)).Where(predicate))
-                {
-                    AllProducts.Add((Product)Product);
-                }
+                return entities.products.Include(includes).Where(predicate);
             }
 
-            return AllProducts;
+            
         }
 
         public OrderedProduct CreateOrderedProduct(string productName, int quantityOrdered, decimal priceEach)

@@ -91,16 +91,13 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Admin> GetAll(Func<Admin, bool> predicate, string includes)
         {
-            List<Admin> AllAdmins = new List<Admin>();
+            
             using (var entities = new toysforboysEntities())
             {
-                foreach (var admin in (String.IsNullOrEmpty(includes) ? entities.admins : entities.admins.Include(includes)).Where(predicate))
-                {
-                    AllAdmins.Add((Admin)admin);
-                }
+                return entities.admins.Include(includes).Where(predicate);
             }
 
-            return AllAdmins;
+            
         }
 
         public Admin GetById(int adminId)

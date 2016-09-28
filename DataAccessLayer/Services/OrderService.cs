@@ -79,16 +79,13 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Order> GetAll(Func<Order, bool> predicate, string includes)
         {
-            List<Order> Allorders = new List<Order>();
+            
             using (var entities = new toysforboysEntities())
             {
-                foreach (var order in (String.IsNullOrEmpty(includes) ? entities.orders : entities.orders.Include(includes)).Where(predicate))
-                {
-                    Allorders.Add((Order)order);
-                }
+                return entities.orders.Include(includes).Where(predicate);
             }
 
-            return Allorders;
+            
         }
 
         public Order GetById(int orderID)
