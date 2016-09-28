@@ -1,19 +1,38 @@
 ﻿@model IEnumerable<WebFrontEnd.Models.ProductListItem>
 
+
 <div class="container">
     <div id="products" class="row list-group">
-           @if(Model.Count() == 0)
-           {
-               <div>
-                   No products were found by your search criteria
-               </div>
-           }
+        @if (Model.Count() == 0)
+        {
+            <div>
+                No products were found by your search criteria
+            </div>
+        }
 
-           @foreach (var item in Model)
-           {
-                @Html.Partial("_Detail", item)
-           }
+        @{
+            int page = ViewBag.Page;
+            List<int> array = new List<int>(2);
+            array.Add(page);
+            array.Add(Model.Count());
+            @Html.Partial("_pagination", array)
+            int count = 1;
+            foreach (var item in Model)
+            {
+                if ((page - 1) * 12 < count)
+                {
+                    if (count <= page * 12)
+                    {
+                        @Html.Partial("_Detail", item)
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                count++;
+            }
+            @Html.Partial("_pagination", array)
+        }
     </div>
 </div>
-
-
