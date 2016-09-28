@@ -131,18 +131,25 @@ namespace WPFToysForBoys.ViewModel
         }
         private void OrderDetail2()
         {
-            View.OrderdetailupdateWindow orderview = new View.OrderdetailupdateWindow();
-            List<Orderdetail> od = oService.GetOrderDetails(ShowOrder).ToList();
-            List<Product> pl = oService.GetProducts(ShowOrder).ToList();
-            foreach (Orderdetail o in od)
-                foreach (Product p in pl)
-                {
-                    if (o.productId == p.id)
-                        o.product = p;
-                }
-            ViewModel.OrderDetailUpdateVM ovm = new OrderDetailUpdateVM(od);
-            orderview.DataContext = ovm;
-            orderview.Show();
+            if (ShowOrder != null && ShowOrder.id > 0)
+            {
+                View.OrderdetailupdateWindow orderview = new View.OrderdetailupdateWindow();
+                List<Orderdetail> od = oService.GetOrderDetails(ShowOrder).ToList();
+                List<Product> pl = oService.GetProducts(ShowOrder).ToList();
+                foreach (Orderdetail o in od)
+                    foreach (Product p in pl)
+                    {
+                        if (o.productId == p.id)
+                            o.product = p;
+                    }
+                ViewModel.OrderDetailUpdateVM ovm = new OrderDetailUpdateVM(od);
+                orderview.DataContext = ovm;
+                orderview.Show();
+            }
+            else
+            {
+                MessageBox.Show("Choose an order for updating!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
 
