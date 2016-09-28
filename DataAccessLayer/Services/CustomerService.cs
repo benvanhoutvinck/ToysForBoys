@@ -11,7 +11,7 @@ namespace DataAccessLayer.Services
 {
     public class CustomerService : ICustomerService
     {
-        private Regex passwordRegex = new Regex(@"^.{1,21}$");
+        private Regex passwordRegex = new Regex(@"^.{1,20}$");
         public void Insert(Customer customer)
         {
             using (var entities = new toysforboysEntities())

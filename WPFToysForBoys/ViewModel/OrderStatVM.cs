@@ -425,7 +425,7 @@ namespace WPFToysForBoys.ViewModel
             }
 
 
-            this.Shipments = OrderList.FindAll(o => OrderStat.OverdueShipment(o.requiredDate, o.shippedDate)).Count;
+            this.Shipments = OrderList.FindAll(o => (OrderStat.OverdueShipment(o.requiredDate, o.shippedDate) /*|| (o.shippedDate == null && o.requiredDate.Value.CompareTo(DateTime.Today) < 0 && (o.status.Equals("WAITING") || o.status.Equals("PROCESSING")))*/)).Count;
 
             this.Cancelled = OrderList.FindAll(o => o.status.Equals("CANCELLED")).Count;
         }

@@ -52,14 +52,33 @@ namespace WebFrontEnd.Controllers
                    );
             }
 
-            productListViewModel.Products = productList;
-            productListViewModel.FilterProductLines = productListViewModel.AllProductLines.Select(pl => pl.id).ToList();
+            if (this.Session["filters"] == null)
+            {
+                productListViewModel.Products = productList;
+                productListViewModel.FilterProductLines = productListViewModel.AllProductLines.Select(pl => pl.id).ToList();
+            }
+            else
+            {
+                return List((ProductListViewModel)this.Session["filters"], id);
+
+            }
 
             return View(productListViewModel);
         }
         [HttpPost]
-        public ActionResult List([ModelBinder(typeof(Infrastructure.ProductListViewModelBinder))] Models.ProductListViewModel model)
+        public ActionResult List([ModelBinder(typeof(Infrastructure.ProductListViewModelBinder))] Models.ProductListViewModel model, int? id)
         {
+
+
+            if (id == null || (ProductListViewModel)this.Session["filters"] != model)
+            {
+                ViewBag.Page = 1;
+            }
+            else
+            {
+                ViewBag.Page = id;
+            }
+
             var productLines = productLineService.GetAll();
             IEnumerable<Product> products;
 
@@ -124,6 +143,8 @@ namespace WebFrontEnd.Controllers
 
             model.Products = productList;
 
+            this.Session["filters"] = model;
+
             return View(model);
         }
 
@@ -173,6 +194,17 @@ namespace WebFrontEnd.Controllers
                 else
                 {
                     cart = (ShoppingCart)this.Session["cart"];
+
+                    //Kijk of dit product reeds in het mandje ligt
+                    foreach (OrderViewModel f in ((ShoppingCart)this.Session["cart"]).orders)
+                    {
+                        //voorstelling gevonden
+                        if (f.Product.id == model.Product.id)
+                        {
+                            f.Aantal += model.Aantal;
+                        }
+
+                    }
                 }
                 Product product = productService.GetById(model.Product.id);
                 model.Product = product;

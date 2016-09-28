@@ -5,8 +5,19 @@
 
 @*code snippet taken from here: http://bootsnipp.com/snippets/featured/product-page-for-online-shop *@
 
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
 <div class="container-fluid">
     <div class="content-wrapper">
+        <p>
+            <button class="btn" onclick="goBack()">
+                Back to list
+            </button>
+        </p>
         <div class="item-container">
             <div class="container">
                 <div class="col-md-12">
@@ -47,12 +58,16 @@
                             <text>out of stock</text>
                         }
                     </div>
-                    @using (Html.BeginForm("AddToCart", "Product", FormMethod.Post))
+                    @using (Html.BeginForm("AddToCart", "Product", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
-                        <div>
-                            Qty: @Html.TextBoxFor(model => model.Aantal, new { @class = "form-control" })
+                        <div class="form-group clearfix">
+                            <label for="qty" class="col-sm-1 control-label">Qty:</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.Aantal, new { @class = "form-control", placeholder = "qty" })
+                            </div>
                             @Html.ValidationMessageFor(model => model.Aantal)
                         </div>
+                      
 
                         <hr>
                         <div class="btn-group cart">

@@ -79,16 +79,19 @@ namespace WPFToysForBoys.ViewModel
 
         private void GetProduct()
         {
-            if (sort)
-            {
-                ProductList = pService.GetProductsSortedByMostSold(SelectedProductline.id, SelectedMonth, SelectedYear);
-                ProductListName = "Products sorted by most sold (click to reverse sorting)";
-            }
+            if (SelectedProductline != null)
+                if (sort)
+                {
+                    ProductList = pService.GetProductsSortedByMostSold(SelectedProductline.id, SelectedMonth, SelectedYear);
+                    ProductListName = "Products sorted by most sold (click to reverse sorting)";
+                }
+                else
+                {
+                    ProductList = pService.GetProductsSortedByLeastSold(SelectedProductline.id, SelectedMonth, SelectedYear);
+                    ProductListName = "Products sorted by least sold (click to reverse sorting)";
+                }
             else
-            {
-                ProductList = pService.GetProductsSortedByLeastSold(SelectedProductline.id, SelectedMonth, SelectedYear);
-                ProductListName = "Products sorted by least sold (click to reverse sorting)";
-            }
+                ProductlineList = new List<ProductStatStruct>();
         }
 
         private List<BestSoldProduct> productList;
@@ -113,6 +116,8 @@ namespace WPFToysForBoys.ViewModel
             }
             catch (NotImplementedException) { }
 
+            GetBestMonth();
+            GetProduct();
             ProductlineList = prod;
         }
 
@@ -181,7 +186,52 @@ namespace WPFToysForBoys.ViewModel
             {
                 selectedProductline = value;
                 GetProduct();
+                GetBestMonth();
                 RaisePropertyChanged("SelectedProductline");
+            }
+        }
+
+        private void GetBestMonth()
+        {
+            if (SelectedProductline == null)
+                BestMonth = "";
+            else
+            {
+                if (SelectedYear == -1)
+                    BestMonth = "";
+                else
+                {
+                    List<MonthStruct> list = new List<MonthStruct>() { new MonthStruct() { month = 1, display = "January" }, new MonthStruct() { month = 2, display = "February" }, new MonthStruct() { month = 3, display = "March" }, new MonthStruct() { month = 4, display = "April" }, new MonthStruct() { month = 5, display = "May" }, new MonthStruct() { month = 6, display = "June" }, new MonthStruct() { month = 7, display = "July" }, new MonthStruct() { month = 8, display = "August" }, new MonthStruct() { month = 9, display = "September" }, new MonthStruct() { month = 10, display = "October" }, new MonthStruct() { month = 11, display = "November" }, new MonthStruct() { month = 12, display = "December" } };
+
+                    int max = 0, id = 0;
+
+                    for (int i = 1; i <= 12; i++)
+                    {
+                        int count = pService.GetCountSold(SelectedProductline.id, SelectedYear, i);
+                        if (max < count)
+                        {
+                            max = count;
+                            id = i;
+                        }
+                    }
+
+                    if (id > 0)
+                        BestMonth = list[id].display;
+                    else
+                        BestMonth = "";
+                }
+            }
+
+        }
+
+        private string bestMonth;
+        public string BestMonth
+        {
+            get { return bestMonth; }
+            set
+            {
+                bestMonth = value;
+                RaisePropertyChanged("BestMonth");
             }
         }
 

@@ -8,7 +8,7 @@
         <div class="media">
             <a class="thumbnail pull-left" href="#"> <img class="media-object" src="@Html.GetImageSourceForProductline(Model.Product.productlineId)" style="width: 72px; height: 72px;"> </a>
             <div class="media-body">
-                <h4 class="media-heading"><a href="#">@Html.DisplayFor(m => m.Product.name)</a></h4>
+                <h4 class="media-heading"><a href="~/Product/Buy/@Model.Product.id">@Html.DisplayFor(m => m.Product.name)</a></h4>
                 <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
                 <span>Status: </span><span class="text-success">
 
@@ -29,6 +29,7 @@
     </td>
     <td class="col-sm-1 col-md-1" style="text-align: center">
         @Html.TextBoxFor(m => m.Aantal, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Aantal)
        
     </td>
     <td class="col-sm-1 col-md-1 text-center"><strong>@Html.DisplayFor(m => m.Product.buyPrice)</strong></td>
