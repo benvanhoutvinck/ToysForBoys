@@ -164,17 +164,17 @@ namespace Tests
         [TestMethod]
         public void GetBestSoldProductTest()
         {
-            //var service = new ProductStatisticService();
-            //var products = service.GetProductsSortedByMostSold();
-            //Assert.IsNotNull(products);
+            var service = new ProductStatisticService();
+            var products = service.GetProductsSortedByMostSold(1);
+            Assert.IsNotNull(products);
         }
 
         [TestMethod]
         public void GetLeastSoldProducts()
         {
-            //var service = new ProductStatisticService();
-            //var products = service.GetProductsSortedByLeastSold();
-            //Assert.IsNotNull(products);
+            var service = new ProductStatisticService();
+            var products = service.GetProductsSortedByLeastSold(0);
+            Assert.IsNotNull(products);
         }
 
         [TestMethod]

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WPFToysForBoys.Mock;
 using WPFToysForBoys.Model;
 
 namespace WPFToysForBoys.ViewModel
@@ -52,6 +51,7 @@ namespace WPFToysForBoys.ViewModel
             SelectedMonth = -1;
             SelectedYear = -1;
             sort = true;
+            ProductListName = "Products sorted by most sold";
         }
 
         private bool sort;
@@ -73,20 +73,21 @@ namespace WPFToysForBoys.ViewModel
 
         public void SortProduct()
         {
-            GetProduct();
-
             sort = !sort;
+            GetProduct();
         }
 
         private void GetProduct()
         {
             if (sort)
             {
-                ProductList = pService.GetProductsSortedByMostSold(SelectedMonth, SelectedYear);
+                ProductList = pService.GetProductsSortedByMostSold(SelectedProductline.id, SelectedMonth, SelectedYear);
+                ProductListName = "Products sorted by most sold (click to reverse sorting)";
             }
             else
             {
-                ProductList = pService.GetProductsSortedByMostSold(SelectedMonth, SelectedYear);
+                ProductList = pService.GetProductsSortedByLeastSold(SelectedProductline.id, SelectedMonth, SelectedYear);
+                ProductListName = "Products sorted by least sold (click to reverse sorting)";
             }
         }
 

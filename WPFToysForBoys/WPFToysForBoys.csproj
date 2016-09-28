@@ -90,8 +90,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IdChecker.cs" />
-    <Compile Include="Mock\OrderStatMock.cs" />
-    <Compile Include="Mock\ProductStatisticServiceMock.cs" />
     <Compile Include="Model\OrderStat.cs" />
     <Compile Include="Model\ProductStatStruct.cs" />
     <Compile Include="ViewModel\CountryCustomerVM.cs" />
@@ -208,7 +206,9 @@
       <Name>DataAccessLayer</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Mock\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

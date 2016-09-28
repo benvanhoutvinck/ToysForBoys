@@ -73,10 +73,10 @@
                                 <TextBlock Text="{Binding Path=id}"/>
                             </Label>
                             <Label Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Left" Margin="5 0" Width="230">
-                                <TextBlock Text="{Binding Path=name}"/>
+                                <TextBlock Text="{Binding Path=name}" ToolTip="{Binding Path=name}"/>
                             </Label>
                             <Label Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" Margin="5 0" Width="50">
-                                <TextBlock Text="{Binding Path=countProductsSold}"/>
+                                <TextBlock Text="{Binding Path=QuantityOrdered}"/>
                             </Label>
                         </Grid>
                         <!--<Border BorderBrush="Black" BorderThickness="1" Width="275">
