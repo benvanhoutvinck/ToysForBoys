@@ -181,7 +181,7 @@ namespace WebFrontEnd.Controllers
                 this.Session["cart"] = cart;
             }
 
-            return View();
+            return RedirectToAction("ViewCart", "Checkout");
         }
 
     }
