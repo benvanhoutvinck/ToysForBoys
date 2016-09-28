@@ -45,21 +45,29 @@ namespace WebFrontEnd.Views.Checkout
             this.Session["cart"] = cart;
         }
 
-        public ActionResult RefreshCart(string button, List<OrderViewModel> orders) 
+        public ActionResult RefreshCart(string button, List<OrderViewModel> orders)
         {
             ShoppingCart cart = (ShoppingCart)this.Session["cart"];
 
-            for (int i = 0; i < orders.Count(); i++)
+            if (cart != null)
             {
-                cart.orders[i].Aantal = orders[i].Aantal;
+
+                for (int i = 0; i < orders.Count(); i++)
+                {
+                    cart.orders[i].Aantal = orders[i].Aantal;
+                }
+
+                this.Session["cart"] = cart;
+
+                if (button == "refresh")
+                    return RedirectToAction("ViewCart");
+                else
+                    return RedirectToAction("Checkout");
             }
-
-            this.Session["cart"] = cart;
-
-            if (button == "refresh")
-                return RedirectToAction("ViewCart");
             else
-                return RedirectToAction("Checkout");
+            {
+                return RedirectToAction("ViewCart");
+            }
         }
 
         public ActionResult Checkout()
@@ -74,11 +82,11 @@ namespace WebFrontEnd.Views.Checkout
             foreach (OrderViewModel vm in cart.orders)
             {
                 Order order = new Order();
-                order.customer = (Customer) this.Session["customer"];
-               
+                order.customer = (Customer)this.Session["customer"];
+
             }
             return View();
         }
-       
+
     }
 }

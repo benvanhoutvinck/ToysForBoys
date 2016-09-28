@@ -36,10 +36,10 @@ namespace DataAccessLayer.Services
             {
                 var originalProductline = entities.productlines.Find(productline.id);
 
-                if(productline.name!=string.Empty)
+                if (productline.name != string.Empty)
                     originalProductline.name = productline.name;
 
-                if(productline.description!=string.Empty)
+                if (productline.description != string.Empty)
                     originalProductline.description = productline.description;
 
                 entities.SaveChanges();
@@ -82,20 +82,38 @@ namespace DataAccessLayer.Services
         {
             return GetAll(c => true, includes);
         }
-        
+
         public IEnumerable<Productline> GetAll(Func<Productline, bool> predicate, string includes)
         {
+            if (includes == "")
+                includes = null;
+
             List<Productline> AllProductlines = new List<Productline>();
             using (var entities = new toysforboysEntities())
             {
-                
-                foreach (var Productline in (String.IsNullOrEmpty(includes) ? entities.productlines : entities.productlines.Include(includes)).Where(predicate))
+
+                if (predicate == null && includes == null)
                 {
-                    AllProductlines.Add((Productline) Productline);
+                    return entities.productlines.ToList();
                 }
+                else if (predicate != null && includes == null)
+                {
+                    return entities.productlines.Where(predicate).ToList();
+                }
+                else if (predicate == null && includes != null)
+                {
+                    return entities.productlines.Include(includes).ToList();
+                }
+                else if (predicate != null && includes != null)
+                {
+                    return entities.productlines.Include(includes).Where(predicate).ToList();
+                }
+
+                return null;
+
             }
 
-            return AllProductlines;
+
         }
     }
 }
