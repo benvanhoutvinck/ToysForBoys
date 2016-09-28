@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WPFToysForBoys.Mock;
 using WPFToysForBoys.Model;
 
 namespace WPFToysForBoys.ViewModel
@@ -23,7 +22,7 @@ namespace WPFToysForBoys.ViewModel
         {
             plService = new ProductlineService();
             pService = new ProductStatisticService();
-            oService = new OrderStatMock();
+            oService = new OrderStatisticService();
 
             {
                 List<YearStruct> yl = new List<YearStruct>() { new YearStruct() { year = -1, display = "---All---" } };
@@ -51,6 +50,56 @@ namespace WPFToysForBoys.ViewModel
 
             SelectedMonth = -1;
             SelectedYear = -1;
+            sort = true;
+            ProductListName = "Products sorted by most sold";
+        }
+
+        private bool sort;
+        private string productListName;
+        public string ProductListName
+        {
+            get { return productListName; }
+            set
+            {
+                productListName = value;
+                RaisePropertyChanged("ProductListName");
+            }
+        }
+
+        public RelayCommand SortCommand
+        {
+            get { return new RelayCommand(SortProduct); }
+        }
+
+        public void SortProduct()
+        {
+            sort = !sort;
+            GetProduct();
+        }
+
+        private void GetProduct()
+        {
+            if (sort)
+            {
+                ProductList = pService.GetProductsSortedByMostSold(SelectedProductline.id, SelectedMonth, SelectedYear);
+                ProductListName = "Products sorted by most sold (click to reverse sorting)";
+            }
+            else
+            {
+                ProductList = pService.GetProductsSortedByLeastSold(SelectedProductline.id, SelectedMonth, SelectedYear);
+                ProductListName = "Products sorted by least sold (click to reverse sorting)";
+            }
+        }
+
+        private List<BestSoldProduct> productList;
+        public List<BestSoldProduct> ProductList
+        {
+            get { return productList; }
+            set
+            {
+                productList = value;
+                RaisePropertyChanged("ProductList");
+            }
         }
 
         private void ProductlineListRefresh()
@@ -131,6 +180,7 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 selectedProductline = value;
+                GetProduct();
                 RaisePropertyChanged("SelectedProductline");
             }
         }

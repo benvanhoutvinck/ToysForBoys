@@ -5,8 +5,19 @@
 
 @*code snippet taken from here: http://bootsnipp.com/snippets/featured/product-page-for-online-shop *@
 
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
 <div class="container-fluid">
     <div class="content-wrapper">
+        <p>
+            <button class="btn" onclick="goBack()">
+                Back to list
+            </button>
+        </p>
         <div class="item-container">
             <div class="container">
                 <div class="col-md-12">

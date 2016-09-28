@@ -305,8 +305,8 @@
                 <StackPanel Width="400">
                     <Button Content="Customers by Country" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding CountryCustomer}"/>
                     <Button Content="Product Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding ProductStatistics}"/>
-                    <Button Content="Shipment Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding OrderStatCommand}"/>
-                    <Button Content="Order Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding NotImplementedCommand}"/>
+                    <Button Content="Shipment Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding ShipmentStatistics}"/>
+                    <Button Content="Order Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding OrderStatCommand}"/>
                 </StackPanel>
             </TabItem>
         </TabControl>

@@ -24,6 +24,8 @@ namespace WPFToysForBoys.ViewModel
 
         private List<Orderdetail> orderdetailList;
         private List<Orderdetail> odList;
+        private List<Product> productList;
+
         public List<Orderdetail> OrderdetailList
         {
             get { return orderdetailList; }
@@ -43,6 +45,7 @@ namespace WPFToysForBoys.ViewModel
             odList = odService.GetAll().ToList().FindAll(odetail => odetail.orderId.Equals(nOrderdetailList[0].orderId));
             PProductList = new List<Product>() { new Product() { id = -1, name = "All" } };
             PProductList = pService.GetAll("productline").ToList();
+            productList = pService.GetAll("productline").ToList();
             //SelectedProduct = ProductList.First();
             SelectedPProductI = -1;
         }
@@ -62,11 +65,27 @@ namespace WPFToysForBoys.ViewModel
                 {
                     selectedOrderdetail = value;
                     ShowOrderdetail = value;
+                    for (int i = 0; i < productList.Count; i++)
+                    {
+                        if (productList[i].id == ShowOrderdetail.productId)
+                            ShowProduct = ShowOrderdetail.product;
+                    }
                     RaisePropertyChanged("SelectedOrderdetail");
                 }
 
             }
         }
+
+        public void UpdateProduct()
+        {
+            for (int i = 0; i < productList.Count; i++)
+            {
+                if (productList[i].id == ShowOrderdetail.productId)
+                    ShowProduct = ShowOrderdetail.product;
+            }
+        }
+
+
 
         private Orderdetail showOrderdetail;
         public Orderdetail ShowOrderdetail
@@ -109,6 +128,20 @@ namespace WPFToysForBoys.ViewModel
                 RaisePropertyChanged("PProductList");
             }
         }
+
+        private Product showProduct;
+        public Product ShowProduct
+        {
+            get { return showProduct; }
+            set
+            {
+                showProduct = value;
+                RaisePropertyChanged("showProduct");
+            }
+        }
+
+
+
 
         public RelayCommand ODAddCommand
         {
@@ -215,6 +248,7 @@ namespace WPFToysForBoys.ViewModel
         private void ODNew()
         {
             SelectedOrderdetail = null;
+            ShowProduct = null;
         }
 
         private void RefreshTab()

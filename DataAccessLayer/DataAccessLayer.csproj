@@ -70,6 +70,7 @@
     <Compile Include="Interfaces\IOrderdetailsStatisticService.cs" />
     <Compile Include="Interfaces\IOrderStatisticService.cs" />
     <Compile Include="Interfaces\IProductStatisticService.cs" />
+    <Compile Include="Interfaces\IShippingService.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
@@ -100,6 +101,8 @@
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductlineService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\ShippingService.cs" />
+    <Compile Include="ShippingDetails.cs" />
     <Compile Include="Statistic.cs" />
     <Compile Include="StatisticServices\CountryStatisticService.cs" />
     <Compile Include="StatisticServices\CustomerStatisticService.cs" />

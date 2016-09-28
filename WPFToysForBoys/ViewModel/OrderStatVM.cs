@@ -10,6 +10,8 @@ using DataAccessLayer.Services;
 using WPFToysForBoys.Model;
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
+using Microsoft.Win32;
+using System.IO;
 
 namespace WPFToysForBoys.ViewModel
 {
@@ -62,6 +64,94 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
+        private int orderCount;
+        public int OrderCount
+        {
+            get { return orderCount; }
+            set
+            {
+                orderCount = value;
+                RaisePropertyChanged("OrderCount");
+            }
+        }
+
+        private int customerCount;
+        public int CustomerCount
+        {
+            get { return customerCount; }
+            set
+            {
+                customerCount = value;
+                RaisePropertyChanged("CustomerCount");
+            }
+        }
+
+        private int disputedOrders;
+        public int DisputedOrders
+        {
+            get { return disputedOrders; }
+            set
+            {
+                disputedOrders = value;
+                RaisePropertyChanged("DisputedOrders");
+            }
+        }
+
+        private int shipments;
+        public int Shipments
+        {
+            get { return shipments; }
+            set
+            {
+                shipments = value;
+                RaisePropertyChanged("Shipments");
+            }
+        }
+
+        private int cancelled;
+        public int Cancelled
+        {
+            get { return cancelled; }
+            set
+            {
+                cancelled = value;
+                RaisePropertyChanged("Cancelled");
+            }
+        }
+
+        private decimal disputedOrdersPercentage;
+        public decimal DisputedOrdersPercentage
+        {
+            get { return disputedOrdersPercentage; }
+            set
+            {
+                disputedOrdersPercentage = value;
+                RaisePropertyChanged("DisputedOrdersPercentage");
+            }
+        }
+
+        private decimal totalRevenue;
+        public decimal TotalRevenue
+        {
+            get { return totalRevenue; }
+            set
+            {
+                totalRevenue = value;
+                RaisePropertyChanged("TotalRevenue");
+            }
+        }
+
+        private decimal averageRevenue;
+        public decimal AverageRevenue
+        {
+            get { return averageRevenue; }
+            set
+            {
+                averageRevenue = value;
+                RaisePropertyChanged("AverageRevenue");
+            }
+        }
+
         private DateTime dateRangeStart;
         public DateTime DateRangeStart
         {
@@ -89,6 +179,17 @@ namespace WPFToysForBoys.ViewModel
             }
         }
 
+        private bool dateBox;
+        public bool DateBox
+        {
+            get { return dateBox; }
+            set
+            {
+                dateBox = value;
+                RaisePropertyChanged("DateBox");
+            }
+        }
+
         private SortDateEnum? sortDateRange;
         public SortDateEnum? SortDateRange
         {
@@ -96,6 +197,10 @@ namespace WPFToysForBoys.ViewModel
             set
             {
                 sortDateRange = value;
+                if (value == null)
+                    DateBox = false;
+                else
+                    DateBox = true;
                 RaisePropertyChanged("SortDateRange");
             }
         }
@@ -223,6 +328,22 @@ namespace WPFToysForBoys.ViewModel
 
         private void Filter()
         {
+            if (SortDateRange != null)
+                if (this.DateRangeStart.CompareTo(this.DateRangeEnd) <= 0)
+                {
+                    Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("You have selected an invalid Date Range!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+            else
+                Refresh();
+
+        }
+
+        private void Refresh()
+        {
             List<Order> ol;
 
             if (string.IsNullOrWhiteSpace(Status) || "ALL".Equals(this.Status))
@@ -254,7 +375,7 @@ namespace WPFToysForBoys.ViewModel
                 });
             }
 
-            
+
 
             List<OrderStat> os = new List<OrderStat>();
 
@@ -262,6 +383,51 @@ namespace WPFToysForBoys.ViewModel
                 os.Add(new OrderStat(o));
 
             OrderStatList = os;
+
+
+            CalcStats(os);
+        }
+
+        private void CalcStats(List<OrderStat> OrderList)
+        {
+            this.OrderCount = OrderList.Count;
+
+            {
+                List<Customer> cl = new List<Customer>();
+
+                foreach (OrderStat os in OrderList)
+                    cl.Add(os.customer);
+
+                this.CustomerCount = cl.Distinct(new CustomerCompare()).Count();
+            }
+
+            this.DisputedOrders = OrderList.FindAll(o => o.status.Equals("DISPUTED")).Count;
+            if (this.OrderCount > 0)
+                this.DisputedOrdersPercentage = ((decimal)this.DisputedOrders) / this.OrderCount;
+            else
+                this.DisputedOrdersPercentage = 0;
+
+            {
+                decimal count = 0;
+
+                foreach (OrderStat os in OrderList.FindAll(o => !o.status.Equals("CANCELLED")))
+                    count += os.revenue;
+
+                this.TotalRevenue = count;
+            }
+            {
+                int count = OrderList.FindAll(o => !o.status.Equals("CANCELLED")).Count;
+
+                if (count > 0)
+                    this.AverageRevenue = this.TotalRevenue / count;
+                else
+                    this.AverageRevenue = 0;
+            }
+
+
+            this.Shipments = OrderList.FindAll(o => OrderStat.OverdueShipment(o.requiredDate, o.shippedDate)).Count;
+
+            this.Cancelled = OrderList.FindAll(o => o.status.Equals("CANCELLED")).Count;
         }
 
         private List<OrderStat> orderStatList;
@@ -277,12 +443,128 @@ namespace WPFToysForBoys.ViewModel
 
         public RelayCommand SaveCommand
         {
-            get { return new RelayCommand(NotImplementedC); }
+            get { return new RelayCommand(SaveRapport); }
         }
 
         public RelayCommand LoadCommand
         {
-            get { return new RelayCommand(NotImplementedC); }
+            get { return new RelayCommand(LoadRapport); }
+        }
+
+        private void SaveRapport()
+        {
+            try
+            {
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.FileName = QueryName;
+                dlg.DefaultExt = ".rapport";
+                dlg.Filter = "Rapport Queries |*.rapport";
+                if (dlg.ShowDialog() == true)
+                {
+                    using (StreamWriter file = new StreamWriter(dlg.FileName))
+                    {
+                        file.WriteLine(QueryName);
+                        file.WriteLine(SortDateRange.ToString());
+                        file.WriteLine(DateRangeStart.ToString());
+                        file.WriteLine(DateRangeEnd.ToString());
+                        file.WriteLine(SCustomer.ToString());
+                        file.WriteLine(Status);
+                        file.WriteLine(DateCompareLeft.ToString());
+                        file.WriteLine(DateCompareMode.ToString());
+                        file.WriteLine(DateCompareRight.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("opslaan mislukt: " + ex.Message);
+            }
+        }
+
+        private void LoadRapport()
+        {
+            try
+            {
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.DefaultExt = ".rapport";
+                dlg.Filter = "Rapport Queries |*.rapport";
+                if (dlg.ShowDialog() == true)
+                {
+                    using (StreamReader bestand = new StreamReader(dlg.FileName))
+                    {
+                        QueryName = bestand.ReadLine();
+                        var lijn = bestand.ReadLine();
+                        switch (lijn)
+                        {
+                            case "orderDate":
+                                SortDateRange = SortDateEnum.orderDate;
+                                break;
+                            case "requiredDate":
+                                SortDateRange = SortDateEnum.requiredDate;
+                                break;
+                            case "shippedDate":
+                                SortDateRange = SortDateEnum.shippedDate;
+                                break;
+                            default:
+                                SortDateRange = null;
+                                break;
+                        }
+
+                        DateRangeStart = DateTime.Parse(bestand.ReadLine());
+                        DateRangeEnd = DateTime.Parse(bestand.ReadLine());
+
+                        int c;
+                        if (!int.TryParse(bestand.ReadLine(), out c))
+                            SCustomer = null;
+                        else
+                            SCustomer = c;
+
+                        Status = bestand.ReadLine();
+
+                        lijn = bestand.ReadLine();
+                        switch (lijn)
+                        {
+                            case "orderDate":
+                                DateCompareLeft = SortDateEnum.orderDate;
+                                break;
+                            case "requiredDate":
+                                DateCompareLeft = SortDateEnum.requiredDate;
+                                break;
+                            case "shippedDate":
+                                DateCompareLeft = SortDateEnum.shippedDate;
+                                break;
+                            default:
+                                DateCompareLeft = null;
+                                break;
+                        }
+                        
+                        DateCompareMode = bestand.ReadLine()[0];
+
+                        lijn = bestand.ReadLine();
+                        switch (lijn)
+                        {
+                            case "orderDate":
+                                DateCompareRight = SortDateEnum.orderDate;
+                                break;
+                            case "requiredDate":
+                                DateCompareRight = SortDateEnum.requiredDate;
+                                break;
+                            case "shippedDate":
+                                DateCompareRight = SortDateEnum.shippedDate;
+                                break;
+                            default:
+                                DateCompareRight = null;
+                                break;
+                        }
+                    }
+
+                    Filter();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("openen mislukt : " + ex.Message);
+            }
         }
 
         private void NotImplementedC()

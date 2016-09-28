@@ -53,12 +53,19 @@ namespace WebFrontEnd.Controllers
         public ActionResult Edit()
         {
             Customer cust = (Customer)this.Session["customer"];
-            cust = customerService.GetById(cust.id);
-            CustomerViewModel customerViewModel = new CustomerViewModel(cust);
+            if (cust != null)
+            {
+                cust = customerService.GetById(cust.id);
+                CustomerViewModel customerViewModel = new CustomerViewModel(cust);
 
-            ViewBag.Countries = getCountriesList();
+                ViewBag.Countries = getCountriesList();
 
-            return View(customerViewModel);
+                return View(customerViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { returnUrl = "Account/Edit" } );
+            }
         }
         [HttpPost]
         public ActionResult Edit(CustomerViewModel custViewModel)
@@ -94,7 +101,7 @@ namespace WebFrontEnd.Controllers
             catch (Exception)
             {
 
-                return RedirectToAction("ConfirmEdit", "Account", new { gelukt = false});
+                return RedirectToAction("ConfirmEdit", "Account", new { gelukt = false });
             }
         }
         public ActionResult ConfirmEdit(bool gelukt)
@@ -167,7 +174,7 @@ namespace WebFrontEnd.Controllers
                     foreach (string str in substrings)
                     {
                         return RedirectToAction(substrings[1], substrings[0]);
-                      
+
                     }
                 }
 

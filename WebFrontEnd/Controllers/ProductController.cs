@@ -60,6 +60,7 @@ namespace WebFrontEnd.Controllers
         [HttpPost]
         public ActionResult List([ModelBinder(typeof(Infrastructure.ProductListViewModelBinder))] Models.ProductListViewModel model)
         {
+            ViewBag.Page = 1;
             var productLines = productLineService.GetAll();
             IEnumerable<Product> products;
 
