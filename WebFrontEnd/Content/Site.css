@@ -348,3 +348,7 @@ body {
     font-size: 12px;
     font-weight: bold;
 }
+
+.thankyou img{
+    width: 250px;
+}

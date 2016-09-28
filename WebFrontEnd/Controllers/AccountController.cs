@@ -143,6 +143,7 @@ namespace WebFrontEnd.Controllers
 
         public ActionResult Login(string returnUrl)
         {
+            ViewBag.returnUrl = returnUrl;
             return View();
         }
         [HttpPost]
@@ -158,6 +159,18 @@ namespace WebFrontEnd.Controllers
             if (customer != null)
             {
                 this.Session["customer"] = customer;
+
+                if (returnUrl != null && returnUrl != "")
+                {
+                    Char delimiter = '/';
+                    String[] substrings = returnUrl.Split(delimiter);
+                    foreach (string str in substrings)
+                    {
+                        return RedirectToAction(substrings[1], substrings[0]);
+                      
+                    }
+                }
+
                 return RedirectToAction("List", "Product");
             }
             else

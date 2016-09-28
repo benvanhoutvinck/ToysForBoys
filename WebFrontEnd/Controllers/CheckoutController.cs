@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace WebFrontEnd.Views.Checkout
 {
     public class CheckoutController : Controller
     {
+        private OrderService oService = new OrderService();
         // GET: Checkout
         public ActionResult ViewCart()
         {
@@ -78,13 +80,31 @@ namespace WebFrontEnd.Views.Checkout
             }
 
             ShoppingCart cart = (ShoppingCart)this.Session["cart"];
+            Customer cust = (Customer)this.Session["customer"];
+
+            Order order = new Order();
+         
+            order.customerId = cust.id;
+            order.orderDate = DateTime.Now;
+            order.requiredDate = DateTime.Now;
+            order.status = "PROCESSING";
 
             foreach (OrderViewModel vm in cart.orders)
             {
-                Order order = new Order();
-                order.customer = (Customer)this.Session["customer"];
+                
+                Orderdetail detail = new Orderdetail();
+
+                detail.product = vm.Product;
+                detail.productId = vm.Product.id;
+                detail.quantityOrdered = vm.Aantal;
+                detail.priceEach = vm.Product.buyPrice;
+
+                order.orderdetails.Add(detail);
 
             }
+            oService.Insert(order);
+            this.Session["cart"] = null;
+
             return View();
         }
 
