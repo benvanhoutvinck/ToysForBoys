@@ -33,7 +33,7 @@ namespace DataAccessLayer.Services
 
             using (var entities = new toysforboysEntities())
             {
-                var originalOrderdetail = entities.orderdetails.Find(orderdetail.orderId);
+                var originalOrderdetail = entities.orderdetails.Find(orderdetail.orderId, orderdetail.productId);
                 originalOrderdetail.productId = orderdetail.productId;
                 if(orderdetail.quantityOrdered!=null)
                     originalOrderdetail.quantityOrdered = orderdetail.quantityOrdered;

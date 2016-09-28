@@ -129,6 +129,45 @@ namespace DataAccessLayer.Services
             }
         }
 
-        
+       
+
+    public List<BestSoldProduct> GetProductsSortedByMostSold()
+    {
+        List<BestSoldProduct> products = new List<BestSoldProduct>();
+
+        using (var entities = new toysforboysEntities())
+        {
+            foreach (var product in entities.products)
+            {
+                var query = from orderdetail in entities.orderdetails
+                            where orderdetail.productId == product.id
+                            select orderdetail;
+                var totalOrdered = query.AsEnumerable().Sum(od => od.quantityOrdered);
+                products.Add(new BestSoldProduct
+                {
+                    id = product.id,
+                    name = product.name,
+                    active = product.active,
+                    buyPrice = product.buyPrice,
+                    description = product.description,
+                    productlineId = product.productlineId,
+                    quantityInOrder = product.quantityInOrder,
+                    quantityInStock = product.quantityInStock,
+                    scale = product.scale,
+                    QuantityOrdered = (int)totalOrdered
+                });
+
+            }
+
+            return products.OrderBy(p => p.QuantityOrdered).Reverse().ToList();
+        }
+    }
+
+        public List<BestSoldProduct> GetProductsSortedByLeastSold()
+        {
+            var list = GetProductsSortedByMostSold().ToList();
+            list.Reverse();
+            return list;
+        }
     }
 }

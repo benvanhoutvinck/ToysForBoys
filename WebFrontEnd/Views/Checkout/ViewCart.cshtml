@@ -4,7 +4,7 @@
     ViewBag.Title = "ViewCart";
 }
 
-<h2>ViewCart</h2>
+<h2>Your Shopping cart</h2>
 
 @if (cart == null || cart.orders.Count() == 0)
 {
@@ -12,33 +12,66 @@
 }
 else
 {
-    <div class="clearfix">
-        <div class="alert alert-info" role="alert">Inhoud van uw winkelmandje</div>
 
-        @using (Html.BeginForm("EditCart", "Checkout"))
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Number</th>
-                        <th>Price</th>
-                        <th>Subtotal</th>
-                        <th>Remove</th>
-                      
-
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @Html.EditorForModel()
-
-                </tbody>
-            </table>
-            <input class="btn btn-default pull-right" type="submit" value="Verwijderen" />
-        }
-    </div>
-    <div class="alert alert-info" role="alert">Te betalen: € @cart.TotalAmount</div>
-
-
+    using (Html.BeginForm("RefreshCart", "Checkout"))
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Total</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @Html.EditorForModel()
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td><h5>Subtotal</h5></td>
+                                <td class="text-right"><h5><strong>€@cart.TotalAmount</strong></h5></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td><h5>Estimated shipping</h5></td>
+                                <td class="text-right"><h5><strong>€0,00</strong></h5></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td><h3>Total</h3></td>
+                                <td class="text-right"><h3><strong> € @cart.TotalAmount</strong></h3></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>
+                                    <button name="button" class="btn btn-default" type="submit" value="refresh"><span class="glyphicon glyphicon-refresh"></span></button>
+                                </td>
+                                <td>
+                                    <a href="~/Product/List" name="button" value="continue" type="submit" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                                    </a>
+                                </td>
+                                <td>
+                                    <button name="button" value="checkout" type="submit" class="btn btn-success">
+                                        Checkout <span class="glyphicon glyphicon-play"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
 }
