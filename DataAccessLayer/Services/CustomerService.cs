@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Services
 {
     public class CustomerService : ICustomerService
     {
-
+        private Regex passwordRegex = new Regex(@"^.{1,21}$");
         public void Insert(Customer customer)
         {
             using (var entities = new toysforboysEntities())
@@ -29,6 +30,11 @@ namespace DataAccessLayer.Services
                     else
                     {
                         throw new Exception("Email already in use");
+                    }
+
+                    if (!passwordRegex.IsMatch(customer.password))
+                    {
+                        throw new Exception("Invalid password: password must be 1 to 20 characters long and is case sensitive");
                     }
                 }
                 else
