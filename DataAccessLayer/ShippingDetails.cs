@@ -25,6 +25,6 @@ namespace DataAccessLayer
         public String Country { get; set; }
 
         //properties van orderdetails van de shipping
-        public List<Orderdetail> OrderDetails { get; set; }
+        public List<OrderdetailsWithSubTotal> OrderDetails { get; set; }
     }
 }

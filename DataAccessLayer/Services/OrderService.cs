@@ -113,7 +113,16 @@ namespace DataAccessLayer.Services
 
         public Order GetById(int orderID)
         {
-            return GetById(orderID, string.Empty);
+            using (var entities = new toysforboysEntities())
+            {
+                var query = (from order in entities.orders
+                             where order.id == orderID
+                             orderby order.id
+                             select order).First();
+
+                return query;
+            }
+            
         }
 
         public Order GetById(int orderID, string includes)

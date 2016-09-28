@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DataAccessLayer.Services;
+using DataAccessLayer;
 
 
 namespace WPFToysForBoys.View
@@ -28,26 +29,31 @@ namespace WPFToysForBoys.View
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
-            var service = new ShippingService();
+            var shippingService = new ShippingService();
+            var orderService = new OrderService();
+
             try
             {
                 //order properties invullen 
-                var shipping = service.GetShippingDetails((int.Parse(TextBoxOrderId.Text)));
-                textBlockOrderDate.Text = shipping.OrderDate.ToString();
-                textBlockRequiredDate.Text = shipping.RequiredDate.ToString();
-                textBlockShipDate.Text = shipping.ShippedDate.ToString();
+                var shipping = shippingService.GetShippingDetails((int.Parse(TextBoxOrderId.Text)));
+                textBlockOrderId.Content = shipping.OrderId.ToString();
+                textBlockOrderDate.Content = shipping.OrderDate.ToString();
+                textBlockRequiredDate.Content = shipping.RequiredDate.ToString();
+                textBlockShipDate.Content = shipping.ShippedDate.ToString();
                 textBlockComments.Text = shipping.OrderComments;
-                textBlockStatus.Text = shipping.OrderStatus;
+                textBlockStatus.Content = shipping.OrderStatus;
+                var order = orderService.GetById((int.Parse(TextBoxOrderId.Text)));
+                LabelContent.Content = orderService.GetTotalPrice(order);
                 //customer invullen
-                textBlockName.Text = shipping.CustomerName;
-                textBlockStreet.Text = shipping.Street;
-                textBlockPostalCode.Text = shipping.PostalCode;
-                textBlockCity.Text = shipping.City;
-                textBlockState.Text = shipping.State;
-                textBlockCountry.Text = shipping.Country;
+                textBlockName.Content = shipping.CustomerName;
+                textBlockStreet.Content = shipping.Street;
+                textBlockPostalCode.Content = shipping.PostalCode;
+                textBlockCity.Content = shipping.City;
+                textBlockState.Content = shipping.State;
+                textBlockCountry.Content = shipping.Country;
                 //orderdetails invullen
-
-                ListBoxOrderdetails.DataContext = shipping.OrderDetails;
+                 
+                ListBoxOrderdetails.ItemsSource = shipping.OrderDetails;
 
             }
             catch (Exception)

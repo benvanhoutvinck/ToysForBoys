@@ -77,6 +77,7 @@
     <Compile Include="Orderdetail.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrderdetailsWithSubTotal.cs" />
     <Compile Include="OrderedProduct.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>ToysForBoys.tt</DependentUpon>

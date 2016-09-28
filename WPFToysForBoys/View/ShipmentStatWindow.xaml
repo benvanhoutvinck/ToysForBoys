@@ -5,112 +5,126 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToysForBoys.View"
         mc:Ignorable="d"
-        Title="ShipmentStatWindow" Height="800" Width="1245">
+        Title="ShipmentStatWindow" Height="889" Width="auto">
     <DockPanel  LastChildFill="True"  Margin="10 5 10 20">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-            <StackPanel Width="1218">
+            <StackPanel Width="740" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Content="OrderId:" Width="100" Margin="5 0" HorizontalContentAlignment="Center" />
                     <TextBox Name="TextBoxOrderId" Width="250" Margin="5 0" VerticalContentAlignment="Center"></TextBox>
                     <Button Name="ButtonSearch" Content="Search" Width="83" Click="ButtonSearch_Click"></Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Order ID : "></Label>
-                    <TextBlock Name="textBlockOrderId" Width="120"></TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="Order ID : " FontWeight="Bold"></Label>
+                    <Label Name="textBlockOrderId" Width="120"></Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
-                        <Label Content="Order properties"></Label>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" >
+                        <Label Content="Order properties" FontWeight="Bold" FontSize="15"></Label>
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Order Date: "></Label>
-                                <TextBlock Name="textBlockOrderDate"></TextBlock>
+                                <Label Content="Order Date: " FontWeight="Bold"></Label>
+                                <Label Name="textBlockOrderDate"></Label>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Required Date: "></Label>
-                                <TextBlock Name="textBlockRequiredDate"></TextBlock>
+                                <Label Content="Required Date: " FontWeight="Bold"></Label>
+                                <Label Name="textBlockRequiredDate"></Label>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Ship Date: "></Label>
-                                <TextBlock Name="textBlockShipDate"></TextBlock>
+                                <Label Content="Ship Date: " FontWeight="Bold"></Label>
+                                <Label Name="textBlockShipDate"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Comments: " FontWeight="Bold">
+                                    
+                                </Label>
+                                <Border BorderThickness="1" BorderBrush="Black" >
+                                    <ScrollViewer Width="183" Height="62" >
+
+                                        <TextBlock Name="textBlockComments" TextWrapping="Wrap"  ></TextBlock>
+
+                                    </ScrollViewer>
+                                </Border>
+
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Comments: "></Label>
-                                <TextBlock Name="textBlockComments"></TextBlock>
+                                <Label Content="Status:" FontWeight="Bold"></Label>
+                                <Label Name="textBlockStatus"></Label>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Status"></Label>
-                                <TextBlock Name="textBlockStatus"></TextBlock>
+                                <Label Content="Total Price:" FontWeight="Bold"></Label>
+                                <Label Name="LabelContent"></Label>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" Margin="300 0" HorizontalAlignment="Stretch">
-                        <Label Content="Customer properties"></Label>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" Margin="150 0" HorizontalAlignment="Stretch">
+                        <Label Content="Customer properties" FontWeight="Bold" FontSize="15"></Label>
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Name: "></Label>
-                                <TextBlock Name="textBlockName"></TextBlock>
+                                <Label Content="Name: " FontWeight="Bold"></Label>
+                                <Label Name="textBlockName"></Label>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Street: "></Label>
-                                <TextBlock Name="textBlockStreet"></TextBlock>
+                                <Label Content="Street: " FontWeight="Bold"></Label>
+                                <Label Name="textBlockStreet"></Label>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="PostalCode: "></Label>
-                                <TextBlock Name="textBlockPostalCode"></TextBlock>
+                                <Label Content="PostalCode: " FontWeight="Bold"></Label>
+                                <Label Name="textBlockPostalCode"></Label>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="City: "></Label>
-                                <TextBlock Name="textBlockCity"></TextBlock>
+                                <Label Content="City: " FontWeight="Bold"></Label>
+                                <Label Name="textBlockCity"></Label>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="State: "></Label>
-                                <TextBlock Name="textBlockState"></TextBlock>
+                                <Label Content="State: " FontWeight="Bold"></Label>
+                                <Label Name="textBlockState"></Label>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Country: "></Label>
-                                <TextBlock Name="textBlockCountry"></TextBlock>
+                                <Label Content="Country: " FontWeight="Bold"></Label>
+                                <Label Name="textBlockCountry"></Label>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                
-                
+
+
             </StackPanel>
         </StackPanel>
-        <StackPanel Margin="0 20 0 0">
-            <Grid Width="800" Height="500">
+        <StackPanel HorizontalAlignment="Center" Margin="10,0,10,-17" Width="554">
+            <Label Content="OrderDetail properties" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"></Label>
+            <Grid Width="506" Height="500">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="14*"></RowDefinition>
                     <RowDefinition Height="221*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="23*"></ColumnDefinition>
-                    <ColumnDefinition Width="777*"/>
+                    <ColumnDefinition Width="Auto" MinWidth="507"/>
+                    <ColumnDefinition Width="Auto" MinWidth="293"/>
                 </Grid.ColumnDefinitions>
-                <Label Width="800" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Grid.ColumnSpan="2">
-                    <Grid Width="765" ShowGridLines="True">
+                <Label Width="507" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
+                    <Grid Width="497" ShowGridLines="True">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
-                            
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+
                         </Grid.ColumnDefinitions>
-                        <GridViewColumnHeader Grid.Column="0">Order ID</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="0" >Order ID</GridViewColumnHeader>
                         <GridViewColumnHeader Grid.Column="1">Product ID</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="2">Quantity </GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="2">Quantity</GridViewColumnHeader>
                         <GridViewColumnHeader Grid.Column="3">Price Each</GridViewColumnHeader>
                         <GridViewColumnHeader Grid.Column="4">Subtotal</GridViewColumnHeader>
-                        
+
                     </Grid>
                 </Label>
-                <ListBox Grid.Row="1" Grid.Column="0" Width="800" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2" Name="ListBoxOrderdetails">
+                <ListBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Name="ListBoxOrderdetails" Margin="0,0,1,0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid ShowGridLines="True">
@@ -126,20 +140,20 @@
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Margin="5 0" HorizontalAlignment="Left">
-                                    <TextBlock Name="OrderId"></TextBlock>
+                                    <TextBlock Text="{Binding orderId}"></TextBlock>
                                 </Label>
                                 <Label Grid.Row="0" Grid.Column="1" Margin="5 0" HorizontalAlignment="Center">
-                                    <TextBlock Name="ProductId"></TextBlock>
+                                    <TextBlock Text="{Binding productId}"></TextBlock>
                                 </Label>
                                 <Label Grid.Row="0" Grid.Column="2" Margin="5 0" HorizontalAlignment="Center">
-                                    <TextBlock Name="Quantity"></TextBlock>
+                                    <TextBlock Text="{Binding quantityOrdered}"></TextBlock>
                                 </Label>
                                 <Label Grid.Row="0" Grid.Column="3" Margin="5 0" HorizontalAlignment="Center">
-                                    <TextBlock Name="PriceEach"></TextBlock>
+                                    <TextBlock Text="{Binding priceEach}"></TextBlock>
                                 </Label>
                                 <Label Grid.Row="0" Grid.Column="4" Margin="5 0" HorizontalAlignment="Left">
-                                    <TextBlock Name="Subtotal"></TextBlock>
-                                </Label>                               
+                                    <TextBlock Text="{Binding Subtotal}"></TextBlock>
+                                </Label>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
