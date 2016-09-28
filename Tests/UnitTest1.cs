@@ -165,7 +165,7 @@ namespace Tests
         public void GetBestSoldProductTest()
         {
             var service = new ProductStatisticService();
-            var products = service.GetProductsSortedByMostSold();
+            var products = service.GetProductsSortedByMostSold(1);
             Assert.IsNotNull(products);
         }
 
@@ -173,7 +173,7 @@ namespace Tests
         public void GetLeastSoldProducts()
         {
             var service = new ProductStatisticService();
-            var products = service.GetProductsSortedByLeastSold();
+            var products = service.GetProductsSortedByLeastSold(0);
             Assert.IsNotNull(products);
         }
 
@@ -183,6 +183,26 @@ namespace Tests
             var service = new CountryStatisticService();
             var count = service.CountCustomersOfCountry(5);
             Assert.IsNotNull(count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.Data.Entity.Validation.DbEntityValidationException), "Invalid password: password must be 1 to 20 characters long and is case sensitive")]
+        public void PasswordIsTooLong()
+        {
+            var service = new CustomerService();
+            var customer = service.GetById(1);
+            customer.password = "123456789012345678901";
+            service.Edit(customer);            
+        }
+
+        [TestMethod]
+        public void TestShippingDetails()
+        {
+            var service = new ShippingService();
+            var shippingDetails = new ShippingDetails();
+            var result = service.GetShippingDetails(3);
+            Assert.IsNotNull(result);
+            
         }
     }
 }

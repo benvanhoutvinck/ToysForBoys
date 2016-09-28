@@ -51,6 +51,14 @@ namespace WPFToysForBoys.Model
             else
                 this.brush = "Red";
         }
+
+        public static bool OverdueShipment(DateTime? required, DateTime? shipped)
+        {
+            if (shipped.HasValue)
+                if (shipped.Value.CompareTo(required.Value) > 0)
+                    return true;
+            return false;
+        }
     }
 
     public class DateSort

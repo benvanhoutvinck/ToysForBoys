@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WPFToysForBoys
 {
-    public class CustomerCompare : IComparer<Customer>
+    public class CustomerCompare : IComparer<Customer>, IEqualityComparer<Customer>
     {
         public CustomerCompare(): base(){ }
         public int Compare(Customer x, Customer y)
@@ -18,6 +18,18 @@ namespace WPFToysForBoys
                 return -1;
             else
                 return 1;
+        }
+
+        public bool Equals(Customer x, Customer y)
+        {
+            if (x.id == y.id)
+                return true;
+            return false;
+        }
+
+        public int GetHashCode(Customer obj)
+        {
+            return obj.GetHashCode();
         }
     }
 

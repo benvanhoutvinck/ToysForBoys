@@ -17,8 +17,8 @@ namespace DataAccessLayer.Interfaces
 
         //methods geven een nieuwe subklasse van product terug. Deze klasse heeft dus alle properties van
         //de klasse Product, maar met een extra toegevoegde property QuantityOrdered
-        List<BestSoldProduct> GetProductsSortedByMostSold();
+        List<BestSoldProduct> GetProductsSortedByMostSold(int productlineId, int month = -1, int year = -1);
 
-        List<BestSoldProduct> GetProductsSortedByLeastSold();
+        List<BestSoldProduct> GetProductsSortedByLeastSold(int productlineId, int month = -1, int year = -1);
     }
 }

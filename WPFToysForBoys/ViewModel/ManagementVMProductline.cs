@@ -140,13 +140,22 @@ namespace WPFToysForBoys.ViewModel
                         description = ShowProductline.description,
                     });
                 }
+                // int iProductlineId = ShowProductline.id; // nieuw
                 cproductlineList = plineService.GetAll("products").ToList();
                 PProductlineList = plineService.GetAll("products").ToList();
                 RefreshTab();
                 var ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
                 ProductlineList.AddRange(cproductlineList);
                 this.ProductlineList = ProductlineList;
+                /* nieuw
+                for (int i = 0; i < ProductlineList.Count; i++)
+                {
+                    if (ProductlineList[i].id == iProductlineId)
+                        SelectedProductline = ProductlineList[i];
+                }
+                */
                 SelectedProductlineI = -1;
+                
             }
             catch (ArgumentException)
             {
