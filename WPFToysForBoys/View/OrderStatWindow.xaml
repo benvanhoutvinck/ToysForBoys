@@ -18,9 +18,9 @@
                     <Label Content="Date: " VerticalContentAlignment="Center" Width="70"></Label>
                     <ComboBox Width="100" Margin="0 15"  ItemsSource="{Binding DateRangeSortList}" DisplayMemberPath="display" SelectedValue="{Binding SortDateRange}" SelectedValuePath="value"></ComboBox>
                     <Label Content=" From " VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50" Margin="50 0 0 0"></Label>
-                    <TextBox Text="{ Binding DateRangeStart, StringFormat=MM/dd/yyyy}" ToolTip="Format: Month/Day/Year" Width="100" Margin="5 10"></TextBox>
+                    <TextBox Text="{ Binding DateRangeStart, StringFormat=MM/dd/yyyy}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="Format: Month/Day/Year" Width="100" Margin="5 10" IsEnabled="{ Binding DateBox}"></TextBox>
                     <Label Content=" to " VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50"></Label>
-                    <TextBox Text="{ Binding DateRangeEnd, StringFormat=MM/dd/yyyy}" ToolTip="Format: Month/Day/Year" Width="100" Margin="5 10"></TextBox>
+                    <TextBox Text="{ Binding DateRangeEnd, StringFormat=MM/dd/yyyy}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="Format: Month/Day/Year" Width="100" Margin="5 10" IsEnabled="{ Binding DateBox}"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
                     <Label Content="Customer" VerticalContentAlignment="Center"></Label>
@@ -49,37 +49,37 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="# Orders:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding OrderCount }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding OrderCount }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="# Customers:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding CustomerCount }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding CustomerCount }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="% Disputed Orders:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding DisputedOrdersPercentage }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding DisputedOrdersPercentage, StringFormat=P2 }" HorizontalContentAlignment="Right" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="Disputed Orders:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding DisputedOrders }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding DisputedOrders }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="Total Revenue:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding TotalRevenue }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding TotalRevenue }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="Average Revenue:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding AverageRevenue }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding AverageRevenue, StringFormat=0.00 }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="Overdue Shipments:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding Shipments }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding Shipments }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="Cancelled Orders:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding Cancelled }" Width="100" Margin="5 0" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding Cancelled }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
