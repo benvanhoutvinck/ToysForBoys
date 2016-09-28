@@ -104,8 +104,8 @@ namespace WPFToysForBoys.ViewModel
                 if (SelectedCCountryI >= 1)
                     if ((ShowCustomer.postalCode == null || ShowCustomer.postalCode != string.Empty) && (ShowCustomer.streetAndNumber == null || ShowCustomer.streetAndNumber != string.Empty) && (ShowCustomer.city == null || ShowCustomer.city != string.Empty))
                         if (ShowCustomer.name != null && ShowCustomer.name != string.Empty)
-                        {                            
-                            if (ShowCustomer.email == null || ShowCustomer.email == string.Empty || IsValidEmailAddress(ShowCustomer.email) )
+                        {
+                            if (ShowCustomer.email == null || ShowCustomer.email == string.Empty || IsValidEmailAddress(ShowCustomer.email))
                             {
                                 if (!IdChecker.IdCheck(ccustomerList, ShowCustomer))
                                 {

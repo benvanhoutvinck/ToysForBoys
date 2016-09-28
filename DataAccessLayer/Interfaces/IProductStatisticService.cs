@@ -14,5 +14,7 @@ namespace DataAccessLayer.Interfaces
         //geef waarde -1 mee aan year als je niet wilt filteren op jaar
         //en geeft aantal verkochte producten op van eventueel een bepaald jaar van een bepaalde productline
         int GetCountSold(int productlineID, int year = -1, int month = -1);
+
+        BestSoldProduct GetBestSoldProduct(int productId, int productlineId);
     }
 }
