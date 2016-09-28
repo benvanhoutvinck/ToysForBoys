@@ -98,7 +98,7 @@ namespace DataAccessLayer.Services
             //Checken welke operator er wordt gebruikt (=, > of <)
             for (int i = 0; i < ordersFromGetOrderStatistics.Count; i++)
             {
-                
+
                 switch (DateCompareMode)
                 {
                     case '=':
@@ -130,14 +130,23 @@ namespace DataAccessLayer.Services
         public List<Order> GetLateShippingDates()
         {
             var service = new OrderService();
-            var orders = (List<Order>)service.GetAll();
+            var orders = (List<Order>)service.GetAll().ToList().FindAll(o => !o.status.Equals("CANCELLED"));
 
             foreach (var ord in orders)
             {
-                if (ord.shippedDate < ord.requiredDate)
+                if (ord.shippedDate.HasValue)
                 {
-                    orders.Add(ord);
+                    if (ord.shippedDate.Value < ord.requiredDate.Value)
+                    {
+                        orders.Add(ord);
+                    }
                 }
+                else
+                {
+                    if (ord.requiredDate.Value.CompareTo(DateTime.Today) < 0)
+                        orders.Add(ord);
+                }
+
             }
 
             return orders;
@@ -202,7 +211,7 @@ namespace DataAccessLayer.Services
                 list.AddRange(query);
 
                 if (orderQuery.SortDateCompareLeft != null && orderQuery.SortDateCompareRight != null && orderQuery.DateCompareMode != null && orderQuery.DateCompareMode != ' ')
-                    list = GetFilteredOrderStatistics(query.ToList(), (SortDateEnum) orderQuery.SortDateCompareLeft, (char) orderQuery.DateCompareMode, (SortDateEnum)orderQuery.SortDateCompareRight);
+                    list = GetFilteredOrderStatistics(query.ToList(), (SortDateEnum)orderQuery.SortDateCompareLeft, (char)orderQuery.DateCompareMode, (SortDateEnum)orderQuery.SortDateCompareRight);
 
                 return list;
 
@@ -213,11 +222,11 @@ namespace DataAccessLayer.Services
         public List<Order> GetUrgentShippingDates(int days)
         {
             var service = new OrderService();
-            var orders = (List<Order>)service.GetAll();
+            var orders = service.GetAll().ToList().FindAll(o => !(o.status.Equals("SHIPPED") || o.status.Equals("CANCELLED")));
 
             foreach (var ord in orders)
             {
-                if (ord.shippedDate.Value - DateTime.Now <= TimeSpan.FromDays(days))
+                if (ord.requiredDate.Value - DateTime.Now <= TimeSpan.FromDays(days))
                 {
                     orders.Add(ord);
                 }
@@ -226,7 +235,7 @@ namespace DataAccessLayer.Services
             return orders;
         }
 
-       //Switch method
+        //Switch method
         private List<DateTime> GetDateTimes(SortDateEnum sortDateEnum, List<Order> orders)
         {
             List<DateTime> datetime = new List<DateTime>();
@@ -251,6 +260,6 @@ namespace DataAccessLayer.Services
             return datetime;
         }
 
-       
+
     }
 }

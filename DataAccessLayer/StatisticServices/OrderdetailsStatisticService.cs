@@ -18,7 +18,7 @@ namespace DataAccessLayer.StatisticServices
 
             foreach (var od in orderdetails)
             {
-                if (od.orderId==orderId)
+                if (od.orderId == orderId)
                 {
                     totalPrice += (Decimal)(od.quantityOrdered * od.priceEach);
                 }
@@ -29,15 +29,12 @@ namespace DataAccessLayer.StatisticServices
         public decimal GetTotalSellingPriceForSingleProduct(int productId)
         {
             var service = new OrderdetailService();
-            var orderdetails = (List<Orderdetail>)service.GetAll();
+            var orderdetails = service.GetAll().ToList().FindAll(od => od.productId == productId);
             decimal totalPrice = 0;
 
             foreach (var od in orderdetails)
             {
-                if (od.productId==productId)
-                {
-                    totalPrice += (decimal)(od.quantityOrdered * od.priceEach);
-                }
+                totalPrice += (decimal)(od.quantityOrdered * od.priceEach);
             }
             return totalPrice;
         }
@@ -50,7 +47,7 @@ namespace DataAccessLayer.StatisticServices
 
             foreach (var od in orderdetails)
             {
-                if (od.productId==productId)
+                if (od.productId == productId)
                 {
                     totalUnits += (int)od.quantityOrdered;
                 }

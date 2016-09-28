@@ -12,13 +12,22 @@ namespace Tests
     public class UnitTest1
     {
         [TestMethod]
-        public void testGetDistinctYear()
+        public void testGetByDistinctYear()
         {
             OrderStatisticService service = new OrderStatisticService();
             List<Order> list = service.GetByDistinctYear(SortDateEnum.orderDate, 2003);
 
 
             Assert.IsTrue(list.Count != 0);
+        }
+
+        [TestMethod]
+        public void testGetDistinctYear()
+        {
+            OrderStatisticService service = new OrderStatisticService();
+            var list = service.GetDistinctYear(SortDateEnum.orderDate);
+            
+            Assert.IsTrue(list.Count == 3);
         }
 
         [TestMethod]
@@ -56,7 +65,7 @@ namespace Tests
         //this testmethod has to fail the second time it's runned
         public void CustomerInsertWithEmail()
         {
-            var New = new Customer { name = "name", city = "city", countryId = 5, postalCode = "dds", streetAndNumber = "Street", email = "a@a.com" };
+            var New = new Customer { name = "name", city = "city", countryId = 5, postalCode = "dds", streetAndNumber = "Street", email = "a@a.com", password = "password" };
             var service = new CustomerService();
 
             foreach (var ad in service.GetAll())

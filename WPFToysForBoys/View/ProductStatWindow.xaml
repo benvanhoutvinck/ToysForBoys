@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:gala="http://www.galasoft.ch/mvvmlight"
-        Title="ProductStatWindow" Height="1000" Width="1000">
+        Title="ProductStatWindow" Height="560.5" Width="1000">
     <StackPanel Orientation="Horizontal">
         <StackPanel Width="450">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -85,6 +85,10 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <StackPanel Orientation="Horizontal" Margin="25 5 25 10">
+                <Label Content="Best Month of the year for selected category:" Width="300" HorizontalContentAlignment="Center"></Label>
+                <TextBox Width="100" IsEnabled="False" Text="{Binding BestMonth}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+            </StackPanel>
         </StackPanel>
     </StackPanel>
 </Window>
