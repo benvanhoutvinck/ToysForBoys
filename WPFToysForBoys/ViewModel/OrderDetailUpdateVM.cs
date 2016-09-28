@@ -119,10 +119,10 @@ namespace WPFToysForBoys.ViewModel
             try
             {
                 ShowOrderdetail.productId = SelectedPProductI;
+                ShowOrderdetail.orderId = OrderdetailList[0].orderId;
                 if (SelectedPProductI >= 1)
                     if ((ShowOrderdetail.priceEach == null || ShowOrderdetail.priceEach > 0) && (ShowOrderdetail.quantityOrdered == null || ShowOrderdetail.quantityOrdered >= 0))
                     {
-                        ShowOrderdetail.orderId = OrderdetailList[0].orderId;
                         if (!IdChecker.IdCheck(odList, ShowOrderdetail))
                         {
                             odService.Insert(new Orderdetail()

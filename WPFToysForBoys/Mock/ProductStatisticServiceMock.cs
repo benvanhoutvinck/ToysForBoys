@@ -11,6 +11,16 @@ namespace WPFToysForBoys.Mock
 {
     public class ProductStatisticServiceMock : IProductStatisticService
     {
+        public BestSoldProduct GetBestSoldProduct(int productId, int productlineId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BestSoldProduct> GetBestSoldProducts()
+        {
+            throw new NotImplementedException();
+        }
+
         public int GetCountSold(int productlineID, int year, int month)
         {
             using (var entities = new toysforboysEntities())
@@ -43,6 +53,16 @@ namespace WPFToysForBoys.Mock
 
 
             }
+        }
+
+        public List<BestSoldProduct> GetProductsSortedByLeastSold()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BestSoldProduct> GetProductsSortedByMostSold()
+        {
+            throw new NotImplementedException();
         }
 
         List<Product> IProductStatisticService.GetProductStatistics(ProductQuery productQuery)

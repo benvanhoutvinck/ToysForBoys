@@ -24,7 +24,7 @@ namespace DataAccessLayer.Interfaces
 
         OrderedProduct CreateOrderedProduct(string productName, int quantityOrdered, decimal priceEach);
 
-        BestSoldProduct GetBestSoldProduct(int productId, int productlineId);
+       
 
 
     }

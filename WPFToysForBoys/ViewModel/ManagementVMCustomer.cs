@@ -104,8 +104,8 @@ namespace WPFToysForBoys.ViewModel
                 if (SelectedCCountryI >= 1)
                     if ((ShowCustomer.postalCode == null || ShowCustomer.postalCode != string.Empty) && (ShowCustomer.streetAndNumber == null || ShowCustomer.streetAndNumber != string.Empty) && (ShowCustomer.city == null || ShowCustomer.city != string.Empty))
                         if (ShowCustomer.name != null && ShowCustomer.name != string.Empty)
-                        {                            
-                            if (ShowCustomer.email == null || ShowCustomer.email == string.Empty || IsValidEmailAddress(ShowCustomer.email) )
+                        {
+                            if (ShowCustomer.email == null || ShowCustomer.email == string.Empty || IsValidEmailAddress(ShowCustomer.email))
                             {
                                 if (!IdChecker.IdCheck(ccustomerList, ShowCustomer))
                                 {
@@ -148,7 +148,7 @@ namespace WPFToysForBoys.ViewModel
                 else
                     MessageBox.Show("No country selected for your customer", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 MessageBox.Show("Identical object already exists in the database!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }

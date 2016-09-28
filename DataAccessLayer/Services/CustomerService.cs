@@ -35,10 +35,7 @@ namespace DataAccessLayer.Services
                 {
                     entities.customers.Add(customer);
                     entities.SaveChanges();
-                }
-                
-
-                
+                }   
             }
         }
 
@@ -140,17 +137,36 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Customer> GetAll(Func<Customer, bool> predicate, string includes)
         {
-            List<Customer> AllCustomers = new List<Customer>();
+
+            if (includes == "")
+                includes = null;
+
+
             using (var entities = new toysforboysEntities())
             {
-                
-               foreach (var customer in (String.IsNullOrEmpty(includes) ? entities.customers : entities.customers.Include(includes)).Where(predicate))
-                    {
-                    AllCustomers.Add((Customer) customer);
+
+                if (predicate == null && includes == null)
+                {
+                    return entities.customers.ToList();
                 }
+                else if (predicate != null && includes == null)
+                {
+                    return entities.customers.Where(predicate).ToList();
+                }
+                else if (predicate == null && includes != null)
+                {
+                    return entities.customers.Include(includes).ToList();
+                }
+                else if (predicate != null && includes != null)
+                {
+                    return entities.customers.Include(includes).Where(predicate).ToList();
+                }
+
+                return null;
+
             }
 
-            return AllCustomers;
+            
         }
 
         public void AddEmailAndPassword(string name, string email, string password)
