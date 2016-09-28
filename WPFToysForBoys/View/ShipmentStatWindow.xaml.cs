@@ -31,10 +31,26 @@ namespace WPFToysForBoys.View
             var service = new ShippingService();
             try
             {
+                //order properties invullen 
                 var shipping = service.GetShippingDetails((int.Parse(TextBoxOrderId.Text)));
+                textBlockOrderDate.Text = shipping.OrderDate.ToString();
+                textBlockRequiredDate.Text = shipping.RequiredDate.ToString();
+                textBlockShipDate.Text = shipping.ShippedDate.ToString();
+                textBlockComments.Text = shipping.OrderComments;
+                textBlockStatus.Text = shipping.OrderStatus;
+                //customer invullen
+                textBlockName.Text = shipping.CustomerName;
+                textBlockStreet.Text = shipping.Street;
+                textBlockPostalCode.Text = shipping.PostalCode;
+                textBlockCity.Text = shipping.City;
+                textBlockState.Text = shipping.State;
+                textBlockCountry.Text = shipping.Country;
+                //orderdetails invullen
+
+                ListBoxOrderdetails.DataContext = shipping.OrderDetails;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 MessageBox.Show("Invalid orderID");

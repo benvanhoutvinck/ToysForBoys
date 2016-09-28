@@ -88,5 +88,10 @@ namespace DataAccessLayer.Services
 
             return orderdetails;
         }
+
+        public decimal GetSubTotal(Orderdetail orderDetail)
+        {
+            return (decimal)(orderDetail.quantityOrdered * orderDetail.priceEach);
+        }
     }
 }

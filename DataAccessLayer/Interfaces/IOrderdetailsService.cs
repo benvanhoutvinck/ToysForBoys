@@ -19,6 +19,7 @@ namespace DataAccessLayer.Interfaces
 
         IEnumerable<Orderdetail> CreateOrderDetails(Order order, List<OrderedProduct> orderedProducts);
 
+        Decimal GetSubTotal(Orderdetail orderDetail);
 
     }
 }

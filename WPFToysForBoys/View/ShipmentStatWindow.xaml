@@ -100,25 +100,25 @@
                             <ColumnDefinition Width="100"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            
                         </Grid.ColumnDefinitions>
-                        <GridViewColumnHeader Grid.Column="0">Customer</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="1">Date Ordered</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="2">Date Required</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="3">Date Shipped</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="4">Status</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="5">Revenue</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="0">Order ID</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="1">Product ID</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="2">Quantity </GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="3">Price Each</GridViewColumnHeader>
+                        <GridViewColumnHeader Grid.Column="4">Subtotal</GridViewColumnHeader>
+                        
                     </Grid>
                 </Label>
-                <ListBox Grid.Row="1" Grid.Column="0" Width="800" ItemsSource="{Binding OrderStatList}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <ListBox Grid.Row="1" Grid.Column="0" Width="800" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2" Name="ListBoxOrderdetails">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="765" ShowGridLines="True">
+                            <Grid ShowGridLines="True">
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
@@ -126,23 +126,20 @@
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Margin="5 0" HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding Path=customer.name}" ToolTip="{Binding Path=customer.name}"></TextBlock>
+                                    <TextBlock Name="OrderId"></TextBlock>
                                 </Label>
                                 <Label Grid.Row="0" Grid.Column="1" Margin="5 0" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding Path=orderDate, StringFormat=MM/dd/yyyy}"></TextBlock>
+                                    <TextBlock Name="ProductId"></TextBlock>
                                 </Label>
                                 <Label Grid.Row="0" Grid.Column="2" Margin="5 0" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding Path=requiredDate, StringFormat=MM/dd/yyyy}"></TextBlock>
+                                    <TextBlock Name="Quantity"></TextBlock>
                                 </Label>
                                 <Label Grid.Row="0" Grid.Column="3" Margin="5 0" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding Path=shippedDate, StringFormat=MM/dd/yyyy}"></TextBlock>
+                                    <TextBlock Name="PriceEach"></TextBlock>
                                 </Label>
                                 <Label Grid.Row="0" Grid.Column="4" Margin="5 0" HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding Path=status}"></TextBlock>
-                                </Label>
-                                <Label Grid.Row="0" Grid.Column="5" Margin="5 0" HorizontalAlignment="Right">
-                                    <TextBlock Text="{Binding Path=revenue, StringFormat=c}" Foreground="{ Binding Path=brush}"></TextBlock>
-                                </Label>
+                                    <TextBlock Name="Subtotal"></TextBlock>
+                                </Label>                               
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
