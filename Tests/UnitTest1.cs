@@ -194,5 +194,15 @@ namespace Tests
             customer.password = "123456789012345678901";
             service.Edit(customer);            
         }
+
+        [TestMethod]
+        public void TestShippingDetails()
+        {
+            var service = new ShippingService();
+            var shippingDetails = new ShippingDetails();
+            var result = service.GetShippingDetails(3);
+            Assert.IsNotNull(result);
+            
+        }
     }
 }
