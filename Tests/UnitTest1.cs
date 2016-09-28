@@ -159,5 +159,21 @@ namespace Tests
             var result2 = service.GetFilteredOrderStatistics(result, SortDateEnum.orderDate, '<', SortDateEnum.requiredDate);
             Assert.AreNotEqual(orders, result);
         }
+
+        [TestMethod]
+        public void GetBestSoldProductTest()
+        {
+            var service = new ProductStatisticService();
+            var products = service.GetProductsSortedByMostSold();
+            Assert.IsNotNull(products);
+        }
+
+        [TestMethod]
+        public void GetLeastSoldProducts()
+        {
+            var service = new ProductStatisticService();
+            var products = service.GetProductsSortedByLeastSold();
+            Assert.IsNotNull(products);
+        }
     }
 }
