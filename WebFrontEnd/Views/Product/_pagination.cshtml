@@ -1,0 +1,42 @@
+﻿@model List<System.Int32>
+
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @{
+            string disabledTag = "enabled";
+            if (Model[0] == 1)
+            {
+                disabledTag = "disabled";
+            }
+            <li class="@disabledTag">
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            int maxPage = (Model[1] / 12) + 1;
+            for (int i = 1; i <= maxPage; i++)
+            {
+                if (i != Model[0])
+                {
+                    <li><a href="~/Product/List/@i">@i</a></li>
+                }
+                else
+                {
+                    <li class="active"><a href="#">@i<span class="sr-only">(current)</span></a></li>
+                }
+            }
+            if (Model[0] == maxPage)
+            {
+                disabledTag = "disabled";
+            }
+            <li class="@disabledTag">
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
+
+
