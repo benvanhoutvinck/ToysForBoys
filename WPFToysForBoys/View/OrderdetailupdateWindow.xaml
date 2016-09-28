@@ -51,7 +51,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
                             <Label Content="Productname:" Width="100"></Label>
-                            <ComboBox Width="220" ItemsSource="{Binding PProductList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedPProductI}" SelectedValuePath="id"></ComboBox>
+                            <ComboBox x:Name="cmbProductName" Width="220" ItemsSource="{Binding PProductList}" DisplayMemberPath="name" SelectedValue="{Binding SelectedPProductI}" SelectedValuePath="id" SelectionChanged="cmbProductName_SelectionChanged"></ComboBox>
                        
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
@@ -59,16 +59,26 @@
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrderdetail.quantityOrdered}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
-                            <Label Content="Price:" Width="100"></Label>
+                            <Label Content="Sold Price:" Width="100"></Label>
                             <TextBox IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowOrderdetail.priceEach}"></TextBox>
                         </StackPanel>
-                       
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                             <Button Content="Add / Modify" Width="100" Margin="0 0 10 0"
                                     Command="{Binding ODAddCommand}"></Button>
                             <Button Content="New" Width="100" Command="{Binding ODNewCommand}"></Button>
                             <Button Content="Delete" Width="100" Margin="10 0 0 0" Command="{Binding ODDeleteCommand}"></Button>
-
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="Buy Price:" Width="100"></Label>
+                            <TextBox x:Name="tbBuyPrice" IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.buyPrice}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="InStock:" Width="100"></Label>
+                            <TextBox x:Name="tbInStock" IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.quantityInStock}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="25 25 25 0">
+                            <Label Content="InOrder:" Width="100"></Label>
+                            <TextBox x:Name="tbInOrder" IsEnabled="True" VerticalContentAlignment="Center" Width="220" Text="{Binding Path=ShowProduct.quantityInOrder}"></TextBox>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
