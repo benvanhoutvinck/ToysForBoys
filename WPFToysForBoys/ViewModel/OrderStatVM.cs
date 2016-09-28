@@ -10,6 +10,8 @@ using DataAccessLayer.Services;
 using WPFToysForBoys.Model;
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
+using Microsoft.Win32;
+using System.IO;
 
 namespace WPFToysForBoys.ViewModel
 {
@@ -327,7 +329,7 @@ namespace WPFToysForBoys.ViewModel
         private void Filter()
         {
             if (SortDateRange != null)
-                if (this.DateRangeStart.CompareTo(this.DateRangeEnd) >= 0)
+                if (this.DateRangeStart.CompareTo(this.DateRangeEnd) <= 0)
                 {
                     Refresh();
                 }
@@ -424,6 +426,8 @@ namespace WPFToysForBoys.ViewModel
 
 
             this.Shipments = OrderList.FindAll(o => OrderStat.OverdueShipment(o.requiredDate, o.shippedDate)).Count;
+
+            this.Cancelled = OrderList.FindAll(o => o.status.Equals("CANCELLED")).Count;
         }
 
         private List<OrderStat> orderStatList;
@@ -439,12 +443,128 @@ namespace WPFToysForBoys.ViewModel
 
         public RelayCommand SaveCommand
         {
-            get { return new RelayCommand(NotImplementedC); }
+            get { return new RelayCommand(SaveRapport); }
         }
 
         public RelayCommand LoadCommand
         {
-            get { return new RelayCommand(NotImplementedC); }
+            get { return new RelayCommand(LoadRapport); }
+        }
+
+        private void SaveRapport()
+        {
+            try
+            {
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.FileName = QueryName;
+                dlg.DefaultExt = ".rapport";
+                dlg.Filter = "Rapport Queries |*.rapport";
+                if (dlg.ShowDialog() == true)
+                {
+                    using (StreamWriter file = new StreamWriter(dlg.FileName))
+                    {
+                        file.WriteLine(QueryName);
+                        file.WriteLine(SortDateRange.ToString());
+                        file.WriteLine(DateRangeStart.ToString());
+                        file.WriteLine(DateRangeEnd.ToString());
+                        file.WriteLine(SCustomer.ToString());
+                        file.WriteLine(Status);
+                        file.WriteLine(DateCompareLeft.ToString());
+                        file.WriteLine(DateCompareMode.ToString());
+                        file.WriteLine(DateCompareRight.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("opslaan mislukt: " + ex.Message);
+            }
+        }
+
+        private void LoadRapport()
+        {
+            try
+            {
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.DefaultExt = ".rapport";
+                dlg.Filter = "Rapport Queries |*.rapport";
+                if (dlg.ShowDialog() == true)
+                {
+                    using (StreamReader bestand = new StreamReader(dlg.FileName))
+                    {
+                        QueryName = bestand.ReadLine();
+                        var lijn = bestand.ReadLine();
+                        switch (lijn)
+                        {
+                            case "orderDate":
+                                SortDateRange = SortDateEnum.orderDate;
+                                break;
+                            case "requiredDate":
+                                SortDateRange = SortDateEnum.requiredDate;
+                                break;
+                            case "shippedDate":
+                                SortDateRange = SortDateEnum.shippedDate;
+                                break;
+                            default:
+                                SortDateRange = null;
+                                break;
+                        }
+
+                        DateRangeStart = DateTime.Parse(bestand.ReadLine());
+                        DateRangeEnd = DateTime.Parse(bestand.ReadLine());
+
+                        int c;
+                        if (!int.TryParse(bestand.ReadLine(), out c))
+                            SCustomer = null;
+                        else
+                            SCustomer = c;
+
+                        Status = bestand.ReadLine();
+
+                        lijn = bestand.ReadLine();
+                        switch (lijn)
+                        {
+                            case "orderDate":
+                                DateCompareLeft = SortDateEnum.orderDate;
+                                break;
+                            case "requiredDate":
+                                DateCompareLeft = SortDateEnum.requiredDate;
+                                break;
+                            case "shippedDate":
+                                DateCompareLeft = SortDateEnum.shippedDate;
+                                break;
+                            default:
+                                DateCompareLeft = null;
+                                break;
+                        }
+                        
+                        DateCompareMode = bestand.ReadLine()[0];
+
+                        lijn = bestand.ReadLine();
+                        switch (lijn)
+                        {
+                            case "orderDate":
+                                DateCompareRight = SortDateEnum.orderDate;
+                                break;
+                            case "requiredDate":
+                                DateCompareRight = SortDateEnum.requiredDate;
+                                break;
+                            case "shippedDate":
+                                DateCompareRight = SortDateEnum.shippedDate;
+                                break;
+                            default:
+                                DateCompareRight = null;
+                                break;
+                        }
+                    }
+
+                    Filter();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("openen mislukt : " + ex.Message);
+            }
         }
 
         private void NotImplementedC()

@@ -70,6 +70,17 @@ namespace WPFToysForBoys.ViewModel
             ONew();
         }
 
+        public RelayCommand ShipmentStatistics
+        {
+            get { return new RelayCommand(ShipmentS); }
+        }
+
+        public void ShipmentS()
+        {
+            View.ShipmentStatWindow shipmentView = new View.ShipmentStatWindow();
+            shipmentView.Show();
+            
+        }
         public RelayCommand ProductStatistics
         {
             get { return new RelayCommand(ProductS); }

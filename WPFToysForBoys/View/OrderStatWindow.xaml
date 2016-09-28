@@ -67,11 +67,11 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="Total Revenue:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding TotalRevenue }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding TotalRevenue, StringFormat='€ 0,000.00' }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="Average Revenue:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
-                            <TextBox Text="{ Binding AverageRevenue, StringFormat=0.00 }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+                            <TextBox Text="{ Binding AverageRevenue, StringFormat='€ 0,000.00' }" Width="100" Margin="5 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
                             <Label Content="Overdue Shipments:" Width="150" Margin="5 0" HorizontalContentAlignment="Left" />
@@ -146,7 +146,7 @@
                                     <TextBlock Text="{Binding Path=status}"></TextBlock>
                                 </Label>
                                 <Label Grid.Row="0" Grid.Column="5" Margin="5 0" HorizontalAlignment="Right">
-                                    <TextBlock Text="{Binding Path=revenue, StringFormat=c}" Foreground="{ Binding Path=brush}"></TextBlock>
+                                    <TextBlock Text="{Binding Path=revenue, StringFormat='€ 0,000.00' }" Foreground="{ Binding Path=brush}"></TextBlock>
                                 </Label>
                             </Grid>
                         </DataTemplate>

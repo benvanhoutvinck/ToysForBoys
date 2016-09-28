@@ -165,7 +165,7 @@ namespace Tests
         public void GetBestSoldProductTest()
         {
             var service = new ProductStatisticService();
-            var products = service.GetProductsSortedByMostSold();
+            var products = service.GetProductsSortedByMostSold(1);
             Assert.IsNotNull(products);
         }
 
@@ -173,7 +173,7 @@ namespace Tests
         public void GetLeastSoldProducts()
         {
             var service = new ProductStatisticService();
-            var products = service.GetProductsSortedByLeastSold();
+            var products = service.GetProductsSortedByLeastSold(0);
             Assert.IsNotNull(products);
         }
 
