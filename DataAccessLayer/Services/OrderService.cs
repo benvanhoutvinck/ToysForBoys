@@ -45,8 +45,8 @@ namespace DataAccessLayer.Services
                 if (order.shippedDate != null)
                     originalOrder.shippedDate = order.shippedDate;
 
-                if (order.comments != string.Empty)
-                    originalOrder.comments = order.comments;
+                
+                originalOrder.comments = order.comments;
 
 
                 originalOrder.customerId = order.customerId;
