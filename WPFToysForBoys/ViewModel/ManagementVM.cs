@@ -79,7 +79,7 @@ namespace WPFToysForBoys.ViewModel
         {
             View.ShipmentStatWindow shipmentView = new View.ShipmentStatWindow();
             shipmentView.Show();
-            
+
         }
         public RelayCommand ProductStatistics
         {
@@ -254,11 +254,16 @@ namespace WPFToysForBoys.ViewModel
                 ShowProduct.productlineId = SelectedPProductlineI;
                 Regex reg = new Regex("^1:[0-9]+(?:[.]{1}[0-9]+)?$");
                 if (SelectedPProductlineI >= 1)
-                    if ((ShowProduct.buyPrice == null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder == null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock == null || ShowProduct.quantityInStock >= 0))
-                        if (ShowProduct.name != null)
+                    if ((ShowProduct.buyPrice != null || ShowProduct.buyPrice > 0) && (ShowProduct.quantityInOrder != null || ShowProduct.quantityInOrder >= 0) && (ShowProduct.quantityInStock != null || ShowProduct.quantityInStock >= 0))
+                        if (!(string.IsNullOrWhiteSpace(ShowProduct.name) || string.IsNullOrEmpty(ShowProduct.name)))
                         {
-                            var m = reg.Match(ShowProduct.scale);
-                            if (ShowProduct.scale != null && m.Success)
+                            Match m;
+                            if (ShowProduct.scale != null)
+                                m = reg.Match(ShowProduct.scale);
+                            else
+                                m = reg.Match("");
+
+                            if (!(string.IsNullOrWhiteSpace(ShowProduct.scale) || string.IsNullOrEmpty(ShowProduct.scale)) && m.Success)
                             {
                                 if (!IdChecker.IdCheck(cproductList, ShowProduct))
                                 {
@@ -290,6 +295,7 @@ namespace WPFToysForBoys.ViewModel
                                     });
                                 }
                                 SelectedProductlineI = SelectedProductlineI;
+                                PNew();
                             }
                             else
                                 MessageBox.Show("Invalid scale!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -328,7 +334,7 @@ namespace WPFToysForBoys.ViewModel
                 {
                     PNew();
                     RefreshTab();
-                }                      
+                }
             }
             catch (ArgumentException)
             {
@@ -337,7 +343,7 @@ namespace WPFToysForBoys.ViewModel
                     pService.Delete(pService.GetById(ShowProduct.id));
                     PNew();
                     RefreshTab();
-                }                    
+                }
             }
             //SelectedProductlineI = SelectedProductlineI;
         }
