@@ -8,6 +8,7 @@ namespace DataAccessLayer
 {
     public class OrderdetailsWithSubTotal : Orderdetail
     {
+        public string productName { get; set; }
         public decimal Subtotal { get; set; }
     }
 }
