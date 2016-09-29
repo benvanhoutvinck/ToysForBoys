@@ -108,7 +108,7 @@ namespace WebFrontEnd.Views.Checkout
 
                 return View();
             }
-            return View();
+            return RedirectToAction("List", "Product");
         }
     }
 }
