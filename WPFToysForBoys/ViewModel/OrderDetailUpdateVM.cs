@@ -66,6 +66,7 @@ namespace WPFToysForBoys.ViewModel
                 {
                     selectedOrderdetail = value;
                     ShowOrderdetail = value;
+                    ShowOrderdetail = new Orderdetail() { orderId = value.orderId, priceEach = value.priceEach, productId= value.productId, quantityOrdered = value.quantityOrdered, product = value.product};
                     for (int i = 0; i < productList.Count; i++)
                     {
                         if (productList[i].id == ShowOrderdetail.productId)
@@ -101,7 +102,7 @@ namespace WPFToysForBoys.ViewModel
                 }
                 else
                 {
-                    SelectedPProductI = value.product.id;
+                    SelectedPProductI = value.product.id; // value.productId;  
                 }
                 RaisePropertyChanged("ShowOrderdetail");
             }

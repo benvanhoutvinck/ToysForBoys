@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DataAccessLayer.Services;
 using DataAccessLayer;
-
+using System.Xaml;
+using System.Windows.Markup;
+using System.Globalization;
 
 namespace WPFToysForBoys.View
 {
@@ -25,6 +27,10 @@ namespace WPFToysForBoys.View
         public ShipmentStatWindow()
         {
             InitializeComponent();
+            CultureInfo myCi = new CultureInfo("en-US", false);
+            myCi.DateTimeFormat = new DateTimeFormatInfo {  ShortDatePattern="dd/MM/yyyy"};
+            CultureInfo.DefaultThreadCurrentCulture = myCi;
+            
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
@@ -37,13 +43,25 @@ namespace WPFToysForBoys.View
                 //order properties invullen 
                 var shipping = shippingService.GetShippingDetails((int.Parse(TextBoxOrderId.Text)));
                 textBlockOrderId.Content = shipping.OrderId.ToString();
-                textBlockOrderDate.Content = shipping.OrderDate.ToString();
-                textBlockRequiredDate.Content = shipping.RequiredDate.ToString();
-                textBlockShipDate.Content = shipping.ShippedDate.ToString();
+                textBlockOrderDate.Content = shipping.OrderDate.ToShortDateString();
+                textBlockRequiredDate.Content = shipping.RequiredDate.ToShortDateString();
+
+                
+                if (shipping.ShippedDate!=null)
+                {
+                    var shippedDate = (DateTime)shipping.ShippedDate;
+                    textBlockShipDate.Content = shippedDate.ToShortDateString();
+                }
+                else
+                {
+                    textBlockShipDate.Content = string.Empty;
+                }
+               
                 textBlockComments.Text = shipping.OrderComments;
                 textBlockStatus.Content = shipping.OrderStatus;
                 var order = orderService.GetById((int.Parse(TextBoxOrderId.Text)));
-                LabelContent.Content = orderService.GetTotalPrice(order);
+                LabelContent.Content = orderService.GetTotalPrice(order).ToString("C");
+                
                 //customer invullen
                 textBlockName.Content = shipping.CustomerName;
                 textBlockStreet.Content = shipping.Street;
