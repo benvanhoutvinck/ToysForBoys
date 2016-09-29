@@ -109,18 +109,20 @@ namespace WPFToysForBoys.ViewModel
                             {
                                 if (!IdChecker.IdCheck(ccustomerList, ShowCustomer))
                                 {
-                                    cService.Insert(new Customer()
-                                    {
-                                        name = ShowCustomer.name,
-                                        city = ShowCustomer.city,
-                                        countryId = SelectedCCountryI,
-                                        postalCode = ShowCustomer.postalCode,
-                                        state = ShowCustomer.state,
-                                        streetAndNumber = ShowCustomer.streetAndNumber,
-                                        email = ShowCustomer.email
-                                    });
-                                    SelectedCCountryI = SelectedCCountryI;
-                                    //ProductList.Add(ShowProduct);
+                                    //cService.Insert(new Customer()
+                                    //{
+                                    //    name = ShowCustomer.name,
+                                    //    city = ShowCustomer.city,
+                                    //    countryId = SelectedCCountryI,
+                                    //    postalCode = ShowCustomer.postalCode,
+                                    //    state = ShowCustomer.state,
+                                    //    streetAndNumber = ShowCustomer.streetAndNumber,
+                                    //    email = ShowCustomer.email
+                                    //});
+                                    //SelectedCCountryI = SelectedCCountryI;
+                                    ////ProductList.Add(ShowProduct);
+                                    //MessageBox.Show("Customer Added!", "Customer Added", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                                    MessageBox.Show("Can't add a new customer!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                                 }
                                 else
                                 {
@@ -135,8 +137,8 @@ namespace WPFToysForBoys.ViewModel
                                         streetAndNumber = ShowCustomer.streetAndNumber,
                                         email = ShowCustomer.email
                                     });
-                                    SelectedCCountryI = SelectedCCountryI;
                                 }
+                                SelectedCountryI = SelectedCountryI;
                             }
                             else
                                 MessageBox.Show("Invalid email!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);

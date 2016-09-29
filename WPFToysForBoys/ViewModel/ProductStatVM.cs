@@ -16,6 +16,7 @@ namespace WPFToysForBoys.ViewModel
     {
         public IProductlineService plService;
         public IProductStatisticService pService;
+        public IProductService prService;
         public IOrderStatisticService oService;
 
         public ProductStatVM()
@@ -23,6 +24,7 @@ namespace WPFToysForBoys.ViewModel
             plService = new ProductlineService();
             pService = new ProductStatisticService();
             oService = new OrderStatisticService();
+            prService = new ProductService();
 
             {
                 List<YearStruct> yl = new List<YearStruct>() { new YearStruct() { year = -1, display = "---All---" } };
@@ -102,6 +104,17 @@ namespace WPFToysForBoys.ViewModel
             {
                 productList = value;
                 RaisePropertyChanged("ProductList");
+            }
+        }
+
+        private List<ProductShortageStruct> emergencyProductList;
+        public List<ProductShortageStruct> EmergencyProductList
+        {
+            get { return emergencyProductList; }
+            set
+            {
+                emergencyProductList = value;
+                RaisePropertyChanged("EmergencyProductList");
             }
         }
 
@@ -187,8 +200,19 @@ namespace WPFToysForBoys.ViewModel
                 selectedProductline = value;
                 GetProduct();
                 GetBestMonth();
+                GetEmergencyProducts();
                 RaisePropertyChanged("SelectedProductline");
             }
+        }
+
+        private void GetEmergencyProducts()
+        {
+            List<ProductShortageStruct> e = new List<ProductShortageStruct>();
+
+            foreach (Product pr in prService.GetAll().ToList().FindAll(p => p.productlineId == SelectedProductline.id))
+                e.Add(new ProductShortageStruct(pr));
+            
+            EmergencyProductList = e.FindAll(ps => ps.itemShortage > 0);
         }
 
         private void GetBestMonth()

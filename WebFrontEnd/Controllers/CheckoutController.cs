@@ -78,35 +78,37 @@ namespace WebFrontEnd.Views.Checkout
             {
                 return RedirectToAction("Login", "Account", new { returnUrl = "Checkout/Checkout" });
             }
-
             ShoppingCart cart = (ShoppingCart)this.Session["cart"];
             Customer cust = (Customer)this.Session["customer"];
 
-            Order order = new Order();
-         
-            order.customerId = cust.id;
-            order.orderDate = DateTime.Now;
-            order.requiredDate = DateTime.Now;
-            order.status = "PROCESSING";
-
-            foreach (OrderViewModel vm in cart.orders)
+            if (cart != null)
             {
-                
-                Orderdetail detail = new Orderdetail();
+                Order order = new Order();
 
-                detail.product = vm.Product;
-                detail.productId = vm.Product.id;
-                detail.quantityOrdered = vm.Aantal;
-                detail.priceEach = vm.Product.buyPrice;
+                order.customerId = cust.id;
+                order.orderDate = DateTime.Now;
+                order.requiredDate = DateTime.Now.AddMonths(1);
+                order.status = "PROCESSING";
 
-                order.orderdetails.Add(detail);
+                foreach (OrderViewModel vm in cart.orders)
+                {
 
+                    Orderdetail detail = new Orderdetail();
+
+                    detail.product = vm.Product;
+                    detail.productId = vm.Product.id;
+                    detail.quantityOrdered = vm.Aantal;
+                    detail.priceEach = vm.Product.buyPrice;
+
+                    order.orderdetails.Add(detail);
+
+                }
+                oService.Insert(order);
+                this.Session["cart"] = null;
+
+                return View();
             }
-            oService.Insert(order);
-            this.Session["cart"] = null;
-
-            return View();
+            return RedirectToAction("List", "Product");
         }
-
     }
 }

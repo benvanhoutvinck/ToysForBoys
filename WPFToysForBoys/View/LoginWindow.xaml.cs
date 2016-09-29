@@ -25,17 +25,17 @@ namespace WPFToysForBoys.View
         public LoginWindow()
         {
             InitializeComponent();
-            userNameTextBox.Text = "User";
-            passwordBox.Password = "user";
+            //userNameTextBox.Text = "User";
+            //passwordBox.Password = "user";
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             //Regular admin
-            if (userNameTextBox.Text.ToString() == "User" && passwordBox.Password.ToString() == "user")
-            {
-                MoveOn();
-            }
+            //if (userNameTextBox.Text.ToString() == "User" && passwordBox.Password.ToString() == "user")
+            //{
+            //    MoveOn();
+            //}
             ////Super admin
             //else if (userNameTextBox.Text.ToString() == "Admin" && passwordBox.Password.ToString() == "admin")
             //{
@@ -45,7 +45,7 @@ namespace WPFToysForBoys.View
             //    eenView.DataContext = vm;
             //    eenView.Show();
             //    Application.Current.MainWindow.Close();
-            else
+            //else
             {
                 IAdminService admin = new AdminService();
                 Admin ad = admin.GetAll().ToList().FindLast(a => a.username.Trim() == userNameTextBox.Text.ToString());

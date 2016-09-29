@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,9 @@ namespace WPFToysForBoys.View
         public OrderStatWindow()
         {
             InitializeComponent();
+            //CultureInfo myCi = new CultureInfo("en-US", false);
+            //myCi.DateTimeFormat = new DateTimeFormatInfo { ShortDatePattern = "dd/MM/yyyy" };
+            //CultureInfo.DefaultThreadCurrentCulture = myCi;
         }
     }
 }

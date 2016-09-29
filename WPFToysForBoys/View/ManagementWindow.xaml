@@ -253,7 +253,7 @@
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
                                         <TextBlock Text="{Binding Path=customer.name}" Grid.Row="0" Grid.Column="1" ToolTip="{Binding Path=customer.name}"></TextBlock>
-                                        <TextBlock Text="{Binding Path=orderDate, StringFormat={}{0:dd/MM/yyyy}}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                        <TextBlock Text="{Binding Path=orderDate, StringFormat=MM/dd/yyyy}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                         <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
 
@@ -301,7 +301,7 @@
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Customer overview">
+            <TabItem Header="Statistics panel">
                 <StackPanel Width="400">
                     <Button Content="Customers by Country" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding CountryCustomer}"/>
                     <Button Content="Product Statistics" Width="250" Height="50" FontSize="18" Margin="0 50 0 0" Command="{Binding ProductStatistics}"/>
