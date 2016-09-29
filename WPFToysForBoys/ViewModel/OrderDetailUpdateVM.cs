@@ -65,6 +65,7 @@ namespace WPFToysForBoys.ViewModel
                 {
                     selectedOrderdetail = value;
                     ShowOrderdetail = value;
+                    ShowOrderdetail = new Orderdetail() { orderId = value.orderId, priceEach = value.priceEach, productId= value.productId, quantityOrdered = value.quantityOrdered, product = value.product};
                     for (int i = 0; i < productList.Count; i++)
                     {
                         if (productList[i].id == ShowOrderdetail.productId)
@@ -100,7 +101,7 @@ namespace WPFToysForBoys.ViewModel
                 }
                 else
                 {
-                    SelectedPProductI = value.product.id;
+                    SelectedPProductI = value.product.id; // value.productId;  
                 }
                 RaisePropertyChanged("ShowOrderdetail");
             }
@@ -152,6 +153,7 @@ namespace WPFToysForBoys.ViewModel
             try
             {
                 ShowOrderdetail.productId = SelectedPProductI;
+                int id = ShowOrderdetail.orderId;
                 ShowOrderdetail.orderId = OrderdetailList[0].orderId;
                 if (SelectedPProductI >= 1)
                     if ((ShowOrderdetail.priceEach == null || ShowOrderdetail.priceEach > 0) && (ShowOrderdetail.quantityOrdered == null || ShowOrderdetail.quantityOrdered >= 0))
@@ -184,6 +186,7 @@ namespace WPFToysForBoys.ViewModel
                             OrderdetailList[i].product = pService.GetById(OrderdetailList[i].productId);
                         }
                         RefreshTab();
+                        ODNew();
                     }
                     else
                         MessageBox.Show("Invalid Quantities/price!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);

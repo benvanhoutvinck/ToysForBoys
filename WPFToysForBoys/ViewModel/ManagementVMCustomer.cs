@@ -43,7 +43,7 @@ namespace WPFToysForBoys.ViewModel
                 else
                 {
                     selectedCustomer = value;
-                    ShowCustomer = value;
+                    ShowCustomer = new Customer() { city = value.city, country = value.country, countryId = value.countryId, email = value.email, id = value.id, name = value.name, orders = null, password = value.password, postalCode = value.postalCode, state = value.state, streetAndNumber = value.streetAndNumber };
                     RaisePropertyChanged("SelectedCustomer");
                 }
 

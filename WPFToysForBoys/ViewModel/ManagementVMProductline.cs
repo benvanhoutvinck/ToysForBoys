@@ -93,7 +93,7 @@ namespace WPFToysForBoys.ViewModel
                 else
                 {
                     selectedProductline = value;
-                    ShowProductline = value;
+                    ShowProductline = new Productline() { description = value.description, id = value.id, name = value.name, products = null };
                     RaisePropertyChanged("SelectedProductline");
                 }
 

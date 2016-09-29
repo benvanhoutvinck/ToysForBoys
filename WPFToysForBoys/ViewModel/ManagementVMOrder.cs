@@ -40,7 +40,7 @@ namespace WPFToysForBoys.ViewModel
                 else
                 {
                     selectedOrder = value;
-                    ShowOrder = value;
+                    ShowOrder = new Order() { comments = value.comments, customer = value.customer, customerId = value.customerId, id = value.id, orderDate = value.orderDate, orderdetails = null, requiredDate = value.requiredDate, shippedDate = value.shippedDate, status = value.status };
                     RaisePropertyChanged("SelectedOrder");
                 }
 
