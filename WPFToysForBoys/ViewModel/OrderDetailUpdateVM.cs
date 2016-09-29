@@ -153,6 +153,7 @@ namespace WPFToysForBoys.ViewModel
             try
             {
                 ShowOrderdetail.productId = SelectedPProductI;
+                int id = ShowOrderdetail.orderId;
                 ShowOrderdetail.orderId = OrderdetailList[0].orderId;
                 if (SelectedPProductI >= 1)
                     if ((ShowOrderdetail.priceEach == null || ShowOrderdetail.priceEach > 0) && (ShowOrderdetail.quantityOrdered == null || ShowOrderdetail.quantityOrdered >= 0))
