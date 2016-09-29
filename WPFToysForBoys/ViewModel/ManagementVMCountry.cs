@@ -68,8 +68,9 @@ namespace WPFToysForBoys.ViewModel
                 }
                 else
                 {
-                    CustomerList = cService.GetAll("country").ToList();
-                    customerList.Sort(new CustomerCompare());
+                    var clist = cService.GetAll("country").ToList();
+                    clist.Sort(new CustomerCompare());
+                    CustomerList = clist;
                 }
 
                 RaisePropertyChanged("SelectedCountryI");

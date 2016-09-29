@@ -137,11 +137,8 @@ namespace WPFToysForBoys.ViewModel
                                         streetAndNumber = ShowCustomer.streetAndNumber,
                                         email = ShowCustomer.email
                                     });
-                                    SelectedCCountryI = SelectedCCountryI;
                                 }
-                                var clist = cService.GetAll("country").ToList();
-                                clist.Sort(new CustomerCompare());
-                                CustomerList = clist;
+                                SelectedCountryI = SelectedCountryI;
                             }
                             else
                                 MessageBox.Show("Invalid email!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
