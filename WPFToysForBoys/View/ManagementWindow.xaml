@@ -253,7 +253,7 @@
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="{Binding Path=id}" Grid.Row="0" Grid.Column="0"></TextBlock>
                                         <TextBlock Text="{Binding Path=customer.name}" Grid.Row="0" Grid.Column="1" ToolTip="{Binding Path=customer.name}"></TextBlock>
-                                        <TextBlock Text="{Binding Path=orderDate, StringFormat={}{0:dd/MM/yyyy}}" Grid.Row="0" Grid.Column="2"></TextBlock>
+                                        <TextBlock Text="{Binding Path=orderDate, StringFormat=MM/dd/yyyy}" Grid.Row="0" Grid.Column="2"></TextBlock>
                                         <TextBlock Text="{Binding Path=status}" Grid.Row="0" Grid.Column="3"></TextBlock>
                                     </Grid>
 
