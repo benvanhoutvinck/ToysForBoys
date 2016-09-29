@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:gala="http://www.galasoft.ch/mvvmlight"
-        Title="ProductStatWindow" Height="560.5" Width="1000">
+        Title="ProductStatWindow" Height="580" Width="1000">
     <StackPanel Orientation="Horizontal">
         <StackPanel Width="450">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -48,16 +48,13 @@
                                 <TextBlock Text="{Binding Path=countProductsSold}"/>
                             </Label>
                         </Grid>
-                        <!--<Border BorderBrush="Black" BorderThickness="1" Width="275">
-                                        <TextBlock Text="{Binding Path=name}"></TextBlock>
-                                    </Border>-->
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
         <StackPanel Width="450">
-            <Button Width="395" Margin="25 75 25 10" Content="{Binding ProductListName}" Command="{Binding SortCommand}"></Button>
-            <ListBox Height="200" Width="395" Margin="25 5 25 10" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
+            <Button Width="395" Margin="25 50 25 10" Content="{Binding ProductListName}" Command="{Binding SortCommand}"></Button>
+            <ListBox Height="200" Width="395" Margin="25 5 25 10" ItemsSource="{Binding ProductList}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="360" ShowGridLines="True">
@@ -79,9 +76,6 @@
                                 <TextBlock Text="{Binding Path=QuantityOrdered}"/>
                             </Label>
                         </Grid>
-                        <!--<Border BorderBrush="Black" BorderThickness="1" Width="275">
-                                        <TextBlock Text="{Binding Path=name}"></TextBlock>
-                                    </Border>-->
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -89,6 +83,32 @@
                 <Label Content="Best Month of the year for selected category:" Width="300" HorizontalContentAlignment="Center"></Label>
                 <TextBox Width="100" IsEnabled="False" Text="{Binding BestMonth}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
             </StackPanel>
+            <Label Content="Product with more orders than stock" HorizontalContentAlignment="Center" FontWeight="SemiBold" FontSize="16"></Label>
+            <StackPanel Orientation="Horizontal" Margin="25 5 25 0">
+                <Label Content="Product Name" Width="270" Margin="5 0" HorizontalContentAlignment="Left"></Label>
+                <Label Content="# missing from stock" HorizontalContentAlignment="Left"></Label>
+            </StackPanel>
+            <ListBox Height="120" Width="395" Margin="25 0 25 10" ItemsSource="{Binding EmergencyProductList}" HorizontalAlignment="Left">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="360" ShowGridLines="True" Margin="0" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Margin="5 0" Width="290">
+                                <TextBlock Text="{Binding Path=name}" ToolTip="{Binding Path=name}"/>
+                            </Label>
+                            <Label Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" Margin="5 0" Width="50">
+                                <TextBlock Text="{Binding Path=itemShortage}"/>
+                            </Label>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
     </StackPanel>
 </Window>

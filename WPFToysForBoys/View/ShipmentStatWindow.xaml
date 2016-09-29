@@ -5,14 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToysForBoys.View"
         mc:Ignorable="d"
-        Title="ShipmentStatWindow" Height="889" Width="auto">
+        Title="ShipmentStatWindow" Height="889" Width="858"
+        ResizeMode="NoResize">
+    
     <DockPanel  LastChildFill="True"  Margin="10 5 10 20">
+        <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <StackPanel Width="740" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Content="OrderId:" Width="100" Margin="5 0" HorizontalContentAlignment="Center" />
                     <TextBox Name="TextBoxOrderId" Width="250" Margin="5 0" VerticalContentAlignment="Center"></TextBox>
-                    <Button Name="ButtonSearch" Content="Search" Width="83" Click="ButtonSearch_Click"></Button>
+                    <Button Name="ButtonSearch" Content="Search" Width="83" Click="ButtonSearch_Click" IsDefault="True"></Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Order ID : " FontWeight="Bold"></Label>
@@ -21,7 +24,7 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" >
                         <Label Content="Order properties" FontWeight="Bold" FontSize="15"></Label>
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" Width="400">
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Order Date: " FontWeight="Bold"></Label>
                                 <Label Name="textBlockOrderDate"></Label>
@@ -36,9 +39,9 @@
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <Label Content="Comments: " FontWeight="Bold">
-                                    
+
                                 </Label>
-                                <Border BorderThickness="1" BorderBrush="Black" >
+                                <Border BorderThickness="1" BorderBrush="Black" Width="200" HorizontalAlignment="Left">
                                     <ScrollViewer Width="183" Height="62" >
 
                                         <TextBlock Name="textBlockComments" TextWrapping="Wrap"  ></TextBlock>
@@ -53,11 +56,12 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Total Price:" FontWeight="Bold"></Label>
-                                <Label Name="LabelContent"></Label>
+                                <Label Name="LabelContent">                                
+                                </Label>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" Margin="150 0" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="342">
                         <Label Content="Customer properties" FontWeight="Bold" FontSize="15"></Label>
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
@@ -85,80 +89,93 @@
                                 <Label Name="textBlockCountry"></Label>
                             </StackPanel>
                         </StackPanel>
+                       </StackPanel>
                     </StackPanel>
                 </StackPanel>
 
 
             </StackPanel>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Center" Margin="10,0,10,-17" Width="554">
-            <Label Content="OrderDetail properties" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"></Label>
-            <Grid Width="506" Height="500">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="14*"></RowDefinition>
-                    <RowDefinition Height="221*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="507"/>
-                    <ColumnDefinition Width="Auto" MinWidth="293"/>
-                </Grid.ColumnDefinitions>
-                <Label Width="507" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
-                    <Grid Width="497" ShowGridLines="True">
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
 
-                        </Grid.ColumnDefinitions>
-                        <GridViewColumnHeader Grid.Column="0" >Order ID</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="1">Product ID</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="2">Quantity</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="3">Price Each</GridViewColumnHeader>
-                        <GridViewColumnHeader Grid.Column="4">Subtotal</GridViewColumnHeader>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Grid Height="500" Width="832" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="14*"/>
+                        <RowDefinition Height="221*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="723"/>
+                        <ColumnDefinition Width="Auto" MinWidth="77"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="OrderDetail properties" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Grid.Row="0"/>
+                    <Label Width="auto" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
 
-                    </Grid>
-                </Label>
-                <ListBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Name="ListBoxOrderdetails" Margin="0,0,1,0">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid ShowGridLines="True">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Margin="5 0" HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding orderId}"></TextBlock>
-                                </Label>
-                                <Label Grid.Row="0" Grid.Column="1" Margin="5 0" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding productId}"></TextBlock>
-                                </Label>
-                                <Label Grid.Row="0" Grid.Column="2" Margin="5 0" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding quantityOrdered}"></TextBlock>
-                                </Label>
-                                <Label Grid.Row="0" Grid.Column="3" Margin="5 0" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding priceEach}"></TextBlock>
-                                </Label>
-                                <Label Grid.Row="0" Grid.Column="4" Margin="5 0" HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding Subtotal}"></TextBlock>
-                                </Label>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
+                        <Grid Width="auto" ShowGridLines="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <GridViewColumnHeader Grid.Column="0" Content="Order ID" />
+                            <GridViewColumnHeader Grid.Column="1" Content="Product ID"/>
+                            <GridViewColumnHeader Grid.Column="2" Content="Product Name"/>
+                            <GridViewColumnHeader Grid.Column="3" Content="Quantity"/>
+                            <GridViewColumnHeader Grid.Column="4" Content="Price Each" />
+                            <GridViewColumnHeader Grid.Column="5" Content="Subtotal" />
+
+                        </Grid>
+                    </Label>
+                    <ListBox HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" x:Name="ListBoxOrderdetails" Grid.ColumnSpan="2" Margin="0,0,24,0" Width="auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ShowGridLines="True">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="300"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Margin="5 0" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding orderId}"/>
+                                    </Label>
+                                    <Label Grid.Row="0" Grid.Column="1" Margin="5 0" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding productId}"/>
+                                    </Label>
+                                    <Label Grid.Row="0" Grid.Column="2" Margin="5 0" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding productName}" HorizontalAlignment="Left"/>
+                                    </Label>
+                                    <Label Grid.Row="0" Grid.Column="3" Margin="5 0" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding quantityOrdered}"/>
+                                    </Label>
+                                    <Label Grid.Row="0" Grid.Column="4" Margin="5 0" HorizontalAlignment="Center">
+                                        
+                                        <TextBlock Text="{Binding priceEach, StringFormat=c}">
+                                            
+                                        </TextBlock>
+                                    </Label>
+                                    <Label Grid.Row="0" Grid.Column="5" Margin="5 0" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Subtotal, StringFormat=c}"/>
+                                    </Label>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </StackPanel>
         </StackPanel>
     </DockPanel>
 </Window>

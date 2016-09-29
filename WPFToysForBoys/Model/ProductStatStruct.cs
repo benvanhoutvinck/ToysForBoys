@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DataAccessLayer;
+using DataAccessLayer.Interfaces;
+using DataAccessLayer.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,5 +26,23 @@ namespace WPFToysForBoys.Model
     {
         public int month { get; set; }
         public string display { get; set; }
+    }
+
+    public class ProductShortageStruct
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public int itemShortage { get; set; }
+        
+        public ProductShortageStruct(Product p)
+        {
+            this.id = p.id;
+            this.name = p.name;
+            CalcShortage(p.quantityInStock.Value, p.quantityInOrder.Value);
+        }
+        private void CalcShortage(int stock, int order)
+        {
+            this.itemShortage = order - stock;
+        }
     }
 }

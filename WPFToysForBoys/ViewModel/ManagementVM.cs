@@ -42,17 +42,17 @@ namespace WPFToysForBoys.ViewModel
 
 
             ProductlineList = new List<Productline>() { new Productline() { id = -1, name = "All" } };
-            PProductlineList = plineService.GetAll("products").ToList();
+            PProductlineList = plineService.GetAll().ToList();
             productlineList.AddRange(PProductlineList);
-            cproductlineList = plineService.GetAll("products").ToList();
+            cproductlineList = plineService.GetAll().ToList();
             //SelectedProduct = ProductList.First();
             SelectedProductlineI = -1;
             SelectedProductline = null;
             SelectedCountryI = -1;
             FCountryList = new List<Country>() { new Country() { id = -1, name = "All" } };
-            ccountryList = ccountryService.GetAll("customers").ToList();
+            ccountryList = ccountryService.GetAll().ToList();
             fcountryList.AddRange(ccountryList);
-            CountryList = ccountryService.GetAll("customers").ToList();
+            CountryList = ccountryService.GetAll().ToList();
             if (adminMaster)
                 AdminMaster = "Visible";
             else
@@ -204,7 +204,7 @@ namespace WPFToysForBoys.ViewModel
                 else
                 {
                     selectedProduct = value;
-                    ShowProduct = value;
+                    ShowProduct = new Product() { active = value.active, buyPrice = value.buyPrice, description = value.description, id = value.id, name = value.name, productlineId = value.productlineId, productline = value.productline, orderdetails = null, quantityInOrder = value.quantityInOrder, quantityInStock = value.quantityInStock, scale = value.scale };
                     RaisePropertyChanged("SelectedProduct");
                 }
 
@@ -270,7 +270,8 @@ namespace WPFToysForBoys.ViewModel
                                         scale = ShowProduct.scale,
                                         quantityInStock = ShowProduct.quantityInStock,
                                         quantityInOrder = ShowProduct.quantityInOrder,
-                                        buyPrice = ShowProduct.buyPrice
+                                        buyPrice = ShowProduct.buyPrice,
+                                        active = true
                                     });
                                 }
                                 else
@@ -284,7 +285,8 @@ namespace WPFToysForBoys.ViewModel
                                         scale = ShowProduct.scale,
                                         quantityInStock = ShowProduct.quantityInStock,
                                         quantityInOrder = ShowProduct.quantityInOrder,
-                                        buyPrice = ShowProduct.buyPrice
+                                        buyPrice = ShowProduct.buyPrice,
+                                        active = ShowProduct.active
                                     });
                                 }
                                 SelectedProductlineI = SelectedProductlineI;
