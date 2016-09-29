@@ -53,21 +53,42 @@ namespace DataAccessLayer.Services
                                              where orderdetail.orderId == shippingDetails.OrderId
                                              select orderdetail;
 
+                    //ophalen van productnames
                 
+                                   
+
                 var service2 = new OrderdetailService();
+                var service3 = new ProductService();
+                var products = service3.GetAll();
                 var withSubtotals = new List<OrderdetailsWithSubTotal>();
                 foreach (var od in orderdetailsProperties)
                 {
-                    
-                    
-                    withSubtotals.Add(new OrderdetailsWithSubTotal {
+                    var orderdetailwithsubtotal = new OrderdetailsWithSubTotal
+                    {
                         orderId = od.orderId,
                         priceEach = od.priceEach,
                         productId = od.productId,
                         quantityOrdered = od.quantityOrdered,
-                        Subtotal = service2.GetSubTotal(od) });
+                        Subtotal = service2.GetSubTotal(od)
+                    };
+
+                    foreach (var p in products)
+                    {
+                        if (p.id==od.productId)
+                        {
+                            orderdetailwithsubtotal.productName = p.name;
+                        }
+                    }
+
+                    withSubtotals.Add(orderdetailwithsubtotal);
+
 
                 }
+
+                
+
+
+
                 shippingDetails.OrderDetails = withSubtotals;
 
                 
