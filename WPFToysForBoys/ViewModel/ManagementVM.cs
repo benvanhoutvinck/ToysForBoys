@@ -270,7 +270,8 @@ namespace WPFToysForBoys.ViewModel
                                         scale = ShowProduct.scale,
                                         quantityInStock = ShowProduct.quantityInStock,
                                         quantityInOrder = ShowProduct.quantityInOrder,
-                                        buyPrice = ShowProduct.buyPrice
+                                        buyPrice = ShowProduct.buyPrice,
+                                        active = true
                                     });
                                 }
                                 else
@@ -284,7 +285,8 @@ namespace WPFToysForBoys.ViewModel
                                         scale = ShowProduct.scale,
                                         quantityInStock = ShowProduct.quantityInStock,
                                         quantityInOrder = ShowProduct.quantityInOrder,
-                                        buyPrice = ShowProduct.buyPrice
+                                        buyPrice = ShowProduct.buyPrice,
+                                        active = ShowProduct.active
                                     });
                                 }
                                 SelectedProductlineI = SelectedProductlineI;
