@@ -137,7 +137,7 @@ namespace DataAccessLayer.Services
 
             using (var entities = new toysforboysEntities())
             {
-                foreach (var product in entities.products)
+                foreach (var product in entities.products.Where(p => p.productlineId == productlineId))
                 {
                     int count;
                     if (year != -1)

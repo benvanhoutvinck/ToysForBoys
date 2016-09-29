@@ -53,8 +53,24 @@ namespace DataAccessLayer.Services
                                              where orderdetail.orderId == shippingDetails.OrderId
                                              select orderdetail;
 
-                shippingDetails.OrderDetails = orderdetailsProperties.ToList();
+                
+                var service2 = new OrderdetailService();
+                var withSubtotals = new List<OrderdetailsWithSubTotal>();
+                foreach (var od in orderdetailsProperties)
+                {
+                    
+                    
+                    withSubtotals.Add(new OrderdetailsWithSubTotal {
+                        orderId = od.orderId,
+                        priceEach = od.priceEach,
+                        productId = od.productId,
+                        quantityOrdered = od.quantityOrdered,
+                        Subtotal = service2.GetSubTotal(od) });
 
+                }
+                shippingDetails.OrderDetails = withSubtotals;
+
+                
                 return shippingDetails;
 
                 
