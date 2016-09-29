@@ -40,11 +40,11 @@ namespace DataAccessLayer.Services
                 if(product.name!=string.Empty)
                     originalProduct.name = product.name;
 
-                if(product.scale!=string.Empty)
-                    originalProduct.scale = product.scale;
+                
+                originalProduct.scale = product.scale;
 
-                if(product.description!=string.Empty)
-                    originalProduct.description = product.description;
+                
+                originalProduct.description = product.description;
 
                 if(product.quantityInStock!=null)
                     originalProduct.quantityInStock = product.quantityInStock;
